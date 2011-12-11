@@ -1,0 +1,32 @@
+# Cache and userfiles
+src/system/logs
+src/system/cache
+src/system/configs/config.php
+src/public_html/cached
+build
+
+# OS Files
+Thumbs.db
+.DS_Store
+
+# IDE Files
+.buildpath
+.externalToolBuilders
+.project
+.settings
+nbproject
+*.LCK
+*.kpf
+*.komodoproject
+.tmp_*
+_notes
+.idea
+.cache
+
+# Source Control
+.svn
+.hg
+.hgignore
+.hgexternals
+CVS
+.bzr
