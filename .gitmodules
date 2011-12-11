@@ -1,0 +1,15 @@
+[submodule "src/system/library/Zend"]
+	path = src/system/library/Zend
+	url = git://github.com/spekkionu/zendframework.git
+[submodule "src/system/library/ZendX"]
+	path = src/system/library/ZendX
+	url = git://github.com/spekkionu/zendframework-extras.git
+[submodule "src/system/library/HTMLPurifier"]
+	path = src/system/library/HTMLPurifier
+	url = git://github.com/spekkionu/htmlpurifier.git
+[submodule "src/system/library/WideImage"]
+	path = src/system/library/WideImage
+	url = git://github.com/spekkionu/wideimage.git
+[submodule "src/public_html/assets/scripts/bootstrap"]
+	path = src/public_html/assets/scripts/bootstrap
+	url = git://github.com/twitter/bootstrap.git
