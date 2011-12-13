@@ -17,18 +17,24 @@ class Form_Delete extends App_Form
       'FormElements',
       array('Description', array('tag' => 'p', 'class' => 'form-help')),
       array('Fieldset', array()),
-      array('Form', array('id' => 'form-category', 'class' => 'validate', 'accept-charset' => 'utf-8'))
+      array('Form', array('id' => 'form-category', 'class' => 'form-stacked', 'accept-charset' => 'utf-8'))
     ));
   }
 
   public function init() {
     parent::init();
 
-    $element = new Zend_Form_Element_Submit('submit');
+    $element = new Zend_Form_Element_Submit('delete');
     $element->setLabel('Confirm Delete');
-    $element->setDecorators($this->button);
+    $element->setDecorators($this->buttonOpen);
     $element->setIgnore(TRUE);
-    $element->setAttrib('class', 'ui-button ui-widget ui-state-default ui-corner-all');
+    $element->setAttrib('class', 'btn primary');
+    $this->addElement($element);
+
+    $element = new Zend_Form_Element_Submit('cancel');
+    $element->setLabel('Cancel');
+    $element->setDecorators($this->buttonClose);
+    $element->setAttrib('class', 'btn');
     $this->addElement($element);
 
     $this->addElement('hash', 'csrf', array('ignore' => true, 'decorators' => $this->hidden));

@@ -45,7 +45,7 @@ if(Zend_Auth::getInstance()->hasIdentity()){
 
 if($config['debug']['debug_bar']){
   $debug = new ZFDebug_Controller_Plugin_Debug(array(
-    //'jquery_path' => $view->baseUrl('assets/scripts/jquery/jquery-1.6.2.min.js'),
+    'jquery_path' => $view->baseUrl('assets/scripts/jquery/jquery-1.7.1.min.js'),
     'plugins' => array(
       'Variables',
       'Html',

@@ -1,0 +1,127 @@
+# Admin Navigation
+-
+  id: main-menu-home
+  label: Dashboard
+  title: Admin Dashboard
+  route: admin_home
+  module: admin
+  controller: index
+  action: index
+  resource: admin
+  privilege: general
+  reset_params: true
+  visible: true
+-
+  id: main-menu-account
+  label: My Account
+  title: Manage account profile
+  route: admin_account
+  module: admin
+  controller: account
+  action: index
+  resource: admin
+  privilege: general
+  reset_params: true
+  visible: false
+  pages:
+    -
+      id: main-menu-profile
+      label: Edit Profile
+      title: Modify account profile
+      route: admin_account_profile
+      module: admin
+      controller: account
+      action: edit
+      resource: admin
+      privilege: general
+      reset_params: true
+      visible: true
+    -
+      id: main-menu-change-password
+      label: Change Password
+      title: Modify account password
+      route: admin_account_password
+      module: admin
+      controller: account
+      action: password
+      resource: admin
+      privilege: general
+      reset_params: true
+      visible: true
+-
+  id: main-menu-login
+  label: Log In
+  route: admin_login
+  module: admin
+  controller: access
+  action: index
+  reset_params: true
+  visible: false
+  pages:
+    -
+      id: main-menu-forgot-password
+      label: Forgot Password
+      route: admin_forgot_password
+      module: admin
+      controller: access
+      action: reset-password
+      reset_params: true
+      visible: true
+    -
+      id: main-menu-reset-password
+      label: Reset Password
+      route: admin_save_password
+      module: admin
+      controller: access
+      action: save-password
+      reset_params: true
+      visible: true
+-
+  id: main-menu-administrator
+  label: Administrators
+  title: Manage administrators
+  route: admin_administrator
+  module: admin
+  controller: administrator
+  action: index
+  resource: admin:administrator
+  privilege: list
+  reset_params: true
+  visible: true
+  pages:
+    -
+      id: main-menu-administrator-add
+      label: Add Administrator
+      title: Add new administrator
+      route: admin_administrator_add
+      module: admin
+      controller: administrator
+      action: add
+      resource: admin:administrator
+      privilege: add
+      reset_params: true
+      visible: true
+    -
+      id: main-menu-administrator-edit
+      label: Edit Administrator
+      title: Modify admninistrator account
+      route: admin_administrator_edit
+      module: admin
+      controller: administrator
+      action: edit
+      resource: admin:administrator
+      privilege: edit
+      reset_params: false
+      visible: true
+    -
+      id: main-menu-administrator-delete
+      label: Delete Administrator
+      title: Delete admninistrator account
+      route: admin_administrator_delete
+      module: admin
+      controller: administrator
+      action: delete
+      resource: admin:administrator
+      privilege: delete
+      reset_params: false
+      visible: true

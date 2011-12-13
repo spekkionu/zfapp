@@ -15,19 +15,19 @@ class Form_ForgotPassword extends App_Form
       'FormElements',
       array('Description', array('tag' => 'p', 'class' => 'form-help')),
       array('Fieldset', array()),
-      array('Form', array('id' => 'form-forgot-password', 'class' => 'validate', 'accept-charset' => 'utf-8'))
+      array('Form', array('id' => 'form-forgot-password', 'class' => 'form-stacked validate', 'accept-charset' => 'utf-8'))
     ));
   }
 
   public function init() {
     parent::init();
 
-    $validator = new Validate_Doctrine_RecordExists(array(
-        'table' => 'Admin',
+    $validator = new Zend_Validate_Db_RecordExists(array(
+        'table' => 'users',
         'field' => 'email'
       ));
     $validator->setMessages(array(
-      Validate_Doctrine_RecordExists::ERROR_NO_RECORD_FOUND => "Account with email address %value% not found."
+      Zend_Validate_Db_RecordExists::ERROR_NO_RECORD_FOUND => "Account with email address %value% not found."
     ));
     $element = new Form_Element_Email('email');
     $element->setLabel('Email Address:');
@@ -38,7 +38,16 @@ class Form_ForgotPassword extends App_Form
         Zend_Validate_NotEmpty::INVALID => "Invalid type given. String, integer or float expected",
         Zend_Validate_NotEmpty::IS_EMPTY => "Email Address is required."
       )));
-    $element->addValidator($this->validator['email'], true);
+    $element->addValidator('EmailAddress', true, array('allow'=>Zend_Validate_Hostname::ALLOW_ALL, 'messages'=>array(
+      Zend_Validate_EmailAddress::INVALID => 'Not a valid email address.',
+      Zend_Validate_EmailAddress::INVALID_FORMAT => 'Not a valid email address.',
+      Zend_Validate_EmailAddress::INVALID_HOSTNAME => 'Not a valid email address.',
+      Zend_Validate_EmailAddress::INVALID_MX_RECORD => 'Not a valid email address.',
+      Zend_Validate_EmailAddress::DOT_ATOM => 'Not a valid email address.',
+      Zend_Validate_EmailAddress::QUOTED_STRING => 'Not a valid email address.',
+      Zend_Validate_EmailAddress::INVALID_LOCAL_PART => 'Not a valid email address.',
+      Zend_Validate_EmailAddress::LENGTH_EXCEEDED => 'Not a valid email address.'
+    )));
     $element->addValidator($validator, true);
     $element->setAttribs(array(
       'size' => 50,
@@ -57,9 +66,15 @@ class Form_ForgotPassword extends App_Form
 
     $element = new Zend_Form_Element_Submit('submit');
     $element->setLabel('Send Password Request');
-    $element->setDecorators($this->button);
-    $element->setAttrib('class', 'ui-button ui-widget ui-state-default ui-corner-all');
+    $element->setDecorators($this->buttonOpen);
+    $element->setAttrib('class', 'btn primary');
     $element->setIgnore(TRUE);
+    $this->addElement($element);
+
+    $element = new Zend_Form_Element_Submit('cancel');
+    $element->setLabel('Cancel');
+    $element->setDecorators($this->buttonClose);
+    $element->setAttrib('class', 'btn');
     $this->addElement($element);
 
     $this->addElement('hash', 'csrf', array('ignore' => true, 'decorators' => $this->hidden));

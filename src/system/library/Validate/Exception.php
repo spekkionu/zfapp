@@ -2,7 +2,7 @@
 /**
  * General Validation Exception
  *
- * @package    Simplecart
+ * @package    App
  * @subpackage Validate
  * @author     spekkionu
  * @license    New BSD http://www.opensource.org/licenses/bsd-license.php

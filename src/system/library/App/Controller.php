@@ -125,7 +125,10 @@ abstract class App_Controller extends Zend_Controller_Action {
    * @param  array  $params
    * @return void
    */
-  protected function redirect($action, $controller = null, $module = null, array $params = array()) {
+  protected function redirect($action = null, $controller = null, $module = null, array $params = array()) {
+    if(is_null($action)){
+      $action = $this->getRequest()->getActionName();
+    }
     $redirector = Zend_Controller_Action_HelperBroker::getStaticHelper('redirector');
     $redirector->gotoSimpleAndExit($action, $controller, $module, $params);
   }
@@ -148,7 +151,7 @@ abstract class App_Controller extends Zend_Controller_Action {
    * @param string $message
    * @param string $type The message type (used as class for container)
    */
-  protected function addMessage($message, $type='alert') {
+  protected function addMessage($message, $type='info') {
     $this->flashMessenger->resetNamespace();
     $this->flashMessenger->addMessage(array($type => $message));
   }
@@ -167,9 +170,9 @@ abstract class App_Controller extends Zend_Controller_Action {
    * Adds a custom flash message that will not be loaded by default
    * @param string $message
    */
-  protected function addCustomFlashMessage($message) {
+  protected function addCustomFlashMessage($message, $type='info') {
     $this->flashMessenger->setNamespace('custom-flash-messages');
-    $this->flashMessenger->addMessage($message);
+    $this->flashMessenger->addMessage($message, $type);
     $this->flashMessenger->resetNamespace();
   }
 

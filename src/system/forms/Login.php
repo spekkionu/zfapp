@@ -16,8 +16,8 @@ class Form_Login extends App_Form
     $this->setDecorators(array(
       'FormElements',
       array('Description', array('tag' => 'p', 'class' => 'form-help')),
-      array('Fieldset', array()),
-      array('Form', array('id' => 'form-login', 'class' => 'validate', 'accept-charset' => 'utf-8'))
+      array('Fieldset', array('legend'=>'Login')),
+      array('Form', array('id' => 'form-login', 'class' => 'validate form-stacked', 'accept-charset' => 'utf-8'))
     ));
   }
 
@@ -62,7 +62,9 @@ class Form_Login extends App_Form
         Zend_Validate_NotEmpty::INVALID => "Invalid type given. String, integer or float expected",
         Zend_Validate_NotEmpty::IS_EMPTY => "Password is required."
       )));
-    $element->addValidator($this->validator['nospace'], true);
+    $element->addValidator('Regex', true, array('pattern'=>'/^\S*$/i','messages'=>array(
+      Zend_Validate_Regex::NOT_MATCH => "Cannot contain spaces."
+    )));
     $element->setFilters(array('StringTrim'));
     $element->setDecorators($this->field);
     $element->setAttribs(array(
@@ -79,11 +81,19 @@ class Form_Login extends App_Form
     ));
     $this->addElement($element);
 
-    $element = new Zend_Form_Element_Submit('submit');
+    $element = new Zend_Form_Element_Submit('login');
     $element->setLabel('Login');
-    $element->setDecorators($this->button);
+    $element->setDecorators($this->buttonOpen);
     $element->setIgnore(TRUE);
-    $element->setAttrib('class', 'ui-button ui-widget ui-state-default ui-corner-all');
+    $element->setAttrib('class', 'btn primary');
+    $this->addElement($element);
+
+    $element = new Form_Element_LinkButton('forgot_password');
+    $element->setLabel('Forgot Password?');
+    $element->setDecorators($this->buttonClose);
+    $element->setIgnore(TRUE);
+    $element->setAttrib('class', 'btn');
+    $element->setAttrib('href', $this->getView()->route('admin_forgot_password'));
     $this->addElement($element);
 
     $this->addElement('hash', 'csrf', array('ignore' => true, 'decorators' => $this->hidden));

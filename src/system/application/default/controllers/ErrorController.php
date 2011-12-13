@@ -30,4 +30,8 @@ class ErrorController extends App_FrontController
     $this->getResponse()->setRawHeader('HTTP/1.1 404 Not Found');
   }
 
+  public function accessDeniedAction(){
+    
+  }
+
 }

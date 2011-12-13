@@ -22,22 +22,7 @@ class Zend_View_Helper_FlashMessages extends Zend_View_Helper_Abstract
     $string .= '<div class="flash-messages">';
     foreach ($messages as $message_item) {
       foreach ($message_item as $class => $message) {
-        switch ($class) {
-          case "alert":
-          case "message":
-            $icon = '<span class="icon icon-message"></span>';
-            break;
-          case "error":
-            $icon = '<span class="icon icon-error"></span>';
-            break;
-          case "success":
-            $icon = '<span class="icon icon-success"></span>';
-            break;
-          default:
-            $icon = '';
-            break;
-        }
-        $string .= '<p class="flash-message ' . $this->view->escape($class) . '">' . $icon . $this->view->escape($message) . '</p>';
+        $string .= '<div data-alert="true" class="alert-message ' . $this->view->escape($class) . '"><a class="close" href="#">×</a><p>' . $this->view->escape($message) . '</p></div>';
       }
     }
     $string .= '</div>';

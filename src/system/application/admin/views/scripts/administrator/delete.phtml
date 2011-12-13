@@ -1,0 +1,54 @@
+<?php $this->headTitle('Delete Administrator');?>
+<?php $this->pageHeader = 'Delete Administrator';?>
+
+<?php if($this->allow_delete):?>
+  <div class="alert-message block-message warning">
+    <p>
+      <strong>Warning!</strong>
+      This user will be deleted permanently.<br>
+      This action cannot be undone.
+    </p>
+  </div>
+<?php else:?>
+  <div class="alert-message block-message error">
+    <p>
+      <strong>Error!</strong>
+      You cannot delete your own account
+    </p>
+  </div>
+<?php endif;?>
+
+<div class="form-stacked">
+  <div class="clearfix">
+    <label>Username:</label>
+    <div class="input">
+      <?php echo $this->escape($this->user['username']);?>
+    </div>
+  </div>
+  <div class="clearfix">
+    <label>Name:</label>
+    <div class="input">
+      <?php echo $this->escape($this->user['firstname']);?>
+      <?php echo $this->escape($this->user['lastname']);?>
+    </div>
+  </div>
+  <div class="clearfix">
+    <label>Email:</label>
+    <div class="input">
+      <?php echo $this->escape($this->user['email']);?>
+    </div>
+  </div>
+  <div class="clearfix">
+    <label>Active:</label>
+    <div class="input">
+      <?php echo ($this->user['active']) ? 'Yes' : 'No';?>
+    </div>
+  </div>
+  <div class="clearfix">
+    <label>Last Login:</label>
+    <div class="input">
+      <?php echo $this->dateFormat($this->user['last_login'], 'm/d/Y h:i A');?>
+    </div>
+  </div>
+</div>
+<?php echo $this->form; ?>

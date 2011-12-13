@@ -1,0 +1,12 @@
+<?php $this->headTitle('Edit Account Profile');?>
+<?php $this->pageHeader = 'Edit Profile';?>
+
+<nav class="page-navigation">
+  <ul class="tabs">
+    <li><a href="<?php echo $this->route('admin_account');?>" data-icon="icon-user">My Profile</a></li>
+    <li class="active"><a href="<?php echo $this->route('admin_account_profile');?>" data-icon="icon-user" class="">Edit Profile</a></li>
+    <li><a href="<?php echo $this->route('admin_account_password');?>" data-icon="icon-key" class="">Change Password</a></li>
+  </ul>
+</nav>
+
+<?php echo $this->form;?>

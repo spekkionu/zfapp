@@ -1,4 +1,4 @@
-<?php 
+<?php
 // Setup Access Control
 $acl = new Zend_Acl();
 
@@ -10,9 +10,11 @@ $acl->addRole(new Zend_Acl_Role('user'));
 // Add resources
 $acl->addResource(new Zend_Acl_Resource('authenticated'));
 $acl->addResource(new Zend_Acl_Resource('admin'));
+$acl->addResource(new Zend_Acl_Resource('admin:administrator'));
 
 // Give admins permission to admin section
 $acl->allow('admin', 'admin');
+$acl->allow('admin', 'admin:administrator');
 
 // This is used to limit access to logged in users but not more finely grained control
 $acl->allow('user', 'authenticated');

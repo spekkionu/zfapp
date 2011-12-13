@@ -10,6 +10,6 @@
 [submodule "src/system/library/WideImage"]
 	path = src/system/library/WideImage
 	url = git://github.com/spekkionu/wideimage.git
-[submodule "src/public_html/assets/scripts/bootstrap"]
-	path = src/public_html/assets/scripts/bootstrap
-	url = git://github.com/twitter/bootstrap.git
+[submodule "src/public_html/assets/scripts/bootstrap-xtra"]
+	path = src/public_html/assets/scripts/bootstrap-xtra
+	url = git://github.com/lightglitch/bootstrap-xtra.git

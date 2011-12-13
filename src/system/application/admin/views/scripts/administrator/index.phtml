@@ -1,0 +1,48 @@
+<?php $this->headTitle('Manage Administrators');?>
+<?php $this->pageHeader = 'Manage Administrators';?>
+
+<?php if($this->hasAccess('admin:administrator', 'add')):?>
+  <nav class="page-navigation actions">
+    <a href="<?php echo $this->route('admin_administrator_add');?>" class="btn success icon alternative add">Add new Administrator</a>
+  </nav>
+<?php endif;?>
+
+<table class="bordered-table zebra-striped">
+  <thead>
+    <tr>
+      <?php if($this->hasAccess('admin:administrator', 'edit') || $this->hasAccess('admin:administrator', 'delete')):?>
+        <th class="header">Actions</th>
+      <?php endif;?>
+      <th class="header">Username</th>
+      <th class="header">Email</th>
+      <th class="header">Name</th>
+      <th class="header">Active</th>
+      <th class="header">Last Login</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach($this->results as $result):?>
+    <tr>
+      <?php if($this->hasAccess('admin:administrator', 'edit') || $this->hasAccess('admin:administrator', 'delete')):?>
+        <td>
+          <?php if($this->hasAccess('admin:administrator', 'edit') && $this->identity->id != $result['id']):?>
+            <a href="<?php echo $this->route('admin_administrator_edit', array('id'=>$result['id']));?>" class="btn info icon alternative edit">Edit</a>
+          <?php endif;?>
+          <?php if($this->hasAccess('admin:administrator', 'delete') && $this->identity->id != $result['id']):?>
+            <a href="<?php echo $this->route('admin_administrator_delete', array('id'=>$result['id']));?>" class="btn danger icon alternative remove">Delete</a>
+          <?php endif;?>
+        </td>
+      <?php endif;?>
+      <td><?php echo $this->escape($result['username']);?></td>
+      <td><?php echo $this->escape($result['email']);?></td>
+      <td>
+        <?php echo $this->escape($result['firstname']);?>
+        <?php echo $this->escape($result['lastname']);?>
+      </td>
+      <td><?php echo ($result['active']) ? 'Yes' : 'No';?></td>
+      <td><?php echo $this->dateFormat($result['last_login'], 'm/d/Y h:i A');?></td>
+    </tr>
+    <?php endforeach;?>
+  </tbody>
+</table>
+<?php echo $this->pagination($this->results);?>

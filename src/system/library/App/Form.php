@@ -11,13 +11,11 @@ class App_Form extends ZendX_JQuery_Form {
 
   public $field = array(
     'ViewHelper',
-    array('Description', array('tag' => 'div', 'class'=>'form-description', 'placement'=>'append', 'escape'=>false)),
+    array('Description', array('tag' => 'span', 'class'=>'help-block', 'placement'=>'append', 'escape'=>false)),
     'Errors',
-    array(array('element'=>'HtmlTag'), array('tag' => 'div', 'class'=>'form-element')),
-    array(array('label-container-open'=>'HtmlTag'), array('tag' => 'div', 'class'=>'form-label', 'placement'=>'prepend', 'closeOnly'=>true)),
+    array(array('element'=>'HtmlTag'), array('tag' => 'div', 'class'=>'input')),
     array('Label', array('placement'=>'prepend')),
-    array(array('label-container-close'=>'HtmlTag'), array('tag' => 'div', 'class'=>'form-label', 'placement'=>'prepend', 'openOnly'=>true)),
-    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'form-row'))
+    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'clearfix'))
   );
 
   public $password_strength = array(
@@ -26,22 +24,20 @@ class App_Form extends ZendX_JQuery_Form {
     array(array('password_meter_message'=>'HtmlTag'), array('tag' => 'div', 'class'=>'password-meter-message', 'placement'=>'prepend')),
     array(array('password_meter'=>'HtmlTag'), array('tag' => 'div', 'class'=>'password-meter')),
     array('ViewHelper', array('placement'=>'prepend')),
-    array('Description', array('tag' => 'div', 'class'=>'form-description', 'placement'=>'append', 'escape'=>false)),
+    array('Description', array('tag' => 'span', 'class'=>'help-block', 'placement'=>'append', 'escape'=>false)),
     'Errors',
-    array(array('element'=>'HtmlTag'), array('tag' => 'div', 'class'=>'form-element form-element-password')),
-    array(array('label-container-open'=>'HtmlTag'), array('tag' => 'div', 'class'=>'form-label', 'placement'=>'prepend', 'closeOnly'=>true)),
+    array(array('element'=>'HtmlTag'), array('tag' => 'div', 'class'=>'input form-element-password')),
     array('Label', array('placement'=>'prepend')),
-    array(array('label-container-close'=>'HtmlTag'), array('tag' => 'div', 'class'=>'form-label', 'placement'=>'prepend', 'openOnly'=>true)),
-    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'form-row'))
+    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'clearfix'))
   );
 
   public $inline = array(
     'ViewHelper',
-    array('Description', array('tag' => 'div', 'class'=>'form-description', 'placement'=>'append', 'escape'=>false)),
+    array('Description', array('tag' => 'span', 'class'=>'help-block', 'placement'=>'append', 'escape'=>false)),
     'Errors',
-    array('Label', array('placement'=>'prepend', 'class'=>'form-label')),
-    array(array('element'=>'HtmlTag'), array('tag' => 'div', 'class'=>'form-element')),
-    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'form-row'))
+    array('Label', array('placement'=>'prepend', 'class'=>'inline')),
+    array(array('element'=>'HtmlTag'), array('tag' => 'div', 'class'=>'input')),
+    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'clearfix'))
   );
 
   public $hidden = array(
@@ -50,14 +46,12 @@ class App_Form extends ZendX_JQuery_Form {
 
   public $button = array(
     'ViewHelper',
-    array(array('element'=>'HtmlTag'), array('tag' => 'div', 'class'=>'form-element')),
-    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'form-row'))
+    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'actions'))
   );
 
   public $buttonOpen = array(
     'ViewHelper',
-    array('element'=>'HtmlTag', array('tag' => 'div', 'class'=>'form-element', 'openOnly'=>true)),
-    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'form-row', 'openOnly'=>true))
+    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'actions', 'openOnly'=>true))
   );
 
   public $buttonMiddle = array(
@@ -66,8 +60,7 @@ class App_Form extends ZendX_JQuery_Form {
 
   public $buttonClose = array(
     'ViewHelper',
-    array('HtmlTag', array('tag' => 'div', 'class'=>'form-element',  'closeOnly'=>true)),
-    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'form-row', 'closeOnly'=>true))
+    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'actions', 'closeOnly'=>true))
   );
 
 

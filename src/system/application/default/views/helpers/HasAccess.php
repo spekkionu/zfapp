@@ -19,7 +19,7 @@ class Zend_View_Helper_HasAccess extends Zend_View_Helper_Abstract
    */
   function hasAccess($resource='general', $privilege=null) {
     $auth = Zend_Auth::getInstance();
-    $acl = Zend_Registry::get('acl');
+    $acl = Zend_Registry::get('Zend_Acl');
     if (!$auth->hasIdentity())
       return false;
     $identity = $auth->getIdentity();
