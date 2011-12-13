@@ -18,6 +18,9 @@ class Admin_AccessController extends App_AdminController
   public function indexAction() {
     $form = new Form_Login();
     if ($this->getRequest()->isPost()) {
+      if($this->getRequest()->getPost('forgot_password')){
+        return $this->routeRedirect('admin_forgot_password');
+      }
       if ($form->isValid($this->getRequest()->getPost())) {
         try {
           try {

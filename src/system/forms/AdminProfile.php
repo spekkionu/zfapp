@@ -36,6 +36,11 @@ class Form_AdminProfile extends App_Form
         Zend_Validate_Alnum::NOT_ALNUM => "May only contain letters and numbers.",
         Zend_Validate_Alnum::STRING_EMPTY => "'%value%' is an empty string"
       )));
+    $element->addValidator('StringLength', true, array('max'=>20,'messages' => array(
+      Zend_Validate_StringLength::INVALID => "Invalid type given. String, integer or float expected",
+      Zend_Validate_StringLength::TOO_SHORT => "Must be at least %min% characters.",
+      Zend_Validate_StringLength::TOO_LONG => "Must be no more than %max% characters."
+    )));
     $element->setFilters(array('StringTrim', 'StripTags'));
     $element->setDecorators($this->field);
     $element->setAttribs(array(
@@ -64,7 +69,7 @@ class Form_AdminProfile extends App_Form
      $element->addValidator('Regex', true, array('pattern'=>'/^\S*$/i','messages'=>array(
       Zend_Validate_Regex::NOT_MATCH => "Cannot contain spaces."
     )));
-    $element->addValidator('StringLength', true, array('messages' => array(
+    $element->addValidator('StringLength', true, array('min'=>4,'max'=>20,'messages' => array(
         Zend_Validate_StringLength::INVALID => "Invalid type given. String, integer or float expected",
         Zend_Validate_StringLength::TOO_SHORT => "Must be at least %min% characters.",
         Zend_Validate_StringLength::TOO_LONG => "Must be no more than %max% characters."

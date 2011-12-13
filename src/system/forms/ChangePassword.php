@@ -62,9 +62,9 @@ class Form_ChangePassword extends App_Form
     $element->setRequired(true);
     $element->setFilters(array('StringTrim'));
     $element->addValidator('NotEmpty', true, array('messages' => array(
-        Zend_Validate_NotEmpty::INVALID => "Invalid type given. String, integer or float expected",
-        Zend_Validate_NotEmpty::IS_EMPTY => "Current password is required."
-      )));
+      Zend_Validate_NotEmpty::INVALID => "Invalid type given. String, integer or float expected",
+      Zend_Validate_NotEmpty::IS_EMPTY => "Current password is required."
+    )));
     $element->setAttribs(array(
       'size' => 20,
       'maxlength' => 20,
@@ -85,17 +85,17 @@ class Form_ChangePassword extends App_Form
     $element->setDescription("Enter your desired new password.");
     $element->setRequired(true);
     $element->addValidator('NotEmpty', true, array('messages' => array(
-        Zend_Validate_NotEmpty::INVALID => "Invalid type given. String, integer or float expected",
-        Zend_Validate_NotEmpty::IS_EMPTY => "New password is required."
-      )));
+      Zend_Validate_NotEmpty::INVALID => "Invalid type given. String, integer or float expected",
+      Zend_Validate_NotEmpty::IS_EMPTY => "New password is required."
+    )));
      $element->addValidator('Regex', true, array('pattern'=>'/^\S*$/i','messages'=>array(
       Zend_Validate_Regex::NOT_MATCH => "Cannot contain spaces."
     )));
-    $element->addValidator('StringLength', true, array('messages' => array(
-        Zend_Validate_StringLength::INVALID => "Invalid type given. String, integer or float expected",
-        Zend_Validate_StringLength::TOO_SHORT => "Must be at least %min% characters.",
-        Zend_Validate_StringLength::TOO_LONG => "Must be no more than %max% characters."
-      )));
+    $element->addValidator('StringLength', true, array('min'=>4,'max'=>20,'messages' => array(
+      Zend_Validate_StringLength::INVALID => "Invalid type given. String, integer or float expected",
+      Zend_Validate_StringLength::TOO_SHORT => "Must be at least %min% characters.",
+      Zend_Validate_StringLength::TOO_LONG => "Must be no more than %max% characters."
+    )));
     $element->setAttribs(array(
       'size' => 20,
       'maxlength' => 20,
