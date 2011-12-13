@@ -34,7 +34,7 @@ class Form_Delete extends App_Form
     $element = new Zend_Form_Element_Submit('cancel');
     $element->setLabel('Cancel');
     $element->setDecorators($this->buttonClose);
-    $element->setAttrib('class', 'btn');
+    $element->setAttrib('class', 'btn cancel');
     $this->addElement($element);
 
     $this->addElement('hash', 'csrf', array('ignore' => true, 'decorators' => $this->hidden));

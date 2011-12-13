@@ -9,3 +9,19 @@ body{
 .inline{
   display:inline-block !important;
 }
+form .password-meter {
+    display: inline-block;
+    margin-left: 5px;
+}
+ul.errors{
+  margin:0 0 0 20px;
+  padding:0;
+}
+ul.errors li{
+  color:#B94A48;
+  font-weight:bold;
+}
+.form-stacked div.clearfix.error {
+  padding-top: 0;
+
+}
