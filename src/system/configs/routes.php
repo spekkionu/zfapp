@@ -117,12 +117,20 @@ $routes['admin_account_password'] = new Zend_Controller_Router_Route_Static(
 
 // Administrator management
 // --------------------------
-$routes['admin_administrator'] = new Zend_Controller_Router_Route_Static(
-  'admin/administrator',
+$routes['admin_administrator'] = new Zend_Controller_Router_Route(
+  'admin/administrator/:page/:sort/:dir',
   array(
     'module' => 'admin',
     'controller' => 'administrator',
-    'action' => 'index'
+    'action' => 'index',
+    'page' => 1,
+    'sort' => 'id',
+    'dir' => 'asc'
+  ),
+  array(
+    'page' => '\d+',
+    'sort' => 'id|username|email|name|active|last_login',
+    'dir' => 'asc|desc'
   )
 );
 $routes['admin_administrator_add'] = new Zend_Controller_Router_Route_Static(

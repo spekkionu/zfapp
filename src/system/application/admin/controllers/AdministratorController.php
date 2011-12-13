@@ -28,11 +28,16 @@ class Admin_AdministratorController extends App_AdminController
     $page = $this->getRequest()->getParam('page', 1);
     $mgr = new Model_Admin();
     $search = Model_Admin::$search;
-    $sort = 'id';
-    $dir = 'asc';
+    $sort = $this->getRequest()->getParam('sort');
+    if(!in_array($sort, Model_Admin::$sortable)){
+      $sort = 'id';
+    }
+    $dir = $this->getRequest()->getParam('dir');
     $limit = 25;
     $results = $mgr->getAdministratorList($search, $page, $limit, $sort, $dir);
     $this->view->results = $results;
+    $this->view->sort = $sort;
+    $this->view->dir = $dir;
   }
 
   public function addAction(){

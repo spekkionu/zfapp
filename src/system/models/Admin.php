@@ -71,7 +71,7 @@ class Model_Admin extends Model_User {
     }
     if($sort == 'id'){
       $select->order("{$sort} {$dir}");
-    }elseif($sort = 'name'){
+    }elseif($sort == 'name'){
       $select->order("firstname {$dir}");
       $select->order("lastname {$dir}");
       $select->order("id {$dir}");
@@ -79,7 +79,6 @@ class Model_Admin extends Model_User {
       $select->order("{$sort} {$dir}");
       $select->order("id {$dir}");
     }
-    $select->order("{$sort} {$dir}");
     return App_Paginator::getPagination($select, $page, $limit);
   }
 

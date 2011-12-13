@@ -11,13 +11,91 @@
   <thead>
     <tr>
       <?php if($this->hasAccess('admin:administrator', 'edit') || $this->hasAccess('admin:administrator', 'delete')):?>
-        <th class="header">Actions</th>
+        <?php if($this->sort == 'id' && $this->dir == 'asc'):?>
+          <?php $class = "headerSortDown"; ?>
+          <th class="header headerSortDown">
+            <a href="<?php echo $this->route('admin_administrator', array('page'=>1,'sort'=>'id','dir'=>'desc'), true);?>">Actions</a>
+          </th>
+        <?php elseif($this->sort == 'id'):?>
+          <th class="header headerSortUp">
+            <a href="<?php echo $this->route('admin_administrator', array('page'=>1,'sort'=>'id','dir'=>'asc'));?>">Actions</a>
+          </th>
+        <?php else:?>
+          <th class="header">
+            <a href="<?php echo $this->route('admin_administrator', array('page'=>1,'sort'=>'id','dir'=>'asc'));?>">Actions</a>
+          </th>
+        <?php endif;?>
       <?php endif;?>
-      <th class="header">Username</th>
-      <th class="header">Email</th>
-      <th class="header">Name</th>
-      <th class="header">Active</th>
-      <th class="header">Last Login</th>
+      <?php if($this->sort == 'username' && $this->dir == 'asc'):?>
+        <?php $class = "headerSortDown"; ?>
+        <th class="header headerSortDown">
+          <a href="<?php echo $this->route('admin_administrator', array('page'=>1,'sort'=>'username','dir'=>'desc'), true);?>">Username</a>
+        </th>
+      <?php elseif($this->sort == 'username'):?>
+        <th class="header headerSortUp">
+          <a href="<?php echo $this->route('admin_administrator', array('page'=>1,'sort'=>'username','dir'=>'asc'));?>">Username</a>
+        </th>
+      <?php else:?>
+        <th class="header">
+          <a href="<?php echo $this->route('admin_administrator', array('page'=>1,'sort'=>'username','dir'=>'asc'));?>">Username</a>
+        </th>
+      <?php endif;?>
+      <?php if($this->sort == 'email' && $this->dir == 'asc'):?>
+        <?php $class = "headerSortDown"; ?>
+        <th class="header headerSortDown">
+          <a href="<?php echo $this->route('admin_administrator', array('page'=>1,'sort'=>'email','dir'=>'desc'), true);?>">Email</a>
+        </th>
+      <?php elseif($this->sort == 'email'):?>
+        <th class="header headerSortUp">
+          <a href="<?php echo $this->route('admin_administrator', array('page'=>1,'sort'=>'email','dir'=>'asc'));?>">Email</a>
+        </th>
+      <?php else:?>
+        <th class="header">
+          <a href="<?php echo $this->route('admin_administrator', array('page'=>1,'sort'=>'email','dir'=>'asc'));?>">Email</a>
+        </th>
+      <?php endif;?>
+      <?php if($this->sort == 'name' && $this->dir == 'asc'):?>
+        <?php $class = "headerSortDown"; ?>
+        <th class="header headerSortDown">
+          <a href="<?php echo $this->route('admin_administrator', array('page'=>1,'sort'=>'name','dir'=>'desc'), true);?>">Name</a>
+        </th>
+      <?php elseif($this->sort == 'name'):?>
+        <th class="header headerSortUp">
+          <a href="<?php echo $this->route('admin_administrator', array('page'=>1,'sort'=>'name','dir'=>'asc'));?>">Name</a>
+        </th>
+      <?php else:?>
+        <th class="header">
+          <a href="<?php echo $this->route('admin_administrator', array('page'=>1,'sort'=>'name','dir'=>'asc'));?>">Name</a>
+        </th>
+      <?php endif;?>
+      <?php if($this->sort == 'active' && $this->dir == 'desc'):?>
+        <?php $class = "headerSortDown"; ?>
+        <th class="header headerSortDown">
+          <a href="<?php echo $this->route('admin_administrator', array('page'=>1,'sort'=>'active','dir'=>'asc'), true);?>">Active</a>
+        </th>
+      <?php elseif($this->sort == 'active'):?>
+        <th class="header headerSortUp">
+          <a href="<?php echo $this->route('admin_administrator', array('page'=>1,'sort'=>'active','dir'=>'desc'));?>">Active</a>
+        </th>
+      <?php else:?>
+        <th class="header">
+          <a href="<?php echo $this->route('admin_administrator', array('page'=>1,'sort'=>'active','dir'=>'desc'));?>">Active</a>
+        </th>
+      <?php endif;?>
+      <?php if($this->sort == 'last_login' && $this->dir == 'desc'):?>
+        <?php $class = "headerSortDown"; ?>
+        <th class="header headerSortDown">
+          <a href="<?php echo $this->route('admin_administrator', array('page'=>1,'sort'=>'last_login','dir'=>'asc'), true);?>">Last Login</a>
+        </th>
+      <?php elseif($this->sort == 'last_login'):?>
+        <th class="header headerSortUp">
+          <a href="<?php echo $this->route('admin_administrator', array('page'=>1,'sort'=>'last_login','dir'=>'desc'));?>">Last Login</a>
+        </th>
+      <?php else:?>
+        <th class="header">
+          <a href="<?php echo $this->route('admin_administrator', array('page'=>1,'sort'=>'last_login','dir'=>'desc'));?>">Last Login</a>
+        </th>
+      <?php endif;?>
     </tr>
   </thead>
   <tbody>
