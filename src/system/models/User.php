@@ -21,8 +21,7 @@ class Model_User extends App_Model {
   protected $_primary = 'id';
 
   const ACCESS_ADMIN = 'admin';
-  const ACCESS_MERCHANT = 'merchant';
-  const ACCESS_CUSTOMER = 'customer';
+  const ACCESS_SUPERADMIN = 'superadmin';
 
   /**
    * Data can be sorted by these columns
