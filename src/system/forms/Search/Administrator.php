@@ -25,7 +25,7 @@ class Form_Search_Administrator extends App_Form
 
     $element = new Zend_Form_Element_Text('username');
     $element->setLabel('Username:');
-    $element->setDescription("Filter by username.");
+    $element->setDescription("Search by username.");
     $element->setFilters(array('StringTrim', 'StripTags'));
     $element->setDecorators($this->column_left);
     $element->setAttribs(array(
@@ -37,7 +37,7 @@ class Form_Search_Administrator extends App_Form
 
     $element = new Zend_Form_Element_Text('name');
     $element->setLabel('Name:');
-    $element->setDescription("Filter by name.");
+    $element->setDescription("Search by name.");
     $element->setFilters(array('StringTrim', 'StripTags'));
     $element->setAttribs(array(
       'size' => 32,
@@ -48,7 +48,7 @@ class Form_Search_Administrator extends App_Form
 
     $element = new Form_Element_Email('email');
     $element->setLabel('Email Address:');
-    $element->setDescription("Filter by email address.");
+    $element->setDescription("Search by email address.");
     $element->setFilters(array('StringTrim', 'StripTags'));
     $element->setAttribs(array(
       'size' => 50,
@@ -59,7 +59,7 @@ class Form_Search_Administrator extends App_Form
 
     $element = new Zend_Form_Element_Select('active');
     $element->setLabel('Active:');
-    $element->setDescription("Filter by account status.");
+    $element->setDescription("Search by account status.");
     $element->setMultiOptions(array(
       '' => 'All',
       '1' => 'Active',

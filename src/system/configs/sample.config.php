@@ -96,6 +96,8 @@ $config['cache'] = array(
     'type' => 'File',
     // Set to true if using something other than a default Zend_Cache Backend
     'custom' => false,
+    // The maximum lifetime of a cached entry, set to null for no expiration
+    "lifetime" => null,
     // Any options for the cache backend go here.  Most will not need any
     'options' => array()
   ),
@@ -107,6 +109,8 @@ $config['cache'] = array(
     'type' => 'File',
     // Set to true if using something other than a default Zend_Cache Backend
     'custom' => false,
+    // The maximum lifetime of a cached entry, set to null for no expiration
+    "lifetime" => null,
     // Any options for the cache backend go here.  Most will not need any
     'options' => array()
   ),
