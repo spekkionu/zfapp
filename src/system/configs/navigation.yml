@@ -86,7 +86,7 @@
   action: index
   resource: admin:administrator
   privilege: list
-  reset_params: true
+  reset_params: false
   visible: true
   pages:
     -

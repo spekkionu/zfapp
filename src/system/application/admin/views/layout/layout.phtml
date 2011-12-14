@@ -10,8 +10,9 @@ echo $this->headTitle();
 
 // CSS Files
 //$this->headLink()->appendStylesheet($this->baseUrl('assets/styles/admin.min.css'), 'screen');
+$this->headLink()->appendStylesheet($this->baseUrl('assets/scripts/jquery/jquery-ui/css/cupertino/jquery-ui-1.8.16.custom.css'));
 $this->headLink()->appendStylesheet($this->baseUrl('assets/scripts/bootstrap-xtra/bootstrap.min.css'), 'screen');
-$this->headLink()->appendStylesheet($this->baseUrl('assets/scripts/jquery/jquery-ui/css/smoothness/jquery-ui-1.8.16.custom.css'));
+
 $this->headLink()->appendStylesheet($this->baseUrl('assets/scripts/jquery/jquery-validate.password/jquery.validate.password.css'));
 $this->headLink()->appendStylesheet($this->baseUrl('assets/styles/admin.css'), 'screen');
 
@@ -28,8 +29,10 @@ $this->headScript()->appendFile($this->baseUrl('assets/scripts/bootstrap-xtra/js
 $this->headScript()->appendFile($this->baseUrl('assets/scripts/bootstrap-xtra/js/bootstrap-buttons.js'));
 $this->headScript()->appendFile($this->baseUrl('assets/scripts/bootstrap-xtra/js/bootstrap-dropdown.js'));
 $this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.metadata.js'));
+$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.cookie.js'));
 $this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.bgiframe-2.1.2.js'));
 $this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.form.js'));
+$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.collapsible.js'));
 $this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-validation/jquery.validate.min.js'));
 $this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-validation/additional-methods.min.js'));
 $this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-validate.password/jquery.validate.password.js'));
@@ -60,8 +63,12 @@ echo $this->headStyle();
                 <?php echo $this->navigation()->menu()->setUlClass('nav')->renderMenu(null, array('maxDepth'=>0)) ?>
                 <?php if($this->hasAccess('admin','general')):?>
                   <ul class="nav secondary-nav">
-                    <li><a class="" data-icon="icon-user" href="<?php echo $this->route('admin_account');?>" title="Manage account profile">My Account</a></li>
-                    <li><a class="" data-icon="icon-logout" href="<?php echo $this->route('admin_logout');?>" title="Log out">Log Out</a></li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle"><?php echo $this->escape($this->identity->username);?></a>
+                      <ul class="dropdown-menu">
+                        <li><a class="" data-icon="icon-user" href="<?php echo $this->route('admin_account');?>" title="Manage account profile">My Account</a></li>
+                        <li><a class="" data-icon="icon-logout" href="<?php echo $this->route('admin_logout');?>" title="Log out">Log Out</a></li>
+                      </ul>
+                    </li>
                   </ul>
                 <?php endif;?>
               </div>
@@ -75,22 +82,22 @@ echo $this->headStyle();
         <?php if($this->pageHeader):?>
           <h1 class="page-title"><?php echo $this->escape($this->pageHeader);?></h1>
         <?php endif;?>
+        <?php if($this->url() != $this->route('admin_home')):?>
         <nav class="breadcrumb">
-          <?php if($this->url() != $this->route('admin_home')):?>
-            <a href="<?php echo $this->route('admin_home');?>" title="Admin Dashboard">Dashboard</a> <span class="divider">/</span>
-          <?php endif;?>
+          <a href="<?php echo $this->route('admin_home');?>" title="Admin Dashboard">Dashboard</a> <span class="divider">/</span>
           <?php $this->navigation()->findOneByRoute('admin_login')->setVisible(true); ?>
             <?php $this->navigation()->findOneByRoute('admin_account')->setVisible(true); ?>
           <?php echo $this->navigation()->breadcrumbs()->setLinkLast(FALSE)->setMinDepth(0)->setSeparator('<span class="divider">/</span>'.PHP_EOL); ?>
         </nav>
+        <?php endif;?>
         <?php echo $this->flashMessages();?>
       </header>
-      <div class="content">
+      <div class="maincontent">
         <?php echo $this->layout()->content;?>
       </div>
     </section>
     <footer class="site-footer">
-      &copy; copyright <?php echo date('Y');?> <a href="http://simplecart.spekkionu.com" target="_blank">spekkionu</a>
+      &copy; copyright 2012 <a href="#" target="_blank">spekkionu</a>
     </footer>
   </div>
 </body>

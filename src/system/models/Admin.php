@@ -43,7 +43,7 @@ class Model_Admin extends Model_User {
    */
   public function getAdministratorList(array $search = array(), $page = 1, $limit = 25, $sort = 'id', $dir = 'asc'){
     // Merge with default search parameters
-    $search = array_merge(self::$search, array_intersect($search, self::$search));
+    $search = array_merge(self::$search, array_intersect_key($search, self::$search));
     $select = $this->select();
     $select->from($this, array(
       'id', 'username', 'firstname', 'lastname', 'email', 'active',
@@ -56,7 +56,7 @@ class Model_Admin extends Model_User {
       $select->where("CONCAT_WS(' ',`firstname`,`lastname`) LIKE ?", "%".$search['name']."%");
     }
     if($search['email']){
-      $select->where("`email` LIKE ?", $search['username']);
+      $select->where("`email` LIKE ?", $search['email']);
     }
     if(!is_null($search['active']) && $search['active'] !== ''){
       $select->where("`active` = ?", $search['active'], Zend_Db::PARAM_INT);

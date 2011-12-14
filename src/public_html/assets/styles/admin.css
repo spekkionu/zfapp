@@ -1,17 +1,20 @@
 body{
   padding-top: 40px;
 }
-
+.content-container{
+  margin-top:18px;
+}
 .page-navigation{
   padding-left: 20px;
 }
+.ui-widget { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 .inline{
   display:inline-block !important;
 }
 form .password-meter {
-    display: inline-block;
-    margin-left: 5px;
+  margin:5px 0 5px 0;
 }
 ul.errors{
   margin:0 0 0 20px;
@@ -23,5 +26,22 @@ ul.errors li{
 }
 .form-stacked div.clearfix.error {
   padding-top: 0;
+}
 
+form.search, form.search fieldset{
+  margin:0;
+  padding:0;
+}
+form.search legend{
+  padding-bottom:9px;
+}
+form.search .clearfix {
+    margin-bottom: 9px;
+}
+form.search .actions{
+  margin:0 0 18px 0;
+  padding: 8px 20px 8px 150px;
+}
+table .header {
+  cursor:default;
 }

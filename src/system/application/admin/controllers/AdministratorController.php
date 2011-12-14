@@ -27,17 +27,45 @@ class Admin_AdministratorController extends App_AdminController
     }
     $page = $this->getRequest()->getParam('page', 1);
     $mgr = new Model_Admin();
-    $search = Model_Admin::$search;
+    $session = new Zend_Session_Namespace('admin_search');
+    if(!isset($session->administrator)){
+      $session->administrator = Model_Admin::$search;
+    }
     $sort = $this->getRequest()->getParam('sort');
     if(!in_array($sort, Model_Admin::$sortable)){
       $sort = 'id';
     }
     $dir = $this->getRequest()->getParam('dir');
     $limit = 25;
-    $results = $mgr->getAdministratorList($search, $page, $limit, $sort, $dir);
+    $form = new Form_Search_Administrator();
+    $form->populate($session->administrator);
+    if($this->getRequest()->isPost()){
+      if($this->getRequest()->getPost('clear')){
+        // Set back to default search parameters
+        $session->administrator = Model_Admin::$search;
+        // Send back to page 1
+        return $this->routeRedirect('admin_administrator', array('page'=>1,'sort'=>$sort,'dir'=>$dir));
+      }
+      if($form->isValid($this->getRequest()->getPost())){
+        // Save search parameters
+        $session->administrator = array_merge($session->administrator, array_intersect_key($form->getValues(), Model_Admin::$search));
+        // Send back to page 1
+        return $this->routeRedirect('admin_administrator', array('page'=>1,'sort'=>$sort,'dir'=>$dir));
+      }
+    }
+    $form->populate($session->administrator);
+    $results = $mgr->getAdministratorList($session->administrator, $page, $limit, $sort, $dir);
     $this->view->results = $results;
     $this->view->sort = $sort;
     $this->view->dir = $dir;
+    $this->view->form = $form;
+    // Set parameters for navigation
+    $navpage = Zend_Registry::get('Zend_Navigation')->findOneByRoute('admin_administrator');
+    $navpage->setParams(array(
+      'page' => $page,
+      'sort' => $sort,
+      'dir' => $dir
+    ));
   }
 
   public function addAction(){

@@ -18,6 +18,26 @@ class App_Form extends ZendX_JQuery_Form {
     array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'clearfix'))
   );
 
+  public $column_left = array(
+    'ViewHelper',
+    array('Description', array('tag' => 'span', 'class'=>'help-block', 'placement'=>'append', 'escape'=>false)),
+    'Errors',
+    array(array('element'=>'HtmlTag'), array('tag' => 'div', 'class'=>'input')),
+    array('Label', array('placement'=>'prepend')),
+    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'clearfix span7')),
+    array(array('wrapper'=>'HtmlTag'), array('tag' => 'div', 'class'=>'row', 'openOnly'=>true))
+  );
+
+  public $column_right = array(
+    'ViewHelper',
+    array('Description', array('tag' => 'span', 'class'=>'help-block', 'placement'=>'append', 'escape'=>false)),
+    'Errors',
+    array(array('element'=>'HtmlTag'), array('tag' => 'div', 'class'=>'input')),
+    array('Label', array('placement'=>'prepend')),
+    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'clearfix span7')),
+    array(array('wrapper'=>'HtmlTag'), array('tag' => 'div', 'class'=>'row', 'closeOnly'=>true))
+  );
+
   public $password_strength = array(
     array(array('password_meter_bar'=>'HtmlTag'), array('tag' => 'div', 'class'=>'password-meter-bar')),
     array(array('password_meter_bg'=>'HtmlTag'), array('tag' => 'div', 'class'=>'password-meter-bg')),

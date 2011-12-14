@@ -99,10 +99,10 @@ if($config['cache']['dbmetadata']['enabled']){
 Zend_Registry::set('db', $db);
 
 // Setup Zend_Currency
-$cache = Cache::getCache('currency');
-Zend_Currency::setCache($cache);
-$currency = new Zend_Currency();
-Zend_Registry::set('Zend_Currency', $currency);
+//$cache = Cache::getCache('currency');
+//Zend_Currency::setCache($cache);
+//$currency = new Zend_Currency();
+//Zend_Registry::set('Zend_Currency', $currency);
 
 // Setup Session Handler
 if($config['session']['handler']){

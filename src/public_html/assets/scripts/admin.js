@@ -34,6 +34,12 @@ jQuery(document).ready(function($){
       form.submit();
     }
   });
+  $('.collapable[data-accordion]').collapsible({
+    persist: true,
+    cookieOptions: {
+      path: 'admin'
+    }
+  });
   // Javascript Validation
   $('form.validate').attr('novalidate', 'novalidate').validate();
   $(document).delegate('form.validate .btn.cancel', 'click', function(e){
