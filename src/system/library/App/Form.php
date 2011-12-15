@@ -18,6 +18,17 @@ class App_Form extends ZendX_JQuery_Form {
     array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'clearfix'))
   );
 
+  public $option_list = array(
+    'ViewHelper',
+    array(array('item'=>'HtmlTag'), array('tag' => 'li')),
+    array(array('list'=>'HtmlTag'), array('tag' => 'ul', 'class'=>'inputs-list')),
+    array('Description', array('tag' => 'span', 'class'=>'help-block', 'placement'=>'append', 'escape'=>false)),
+    'Errors',
+    array(array('element'=>'HtmlTag'), array('tag' => 'div', 'class'=>'input')),
+    array('Label', array('placement'=>'prepend')),
+    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'clearfix'))
+  );
+
   public $column_left = array(
     'ViewHelper',
     array('Description', array('tag' => 'span', 'class'=>'help-block', 'placement'=>'append', 'escape'=>false)),

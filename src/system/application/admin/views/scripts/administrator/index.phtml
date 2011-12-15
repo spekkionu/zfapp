@@ -78,15 +78,15 @@
       <?php if($this->sort == 'active' && $this->dir == 'desc'):?>
         <?php $class = "headerSortDown"; ?>
         <th class="header headerSortDown">
-          <a href="<?php echo $this->route('admin_administrator', array('page'=>1,'sort'=>'active','dir'=>'asc'), true);?>">Active</a>
+          <a href="<?php echo $this->route('admin_administrator', array('page'=>1,'sort'=>'active','dir'=>'asc'), true);?>">Account Status</a>
         </th>
       <?php elseif($this->sort == 'active'):?>
         <th class="header headerSortUp">
-          <a href="<?php echo $this->route('admin_administrator', array('page'=>1,'sort'=>'active','dir'=>'desc'));?>">Active</a>
+          <a href="<?php echo $this->route('admin_administrator', array('page'=>1,'sort'=>'active','dir'=>'desc'));?>">Account Status</a>
         </th>
       <?php else:?>
         <th class="header">
-          <a href="<?php echo $this->route('admin_administrator', array('page'=>1,'sort'=>'active','dir'=>'desc'));?>">Active</a>
+          <a href="<?php echo $this->route('admin_administrator', array('page'=>1,'sort'=>'active','dir'=>'desc'));?>">Account Status</a>
         </th>
       <?php endif;?>
       <?php if($this->sort == 'last_login' && $this->dir == 'desc'):?>
@@ -124,7 +124,7 @@
         <?php echo $this->escape($result['firstname']);?>
         <?php echo $this->escape($result['lastname']);?>
       </td>
-      <td><?php echo ($result['active']) ? 'Yes' : 'No';?></td>
+      <td><?php echo ($result['active']) ? 'Active' : 'Inactive';?></td>
       <td><?php echo $this->dateFormat($result['last_login'], 'm/d/Y h:i A');?></td>
     </tr>
     <?php endforeach;?>

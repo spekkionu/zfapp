@@ -58,7 +58,7 @@ class Form_Search_Administrator extends App_Form
     $this->addElement($element);
 
     $element = new Zend_Form_Element_Select('active');
-    $element->setLabel('Active:');
+    $element->setLabel('Status:');
     $element->setDescription("Search by account status.");
     $element->setMultiOptions(array(
       '' => 'All',

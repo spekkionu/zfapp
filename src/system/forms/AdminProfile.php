@@ -16,7 +16,7 @@ class Form_AdminProfile extends App_Form
       'FormElements',
       array('Description', array('tag' => 'p', 'class' => 'form-help')),
       array('Fieldset', array()),
-      array('Form', array('id' => 'form-profile', 'class' => 'form-stacked validate', 'accept-charset' => 'utf-8'))
+      array('Form', array('id' => 'form-profile', 'class' => 'validate', 'accept-charset' => 'utf-8'))
     ));
   }
 
@@ -214,11 +214,17 @@ class Form_AdminProfile extends App_Form
     $element->setDecorators($this->field);
     $this->addElement($element);
 
-    $element = new Zend_Form_Element_Checkbox('active');
-    $element->setLabel('Active:');
+    $element = new Zend_Form_Element_Radio('active');
+    $element->setLabel('Account Status:');
+    $element->setMultiOptions(array(
+      '1' => 'Active',
+      '0' => 'Inactive'
+    ));
+    $element->setSeparator('</li><li>');
     $element->setDescription("Only active users may log in.");
     $element->setFilters(array('StringTrim', 'StripTags'));
-    $element->setDecorators($this->inline);
+    $element->setDecorators($this->option_list);
+    $element->setValue('0');
     $this->addElement($element);
 
     $element = new Zend_Form_Element_Submit('save');
