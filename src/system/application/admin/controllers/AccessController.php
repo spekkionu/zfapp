@@ -37,7 +37,7 @@ class Admin_AccessController extends App_AdminController
               return $this->routeRedirect('admin_home');
             }
           } catch (Validate_Exception $e) {
-            $form->getElement('username')->addError($e->getMesage());
+            $form->getElement('username')->addError($e->getMessage());
           }
         } catch (Exception $e) {
           $this->logError("Error logging in admin. - {$e->getMessage()}");
