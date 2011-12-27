@@ -17,7 +17,7 @@ class Form_Delete extends App_Form
       'FormElements',
       array('Description', array('tag' => 'p', 'class' => 'form-help')),
       array('Fieldset', array()),
-      array('Form', array('id' => 'form-category', 'class' => 'form-stacked', 'accept-charset' => 'utf-8'))
+      array('Form', array('id' => 'form-category', 'class' => '', 'accept-charset' => 'utf-8'))
     ));
   }
 

@@ -9,12 +9,7 @@
   </ul>
 </nav>
 
-<table class="border data-table">
-  <thead>
-  <tr>
-    <th colspan="2">User Profile</th>
-  </tr>
-  </thead>
+<table class="details-table">
   <tr>
     <th>Username:</th>
     <td><?php echo $this->escape($this->profile['username']);?></td>
@@ -32,7 +27,7 @@
   </tr>
   <tr>
     <th>Last Login:</th>
-    <td><?php echo $this->dateFormat($this->profile['last_login'], 'm/d/Y h:i a');?></td>
+    <td><?php echo $this->dateFormat($this->profile['last_login'], 'm/d/Y h:i A');?></td>
   </tr>
 
 </table>

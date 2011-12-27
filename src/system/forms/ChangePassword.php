@@ -17,7 +17,7 @@ class Form_ChangePassword extends App_Form
       'FormElements',
       array('Description', array('tag' => 'p', 'class' => 'form-help')),
       array('Fieldset', array()),
-      array('Form', array('id' => 'form-change-password', 'class' => 'form-stacked validate', 'accept-charset' => 'utf-8'))
+      array('Form', array('id' => 'form-change-password', 'class' => 'validate', 'accept-charset' => 'utf-8'))
     ));
   }
 

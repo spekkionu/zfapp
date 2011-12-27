@@ -45,3 +45,10 @@ form.search .actions{
 table .header {
   cursor:default;
 }
+.details-table{
+  width: auto;
+}
+.details-table thead th{
+  text-align: center;
+  font-size:120%;
+}
