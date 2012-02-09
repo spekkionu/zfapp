@@ -10,8 +10,8 @@ echo $this->headTitle();
 
 // CSS Files
 //$this->headLink()->appendStylesheet($this->baseUrl('assets/styles/admin.min.css'), 'screen');
-$this->headLink()->appendStylesheet($this->baseUrl('assets/scripts/jquery/jquery-ui/css/cupertino/jquery-ui-1.8.16.custom.css'));
-$this->headLink()->appendStylesheet($this->baseUrl('assets/scripts/bootstrap-xtra/bootstrap.min.css'), 'screen');
+$this->headLink()->appendStylesheet($this->baseUrl('assets/scripts/jquery/jquery-ui/css/cupertino/jquery-ui-1.8.17.custom.css'));
+$this->headLink()->appendStylesheet($this->baseUrl('assets/scripts/bootstrap/bootstrap.min.css'), 'screen');
 
 $this->headLink()->appendStylesheet($this->baseUrl('assets/scripts/jquery/jquery-validate.password/jquery.validate.password.css'));
 $this->headLink()->appendStylesheet($this->baseUrl('assets/styles/admin.css'), 'screen');
@@ -22,21 +22,22 @@ echo $this->headLink();
 // Javascript Files
 $this->headScript()->appendFile($this->baseUrl('assets/scripts/html5.js'), 'text/javascript', array('conditional' => 'lt IE 9'));
 
-//$this->headScript()->appendFile($this->baseUrl('assets/scripts/admin.min.js'), 'text/javascript');
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-1.7.1.min.js'));
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-ui/js/jquery-ui-1.8.16.custom.min.js'));
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/bootstrap-xtra/js/bootstrap-alerts.js'));
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/bootstrap-xtra/js/bootstrap-buttons.js'));
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/bootstrap-xtra/js/bootstrap-dropdown.js'));
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.metadata.js'));
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.cookie.js'));
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.bgiframe-2.1.2.js'));
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.form.js'));
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.collapsible.js'));
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-validation/jquery.validate.min.js'));
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-validation/additional-methods.min.js'));
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-validate.password/jquery.validate.password.js'));
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/admin.js'));
+$this->headScript()->appendFile($this->baseUrl('assets/scripts/admin.all.min.js'), 'text/javascript');
+//$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-1.7.1.min.js'));
+//$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-ui/js/jquery-ui-1.8.17.custom.min.js'));
+//$this->headScript()->appendFile($this->baseUrl('assets/scripts/bootstrap/js/bootstrap-alerts.js'));
+//$this->headScript()->appendFile($this->baseUrl('assets/scripts/bootstrap/js/bootstrap-buttons.js'));
+//$this->headScript()->appendFile($this->baseUrl('assets/scripts/bootstrap/js/bootstrap-dropdown.js'));
+//$this->headScript()->appendFile($this->baseUrl('assets/scripts/bootbox/js/bootbox.min.js'));
+//$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.metadata.js'));
+//$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.cookie.js'));
+//$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.bgiframe-2.1.2.js'));
+//$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.form.js'));
+//$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.collapsible.js'));
+//$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-validation/jquery.validate.min.js'));
+//$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-validation/additional-methods.min.js'));
+//$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-validate.password/jquery.validate.password.js'));
+//$this->headScript()->appendFile($this->baseUrl('assets/scripts/admin.js'));
 echo $this->headScript();
 
 // jQuery Plugins
