@@ -15,7 +15,7 @@ class Form_ForgotPassword extends App_Form
       'FormElements',
       array('Description', array('tag' => 'p', 'class' => 'form-help')),
       array('Fieldset', array()),
-      array('Form', array('id' => 'form-forgot-password', 'class' => 'validate', 'accept-charset' => 'utf-8'))
+      array('Form', array('id' => 'form-forgot-password', 'class' => 'validate form-horizontal', 'accept-charset' => 'utf-8'))
     ));
   }
 
@@ -67,7 +67,7 @@ class Form_ForgotPassword extends App_Form
     $element = new Zend_Form_Element_Submit('submit');
     $element->setLabel('Send Password Request');
     $element->setDecorators($this->buttonOpen);
-    $element->setAttrib('class', 'btn primary');
+    $element->setAttrib('class', 'btn btn-primary');
     $element->setIgnore(TRUE);
     $this->addElement($element);
 

@@ -11,41 +11,39 @@ class App_Form extends ZendX_JQuery_Form {
 
   public $field = array(
     'ViewHelper',
-    array('Description', array('tag' => 'span', 'class'=>'help-block', 'placement'=>'append', 'escape'=>false)),
+    array('Description', array('tag' => 'div', 'class'=>'help-block', 'placement'=>'append', 'escape'=>false)),
     'Errors',
-    array(array('element'=>'HtmlTag'), array('tag' => 'div', 'class'=>'input')),
-    array('Label', array('placement'=>'prepend')),
-    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'clearfix'))
+    array(array('element'=>'HtmlTag'), array('tag' => 'div', 'class'=>'controls')),
+    array('Label', array('placement'=>'prepend', 'class' => 'control-label')),
+    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'control-group'))
   );
 
   public $option_list = array(
     'ViewHelper',
-    array(array('item'=>'HtmlTag'), array('tag' => 'li')),
-    array(array('list'=>'HtmlTag'), array('tag' => 'ul', 'class'=>'inputs-list')),
-    array('Description', array('tag' => 'span', 'class'=>'help-block', 'placement'=>'append', 'escape'=>false)),
+    array('Description', array('tag' => 'div', 'class'=>'help-block', 'placement'=>'append', 'escape'=>false)),
     'Errors',
-    array(array('element'=>'HtmlTag'), array('tag' => 'div', 'class'=>'input')),
-    array('Label', array('placement'=>'prepend')),
-    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'clearfix'))
+    array(array('element'=>'HtmlTag'), array('tag' => 'div', 'class'=>'controls')),
+    array('Label', array('placement'=>'prepend', 'class' => 'control-label')),
+    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'control-group'))
   );
 
   public $column_left = array(
     'ViewHelper',
-    array('Description', array('tag' => 'span', 'class'=>'help-block', 'placement'=>'append', 'escape'=>false)),
+    array('Description', array('tag' => 'div', 'class'=>'help-block', 'placement'=>'append', 'escape'=>false)),
     'Errors',
-    array(array('element'=>'HtmlTag'), array('tag' => 'div', 'class'=>'input')),
+    array(array('element'=>'HtmlTag'), array('tag' => 'div', 'class'=>'controls')),
     array('Label', array('placement'=>'prepend')),
-    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'clearfix span7')),
+    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'control-group span5')),
     array(array('wrapper'=>'HtmlTag'), array('tag' => 'div', 'class'=>'row', 'openOnly'=>true))
   );
 
   public $column_right = array(
     'ViewHelper',
-    array('Description', array('tag' => 'span', 'class'=>'help-block', 'placement'=>'append', 'escape'=>false)),
+    array('Description', array('tag' => 'div', 'class'=>'help-block', 'placement'=>'append', 'escape'=>false)),
     'Errors',
-    array(array('element'=>'HtmlTag'), array('tag' => 'div', 'class'=>'input')),
+    array(array('element'=>'HtmlTag'), array('tag' => 'div', 'class'=>'controls')),
     array('Label', array('placement'=>'prepend')),
-    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'clearfix span7')),
+    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'control-group span5')),
     array(array('wrapper'=>'HtmlTag'), array('tag' => 'div', 'class'=>'row', 'closeOnly'=>true))
   );
 
@@ -55,20 +53,20 @@ class App_Form extends ZendX_JQuery_Form {
     array(array('password_meter_message'=>'HtmlTag'), array('tag' => 'div', 'class'=>'password-meter-message', 'placement'=>'prepend')),
     array(array('password_meter'=>'HtmlTag'), array('tag' => 'div', 'class'=>'password-meter')),
     array('ViewHelper', array('placement'=>'prepend')),
-    array('Description', array('tag' => 'span', 'class'=>'help-block', 'placement'=>'append', 'escape'=>false)),
+    array('Description', array('tag' => 'div', 'class'=>'help-block', 'placement'=>'append', 'escape'=>false)),
     'Errors',
-    array(array('element'=>'HtmlTag'), array('tag' => 'div', 'class'=>'input form-element-password')),
+    array(array('element'=>'HtmlTag'), array('tag' => 'div', 'class'=>'controls form-element-password')),
     array('Label', array('placement'=>'prepend')),
-    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'clearfix'))
+    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'control-group'))
   );
 
   public $inline = array(
     'ViewHelper',
-    array('Description', array('tag' => 'span', 'class'=>'help-block', 'placement'=>'append', 'escape'=>false)),
+    array('Description', array('tag' => 'div', 'class'=>'help-block', 'placement'=>'append', 'escape'=>false)),
     'Errors',
     array('Label', array('placement'=>'prepend', 'class'=>'inline')),
-    array(array('element'=>'HtmlTag'), array('tag' => 'div', 'class'=>'input')),
-    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'clearfix'))
+    array(array('element'=>'HtmlTag'), array('tag' => 'div', 'class'=>'controls')),
+    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'control-group'))
   );
 
   public $hidden = array(
@@ -77,12 +75,12 @@ class App_Form extends ZendX_JQuery_Form {
 
   public $button = array(
     'ViewHelper',
-    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'actions'))
+    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'form-actions'))
   );
 
   public $buttonOpen = array(
     'ViewHelper',
-    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'actions', 'openOnly'=>true))
+    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'form-actions', 'openOnly'=>true))
   );
 
   public $buttonMiddle = array(
@@ -91,7 +89,7 @@ class App_Form extends ZendX_JQuery_Form {
 
   public $buttonClose = array(
     'ViewHelper',
-    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'actions', 'closeOnly'=>true))
+    array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'form-actions', 'closeOnly'=>true))
   );
 
 

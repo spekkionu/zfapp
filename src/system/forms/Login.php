@@ -17,7 +17,7 @@ class Form_Login extends App_Form
       'FormElements',
       array('Description', array('tag' => 'p', 'class' => 'form-help')),
       array('Fieldset', array('legend'=>'Login')),
-      array('Form', array('id' => 'form-login', 'class' => 'validate form-stacked', 'accept-charset' => 'utf-8'))
+      array('Form', array('id' => 'form-login', 'class' => 'validate form-horizontal', 'accept-charset' => 'utf-8'))
     ));
   }
 
@@ -77,7 +77,7 @@ class Form_Login extends App_Form
     $element->setLabel('Login');
     $element->setDecorators($this->buttonOpen);
     $element->setIgnore(TRUE);
-    $element->setAttrib('class', 'btn primary');
+    $element->setAttrib('class', 'btn btn-primary');
     $this->addElement($element);
 
     $element = new Zend_Form_Element_Submit('forgot_password');

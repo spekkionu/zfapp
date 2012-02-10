@@ -16,7 +16,7 @@ class Form_AdminProfile extends App_Form
       'FormElements',
       array('Description', array('tag' => 'p', 'class' => 'form-help')),
       array('Fieldset', array()),
-      array('Form', array('id' => 'form-profile', 'class' => 'validate', 'accept-charset' => 'utf-8'))
+      array('Form', array('id' => 'form-profile', 'class' => 'validate form-horizontal', 'accept-charset' => 'utf-8'))
     ));
   }
 
@@ -220,10 +220,11 @@ class Form_AdminProfile extends App_Form
       '1' => 'Active',
       '0' => 'Inactive'
     ));
-    $element->setSeparator('</li><li>');
+    $element->setSeparator(PHP_EOL);
     $element->setDescription("Only active users may log in.");
     $element->setFilters(array('StringTrim', 'StripTags'));
     $element->setDecorators($this->option_list);
+    $element->setAttrib('label_class', 'radio');
     $element->setValue('0');
     $this->addElement($element);
 
@@ -231,13 +232,14 @@ class Form_AdminProfile extends App_Form
     $element->setLabel('Save');
     $element->setDecorators($this->buttonOpen);
     $element->setIgnore(TRUE);
-    $element->setAttrib('class', 'btn primary');
+    $element->setAttrib('class', 'btn btn-primary');
     $this->addElement($element);
 
     $element = new Zend_Form_Element_Submit('cancel');
     $element->setLabel('Cancel');
     $element->setDecorators($this->buttonClose);
     $element->setAttrib('class', 'btn cancel');
+    //$element->setAttrib('data-loading-text', 'Saving');
     $this->addElement($element);
 
     $this->addElement('hash', 'csrf', array('ignore' => true, 'decorators' => $this->hidden));

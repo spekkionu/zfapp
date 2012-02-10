@@ -22,7 +22,10 @@ class Zend_View_Helper_FlashMessages extends Zend_View_Helper_Abstract
     $string .= '<div class="flash-messages">';
     foreach ($messages as $message_item) {
       foreach ($message_item as $class => $message) {
-        $string .= '<div data-alert="true" class="alert-message ' . $this->view->escape($class) . '"><a class="close" href="#">×</a><p>' . $this->view->escape($message) . '</p></div>';
+        if($class){
+          $class = 'alert-'.$class;
+        }
+        $string .= '<div data-alert="true" class="alert ' . $this->view->escape($class) . '"><a class="close" href="#">&times;</a>' . $this->view->escape($message) . '</div>';
       }
     }
     $string .= '</div>';

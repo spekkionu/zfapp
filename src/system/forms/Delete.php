@@ -28,7 +28,7 @@ class Form_Delete extends App_Form
     $element->setLabel('Confirm Delete');
     $element->setDecorators($this->buttonOpen);
     $element->setIgnore(TRUE);
-    $element->setAttrib('class', 'btn primary');
+    $element->setAttrib('class', 'btn btn-primary');
     $this->addElement($element);
 
     $element = new Zend_Form_Element_Submit('cancel');

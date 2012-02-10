@@ -17,7 +17,7 @@ class Form_ChangePassword extends App_Form
       'FormElements',
       array('Description', array('tag' => 'p', 'class' => 'form-help')),
       array('Fieldset', array()),
-      array('Form', array('id' => 'form-change-password', 'class' => 'validate', 'accept-charset' => 'utf-8'))
+      array('Form', array('id' => 'form-change-password', 'class' => 'validate form-horizontal', 'accept-charset' => 'utf-8'))
     ));
   }
 
@@ -148,7 +148,7 @@ class Form_ChangePassword extends App_Form
     $element->setLabel('Change Password');
     $element->setDecorators($this->buttonOpen);
     $element->setIgnore(TRUE);
-    $element->setAttrib('class', 'btn primary');
+    $element->setAttrib('class', 'btn btn-primary');
     $this->addElement($element);
 
     $element = new Zend_Form_Element_Submit('cancel');

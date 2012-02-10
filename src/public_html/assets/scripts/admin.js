@@ -21,15 +21,15 @@ jQuery(document).ready(function($){
     highlight: function(element, errorClass, validClass) {
       // Add error classes to element and container
       $(element).removeClass(validClass).addClass(errorClass)
-                .closest('.clearfix').removeClass(validClass).addClass(errorClass);
+                .closest('.control-group').removeClass(validClass).addClass(errorClass);
     },
     unhighlight: function(element, errorClass, validClass) {
       // Remove error classes to element and container
-     $(element).removeClass(errorClass).closest('.clearfix').removeClass(errorClass);
+     $(element).removeClass(errorClass).closest('.control-group').removeClass(errorClass);
     },
     submitHandler: function(form) {
       // Disable submit buttons
-      $(form).find('input:submit').button('disable');
+      $(form).find('input:submit').addClass('disabled').attr('disabled','disabled');
       // Submit Form
       form.submit();
     }

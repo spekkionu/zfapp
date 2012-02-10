@@ -2,14 +2,14 @@
 <?php $this->pageHeader = 'My Account';?>
 
 <nav class="page-navigation">
-  <ul class="tabs">
-    <li class="active"><a href="<?php echo $this->route('admin_account');?>" data-icon="icon-user">My Profile</a></li>
-    <li><a href="<?php echo $this->route('admin_account_profile');?>" data-icon="icon-user" class="">Edit Profile</a></li>
-    <li><a href="<?php echo $this->route('admin_account_password');?>" data-icon="icon-key" class="">Change Password</a></li>
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="<?php echo $this->route('admin_account');?>">My Profile</a></li>
+    <li><a href="<?php echo $this->route('admin_account_profile');?>">Edit Profile</a></li>
+    <li><a href="<?php echo $this->route('admin_account_password');?>">Change Password</a></li>
   </ul>
 </nav>
 
-<table class="details-table">
+<table class="table details-table">
   <tr>
     <th>Username:</th>
     <td><?php echo $this->escape($this->profile['username']);?></td>

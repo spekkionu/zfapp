@@ -11,7 +11,7 @@ echo $this->headTitle();
 // CSS Files
 //$this->headLink()->appendStylesheet($this->baseUrl('assets/styles/admin.min.css'), 'screen');
 $this->headLink()->appendStylesheet($this->baseUrl('assets/scripts/jquery/jquery-ui/css/cupertino/jquery-ui-1.8.17.custom.css'));
-$this->headLink()->appendStylesheet($this->baseUrl('assets/scripts/bootstrap/bootstrap.min.css'), 'screen');
+$this->headLink()->appendStylesheet($this->baseUrl('assets/scripts/bootstrap/docs/assets/css/bootstrap.min.css'), 'screen');
 
 $this->headLink()->appendStylesheet($this->baseUrl('assets/scripts/jquery/jquery-validate.password/jquery.validate.password.css'));
 $this->headLink()->appendStylesheet($this->baseUrl('assets/styles/admin.css'), 'screen');
@@ -22,22 +22,22 @@ echo $this->headLink();
 // Javascript Files
 $this->headScript()->appendFile($this->baseUrl('assets/scripts/html5.js'), 'text/javascript', array('conditional' => 'lt IE 9'));
 
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/admin.all.min.js'), 'text/javascript');
-//$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-1.7.1.min.js'));
-//$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-ui/js/jquery-ui-1.8.17.custom.min.js'));
-//$this->headScript()->appendFile($this->baseUrl('assets/scripts/bootstrap/js/bootstrap-alerts.js'));
-//$this->headScript()->appendFile($this->baseUrl('assets/scripts/bootstrap/js/bootstrap-buttons.js'));
-//$this->headScript()->appendFile($this->baseUrl('assets/scripts/bootstrap/js/bootstrap-dropdown.js'));
-//$this->headScript()->appendFile($this->baseUrl('assets/scripts/bootbox/js/bootbox.min.js'));
-//$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.metadata.js'));
-//$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.cookie.js'));
-//$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.bgiframe-2.1.2.js'));
-//$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.form.js'));
-//$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.collapsible.js'));
-//$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-validation/jquery.validate.min.js'));
-//$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-validation/additional-methods.min.js'));
-//$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-validate.password/jquery.validate.password.js'));
-//$this->headScript()->appendFile($this->baseUrl('assets/scripts/admin.js'));
+//$this->headScript()->appendFile($this->baseUrl('assets/scripts/admin.all.min.js'), 'text/javascript');
+$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-1.7.1.min.js'));
+$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-ui/js/jquery-ui-1.8.17.custom.min.js'));
+$this->headScript()->appendFile($this->baseUrl('assets/scripts/bootstrap/js/bootstrap-alert.js'));
+$this->headScript()->appendFile($this->baseUrl('assets/scripts/bootstrap/js/bootstrap-button.js'));
+$this->headScript()->appendFile($this->baseUrl('assets/scripts/bootstrap/js/bootstrap-dropdown.js'));
+$this->headScript()->appendFile($this->baseUrl('assets/scripts/bootbox/js/bootbox.min.js'));
+$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.metadata.js'));
+$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.cookie.js'));
+$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.bgiframe-2.1.2.js'));
+$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.form.js'));
+$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.collapsible.js'));
+$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-validation/jquery.validate.min.js'));
+$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-validation/additional-methods.min.js'));
+$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-validate.password/jquery.validate.password.js'));
+$this->headScript()->appendFile($this->baseUrl('assets/scripts/admin.js'));
 echo $this->headScript();
 
 // jQuery Plugins
@@ -57,17 +57,21 @@ echo $this->headStyle();
     <header class="main-header">
       <nav class="main-navigation clearfix">
         <div class="topbar-wrapper" style="z-index: 5;">
-          <div class="topbar" data-dropdown="dropdown">
-            <div class="topbar-inner">
+          <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
               <div class="container-fluid">
-                <h3><a href="<?php echo $this->route('admin_home');?>"><?php echo $this->escape($this->site_info['name']);?> Administration</a></h3>
+                <a href="<?php echo $this->route('admin_home');?>" class="brand"><?php echo $this->escape($this->site_info['name']);?> Administration</a>
                 <?php echo $this->navigation()->menu()->setUlClass('nav')->renderMenu(null, array('maxDepth'=>0)) ?>
                 <?php if($this->hasAccess('admin','general')):?>
-                  <ul class="nav secondary-nav">
-                    <li class="dropdown"><a href="#" class="dropdown-toggle"><?php echo $this->escape($this->identity->username);?></a>
+                  <ul class="nav pull-right">
+                    <li class="dropdown">
+                      <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                        <?php echo $this->escape($this->identity->username);?>
+                        <b class="caret"></b>
+                      </a>
                       <ul class="dropdown-menu">
-                        <li><a class="" data-icon="icon-user" href="<?php echo $this->route('admin_account');?>" title="Manage account profile">My Account</a></li>
-                        <li><a class="" data-icon="icon-logout" href="<?php echo $this->route('admin_logout');?>" title="Log out">Log Out</a></li>
+                        <li><a href="<?php echo $this->route('admin_account');?>" title="Manage account profile">My Account</a></li>
+                        <li><a href="<?php echo $this->route('admin_logout');?>" title="Log out">Log Out</a></li>
                       </ul>
                     </li>
                   </ul>
@@ -84,12 +88,12 @@ echo $this->headStyle();
           <h1 class="page-title"><?php echo $this->escape($this->pageHeader);?></h1>
         <?php endif;?>
         <?php if($this->url() != $this->route('admin_home')):?>
-        <nav class="breadcrumb">
-          <a href="<?php echo $this->route('admin_home');?>" title="Admin Dashboard">Dashboard</a> <span class="divider">/</span>
+        <ul class="breadcrumb">
+          <li><a href="<?php echo $this->route('admin_home');?>" title="Admin Dashboard">Dashboard</a> <span class="divider">/</span></li>
           <?php $this->navigation()->findOneByRoute('admin_login')->setVisible(true); ?>
             <?php $this->navigation()->findOneByRoute('admin_account')->setVisible(true); ?>
-          <?php echo $this->navigation()->breadcrumbs()->setLinkLast(FALSE)->setMinDepth(0)->setSeparator('<span class="divider">/</span>'.PHP_EOL); ?>
-        </nav>
+          <li><?php echo $this->navigation()->breadcrumbs()->setLinkLast(FALSE)->setMinDepth(0)->setSeparator('</li><span class="divider">/</span><li>'); ?></li>
+        </ul>
         <?php endif;?>
         <?php echo $this->flashMessages();?>
       </header>

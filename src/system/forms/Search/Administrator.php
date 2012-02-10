@@ -16,7 +16,7 @@ class Form_Search_Administrator extends App_Form
       'FormElements',
       array('Description', array('tag' => 'p', 'class' => 'form-help')),
       array('Fieldset', array()),
-      array('Form', array('id' => 'form-profile', 'class' => 'search', 'accept-charset' => 'utf-8'))
+      array('Form', array('id' => 'form-profile', 'class' => 'search form-horizontal', 'accept-charset' => 'utf-8'))
     ));
   }
 
@@ -65,7 +65,6 @@ class Form_Search_Administrator extends App_Form
       '1' => 'Active',
       '0' => 'Inactive'
     ));
-    $element->setAttrib('class','span2');
     $element->setDecorators($this->column_right);
     $this->addElement($element);
 
@@ -73,7 +72,7 @@ class Form_Search_Administrator extends App_Form
     $element->setLabel('Search');
     $element->setDecorators($this->buttonOpen);
     $element->setIgnore(TRUE);
-    $element->setAttrib('class', 'btn primary icon alternative search');
+    $element->setAttrib('class', 'btn btn-primary');
     $this->addElement($element);
 
     $element = new Zend_Form_Element_Submit('clear');

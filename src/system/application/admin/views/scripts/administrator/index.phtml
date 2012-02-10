@@ -9,12 +9,15 @@
 
 
 <?php if($this->hasAccess('admin:administrator', 'add')):?>
-  <nav class="page-navigation actions">
-    <a href="<?php echo $this->route('admin_administrator_add');?>" class="btn success icon alternative add">Add new Administrator</a>
+  <nav class="page-navigation form-actions">
+    <a href="<?php echo $this->route('admin_administrator_add');?>" class="btn btn-success">
+      <i class="icon-plus icon-white"></i>
+      Add new Administrator
+    </a>
   </nav>
 <?php endif;?>
 
-<table class="bordered-table zebra-striped">
+<table class="table table-bordered table-striped">
   <thead>
     <tr>
       <?php if($this->hasAccess('admin:administrator', 'edit') || $this->hasAccess('admin:administrator', 'delete')):?>
@@ -111,10 +114,10 @@
       <?php if($this->hasAccess('admin:administrator', 'edit') || $this->hasAccess('admin:administrator', 'delete')):?>
         <td>
           <?php if($this->hasAccess('admin:administrator', 'edit') && $this->identity->id != $result['id']):?>
-            <a href="<?php echo $this->route('admin_administrator_edit', array('id'=>$result['id']));?>" class="btn info icon alternative edit">Edit</a>
+            <a href="<?php echo $this->route('admin_administrator_edit', array('id'=>$result['id']));?>" class="btn btn-info"><i class="icon-pencil icon-white"></i> Edit</a>
           <?php endif;?>
           <?php if($this->hasAccess('admin:administrator', 'delete') && $this->identity->id != $result['id']):?>
-            <a href="<?php echo $this->route('admin_administrator_delete', array('id'=>$result['id']));?>" class="btn danger icon alternative remove">Delete</a>
+            <a href="<?php echo $this->route('admin_administrator_delete', array('id'=>$result['id']));?>" class="btn btn-danger"><i class="icon-trash icon-white"></i> Delete</a>
           <?php endif;?>
         </td>
       <?php endif;?>
