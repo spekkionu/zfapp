@@ -16,3 +16,6 @@
 [submodule "src/public_html/assets/scripts/bootstrap"]
 	path = src/public_html/assets/scripts/bootstrap
 	url = git://github.com/twitter/bootstrap.git
+[submodule "src/system/library/Assetic"]
+	path = src/system/library/Assetic
+	url = git://github.com/kriswallsmith/assetic.git
