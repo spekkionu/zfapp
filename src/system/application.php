@@ -14,18 +14,40 @@ set_include_path(
 );
 
 // Set up autoload.
-require_once( 'Zend/Loader/Autoloader.php' );
-$autoloader = Zend_Loader_Autoloader::getInstance();
-$autoloader->registerNamespace('App_');
-$autoloader->setFallbackAutoloader(true);
-
-// Include HTMLPurifier bootstrapper, does not include libraries
-require(SYSTEM.'/library/HTMLPurifier/HTMLPurifier/Bootstrap.php');
-$autoloader->pushAutoloader(array('HTMLPurifier_Bootstrap','autoload'), 'HTMLPurifier');
+require_once(SYSTEM.'/library/ZendW/Loader/AutoloaderFactory.php');
+ZendW_Loader_AutoloaderFactory::factory(array(
+    'ZendW_Loader_ClassMapAutoloader' => array(
+        SYSTEM . '/configs/.classmap.php',
+    ),
+    'ZendW_Loader_StandardAutoloader' => array(
+      'prefixes' => array(
+        'Zend' => SYSTEM.'/library/Zend',
+        'ZendX' => SYSTEM.'/library/ZendX',
+        'ZendW' => SYSTEM.'library/ZendW',
+        'HTMLPurifier' => SYSTEM.'/library/HTMLPurifier/HTMLPurifier',
+        'WideImage' => SYSTEM.'/library/WideImage',
+        'ZFDebug' => SYSTEM.'/library/ZFDebug',
+        'Cache' => SYSTEM.'/library/Cache',
+        'Form' => SYSTEM.'/library/Form',
+        'Options' => SYSTEM.'/library/Options',
+        'Session' => SYSTEM.'/library/Session',
+        'Validate' => SYSTEM.'/library/Validate',
+        'App' => SYSTEM.'/library/App'
+      ),
+      'namespaces' => array(
+        'Assetic' => SYSTEM.'/library/Assetic/src/Assetic'
+      ),
+      'fallback_autoloader' => true,
+    ),
+));
 
 // Load Config
 $config = require( SYSTEM.'/configs/config.php');
 $config['system'] = SYSTEM;
+
+if(!defined('WEBROOT')){
+  define('WEBROOT', $config['site']['webroot']);
+}
 
 // Set Timezone
 date_default_timezone_set($config['locale']['timezone']);
@@ -115,9 +137,6 @@ if($config['session']['handler']){
   $handler = new $handler($config['session']['handler_options']);
   Zend_Session::setSaveHandler($handler);
 }
-
-// Start Session
-Zend_Session::start();
 
 // Initialize Auth Class
 $auth = Zend_Auth::getInstance();
