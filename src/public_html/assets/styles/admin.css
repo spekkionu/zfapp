@@ -183,3 +183,19 @@ table .header {
   text-align: center;
   font-size:120%;
 }
+.collapsable .accordion-heading .accordion-toggle {
+  font-weight:bold;
+  background-color:#E2EFF6;
+  background-color: rgba(141, 192, 219, 0.25);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+.collapsable .accordion-inner {
+    padding: 20px 0 0 0;
+}
+.collapsable form.search .form-actions{
+  margin:10px 0 0 0;
+
+}

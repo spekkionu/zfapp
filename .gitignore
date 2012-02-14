@@ -3,6 +3,8 @@ src/system/logs
 src/system/cache
 src/system/configs/config.php
 src/public_html/cached
+src/public_html/wincache.php
+src/public_html/phpinfo.php
 build
 
 # OS Files

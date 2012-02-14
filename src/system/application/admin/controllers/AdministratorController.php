@@ -59,6 +59,7 @@ class Admin_AdministratorController extends App_AdminController
     $this->view->sort = $sort;
     $this->view->dir = $dir;
     $this->view->form = $form;
+    $this->view->search_expanded = isset($_COOKIE['bootstrap_accordion:admin-administrator-search']) ? $_COOKIE['bootstrap_accordion:admin-administrator-search'] : 'collapsed';
     // Set parameters for navigation
     $navpage = Zend_Registry::get('Zend_Navigation')->findOneByRoute('admin_administrator');
     $navpage->setParams(array(

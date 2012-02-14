@@ -34,11 +34,23 @@ jQuery(document).ready(function($){
       form.submit();
     }
   });
-  $('.collapable[data-accordion]').collapsible({
-    persist: true,
-    cookieOptions: {
-      path: 'admin'
+  $('.collapsable[data-cookie]').on('shown', function (e) {
+    $el = $(this);
+    if($el.data('cookie')){
+      var cookieId = 'bootstrap.accordion:' + $el.data('cookie');
+    }else{
+      var cookieId = 'bootstrap.accordion';
     }
+    $.cookie(cookieId, 'expanded', {path: 'admin'} );
+  });
+  $('.collapsable[data-cookie]').on('hidden', function (e) {
+    $el = $(this);
+    if($el.data('cookie')){
+      var cookieId = 'bootstrap.accordion:' + $el.data('cookie');
+    }else{
+      var cookieId = 'bootstrap.accordion';
+    }
+    $.cookie(cookieId, 'collapsed', {path: 'admin'} );
   });
   // Javascript Validation
   $('form.validate').attr('novalidate', 'novalidate').validate();

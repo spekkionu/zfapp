@@ -25,7 +25,7 @@ class Zend_View_Helper_FlashMessages extends Zend_View_Helper_Abstract
         if($class){
           $class = 'alert-'.$class;
         }
-        $string .= '<div data-alert="true" class="alert ' . $this->view->escape($class) . '"><a class="close" href="#">&times;</a>' . $this->view->escape($message) . '</div>';
+        $string .= '<div data-alert="true" class="alert ' . $this->view->escape($class) . '"><a class="close" data-dismiss="alert" href="#">&times;</a>' . $this->view->escape($message) . '</div>';
       }
     }
     $string .= '</div>';
