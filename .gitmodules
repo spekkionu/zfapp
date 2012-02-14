@@ -19,3 +19,6 @@
 [submodule "src/system/library/Assetic"]
 	path = src/system/library/Assetic
 	url = git://github.com/kriswallsmith/assetic.git
+[submodule "src/public_html/assets/scripts/tiny_mce"]
+	path = src/public_html/assets/scripts/tiny_mce
+	url = git://github.com/spekkionu/tinymce.git
