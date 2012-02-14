@@ -17,7 +17,7 @@ set_include_path(
 require_once(SYSTEM.'/library/ZendW/Loader/AutoloaderFactory.php');
 ZendW_Loader_AutoloaderFactory::factory(array(
     'ZendW_Loader_ClassMapAutoloader' => array(
-        SYSTEM . '/configs/.classmap.php',
+        SYSTEM . '/library/.classmap.php',
     ),
     'ZendW_Loader_StandardAutoloader' => array(
       'prefixes' => array(

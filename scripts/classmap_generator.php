@@ -31,9 +31,8 @@
  * --overwrite|-w               Whether or not to overwrite existing autoload 
  *                              file
  */
-
-$system = realpath(dirname(__FILE__) . '/../src/system');
-$libPath = $system . '/library';
+define('SYSTEM', realpath(dirname(__FILE__) . '/../src/system'));
+$libPath = SYSTEM . DIRECTORY_SEPARATOR.'library';
 if (!is_dir($libPath)) {
     // Try to load StandardAutoloader from include_path
     if (false === include('ZendW/Loader/StandardAutoloader.php')) {
@@ -88,7 +87,7 @@ if (isset($opts->l)) {
 }
 
 $usingStdout = false;
-$output = $system . DIRECTORY_SEPARATOR . 'configs'.DIRECTORY_SEPARATOR.'.classmap.php';
+$output = $libPath.DIRECTORY_SEPARATOR.'.classmap.php';
 if (isset($opts->o)) {
     $output = $opts->o;
     if ('-' == $output) {
@@ -110,7 +109,7 @@ if (isset($opts->o)) {
     }
 }
 
-$strip     = $path;
+$strip     = SYSTEM . DIRECTORY_SEPARATOR.'library';
 
 if (!$usingStdout) {
     echo "Creating class file map for library in '$path'..." . PHP_EOL;
@@ -127,7 +126,6 @@ function createMap(Iterator $i, $map, $strip) {
     $file      = $i->current();
     $namespace = empty($file->namespace) ? '' : $file->namespace . '\\';
     $filename  = str_replace($strip, '', $file->getRealpath());
-
     // Windows portability
     $filename  = str_replace(array('/', '\\'), "' . DIRECTORY_SEPARATOR . '", $filename);
 
