@@ -19,24 +19,37 @@ $this->headLink()->appendStylesheet($this->baseUrl('assets/styles/admin.css'), '
 $this->headLink()->appendStylesheet($this->baseUrl('assets/styles/ie.css'), 'screen', 'lt IE 8');
 echo $this->headLink();
 
-// Javascript Files
-$this->headScript()->appendFile($this->baseUrl('/assets/scripts/html5.js'), 'text/javascript', array('conditional' => 'if lt IE 9'));
-//$this->headScript()->appendFile($this->baseUrl('assets/scripts/admin.all.min.js'), 'text/javascript');
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-1.7.1.min.js'), 'text/javascript');
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-ui/js/jquery-ui-1.8.17.custom.min.js'), 'text/javascript');
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/bootstrap/js/bootstrap-alert.js'), 'text/javascript');
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/bootstrap/js/bootstrap-button.js'), 'text/javascript');
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/bootstrap/js/bootstrap-dropdown.js'), 'text/javascript');
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/bootstrap/js/bootstrap-collapse.js'), 'text/javascript');
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/bootbox/bootbox.min.js'), 'text/javascript');
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.metadata.js'), 'text/javascript');
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.cookie.js'), 'text/javascript');
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.bgiframe-2.1.2.js'), 'text/javascript');
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery.form.js'), 'text/javascript');
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-validation/jquery.validate.min.js'), 'text/javascript');
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-validation/additional-methods.min.js'), 'text/javascript');
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/jquery/jquery-validate.password/jquery.validate.password.js'), 'text/javascript');
-$this->headScript()->appendFile($this->baseUrl('assets/scripts/admin.js'), 'text/javascript');
+// Javascript Files (These will appear in reverse order)
+$this->headScript()->prependFile($this->baseUrl('assets/scripts/admin.js'), 'text/javascript');
+$this->headScript()->prependFile($this->baseUrl('assets/scripts/jquery/jquery-validate.password/jquery.validate.password.js'), 'text/javascript');
+$this->headScript()->prependFile($this->baseUrl('assets/scripts/jquery/jquery-validation/additional-methods.min.js'), 'text/javascript');
+$this->headScript()->prependFile($this->baseUrl('assets/scripts/jquery/jquery-validation/jquery.validate.min.js'), 'text/javascript');
+$this->headScript()->prependFile($this->baseUrl('assets/scripts/jquery/jquery.form.js'), 'text/javascript');
+$this->headScript()->prependFile($this->baseUrl('assets/scripts/jquery/jquery.bgiframe-2.1.2.js'), 'text/javascript');
+$this->headScript()->prependFile($this->baseUrl('assets/scripts/jquery/jquery.cookie.js'), 'text/javascript');
+$this->headScript()->prependFile($this->baseUrl('assets/scripts/jquery/jquery.metadata.js'), 'text/javascript');
+$this->headScript()->prependFile($this->baseUrl('assets/scripts/bootbox/bootbox.min.js'), 'text/javascript');
+$this->headScript()->prependFile($this->baseUrl('assets/scripts/bootstrap/js/bootstrap-alert.js'), 'text/javascript');
+$this->headScript()->prependFile($this->baseUrl('assets/scripts/bootstrap/js/bootstrap-button.js'), 'text/javascript');
+$this->headScript()->prependFile($this->baseUrl('assets/scripts/bootstrap/js/bootstrap-dropdown.js'), 'text/javascript');
+$this->headScript()->prependFile($this->baseUrl('assets/scripts/bootstrap/js/bootstrap-collapse.js'), 'text/javascript');
+$this->headScript()->prependFile($this->baseUrl('assets/scripts/jquery/jquery-ui/js/jquery-ui-1.8.17.custom.min.js'), 'text/javascript');
+$this->headScript()->prependFile($this->baseUrl('assets/scripts/jquery/jquery-1.7.1.min.js'), 'text/javascript');
+//$this->headScript()->prependFile($this->baseUrl('assets/scripts/admin.all.min.js'), 'text/javascript');
+$this->headScript()->prependFile($this->baseUrl('/assets/scripts/html5.js'), 'text/javascript', array('conditional' => 'if lt IE 9'));
+
+
+
+
+
+
+
+
+
+
+
+
+
 echo $this->headScript();
 
 // jQuery Plugins
@@ -104,5 +117,6 @@ echo $this->headStyle();
       &copy; copyright 2012 <a href="#" target="_blank">spekkionu</a>
     </footer>
   </div>
+  <?php echo $this->placeholder('footerScript'); ?>
 </body>
 </html>

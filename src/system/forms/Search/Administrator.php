@@ -16,7 +16,7 @@ class Form_Search_Administrator extends App_Form
       'FormElements',
       array('Description', array('tag' => 'p', 'class' => 'form-help')),
       array('Fieldset', array()),
-      array('Form', array('id' => 'form-profile', 'class' => 'search form-horizontal', 'accept-charset' => 'utf-8'))
+      array('Form', array('id' => 'form-search-profile', 'class' => 'search form-horizontal', 'accept-charset' => 'utf-8'))
     ));
   }
 

@@ -12,7 +12,7 @@ class App_Form extends ZendX_JQuery_Form {
   public $field = array(
     'ViewHelper',
     array('Description', array('tag' => 'div', 'class'=>'help-block', 'placement'=>'append', 'escape'=>false)),
-    'Errors',
+    array('Errors', array()),
     array(array('element'=>'HtmlTag'), array('tag' => 'div', 'class'=>'controls')),
     array('Label', array('placement'=>'prepend', 'class' => 'control-label')),
     array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'control-group'))
@@ -138,6 +138,22 @@ class App_Form extends ZendX_JQuery_Form {
           }
         }
         $this->getElement($element)->setAttrib('class', $class);
+        $decorator = $this->getElement($element)->getDecorator('row');
+        if(!$decorator){
+          continue;
+        }
+        $class = $decorator->getOption('class');
+        if(!$class){
+          $class = 'error';
+        }else{
+          // Check if already has error class
+          $classes = explode(' ', $class);
+          if(!in_array('error', $classes)){
+            // Does not already have error class
+            $class .= ' error';
+          }
+        }
+        $this->getElement($element)->getDecorator('row')->setOption('class', $class);
       }
     }
     return $valid;

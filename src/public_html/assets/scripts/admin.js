@@ -10,7 +10,7 @@ jQuery(document).ready(function($){
     errorClass: "error",
     errorPlacement: function(error, element) {
       // Add error messages to DOM
-      var container = element.parent('div');
+      var container = element.closest('.controls');
       var error_ul = container.find('ul.errors').eq(0);
       if(!error_ul.length){
         container.append( $('<ul class="errors"></ul>') );
@@ -34,7 +34,7 @@ jQuery(document).ready(function($){
       form.submit();
     }
   });
-  $('.collapsable[data-cookie]').on('shown', function (e) {
+  $('.collapsible[data-cookie]').on('shown', function (e) {
     $el = $(this);
     if($el.data('cookie')){
       var cookieId = 'bootstrap.accordion:' + $el.data('cookie');
@@ -43,7 +43,7 @@ jQuery(document).ready(function($){
     }
     $.cookie(cookieId, 'expanded', {path: 'admin'} );
   });
-  $('.collapsable[data-cookie]').on('hidden', function (e) {
+  $('.collapsible[data-cookie]').on('hidden', function (e) {
     $el = $(this);
     if($el.data('cookie')){
       var cookieId = 'bootstrap.accordion:' + $el.data('cookie');
@@ -53,6 +53,9 @@ jQuery(document).ready(function($){
     $.cookie(cookieId, 'collapsed', {path: 'admin'} );
   });
   // Javascript Validation
+  jQuery.validator.addMethod("slug", function(value, element) {
+    return this.optional(element) || /^[a-z0-9\/-]*$/i.test(value);
+  }, "Letters, numbers, dashes, and slashes only please");
   $('form.validate').attr('novalidate', 'novalidate').validate();
   $(document).delegate('form.validate .btn.cancel', 'click', function(e){
     e.stopPropagation();
