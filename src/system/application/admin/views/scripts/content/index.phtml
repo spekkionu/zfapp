@@ -1,0 +1,137 @@
+<?php $this->headTitle('Manage Content');?>
+<?php $this->pageHeader = 'Manage Content';?>
+
+<div class="collapsible" data-cookie="admin-content-search">
+  <div class="accordion-group">
+    <div class="accordion-heading"><a class="accordion-toggle" data-toggle="collapse" href="#admin-content-search-wrapper">Search</a></div>
+    <div id="admin-content-search-wrapper" class="accordion-body collapse <?php if($this->search_expanded == 'expanded') echo 'in';?>">
+      <div class="accordion-inner">
+        <?php echo $this->form; ?>
+      </div>
+    </div>
+  </div>
+</div>
+
+<?php if($this->hasAccess('admin:content', 'add')):?>
+  <nav class="page-navigation form-actions">
+    <a href="<?php echo $this->route('admin_content_add');?>" class="btn btn-success">
+      <i class="icon-plus icon-white"></i>
+      Add new Page
+    </a>
+  </nav>
+<?php endif;?>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <?php if($this->hasAccess('admin:content', 'edit') || $this->hasAccess('admin:content', 'delete')):?>
+        <?php if($this->sort == 'id' && $this->dir == 'asc'):?>
+          <?php $class = "headerSortDown"; ?>
+          <th class="header headerSortDown">
+            <a href="<?php echo $this->route('admin_content', array('page'=>1,'sort'=>'id','dir'=>'desc'), true);?>">Actions</a>
+          </th>
+        <?php elseif($this->sort == 'id'):?>
+          <th class="header headerSortUp">
+            <a href="<?php echo $this->route('admin_content', array('page'=>1,'sort'=>'id','dir'=>'asc'));?>">Actions</a>
+          </th>
+        <?php else:?>
+          <th class="header">
+            <a href="<?php echo $this->route('admin_content', array('page'=>1,'sort'=>'id','dir'=>'asc'));?>">Actions</a>
+          </th>
+        <?php endif;?>
+      <?php endif;?>
+      <?php if($this->sort == 'url' && $this->dir == 'asc'):?>
+        <?php $class = "headerSortDown"; ?>
+        <th class="header headerSortDown">
+          <a href="<?php echo $this->route('admin_content', array('page'=>1,'sort'=>'url','dir'=>'desc'), true);?>">URL</a>
+        </th>
+      <?php elseif($this->sort == 'url'):?>
+        <th class="header headerSortUp">
+          <a href="<?php echo $this->route('admin_content', array('page'=>1,'sort'=>'url','dir'=>'asc'));?>">URL</a>
+        </th>
+      <?php else:?>
+        <th class="header">
+          <a href="<?php echo $this->route('admin_content', array('page'=>1,'sort'=>'url','dir'=>'asc'));?>">URL</a>
+        </th>
+      <?php endif;?>
+      <?php if($this->sort == 'title' && $this->dir == 'asc'):?>
+        <?php $class = "headerSortDown"; ?>
+        <th class="header headerSortDown">
+          <a href="<?php echo $this->route('admin_content', array('page'=>1,'sort'=>'title','dir'=>'desc'), true);?>">Title</a>
+        </th>
+      <?php elseif($this->sort == 'title'):?>
+        <th class="header headerSortUp">
+          <a href="<?php echo $this->route('admin_content', array('page'=>1,'sort'=>'title','dir'=>'asc'));?>">Title</a>
+        </th>
+      <?php else:?>
+        <th class="header">
+          <a href="<?php echo $this->route('admin_content', array('page'=>1,'sort'=>'title','dir'=>'asc'));?>">Title</a>
+        </th>
+      <?php endif;?>
+      <?php if($this->sort == 'active' && $this->dir == 'desc'):?>
+        <?php $class = "headerSortDown"; ?>
+        <th class="header headerSortDown">
+          <a href="<?php echo $this->route('admin_content', array('page'=>1,'sort'=>'active','dir'=>'asc'), true);?>">Status</a>
+        </th>
+      <?php elseif($this->sort == 'active'):?>
+        <th class="header headerSortUp">
+          <a href="<?php echo $this->route('admin_content', array('page'=>1,'sort'=>'active','dir'=>'desc'));?>">Status</a>
+        </th>
+      <?php else:?>
+        <th class="header">
+          <a href="<?php echo $this->route('admin_content', array('page'=>1,'sort'=>'active','dir'=>'desc'));?>">Status</a>
+        </th>
+      <?php endif;?>
+      <?php if($this->sort == 'date_created' && $this->dir == 'desc'):?>
+        <?php $class = "headerSortDown"; ?>
+        <th class="header headerSortDown">
+          <a href="<?php echo $this->route('admin_content', array('page'=>1,'sort'=>'date_created','dir'=>'asc'), true);?>">Date Created</a>
+        </th>
+      <?php elseif($this->sort == 'date_created'):?>
+        <th class="header headerSortUp">
+          <a href="<?php echo $this->route('admin_content', array('page'=>1,'sort'=>'date_created','dir'=>'desc'));?>">Date Created</a>
+        </th>
+      <?php else:?>
+        <th class="header">
+          <a href="<?php echo $this->route('admin_content', array('page'=>1,'sort'=>'date_created','dir'=>'desc'));?>">Date Created</a>
+        </th>
+      <?php endif;?>
+      <?php if($this->sort == 'last_updated' && $this->dir == 'desc'):?>
+        <?php $class = "headerSortDown"; ?>
+        <th class="header headerSortDown">
+          <a href="<?php echo $this->route('admin_content', array('page'=>1,'sort'=>'last_updated','dir'=>'asc'), true);?>">Last Updated</a>
+        </th>
+      <?php elseif($this->sort == 'last_updated'):?>
+        <th class="header headerSortUp">
+          <a href="<?php echo $this->route('admin_content', array('page'=>1,'sort'=>'last_updated','dir'=>'desc'));?>">Last Updated</a>
+        </th>
+      <?php else:?>
+        <th class="header">
+          <a href="<?php echo $this->route('admin_content', array('page'=>1,'sort'=>'last_updated','dir'=>'desc'));?>">Last Updated</a>
+        </th>
+      <?php endif;?>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach($this->results as $result):?>
+    <tr>
+      <?php if($this->hasAccess('admin:content', 'edit') || $this->hasAccess('admin:content', 'delete')):?>
+        <td>
+          <?php if($this->hasAccess('admin:content', 'edit')):?>
+            <a href="<?php echo $this->route('admin_content_edit', array('id'=>$result['id']));?>" class="btn btn-info"><i class="icon-pencil icon-white"></i> Edit</a>
+          <?php endif;?>
+          <?php if($this->hasAccess('admin:content', 'delete') && $result['can_delete']):?>
+            <a href="<?php echo $this->route('admin_content_delete', array('id'=>$result['id']));?>" class="btn btn-danger"><i class="icon-trash icon-white"></i> Delete</a>
+          <?php endif;?>
+        </td>
+      <?php endif;?>
+      <td><?php echo $this->baseUrl($result['url']);?></td>
+      <td><?php echo $this->escape($result['title']);?></td>
+      <td><?php echo ($result['active']) ? 'Active' : 'Inactive';?></td>
+      <td><?php echo $this->dateFormat($result['date_created'], 'm/d/Y h:i A');?></td>
+      <td><?php echo $this->dateFormat($result['last_updated'], 'm/d/Y h:i A');?></td>
+    </tr>
+    <?php endforeach;?>
+  </tbody>
+</table>
+<?php echo $this->pagination($this->results);?>

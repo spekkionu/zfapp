@@ -1,0 +1,53 @@
+<?php $this->headTitle('Delete Page');?>
+<?php $this->pageHeader = 'Delete Pahe';?>
+
+<?php if($this->page['can_delete']):?>
+  <div class="alert alert-block">
+    <h4 class="alert-heading">
+      Warning!
+    </h4>
+    This page will be deleted permanently.<br>
+    This action cannot be undone.
+  </div>
+<?php else:?>
+  <div class="alert alert-block alert-error">
+    <h4 class="alert-heading">
+      Error!
+    </h4>
+    This page cannot be deleted.
+  </div>
+<?php endif;?>
+
+<div class="form-vertical">
+  <div class="control-group">
+    <label class="control-label">URL:</label>
+    <div class="control">
+      <?php echo $this->escape($this->page['url']);?>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Title:</label>
+    <div class="control">
+      <?php echo $this->escape($this->page['title']);?>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Account Status:</label>
+    <div class="control">
+      <?php echo ($this->page['active']) ? 'Active' : 'Inactive';?>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Date Created:</label>
+    <div class="control">
+      <?php echo $this->dateFormat($this->page['date_created'], 'm/d/Y h:i A');?>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Last Updated:</label>
+    <div class="control">
+      <?php echo $this->dateFormat($this->page['last_updated'], 'm/d/Y h:i A');?>
+    </div>
+  </div>
+</div>
+<?php echo $this->form; ?>

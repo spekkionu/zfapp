@@ -164,5 +164,54 @@ $routes['admin_administrator_delete'] = new Zend_Controller_Router_Route(
   )
 );
 
+// Content management
+// --------------------------
+$routes['admin_content'] = new Zend_Controller_Router_Route(
+  'admin/content/:page/:sort/:dir',
+  array(
+    'module' => 'admin',
+    'controller' => 'content',
+    'action' => 'index',
+    'page' => 1,
+    'sort' => 'url',
+    'dir' => 'asc'
+  ),
+  array(
+    'page' => '\d+',
+    'sort' => 'id|url|title|active|date_created|last_updated',
+    'dir' => 'asc|desc'
+  )
+);
+$routes['admin_content_add'] = new Zend_Controller_Router_Route_Static(
+  'admin/content/add',
+  array(
+    'module' => 'admin',
+    'controller' => 'content',
+    'action' => 'add'
+  )
+);
+$routes['admin_content_edit'] = new Zend_Controller_Router_Route(
+  'admin/content/edit/:id',
+  array(
+    'module' => 'admin',
+    'controller' => 'content',
+    'action' => 'edit'
+  ),
+  array(
+    'id' => '\d+'
+  )
+);
+$routes['admin_content_delete'] = new Zend_Controller_Router_Route(
+  'admin/content/delete/:id',
+  array(
+    'module' => 'admin',
+    'controller' => 'content',
+    'action' => 'delete'
+  ),
+  array(
+    'id' => '\d+'
+  )
+);
+
 
 return $routes;

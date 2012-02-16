@@ -12,6 +12,7 @@ $acl->addRole(new Zend_Acl_Role('user'));
 $acl->addResource(new Zend_Acl_Resource('authenticated'));
 $acl->addResource(new Zend_Acl_Resource('admin'));
 $acl->addResource(new Zend_Acl_Resource('admin:administrator'));
+$acl->addResource(new Zend_Acl_Resource('admin:content'));
 
 // Give admins permission to admin section
 $acl->allow('superadmin');

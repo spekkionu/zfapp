@@ -125,3 +125,52 @@
       privilege: delete
       reset_params: false
       visible: true
+-
+  id: main-menu-content
+  label: Content
+  title: Manage content
+  route: admin_content
+  module: admin
+  controller: content
+  action: index
+  resource: admin:content
+  privilege: list
+  reset_params: false
+  visible: true
+  pages:
+    -
+      id: main-menu-content-add
+      label: Add Content
+      title: Add new content
+      route: admin_content_add
+      module: admin
+      controller: content
+      action: add
+      resource: admin:content
+      privilege: add
+      reset_params: true
+      visible: true
+    -
+      id: main-menu-content-edit
+      label: Edit Content
+      title: Modify content
+      route: admin_content_edit
+      module: admin
+      controller: content
+      action: edit
+      resource: admin:content
+      privilege: edit
+      reset_params: false
+      visible: true
+    -
+      id: main-menu-content-delete
+      label: Delete Content
+      title: Delete content account
+      route: admin_content_delete
+      module: admin
+      controller: content
+      action: delete
+      resource: admin:content
+      privilege: delete
+      reset_params: false
+      visible: true
