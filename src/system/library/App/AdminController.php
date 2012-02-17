@@ -25,7 +25,7 @@ abstract class App_AdminController extends App_Controller {
     $this->_helper->layout->setLayoutPath(SYSTEM . '/application/admin/views/layout');
     $this->view->pageHeader = NULL;
     // Setup Admin Navigation
-    $pages = new Zend_Config_Yaml(SYSTEM.'/configs/navigation.yml');
+    $pages = require(SYSTEM.'/configs/navigation.php');
     $container = new Zend_Navigation($pages);
     // Save Navigation
     Zend_Registry::set('Zend_Navigation', $container);
