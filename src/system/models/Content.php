@@ -197,8 +197,8 @@ class Model_Content extends App_Model {
     $config->set('AutoFormat.RemoveSpansWithoutAttributes', true);
     //$config->set('HTML.Allowed', "");
     $config->set('HTML.Doctype', 'HTML 4.01 Transitional');
-    $config->set('HTML.MaxImgLength', 800);
-    $config->set('CSS.MaxImgLength', 800);
+    $config->set('HTML.MaxImgLength', '800');
+    $config->set('CSS.MaxImgLength', '800');
     $config->set('HTML.TidyLevel', 'light');
 
     $config->set('Output.Newline', "\n");
