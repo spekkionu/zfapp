@@ -10,6 +10,11 @@ $controller->setControllerDirectory(array(
 
 // Setup Router with custom routes
 $router = $controller->getRouter();
+// Load CMS Routes
+$mgrContent = new Model_Content();
+$router->addRoutes($mgrContent->getRoutes());
+unset($mgrContent);
+// Add application routes
 $router->addRoutes(require(SYSTEM.'/configs/routes.php'));
 
 // Set Error Reporting

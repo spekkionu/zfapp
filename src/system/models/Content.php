@@ -98,16 +98,24 @@ class Model_Content extends App_Model {
 
   /**
    * Returns the content of a page by id
+   * Returns from cache if possible
    *
    * @param string $url
    * @return array
    */
-  public function getPageByUrl($url) {
-    $select = $this->select();
-    $select->from($this, array('id', 'url', 'title', 'content'));
-    $select->where('url LIKE ?', $url);
-    $select->where("`active` = 1");
-    return $this->getAdapter()->fetchRow($select);
+  public function getPageContent($id) {
+    $cache = Cache::getCache('content');
+    if( ($page = $cache->load("page_".$id)) === false ) {
+      // Cache miss, pull from db
+      $select = $this->select();
+      $select->from($this, array('id', 'url', 'title', 'content'));
+      $select->where('id = ?', $id, Zend_Db::PARAM_INT);
+      $select->where("`active` = 1");
+      $page = $this->getAdapter()->fetchRow($select);
+      // Save to cache
+      $cache->save($page, "page_".$id);
+    }
+    return $page;
   }
 
   /**
@@ -120,7 +128,10 @@ class Model_Content extends App_Model {
     $data['date_created'] = new Zend_Db_Expr("NOW()");
     $data['can_delete'] = 1;
     $this->insert($data);
-    return $this->getAdapter()->lastInsertId($this->_name, $this->_primary);
+    $id = $this->getAdapter()->lastInsertId($this->_name, $this->_primary);
+    // Clear Cache
+    Cache::getCache('content')->remove('routes');
+    return $id;
   }
 
   /**
@@ -132,7 +143,12 @@ class Model_Content extends App_Model {
   public function updatePage($id, array $data){
     $data = $this->_filterDataArray($data, array('id', 'date_created', 'last_updated', 'can_delete'));
     $data['last_updated'] = new Zend_Db_Expr("NOW()");
-    return $this->update($data, 'id = ' . $this->getAdapter()->quote($id, Zend_Db::PARAM_INT));
+    $updated = $this->update($data, 'id = ' . $this->getAdapter()->quote($id, Zend_Db::PARAM_INT));
+    // Clear Cache
+    $cache = Cache::getCache('content');
+    $cache->remove("page_".$id);
+    $cache->remove("routes");
+    return $updated;
   }
 
   /**
@@ -141,7 +157,39 @@ class Model_Content extends App_Model {
    * @return int Number of affected rows
    */
   public function deletePage($id){
-    return $this->delete('id = ' . $this->getAdapter()->quote($id, Zend_Db::PARAM_INT));
+    $deleted = $this->delete('id = ' . $this->getAdapter()->quote($id, Zend_Db::PARAM_INT));
+    // Clear Cache
+    $cache = Cache::getCache('content');
+    $cache->remove("page_".$id);
+    $cache->remove("routes");
+    return $deleted;
+  }
+
+  public function getRoutes(){
+    $cache = Cache::getCache('content');
+    if( ($routes = $cache->load('routes')) === false ) {
+      // Cache miss
+      $select = $this->select();
+      $select->from($this, array('id','url'));
+      $select->where("`active` = 1");
+      $select->where("`full_page` = 1");
+      $select->order("url ASC");
+      $stmt = $this->getAdapter()->query($select);
+      $routes = array();
+      while($page = $stmt->fetch(Zend_Db::FETCH_ASSOC)){
+        $routes['cms_page_'.$page['id']] = new Zend_Controller_Router_Route_Static(
+          $page['url'],
+          array(
+            'module' => 'default',
+            'controller' => 'index',
+            'action' => 'page',
+            'id' => $page['id']
+          )
+        );
+      }
+      $cache->save($routes, 'routes');
+    }
+    return $routes;
   }
 
   /**
@@ -181,17 +229,6 @@ class Model_Content extends App_Model {
 
     $config->set('HTML.DefinitionID', 'page_filter');
     $config->set('HTML.DefinitionRev', 1);
-    /*
-    //$config->set('Cache.DefinitionImpl', null); // TODO: remove this later!
-    if ($def = $config->maybeGetRawHTMLDefinition()) {
-      // Definition Cache is not Valid. Build it.
-      // Allow target attribute on links
-      $def->addAttribute('a', 'target', new HTMLPurifier_AttrDef_Enum(
-        array('_blank','_self','_target','_top')
-      ));
-    }
-     *
-     */
     $config->set('Attr.AllowedFrameTargets', array('_blank','_self','_target','_top'));
     $config->set('Attr.ForbiddenClasses', array());
     $config->set('AutoFormat.RemoveSpansWithoutAttributes', true);
