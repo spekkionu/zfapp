@@ -82,11 +82,6 @@ class Session_SaveHandler_EncryptedDb extends Zend_Session_SaveHandler_DbTable i
     if ($config instanceof Zend_Config) {
       $config = $config->toArray();
     } else if (!is_array($config)) {
-      /**
-       * @see Zend_Session_SaveHandler_Exception
-       */
-      require_once 'Zend/Session/SaveHandler/Exception.php';
-
       throw new Zend_Session_SaveHandler_Exception("$config must be an instance of Zend_Config or array of key/value pairs containing configuration options for Zend_Session_SaveHandler_DbTable and Zend_Db_Table_Abstract.");
     }
 

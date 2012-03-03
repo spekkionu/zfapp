@@ -11,23 +11,25 @@ define('SYSTEM', dirname(__FILE__));
 // Set Include Path
 set_include_path(
   // Application Library Files
-  SYSTEM . DIRECTORY_SEPARATOR . 'library'
+  SYSTEM . DIRECTORY_SEPARATOR . 'library' . PATH_SEPARATOR . 
+  realpath(SYSTEM . DIRECTORY_SEPARATOR . 'library/vendor/zend-framework/library') . PATH_SEPARATOR . 
+  realpath(SYSTEM . DIRECTORY_SEPARATOR . 'library/vendor/zend-framework/extras/library')
 );
 
 // Set up autoload.
-require_once(SYSTEM . '/library/ZendW/Loader/AutoloaderFactory.php');
+require_once(SYSTEM . '/library/vendor/ZendW/Loader/AutoloaderFactory.php');
 ZendW_Loader_AutoloaderFactory::factory(array(
   'ZendW_Loader_ClassMapAutoloader' => array(
     SYSTEM . '/library/.classmap.php',
   ),
   'ZendW_Loader_StandardAutoloader' => array(
     'prefixes' => array(
-      'Zend' => SYSTEM . '/library/Zend',
-      'ZendX' => SYSTEM . '/library/ZendX',
-      'ZendW' => SYSTEM . 'library/ZendW',
-      'HTMLPurifier' => SYSTEM . '/library/HTMLPurifier/HTMLPurifier',
-      'WideImage' => SYSTEM . '/library/WideImage',
-      'ZFDebug' => SYSTEM . '/library/ZFDebug',
+      'Zend' => SYSTEM . '/library/vendor/zend-framework/library/Zend',
+      'ZendX' => SYSTEM . '/library/vendor/zend-framework/extras/library/ZendX',
+      'ZendW' => SYSTEM . '/library/vendor/ZendW',
+      'HTMLPurifier' => SYSTEM . '/library/vendor/HTMLPurifier/HTMLPurifier',
+      'WideImage' => SYSTEM . '/library/vendor/WideImage',
+      'ZFDebug' => SYSTEM . '/library/vendor/ZFDebug',
       'Cache' => SYSTEM . '/library/Cache',
       'Form' => SYSTEM . '/library/Form',
       'Options' => SYSTEM . '/library/Options',
@@ -35,9 +37,7 @@ ZendW_Loader_AutoloaderFactory::factory(array(
       'Validate' => SYSTEM . '/library/Validate',
       'App' => SYSTEM . '/library/App'
     ),
-    'namespaces' => array(
-      'Assetic' => SYSTEM . '/library/Assetic/src/Assetic'
-    ),
+    'namespaces' => array(),
     'fallback_autoloader' => true,
   ),
 ));

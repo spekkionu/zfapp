@@ -33,19 +33,13 @@
  */
 define('SYSTEM', realpath(dirname(__FILE__) . '/../src/system'));
 $libPath = SYSTEM . DIRECTORY_SEPARATOR.'library';
-if (!is_dir($libPath)) {
-    // Try to load StandardAutoloader from include_path
-    if (false === include('ZendW/Loader/StandardAutoloader.php')) {
-        echo "Unable to locate autoloader via include_path; aborting" . PHP_EOL;
-        exit(2);
-    }
-} else {
-    // Try to load StandardAutoloader from library
-    if (false === include($libPath . '/ZendW/Loader/StandardAutoloader.php')) {
-        echo "Unable to locate autoloader via library; aborting" . PHP_EOL;
-        exit(2);
-    }
-}
+// Set Include Path
+set_include_path(
+  // Application Library Files
+  $libPath . PATH_SEPARATOR . 
+  $libPath . DIRECTORY_SEPARATOR . 'vendor'.DIRECTORY_SEPARATOR.'zend-framework'.DIRECTORY_SEPARATOR.'library'
+);
+require(SYSTEM . '/library/vendor/ZendW/Loader/StandardAutoloader.php');
 
 // Setup autoloading
 $loader = new ZendW_Loader_StandardAutoloader();
