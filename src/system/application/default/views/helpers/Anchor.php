@@ -20,10 +20,10 @@ class Zend_View_Helper_Anchor extends Zend_View_Helper_HtmlElement
    * @return string
    */
   public function anchor($label, $href = "#", $attribs = array(), $escape = true) {
-    if($href){
+    if ($href) {
       $attribs['href'] = $href;
     }
-    if($escape){
+    if ($escape) {
       $label = $this->view->escape($label);
     }
     return '<a' . $this->_htmlAttribs($attribs) . '>' . $label . '</a>';

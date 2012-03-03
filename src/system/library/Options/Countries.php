@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Countries Options Class
  *
@@ -6,25 +7,31 @@
  * @author     spekkionu
  * @license New BSD http://www.opensource.org/licenses/bsd-license.php
  */
-class Options_Countries {
+class Options_Countries
+{
 
   private static $file = null;
-
   private static $countries = null;
 
   /**
    * Constructor is static for a static class
    */
-  private function __construct(){}
+  private function __construct() {
+
+  }
 
   /**
    * Sets the xml file to use to load countries
    * @param string $file
    * @return void
    */
-  public static function setXML($file = null){
-    if(is_null($file)) $file = dirname(__FILE__) . '/countries.xml';
-    if(!is_file($file)) throw new Exception('Country XML file does not exist.');
+  public static function setXML($file = null) {
+    if (is_null($file)) {
+      $file = dirname(__FILE__) . '/countries.xml';
+    }
+    if (!is_file($file)) {
+      throw new Exception('Country XML file does not exist.');
+    }
     self::$file = realpath($file);
     self::$countries = null;
   }
@@ -33,13 +40,15 @@ class Options_Countries {
    * Loads the countries from the xml file.
    * @return void
    */
-  private static function loadCountries(){
-    if(is_null(self::$file)) self::setXML();
+  private static function loadCountries() {
+    if (is_null(self::$file)) {
+      self::setXML();
+    }
     // Load xml file
     $xml = simplexml_load_file(self::$file);
     $countries = array();
     // loop through states
-    foreach($xml as $country){
+    foreach ($xml as $country) {
       $countries[(string) $country->code] = array(
         'code' => (string) $country->code,
         'name' => (string) $country->name
@@ -52,18 +61,18 @@ class Options_Countries {
   }
 
   /**
-	 * Clears the data from the cache.
-	 * @return void
-	 */
-	public static function clearCache(){
-		self::$countries = null;
-	}
+   * Clears the data from the cache.
+   * @return void
+   */
+  public static function clearCache() {
+    self::$countries = null;
+  }
 
   /**
    * Checks if data has been cached
    * @return boolean
    */
-  public static function isCached(){
+  public static function isCached() {
     return is_null(self::$countries);
   }
 
@@ -71,9 +80,11 @@ class Options_Countries {
    * Returns array of countries
    * @return array
    */
-  public static function getArray(){
+  public static function getArray() {
     // Load States if they are not yet loaded.
-    if(is_null(self::$countries)) self::loadCountries();
+    if (is_null(self::$countries)) {
+      self::loadCountries();
+    }
     return self::$countries;
   }
 
@@ -81,11 +92,13 @@ class Options_Countries {
    * Returns countries as abbreviation=>name pair array
    * @return array
    */
-  public static function getPairs(){
+  public static function getPairs() {
     // Load States if they are not yet loaded.
-    if(is_null(self::$countries)) self::loadCountries();
+    if (is_null(self::$countries)) {
+      self::loadCountries();
+    }
     $countries = array();
-    foreach(self::$countries as $key=>$country){
+    foreach (self::$countries as $key => $country) {
       $countries[$country['code']] = $country['name'];
     }
     return $countries;
@@ -97,12 +110,14 @@ class Options_Countries {
    * @param bool $name_only
    * @return string|array
    */
-  public static function getCountry($country, $name_only = true){
+  public static function getCountry($country, $name_only = true) {
     // Load States if they are not yet loaded.
-    if(is_null(self::$countries)) self::loadCountries();
-    if(array_key_exists($country, self::$countries)){
+    if (is_null(self::$countries)) {
+      self::loadCountries();
+    }
+    if (array_key_exists($country, self::$countries)) {
       return ($name_only) ? self::$countries[$country]['name'] : self::$countries[$country];
-    }else{
+    } else {
       return false;
     }
   }

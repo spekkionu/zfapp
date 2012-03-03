@@ -1,5 +1,6 @@
 
 <?php
+
 /**
  * User Model
  *
@@ -8,12 +9,13 @@
  * @author spekkionu
  * @license New BSD http://www.opensource.org/licenses/bsd-license.php
  */
-class Model_User extends App_Model {
+class Model_User extends App_Model
+{
 
   /**
    * @var string $_name The name of the table
    */
-  protected $_name   = 'users';
+  protected $_name = 'users';
 
   /**
    * @var string $_primary The name of the primary key of the table
@@ -62,11 +64,10 @@ class Model_User extends App_Model {
    * @param array $data
    * @return int Number of affected rows
    */
-  public function updateProfile($userid, array $data){
+  public function updateProfile($userid, array $data) {
     $data = $this->_filterDataArray($data, array('id', 'password', 'accesslevel', 'signup_date', 'last_login', 'token', 'password_key', 'token_date'));
     return $this->update($data, 'id = ' . $this->getAdapter()->quote($userid, Zend_Db::PARAM_INT));
   }
-
 
   /**
    * Logs a user in
@@ -75,7 +76,7 @@ class Model_User extends App_Model {
    * @param string $password
    * @return array
    */
-  public function login($username, $password){
+  public function login($username, $password) {
     // Encrypt the password
     $password = self::encryptPassword($password);
 
@@ -85,15 +86,15 @@ class Model_User extends App_Model {
     // Setup table and credentials columns
     $authAdapter = new Zend_Auth_Adapter_DbTable($this->getAdapter());
     $authAdapter->setTableName($this->_name)
-                ->setIdentityColumn('username')
-                ->setCredentialColumn('password');
+      ->setIdentityColumn('username')
+      ->setCredentialColumn('password');
     $authAdapter->setIdentity($username);
     $authAdapter->setCredential($password);
     $select = $authAdapter->getDbSelect();
     $select->where('active = 1');
     // Authenticate the user
     $result = $auth->authenticate($authAdapter);
-    if ($result->isValid()){
+    if ($result->isValid()) {
       // The account was found pull the db row.
       $data = $authAdapter->getResultRowObject(array(
         'id',
@@ -102,18 +103,18 @@ class Model_User extends App_Model {
         'lastname',
         'email',
         'accesslevel'
-      ));
+        ));
       // Update Last Login Date and clear password reset tokens
       $this->update(array(
         'last_login' => new Zend_Db_Expr("NOW()"),
         'token' => null,
         'password_key' => null,
         'token_date' => null
-      ), 'id = ' . $this->quote($data->id, Zend_Db::PARAM_INT));
+        ), 'id = ' . $this->quote($data->id, Zend_Db::PARAM_INT));
       // Save the login data to the session.
       $auth->getStorage()->write($data);
       return $auth->getIdentity();
-    }else{
+    } else {
       throw new Validate_Exception('User account not found with this username and password.');
     }
   }
@@ -137,7 +138,7 @@ class Model_User extends App_Model {
       'token' => null,
       'password_key' => null,
       'token_date' => null
-    ), 'id = ' . $this->quote($id, Zend_Db::PARAM_INT));
+      ), 'id = ' . $this->quote($id, Zend_Db::PARAM_INT));
   }
 
   /**
@@ -152,7 +153,7 @@ class Model_User extends App_Model {
     $select->from($this, array('id', 'username', 'firstname', 'lastname', 'email'));
     $select->where('email LIKE ?', $email);
     $select->where("active = 1");
-    if($access_level){
+    if ($access_level) {
       $select->where('accesslevel = ?', $access_level);
     }
     $user = $this->getAdapter()->fetchRow($select);
@@ -167,7 +168,7 @@ class Model_User extends App_Model {
       'token' => self::encryptToken($user['token']),
       'password_key' => self::encryptPin($user['pin']),
       'token_date' => new Zend_Db_Expr("NOW()")
-    ), 'id = ' . $this->quote($user['id']));
+      ), 'id = ' . $this->quote($user['id']));
     return $user;
   }
 
@@ -202,7 +203,7 @@ class Model_User extends App_Model {
     // Password matches, do change
     $this->update(array(
       'password' => self::encryptPassword($values['password'])
-    ),'id = ' . $this->quote($user['id']));
+      ), 'id = ' . $this->quote($user['id']));
     return $this->login($user['username'], $values['password']);
   }
 

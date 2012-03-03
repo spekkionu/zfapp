@@ -5,12 +5,15 @@
  *
  * @package    App
  * @subpackage Form
- * @author     spekkionu
+ * @author     spekkionu <spekkionu@spekkionu.com>
  * @license    New BSD http://www.opensource.org/licenses/bsd-license.php
  */
 class Form_AdminProfile extends App_Form
 {
 
+  /**
+   * Loads decorators for the form
+   */
   public function loadDefaultDecorators() {
     $this->setDecorators(array(
       'FormElements',
@@ -20,6 +23,9 @@ class Form_AdminProfile extends App_Form
     ));
   }
 
+  /**
+   * Adds form elements
+   */
   public function init() {
     parent::init();
 
@@ -36,11 +42,11 @@ class Form_AdminProfile extends App_Form
         Zend_Validate_Alnum::NOT_ALNUM => "May only contain letters and numbers.",
         Zend_Validate_Alnum::STRING_EMPTY => "'%value%' is an empty string"
       )));
-    $element->addValidator('StringLength', true, array('max'=>20,'messages' => array(
-      Zend_Validate_StringLength::INVALID => "Invalid type given. String, integer or float expected",
-      Zend_Validate_StringLength::TOO_SHORT => "Must be at least %min% characters.",
-      Zend_Validate_StringLength::TOO_LONG => "Must be no more than %max% characters."
-    )));
+    $element->addValidator('StringLength', true, array('max' => 20, 'messages' => array(
+        Zend_Validate_StringLength::INVALID => "Invalid type given. String, integer or float expected",
+        Zend_Validate_StringLength::TOO_SHORT => "Must be at least %min% characters.",
+        Zend_Validate_StringLength::TOO_LONG => "Must be no more than %max% characters."
+      )));
     $element->setFilters(array('StringTrim', 'StripTags'));
     $element->setDecorators($this->field);
     $element->setAttribs(array(
@@ -66,10 +72,10 @@ class Form_AdminProfile extends App_Form
         Zend_Validate_NotEmpty::INVALID => "Invalid type given. String, integer or float expected",
         Zend_Validate_NotEmpty::IS_EMPTY => "New password is required."
       )));
-     $element->addValidator('Regex', true, array('pattern'=>'/^\S*$/i','messages'=>array(
-      Zend_Validate_Regex::NOT_MATCH => "Cannot contain spaces."
-    )));
-    $element->addValidator('StringLength', true, array('min'=>4,'max'=>20,'messages' => array(
+    $element->addValidator('Regex', true, array('pattern' => '/^\S*$/i', 'messages' => array(
+        Zend_Validate_Regex::NOT_MATCH => "Cannot contain spaces."
+      )));
+    $element->addValidator('StringLength', true, array('min' => 4, 'max' => 20, 'messages' => array(
         Zend_Validate_StringLength::INVALID => "Invalid type given. String, integer or float expected",
         Zend_Validate_StringLength::TOO_SHORT => "Must be at least %min% characters.",
         Zend_Validate_StringLength::TOO_LONG => "Must be no more than %max% characters."
@@ -189,16 +195,16 @@ class Form_AdminProfile extends App_Form
         Zend_Validate_StringLength::INVALID => "Invalid type given. String, integer or float expected",
         Zend_Validate_StringLength::TOO_LONG => "Must be no more than %max% characters."
       )));
-    $element->addValidator('EmailAddress', true, array('allow'=>Zend_Validate_Hostname::ALLOW_ALL, 'messages'=>array(
-      Zend_Validate_EmailAddress::INVALID => 'Not a valid email address.',
-      Zend_Validate_EmailAddress::INVALID_FORMAT => 'Not a valid email address.',
-      Zend_Validate_EmailAddress::INVALID_HOSTNAME => 'Not a valid email address.',
-      Zend_Validate_EmailAddress::INVALID_MX_RECORD => 'Not a valid email address.',
-      Zend_Validate_EmailAddress::DOT_ATOM => 'Not a valid email address.',
-      Zend_Validate_EmailAddress::QUOTED_STRING => 'Not a valid email address.',
-      Zend_Validate_EmailAddress::INVALID_LOCAL_PART => 'Not a valid email address.',
-      Zend_Validate_EmailAddress::LENGTH_EXCEEDED => 'Not a valid email address.'
-    )));
+    $element->addValidator('EmailAddress', true, array('allow' => Zend_Validate_Hostname::ALLOW_ALL, 'messages' => array(
+        Zend_Validate_EmailAddress::INVALID => 'Not a valid email address.',
+        Zend_Validate_EmailAddress::INVALID_FORMAT => 'Not a valid email address.',
+        Zend_Validate_EmailAddress::INVALID_HOSTNAME => 'Not a valid email address.',
+        Zend_Validate_EmailAddress::INVALID_MX_RECORD => 'Not a valid email address.',
+        Zend_Validate_EmailAddress::DOT_ATOM => 'Not a valid email address.',
+        Zend_Validate_EmailAddress::QUOTED_STRING => 'Not a valid email address.',
+        Zend_Validate_EmailAddress::INVALID_LOCAL_PART => 'Not a valid email address.',
+        Zend_Validate_EmailAddress::LENGTH_EXCEEDED => 'Not a valid email address.'
+      )));
     $element->setAttribs(array(
       'size' => 50,
       'maxlength' => 127,
@@ -231,7 +237,7 @@ class Form_AdminProfile extends App_Form
     $element = new Zend_Form_Element_Submit('save');
     $element->setLabel('Save');
     $element->setDecorators($this->buttonOpen);
-    $element->setIgnore(TRUE);
+    $element->setIgnore(true);
     $element->setAttrib('class', 'btn btn-primary');
     $this->addElement($element);
 
@@ -248,10 +254,11 @@ class Form_AdminProfile extends App_Form
   /**
    * Adds database validators
    * @param int $id Account to exclude from unique requirements
+   *
    * @return Form_AdminProfile
    */
   public function addDbValidators($id = null) {
-    if($this->getElement('email')){
+    if ($this->getElement('email')) {
       $validator = new Zend_Validate_Db_NoRecordExists(array(
           'table' => 'users',
           'field' => 'email'
@@ -264,7 +271,7 @@ class Form_AdminProfile extends App_Form
       ));
       $this->getElement('email')->addValidator($validator, true);
     }
-    if($this->getElement('username')){
+    if ($this->getElement('username')) {
       $validator = new Zend_Validate_Db_NoRecordExists(array(
           'table' => 'users',
           'field' => 'username'
@@ -277,6 +284,7 @@ class Form_AdminProfile extends App_Form
       ));
       $this->getElement('username')->addValidator($validator, true);
     }
+    
     return $this;
   }
 

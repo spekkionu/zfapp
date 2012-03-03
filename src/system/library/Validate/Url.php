@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Validates a url
  *
@@ -7,7 +8,8 @@
  * @author     spekkionu
  * @license    New BSD http://www.opensource.org/licenses/bsd-license.php
  */
-class Validate_Url extends Zend_Validate_Abstract {
+class Validate_Url extends Zend_Validate_Abstract
+{
 
   const INVALID = 'urlInvalid';
 
@@ -30,4 +32,5 @@ class Validate_Url extends Zend_Validate_Abstract {
     }
     return true;
   }
+
 }

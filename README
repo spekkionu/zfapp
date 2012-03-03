@@ -1,0 +1,10 @@
+This is a launching point for Zend Framework applications
+
+Features:
+----------
+
+- Front end and administration modules.
+- Login system with secure password reset
+- Permissions integration in amdin
+- Administrator management.
+- Basic content management to allow editing of page content.

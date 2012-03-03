@@ -18,17 +18,17 @@ class Zend_View_Helper_DateFormat extends Zend_View_Helper_Abstract
    * @param string $format format matching date()
    * @return string
    */
-  function dateFormat($date, $format="m/d/Y h:i:s A") {
+  public function dateFormat($date, $format = "m/d/Y h:i:s A") {
     if (empty($date)) {
       return null;
     }
-    if($date instanceof Zend_Date){
+    if ($date instanceof Zend_Date) {
       return $zdate->toString($format);
-    }elseif($date instanceof DateTime){
+    } elseif ($date instanceof DateTime) {
       return $date->format($format);
-    }else{
+    } else {
       $date = date_create($date);
-      if($date === false){
+      if ($date === false) {
         return null;
       }
       return $date->format($format);

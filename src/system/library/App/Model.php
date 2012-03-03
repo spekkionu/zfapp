@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Model Base Class
  *
@@ -7,8 +8,8 @@
  * @author     spekkionu
  * @license    New BSD http://www.opensource.org/licenses/bsd-license.php
  */
-abstract class App_Model extends Zend_Db_Table_Abstract {
-
+abstract class App_Model extends Zend_Db_Table_Abstract
+{
 
   /**
    * Loops through data and filters columns.
@@ -18,20 +19,20 @@ abstract class App_Model extends Zend_Db_Table_Abstract {
    * @param array $notallowed
    * @return array
    */
-  protected function _filterDataArray(array $data, $notallowed = array()){
-  	foreach($data as $key=>$value){
-  		if(!in_array($key, $this->_getCols()) || in_array($key, $notallowed)){
-  			unset($data[$key]);
-  		}else{
-  			$data[$key] = $this->_filterValue($value);
-  		}
-      if(method_exists($this, '_filter_'.$key)){
-        $method = '_filter_'.$key;
+  protected function _filterDataArray(array $data, $notallowed = array()) {
+    foreach ($data as $key => $value) {
+      if (!in_array($key, $this->_getCols()) || in_array($key, $notallowed)) {
+        unset($data[$key]);
+      } else {
+        $data[$key] = $this->_filterValue($value);
+      }
+      if (method_exists($this, '_filter_' . $key)) {
+        $method = '_filter_' . $key;
         $data[$key] = $this->$method($data[$key]);
       }
-  	}
-    
-  	return $data;
+    }
+
+    return $data;
   }
 
   /**
@@ -39,9 +40,11 @@ abstract class App_Model extends Zend_Db_Table_Abstract {
    * @param string $value
    * @return string
    */
-  protected function _filterValue($value){
+  protected function _filterValue($value) {
     $value = trim($value);
-    if($value == '') $value = null;
+    if ($value == '') {
+      $value = null;
+    }
     return $value;
   }
 
@@ -51,17 +54,19 @@ abstract class App_Model extends Zend_Db_Table_Abstract {
    * @param array $notallowed
    * @return array
    */
-  protected function _validateDataArray(array $data){
+  protected function _validateDataArray(array $data) {
     $valid = true;
     $result = array();
-  	foreach($data as $key=>$value){
-  		if(method_exists($this, '_validate_'.$key)){
-        $method = '_validate_'.$key;
+    foreach ($data as $key => $value) {
+      if (method_exists($this, '_validate_' . $key)) {
+        $method = '_validate_' . $key;
         $result[$key] = $this->$method($value);
-        if($result[$key] !== true) $valid = false;
+        if ($result[$key] !== true) {
+          $valid = false;
+        }
       }
-  	}
-  	return ($valid) ? $valid : $result;
+    }
+    return ($valid) ? $valid : $result;
   }
 
   /**
@@ -74,7 +79,8 @@ abstract class App_Model extends Zend_Db_Table_Abstract {
    * @param mixed $type  OPTIONAL the SQL datatype name, or constant, or null.
    * @return mixed An SQL-safe quoted value (or string of separated values).
    */
-  protected function quote($value, $type = null){
+  protected function quote($value, $type = null) {
     return $this->getAdapter()->quote($value, $type);
   }
+
 }

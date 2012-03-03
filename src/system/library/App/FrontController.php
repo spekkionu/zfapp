@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Front controller base class
  *
@@ -7,12 +8,13 @@
  * @author     spekkionu
  * @license    New BSD http://www.opensource.org/licenses/bsd-license.php
  */
-abstract class App_FrontController extends App_Controller {
+abstract class App_FrontController extends App_Controller
+{
 
   /**
    * Controller init
    */
-  public function init(){
+  public function init() {
     parent::init();
   }
 

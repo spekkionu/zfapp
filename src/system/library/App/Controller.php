@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Base controller class
  *
@@ -7,7 +8,8 @@
  * @author     spekkionu
  * @license    New BSD http://www.opensource.org/licenses/bsd-license.php
  */
-abstract class App_Controller extends Zend_Controller_Action {
+abstract class App_Controller extends Zend_Controller_Action
+{
 
   /**
    * Config array
@@ -48,26 +50,26 @@ abstract class App_Controller extends Zend_Controller_Action {
   /**
    * Controller init
    */
-  public function init(){
+  public function init() {
     $this->config = Zend_Registry::get('config');
     $auth = Zend_Auth::getInstance();
-    if($auth->hasIdentity()){
+    if ($auth->hasIdentity()) {
       $this->identity = $auth->getIdentity();
     }
     $this->view->identity = $this->identity;
     $this->acl = Zend_Registry::get('Zend_Acl');
-    $this->logger = new Zend_Log(new Zend_Log_Writer_Stream($this->config['system'].'/logs/access.log'));
-    $this->error_logger = new Zend_Log(new Zend_Log_Writer_Stream($this->config['system'].'/logs/error.log'));
+    $this->logger = new Zend_Log(new Zend_Log_Writer_Stream($this->config['system'] . '/logs/access.log'));
+    $this->error_logger = new Zend_Log(new Zend_Log_Writer_Stream($this->config['system'] . '/logs/error.log'));
     $this->flashMessenger = $this->_helper->getHelper('FlashMessenger');
     $this->view->site_info = array(
       'name' => $this->config['site']['name'],
       'domain' => $this->config['site']['domain']
     );
-    if($this->config['ssl']['enable'] && $_SERVER['REMOTE_PORT'] == $this->config['ssl']['port']){
+    if ($this->config['ssl']['enable'] && $_SERVER['REMOTE_PORT'] == $this->config['ssl']['port']) {
       // This is a ssl request
       $this->view->site_info['domain'] = $this->config['ssl']['domain'];
     }
-    $this->view->site_info['url'] = ($_SERVER['REMOTE_PORT'] == 443)?'https://':'http://' . $this->view->site_info['domain'].$this->view->baseUrl();
+    $this->view->site_info['url'] = ($_SERVER['REMOTE_PORT'] == 443) ? 'https://' : 'http://' . $this->view->site_info['domain'] . $this->view->baseUrl();
   }
 
   /**
@@ -75,7 +77,7 @@ abstract class App_Controller extends Zend_Controller_Action {
    * @param mixed $data
    * @return void
    */
-  protected function sendJson($data){
+  protected function sendJson($data) {
     return $this->_helper->getHelper('json')->sendJson($data);
   }
 
@@ -87,7 +89,7 @@ abstract class App_Controller extends Zend_Controller_Action {
    * @return void
    * @throws Zend_Log_Exception
    */
-  protected function log($message, $priority = Zend_Log::INFO){
+  protected function log($message, $priority = Zend_Log::INFO) {
     $this->logger->log($message, $priority);
   }
 
@@ -99,7 +101,7 @@ abstract class App_Controller extends Zend_Controller_Action {
    * @return void
    * @throws Zend_Log_Exception
    */
-  protected function logError($message, $priority = Zend_Log::ERR){
+  protected function logError($message, $priority = Zend_Log::ERR) {
     $this->error_logger->log($message, $priority);
   }
 
@@ -109,9 +111,11 @@ abstract class App_Controller extends Zend_Controller_Action {
    * @param string $privilege
    * @return bool
    */
-  protected function isAllowed($resource=null, $privilege=null){
+  protected function isAllowed($resource = null, $privilege = null) {
     $auth = Zend_Auth::getInstance();
-    if(!$auth->hasIdentity()) return false;
+    if (!$auth->hasIdentity()) {
+      return false;
+    }
     $identity = $auth->getIdentity();
     return $this->acl->isAllowed($identity->accesslevel, $resource, $privilege);
   }
@@ -126,7 +130,7 @@ abstract class App_Controller extends Zend_Controller_Action {
    * @return void
    */
   protected function redirect($action = null, $controller = null, $module = null, array $params = array()) {
-    if(is_null($action)){
+    if (is_null($action)) {
       $action = $this->getRequest()->getActionName();
     }
     $redirector = Zend_Controller_Action_HelperBroker::getStaticHelper('redirector');
@@ -151,7 +155,7 @@ abstract class App_Controller extends Zend_Controller_Action {
    * @param string $message
    * @param string $type The message type (used as class for container)
    */
-  protected function addMessage($message, $type='info') {
+  protected function addMessage($message, $type = 'info') {
     $this->flashMessenger->resetNamespace();
     $this->flashMessenger->addMessage(array($type => $message));
   }
@@ -170,7 +174,7 @@ abstract class App_Controller extends Zend_Controller_Action {
    * Adds a custom flash message that will not be loaded by default
    * @param string $message
    */
-  protected function addCustomFlashMessage($message, $type='info') {
+  protected function addCustomFlashMessage($message, $type = 'info') {
     $this->flashMessenger->setNamespace('custom-flash-messages');
     $this->flashMessenger->addMessage($message, $type);
     $this->flashMessenger->resetNamespace();

@@ -1,5 +1,6 @@
 
 <?php
+
 /**
  * CMS Model
  *
@@ -8,12 +9,13 @@
  * @author spekkionu
  * @license New BSD http://www.opensource.org/licenses/bsd-license.php
  */
-class Model_Content extends App_Model {
+class Model_Content extends App_Model
+{
 
   /**
    * @var string $_name The name of the table
    */
-  protected $_name   = 'content';
+  protected $_name = 'content';
 
   /**
    * @var string $_primary The name of the primary key of the table
@@ -49,7 +51,7 @@ class Model_Content extends App_Model {
    * @param string $dir Sort direction. Can be asc or desc
    * @return Zend_Paginator
    */
-  public function getPageList(array $search = array(), $page = 1, $limit = 25, $sort = 'url', $dir = 'asc'){
+  public function getPageList(array $search = array(), $page = 1, $limit = 25, $sort = 'url', $dir = 'asc') {
     // Merge with default search parameters
     $search = array_merge(self::$search, array_intersect_key($search, self::$search));
     $select = $this->select();
@@ -57,26 +59,26 @@ class Model_Content extends App_Model {
       'id', 'url', 'title', 'active', 'can_delete',
       'date_created', 'last_updated'
     ));
-    if($search['url']){
+    if ($search['url']) {
       $select->where("`url` LIKE ?", $search['url']);
     }
-    if($search['title']){
-      $select->where("`title` LIKE ?", "%".$search['title']."%");
+    if ($search['title']) {
+      $select->where("`title` LIKE ?", "%" . $search['title'] . "%");
     }
-    if(!is_null($search['active']) && $search['active'] !== ''){
+    if (!is_null($search['active']) && $search['active'] !== '') {
       $select->where("`active` = ?", $search['active'], Zend_Db::PARAM_INT);
     }
     $sort = mb_strtolower($sort);
-    if(!in_array($sort, self::$sortable)){
+    if (!in_array($sort, self::$sortable)) {
       $sort = 'id';
     }
     $dir = mb_strtoupper($dir);
-    if(!in_array($dir, array('ASC','DESC'))){
+    if (!in_array($dir, array('ASC', 'DESC'))) {
       $dir = 'ASC';
     }
-    if($sort == 'url'){
+    if ($sort == 'url') {
       $select->order("{$sort} {$dir}");
-    }else{
+    } else {
       $select->order("{$sort} {$dir}");
       $select->order("url {$dir}");
     }
@@ -105,7 +107,7 @@ class Model_Content extends App_Model {
    */
   public function getPageContent($id) {
     $cache = Cache::getCache('content');
-    if( ($page = $cache->load("page_".$id)) === false ) {
+    if (($page = $cache->load("page_" . $id)) === false) {
       // Cache miss, pull from db
       $select = $this->select();
       $select->from($this, array('id', 'url', 'title', 'content'));
@@ -113,7 +115,7 @@ class Model_Content extends App_Model {
       $select->where("`active` = 1");
       $page = $this->getAdapter()->fetchRow($select);
       // Save to cache
-      $cache->save($page, "page_".$id);
+      $cache->save($page, "page_" . $id);
     }
     return $page;
   }
@@ -123,7 +125,7 @@ class Model_Content extends App_Model {
    * @param array $data
    * @return int RowID of page
    */
-  public function addPage(array $data){
+  public function addPage(array $data) {
     $data = $this->_filterDataArray($data, array('id', 'date_created', 'last_updated', 'can_delete'));
     $data['date_created'] = new Zend_Db_Expr("NOW()");
     $data['can_delete'] = 1;
@@ -140,13 +142,13 @@ class Model_Content extends App_Model {
    * @param array $data
    * @return int Number of affected rows
    */
-  public function updatePage($id, array $data){
+  public function updatePage($id, array $data) {
     $data = $this->_filterDataArray($data, array('id', 'date_created', 'last_updated', 'can_delete'));
     $data['last_updated'] = new Zend_Db_Expr("NOW()");
     $updated = $this->update($data, 'id = ' . $this->getAdapter()->quote($id, Zend_Db::PARAM_INT));
     // Clear Cache
     $cache = Cache::getCache('content');
-    $cache->remove("page_".$id);
+    $cache->remove("page_" . $id);
     $cache->remove("routes");
     return $updated;
   }
@@ -156,35 +158,35 @@ class Model_Content extends App_Model {
    * @param int $id
    * @return int Number of affected rows
    */
-  public function deletePage($id){
+  public function deletePage($id) {
     $deleted = $this->delete('id = ' . $this->getAdapter()->quote($id, Zend_Db::PARAM_INT));
     // Clear Cache
     $cache = Cache::getCache('content');
-    $cache->remove("page_".$id);
+    $cache->remove("page_" . $id);
     $cache->remove("routes");
     return $deleted;
   }
 
-  public function getRoutes(){
+  public function getRoutes() {
     $cache = Cache::getCache('content');
-    if( ($routes = $cache->load('routes')) === false ) {
+    if (($routes = $cache->load('routes')) === false) {
       // Cache miss
       $select = $this->select();
-      $select->from($this, array('id','url'));
+      $select->from($this, array('id', 'url'));
       $select->where("`active` = 1");
       $select->where("`full_page` = 1");
       $select->order("url ASC");
       $stmt = $this->getAdapter()->query($select);
       $routes = array();
-      while($page = $stmt->fetch(Zend_Db::FETCH_ASSOC)){
-        $routes['cms_page_'.$page['id']] = new Zend_Controller_Router_Route_Static(
-          $page['url'],
-          array(
-            'module' => 'default',
-            'controller' => 'index',
-            'action' => 'page',
-            'id' => $page['id']
-          )
+      while ($page = $stmt->fetch(Zend_Db::FETCH_ASSOC)) {
+        $routes['cms_page_' . $page['id']] = new Zend_Controller_Router_Route_Static(
+            $page['url'],
+            array(
+              'module' => 'default',
+              'controller' => 'index',
+              'action' => 'page',
+              'id' => $page['id']
+            )
         );
       }
       $cache->save($routes, 'routes');
@@ -198,7 +200,7 @@ class Model_Content extends App_Model {
    * @param string $url
    * @return string
    */
-  public static function filterUrl($url){
+  public static function filterUrl($url) {
     // Replace multiple slashes with one
     $url = preg_replace('/\\/{2,}/i', '/', trim($url));
     // Replace multiple dashes with one
@@ -220,8 +222,8 @@ class Model_Content extends App_Model {
    * @param string $content
    * @return string Filtered content
    */
-  public static function filterContent($content){
-    if(empty($content)){
+  public static function filterContent($content) {
+    if (empty($content)) {
       return $content;
     }
     require_once("HTMLPurifier/HTMLPurifier.safe-includes.php");
@@ -229,7 +231,7 @@ class Model_Content extends App_Model {
 
     $config->set('HTML.DefinitionID', 'page_filter');
     $config->set('HTML.DefinitionRev', 1);
-    $config->set('Attr.AllowedFrameTargets', array('_blank','_self','_target','_top'));
+    $config->set('Attr.AllowedFrameTargets', array('_blank', '_self', '_target', '_top'));
     $config->set('Attr.ForbiddenClasses', array());
     $config->set('AutoFormat.RemoveSpansWithoutAttributes', true);
     //$config->set('HTML.Allowed', "");
@@ -240,7 +242,7 @@ class Model_Content extends App_Model {
 
     $config->set('Output.Newline', "\n");
     $config->set('Output.TidyFormat', true);
-    $config->set('URI.AllowedSchemes', array (
+    $config->set('URI.AllowedSchemes', array(
       'http' => true, 'https' => true, 'mailto' => true
     ));
     $config->set('Cache.SerializerPath', Cache::getHtmlPurifierCache('page_filter'));

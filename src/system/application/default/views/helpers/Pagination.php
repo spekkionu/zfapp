@@ -18,7 +18,7 @@ class Zend_View_Helper_Pagination extends Zend_View_Helper_Abstract
    * @param array $params An array with key=>value to use as the url parameters
    * @return string Pagination control
    */
-  function pagination(Zend_Paginator $pager, $params = array()) {
+  public function pagination(Zend_Paginator $pager, $params = array()) {
     return $this->view->paginationControl($pager, null, null, array('params' => $params));
   }
 

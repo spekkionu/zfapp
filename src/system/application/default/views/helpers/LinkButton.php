@@ -28,19 +28,19 @@ class Zend_View_Helper_LinkButton extends Zend_View_Helper_FormElement
     // check if disabled
     $disabled = '';
     if ($disable) {
-      if(isset($attribs['class'])){
-        $class = explode(' ',$attribs['class']);
+      if (isset($attribs['class'])) {
+        $class = explode(' ', $attribs['class']);
         $found = array_search('disabled', $class);
-        if($found === false){
+        if ($found === false) {
           $attribs['class'] .= ' disabled';
         }
-      }else{
+      } else {
         $attribs['class'] = 'disabled';
       }
     }
     $xhtml = '<a '
-           . $id
-           .' ' . $this->_htmlAttribs($attribs) . '>' . $this->view->escape($value) . '</a>';
+      . $id
+      . ' ' . $this->_htmlAttribs($attribs) . '>' . $this->view->escape($value) . '</a>';
     return $xhtml;
   }
 

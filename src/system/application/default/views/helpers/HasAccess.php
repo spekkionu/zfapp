@@ -17,11 +17,12 @@ class Zend_View_Helper_HasAccess extends Zend_View_Helper_Abstract
    * @param string $privilege
    * @return bool
    */
-  function hasAccess($resource='general', $privilege=null) {
+  public function hasAccess($resource = 'general', $privilege = null) {
     $auth = Zend_Auth::getInstance();
     $acl = Zend_Registry::get('Zend_Acl');
-    if (!$auth->hasIdentity())
+    if (!$auth->hasIdentity()) {
       return false;
+    }
     $identity = $auth->getIdentity();
     return $acl->isAllowed($identity->accesslevel, $resource, $privilege);
   }

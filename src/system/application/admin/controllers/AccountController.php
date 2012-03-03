@@ -40,7 +40,7 @@ class Admin_AccountController extends App_AdminController
     $form->populate($profile);
     $form->addDbValidators($this->identity->id);
     if ($this->getRequest()->isPost()) {
-      if($this->getRequest()->getPost('cancel')){
+      if ($this->getRequest()->getPost('cancel')) {
         return $this->redirect('index');
       }
       if ($form->isValid($this->getRequest()->getPost())) {
@@ -62,7 +62,7 @@ class Admin_AccountController extends App_AdminController
     $form = new Form_ChangePassword();
     $form->removeElement('pin');
     if ($this->getRequest()->isPost()) {
-      if($this->getRequest()->getPost('cancel')){
+      if ($this->getRequest()->getPost('cancel')) {
         return $this->redirect('index');
       }
       if ($form->isValid($this->getRequest()->getPost())) {

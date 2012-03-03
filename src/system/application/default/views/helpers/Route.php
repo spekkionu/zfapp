@@ -20,7 +20,7 @@ class Zend_View_Helper_Route extends Zend_View_Helper_Abstract
    * @param  bool $reset Whether or not to reset the route defaults with those provided
    * @return string Url for the link href attribute.
    */
-  function route($route="default", array $urlOptions = array(), $reset = true, $encode = true) {
+  public function route($route="default", array $urlOptions = array(), $reset = true, $encode = true) {
     return $this->view->url($urlOptions, $route, $reset, $encode);
   }
 

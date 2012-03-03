@@ -1,4 +1,5 @@
 <?php
+
 /**
  * General Validation Exception
  *
@@ -7,6 +8,7 @@
  * @author     spekkionu
  * @license    New BSD http://www.opensource.org/licenses/bsd-license.php
  */
-class Validate_Exception extends Zend_Validate_Exception {
+class Validate_Exception extends Zend_Validate_Exception
+{
 
 }

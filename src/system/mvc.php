@@ -1,5 +1,6 @@
 <?php
-require(dirname(__FILE__).'/application.php');
+
+require(dirname(__FILE__) . '/application.php');
 
 // Set Controller Paths
 $controller = Zend_Controller_Front::getInstance();
@@ -15,15 +16,15 @@ $mgrContent = new Model_Content();
 $router->addRoutes($mgrContent->getRoutes());
 unset($mgrContent);
 // Add application routes
-$router->addRoutes(require(SYSTEM.'/configs/routes.php'));
+$router->addRoutes(require(SYSTEM . '/configs/routes.php'));
 
 // Set Error Reporting
-$controller->throwExceptions( $config['debug']['display_errors'] );
+$controller->throwExceptions($config['debug']['display_errors']);
 // Set Base Url
-if($config['ssl']['enable'] && $_SERVER['REMOTE_PORT'] == $config['ssl']['port']){
+if ($config['ssl']['enable'] && $_SERVER['REMOTE_PORT'] == $config['ssl']['port']) {
   // This is a ssl request
   $controller->setBaseUrl($config['ssl']['base_url']);
-}else{
+} else {
   // This is not an ssl request
   $controller->setBaseUrl($config['site']['base_url']);
 }
@@ -34,7 +35,7 @@ Zend_Controller_Action_HelperBroker::addPath(SYSTEM . '/application/default/help
 
 // Init Layout
 $layout = Zend_Layout::startMvc();
-$layout->setLayoutPath(SYSTEM.'/application/default/views/layout');
+$layout->setLayoutPath(SYSTEM . '/application/default/views/layout');
 $view = $layout->getView();
 $view->addHelperPath(SYSTEM . '/application/default/views/helpers', 'Zend_View_Helper');
 ZendX_JQuery::enableView($view);
@@ -42,27 +43,27 @@ $view->jQuery()->enable();
 
 // Setup Navidation Defaults
 Zend_View_Helper_Navigation_HelperAbstract::setDefaultAcl($acl);
-if(Zend_Auth::getInstance()->hasIdentity()){
+if (Zend_Auth::getInstance()->hasIdentity()) {
   Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole(Zend_Auth::getInstance()->getIdentity()->accesslevel);
-}else{
+} else {
   Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('guest');
 }
 
-if($config['debug']['debug_bar']){
+if ($config['debug']['debug_bar']) {
   $debug = new ZFDebug_Controller_Plugin_Debug(array(
-    'jquery_path' => $view->baseUrl('assets/scripts/jquery/jquery-1.7.1.min.js'),
-    'plugins' => array(
-      'Variables',
-      'Html',
-      'Log',
-      'File' => array('base_path' => SYSTEM),
-      'Database',
-      'Memory',
-      'Time',
-      'ZFDebug_Controller_Plugin_Debug_Plugin_Auth' => array('user'=>'username','role'=>'accesslevel'),
-      'Exception'
-    )
-  ));
+      'jquery_path' => $view->baseUrl('assets/scripts/jquery/jquery-1.7.1.min.js'),
+      'plugins' => array(
+        'Variables',
+        'Html',
+        'Log',
+        'File' => array('base_path' => SYSTEM),
+        'Database',
+        'Memory',
+        'Time',
+        'ZFDebug_Controller_Plugin_Debug_Plugin_Auth' => array('user' => 'username', 'role' => 'accesslevel'),
+        'Exception'
+      )
+    ));
   $controller->registerPlugin($debug);
 }
 

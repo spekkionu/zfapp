@@ -18,7 +18,7 @@ class Admin_AccessController extends App_AdminController
   public function indexAction() {
     $form = new Form_Login();
     if ($this->getRequest()->isPost()) {
-      if($this->getRequest()->getPost('forgot_password')){
+      if ($this->getRequest()->getPost('forgot_password')) {
         return $this->routeRedirect('admin_forgot_password');
       }
       if ($form->isValid($this->getRequest()->getPost())) {
@@ -57,7 +57,7 @@ class Admin_AccessController extends App_AdminController
   public function resetPasswordAction() {
     $form = new Form_ForgotPassword();
     if ($this->getRequest()->isPost()) {
-      if($this->getRequest()->getPost('cancel')){
+      if ($this->getRequest()->getPost('cancel')) {
         return $this->routeRedirect('admin_login');
       }
       if ($form->isValid($this->getRequest()->getPost())) {

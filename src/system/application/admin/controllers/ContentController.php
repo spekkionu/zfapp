@@ -28,29 +28,29 @@ class Admin_ContentController extends App_AdminController
     $page = $this->getRequest()->getParam('page', 1);
     $mgr = new Model_Content();
     $session = new Zend_Session_Namespace('admin_search');
-    if(!isset($session->content)){
+    if (!isset($session->content)) {
       $session->content = Model_Content::$search;
     }
     $sort = $this->getRequest()->getParam('sort');
-    if(!in_array($sort, Model_Content::$sortable)){
+    if (!in_array($sort, Model_Content::$sortable)) {
       $sort = 'id';
     }
     $dir = $this->getRequest()->getParam('dir');
     $limit = 25;
     $form = new Form_Search_Content();
     $form->populate($session->content);
-    if($this->getRequest()->isPost()){
-      if($this->getRequest()->getPost('clear')){
+    if ($this->getRequest()->isPost()) {
+      if ($this->getRequest()->getPost('clear')) {
         // Set back to default search parameters
         $session->content = Model_Content::$search;
         // Send back to page 1
-        return $this->routeRedirect('admin_content', array('page'=>1,'sort'=>$sort,'dir'=>$dir));
+        return $this->routeRedirect('admin_content', array('page' => 1, 'sort' => $sort, 'dir' => $dir));
       }
-      if($form->isValid($this->getRequest()->getPost())){
+      if ($form->isValid($this->getRequest()->getPost())) {
         // Save search parameters
         $session->content = array_merge($session->content, array_intersect_key($form->getValues(), Model_Content::$search));
         // Send back to page 1
-        return $this->routeRedirect('admin_content', array('page'=>1,'sort'=>$sort,'dir'=>$dir));
+        return $this->routeRedirect('admin_content', array('page' => 1, 'sort' => $sort, 'dir' => $dir));
       }
     }
     $form->populate($session->content);
@@ -69,24 +69,24 @@ class Admin_ContentController extends App_AdminController
     ));
   }
 
-  public function addAction(){
+  public function addAction() {
     if (!$this->isAllowed('admin:content', 'add')) {
       return $this->_forward('access-denied', 'error', 'default');
     }
     $form = new Form_Content();
     $form->addDbValidators();
-    if($this->getRequest()->isPost()){
-      if($this->getRequest()->getPost('cancel')){
+    if ($this->getRequest()->isPost()) {
+      if ($this->getRequest()->getPost('cancel')) {
         return $this->routeRedirect('admin_content');
       }
-      if($form->isValid($this->getRequest()->getPost())){
-        try{
+      if ($form->isValid($this->getRequest()->getPost())) {
+        try {
           $values = $form->getValues();
           $mgr = new Model_Content();
           $id = $mgr->addPage($values);
           $this->addMessage("Sucessfully added page.", 'success');
           return $this->redirect('index');
-        }catch(Exception $e){
+        } catch (Exception $e) {
           $this->logError("Failed to add page - {$e->getMessage()}");
           $this->addMessage("Failed to add page", 'error');
           return $this->redirect();
@@ -96,34 +96,34 @@ class Admin_ContentController extends App_AdminController
     $this->view->form = $form;
   }
 
-  public function editAction(){
+  public function editAction() {
     if (!$this->isAllowed('admin:content', 'edit')) {
       return $this->_forward('access-denied', 'error', 'default');
     }
     $id = $this->getRequest()->getParam('id');
     $mgr = new Model_Content();
     $result = $mgr->getPage($id);
-    if(!$result){
+    if (!$result) {
       return $this->_forward('not-found', 'error', 'default');
     }
     $form = new Form_Content();
-    if(!$result['can_delete']){
+    if (!$result['can_delete']) {
       $form->removeElement('active');
       $form->getElement('url')->setIgnore(true)->setAttrib('readonly', 'readonly');
     }
     $form->addDbValidators($id);
     $form->populate($result);
-    if($this->getRequest()->isPost()){
-      if($this->getRequest()->getPost('cancel')){
+    if ($this->getRequest()->isPost()) {
+      if ($this->getRequest()->getPost('cancel')) {
         return $this->routeRedirect('admin_content');
       }
-      if($form->isValid($this->getRequest()->getPost())){
-        try{
+      if ($form->isValid($this->getRequest()->getPost())) {
+        try {
           $values = $form->getValues();
           $id = $mgr->updatePage($id, $values);
           $this->addMessage("Sucessfully updated page.", 'success');
           return $this->routeRedirect('admin_content');
-        }catch(Exception $e){
+        } catch (Exception $e) {
           $this->logError("Failed to update page - {$e->getMessage()}");
           $this->addMessage("Failed to update page", 'error');
           return $this->redirect();
@@ -133,31 +133,31 @@ class Admin_ContentController extends App_AdminController
     $this->view->form = $form;
   }
 
-  public function deleteAction(){
+  public function deleteAction() {
     if (!$this->isAllowed('admin:content', 'delete')) {
       return $this->_forward('access-denied', 'error', 'default');
     }
     $id = $this->getRequest()->getParam('id');
     $mgr = new Model_Content();
     $result = $mgr->getPage($id);
-    if(!$result){
+    if (!$result) {
       return $this->_forward('not-found', 'error', 'default');
     }
     $form = new Form_Delete();
-    if(!$result['can_delete']){
+    if (!$result['can_delete']) {
       $form->removeElement('delete');
       $form->getElement('cancel')->setDecorators($form->button);
     }
-    if($this->getRequest()->isPost()){
-      if($this->getRequest()->getPost('cancel') || !$result['can_delete']){
+    if ($this->getRequest()->isPost()) {
+      if ($this->getRequest()->getPost('cancel') || !$result['can_delete']) {
         return $this->routeRedirect('admin_content');
       }
-      if($form->isValid($this->getRequest()->getPost())){
-        try{
+      if ($form->isValid($this->getRequest()->getPost())) {
+        try {
           $id = $mgr->deletePage($id);
           $this->addMessage("Sucessfully deleted page.", 'success');
           return $this->routeRedirect('admin_content');
-        }catch(Exception $e){
+        } catch (Exception $e) {
           $this->logError("Failed to delete page - {$e->getMessage()}");
           $this->addMessage("Failed to delete page", 'error');
           return $this->redirect();

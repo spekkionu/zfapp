@@ -1,46 +1,49 @@
 <?php
+
 /**
  * Encrypts sessions data before saving
+ *
  * Stores session in file
  */
-class Session_SaveHandler_EncryptedFile implements Zend_Session_SaveHandler_Interface {
- 
+class Session_SaveHandler_EncryptedFile implements Zend_Session_SaveHandler_Interface
+{
+
   const CIPHER = MCRYPT_RIJNDAEL_256;
   const CIPHER_MODE = MCRYPT_MODE_CBC;
-  
+
   /**
    * Key for encryption/decryption
    *
    * @var string
    */
   private static $_key;
-  
+
   /**
    * Path of the session file
    *
    * @var string
-  */
+   */
   private static $_path;
-  
+
   /**
    * Session name (optional)
    *
    * @var string
-  */
+   */
   private static $_name;
-  
+
   /**
-  * Size of the IV vector for encryption
-  *
-  * @var integer
-  */
+   * Size of the IV vector for encryption
+   *
+   * @var integer
+   */
   private static $_ivSize;
 
   /**
    * Cookie variable name of the key
    *
    * @var string
-  */
+   */
   private static $_keyName;
 
   /**
@@ -49,17 +52,19 @@ class Session_SaveHandler_EncryptedFile implements Zend_Session_SaveHandler_Inte
    *
    * @param integer $length
    * @return string
-  */
-  private static function _randomKey($length=32) {
+   */
+  private static function _randomKey($length = 32) {
     $rnd = "";
-    if(function_exists('openssl_random_pseudo_bytes')) {
+    if (function_exists('openssl_random_pseudo_bytes')) {
       $rnd = openssl_random_pseudo_bytes($length, $strong);
-      if($strong === TRUE) return $rnd;
+      if ($strong === true) {
+        return $rnd;
+      }
     }
-    for ($i=0;$i<$length;$i++) {
-      $sha= sha1(mt_rand());
-      $char= mt_rand(0,30);
-      $rnd.= chr(hexdec($sha[$char].$sha[$char+1]));
+    for ($i = 0; $i < $length; $i++) {
+      $sha = sha1(mt_rand());
+      $char = mt_rand(0, 30);
+      $rnd.= chr(hexdec($sha[$char] . $sha[$char + 1]));
     }
     return $rnd;
   }
@@ -72,30 +77,24 @@ class Session_SaveHandler_EncryptedFile implements Zend_Session_SaveHandler_Inte
    * @return bool
    */
   public function open($save_path, $session_name) {
-    self::$_path= $save_path.'/';
-    self::$_name= $session_name;
-    self::$_keyName= "KEY_$session_name";
-    self::$_ivSize= mcrypt_get_iv_size(self::CIPHER, self::CIPHER_MODE);
-    
+    self::$_path = $save_path . '/';
+    self::$_name = $session_name;
+    self::$_keyName = "KEY_$session_name";
+    self::$_ivSize = mcrypt_get_iv_size(self::CIPHER, self::CIPHER_MODE);
+
     if (empty($_COOKIE[self::$_keyName])) {
-      $keyLength= mcrypt_get_key_size(self::CIPHER, self::CIPHER_MODE);
-      self::$_key= self::_randomKey($keyLength);
+      $keyLength = mcrypt_get_key_size(self::CIPHER, self::CIPHER_MODE);
+      self::$_key = self::_randomKey($keyLength);
       $cookie_param = session_get_cookie_params();
       setcookie(
-        self::$_keyName,
-        base64_encode(self::$_key),
-        $cookie_param['lifetime'],
-        $cookie_param['path'],
-        $cookie_param['domain'],
-        $cookie_param['secure'],
-        $cookie_param['httponly']
+        self::$_keyName, base64_encode(self::$_key), $cookie_param['lifetime'], $cookie_param['path'], $cookie_param['domain'], $cookie_param['secure'], $cookie_param['httponly']
       );
     } else {
-      self::$_key= base64_decode($_COOKIE[self::$_keyName]);
+      self::$_key = base64_decode($_COOKIE[self::$_keyName]);
     }
     return true;
   }
-  
+
   /**
    * Close the session
    *
@@ -104,7 +103,7 @@ class Session_SaveHandler_EncryptedFile implements Zend_Session_SaveHandler_Inte
   public function close() {
     return true;
   }
-  
+
   /**
    * Read and decrypt the session
    *
@@ -112,27 +111,23 @@ class Session_SaveHandler_EncryptedFile implements Zend_Session_SaveHandler_Inte
    * @return string
    */
   public function read($id) {
-    $sess_file = self::$_path.self::$_name."_$id";
-    if(!is_file($sess_file)){
+    $sess_file = self::$_path . self::$_name . "_$id";
+    if (!is_file($sess_file)) {
       return false;
     }
-    $data= @file_get_contents($sess_file);
+    $data = @file_get_contents($sess_file);
     if (empty($data)) {
       return false;
     }
     $data = base64_decode($data);
-    $iv= substr($data,0,self::$_ivSize);
-    $encrypted= substr($data,self::$_ivSize);
+    $iv = substr($data, 0, self::$_ivSize);
+    $encrypted = substr($data, self::$_ivSize);
     $decrypt = mcrypt_decrypt(
-      self::CIPHER,
-      self::$_key,
-      $encrypted,
-      self::CIPHER_MODE,
-      $iv
+      self::CIPHER, self::$_key, $encrypted, self::CIPHER_MODE, $iv
     );
     return rtrim($decrypt, "\0");
   }
-  
+
   /**
    * Encrypt and write the session
    *
@@ -141,17 +136,13 @@ class Session_SaveHandler_EncryptedFile implements Zend_Session_SaveHandler_Inte
    * @return bool
    */
   public function write($id, $data) {
-    $sess_file = self::$_path.self::$_name."_$id";
-    $iv= mcrypt_create_iv(self::$_ivSize, MCRYPT_RAND);
+    $sess_file = self::$_path . self::$_name . "_$id";
+    $iv = mcrypt_create_iv(self::$_ivSize, MCRYPT_RAND);
     if ($fp = @fopen($sess_file, "w")) {
-      $encrypted= mcrypt_encrypt(
-        self::CIPHER,
-        self::$_key,
-        $data,
-        self::CIPHER_MODE,
-        $iv
+      $encrypted = mcrypt_encrypt(
+        self::CIPHER, self::$_key, $data, self::CIPHER_MODE, $iv
       );
-      $data = base64_encode($iv.$encrypted);
+      $data = base64_encode($iv . $encrypted);
       $return = fwrite($fp, $data);
       fclose($fp);
       return $return;
@@ -159,7 +150,7 @@ class Session_SaveHandler_EncryptedFile implements Zend_Session_SaveHandler_Inte
       return false;
     }
   }
-  
+
   /**
    * Destroy the session
    *
@@ -167,11 +158,11 @@ class Session_SaveHandler_EncryptedFile implements Zend_Session_SaveHandler_Inte
    * @return bool
    */
   public function destroy($id) {
-    $sess_file = self::$_path.self::$_name."_$id";
-    setcookie (self::$_keyName, '', time() - 3600);
+    $sess_file = self::$_path . self::$_name . "_$id";
+    setcookie(self::$_keyName, '', time() - 3600);
     return(@unlink($sess_file));
   }
-  
+
   /**
    * Garbage Collector
    *
@@ -179,11 +170,12 @@ class Session_SaveHandler_EncryptedFile implements Zend_Session_SaveHandler_Inte
    * @return bool
    */
   public function gc($max) {
-    foreach (glob(self::$_path.self::$_name.'_*') as $filename) {
+    foreach (glob(self::$_path . self::$_name . '_*') as $filename) {
       if (filemtime($filename) + $max < time()) {
         @unlink($filename);
       }
     }
     return true;
   }
+
 }
