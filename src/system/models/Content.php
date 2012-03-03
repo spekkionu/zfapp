@@ -226,7 +226,7 @@ class Model_Content extends App_Model
     if (empty($content)) {
       return $content;
     }
-    require_once("HTMLPurifier/HTMLPurifier.safe-includes.php");
+    require_once(SYSTEM."/library/vendor/HTMLPurifier/HTMLPurifier.safe-includes.php");
     $config = HTMLPurifier_Config::createDefault();
 
     $config->set('HTML.DefinitionID', 'page_filter');

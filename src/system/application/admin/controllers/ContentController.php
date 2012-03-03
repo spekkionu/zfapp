@@ -74,11 +74,9 @@ class Admin_ContentController extends App_AdminController
       return $this->_forward('access-denied', 'error', 'default');
     }
     $form = new Form_Content();
+    $form->getElement('cancel')->setAttrib('href', $this->view->route('admin_content'));
     $form->addDbValidators();
     if ($this->getRequest()->isPost()) {
-      if ($this->getRequest()->getPost('cancel')) {
-        return $this->routeRedirect('admin_content');
-      }
       if ($form->isValid($this->getRequest()->getPost())) {
         try {
           $values = $form->getValues();
@@ -111,6 +109,7 @@ class Admin_ContentController extends App_AdminController
       $form->removeElement('active');
       $form->getElement('url')->setIgnore(true)->setAttrib('readonly', 'readonly');
     }
+    $form->getElement('cancel')->setAttrib('href', $this->view->route('admin_content'));
     $form->addDbValidators($id);
     $form->populate($result);
     if ($this->getRequest()->isPost()) {
@@ -144,6 +143,7 @@ class Admin_ContentController extends App_AdminController
       return $this->_forward('not-found', 'error', 'default');
     }
     $form = new Form_Delete();
+    $form->getElement('cancel')->setAttrib('href', $this->view->route('admin_content'));
     if (!$result['can_delete']) {
       $form->removeElement('delete');
       $form->getElement('cancel')->setDecorators($form->button);

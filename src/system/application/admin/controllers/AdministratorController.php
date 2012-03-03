@@ -74,6 +74,7 @@ class Admin_AdministratorController extends App_AdminController
       return $this->_forward('access-denied', 'error', 'default');
     }
     $form = new Form_AdminProfile();
+    $form->getElement('cancel')->setAttrib('href', $this->view->route('admin_administrator'));
     $form->addDbValidators();
     if ($this->getRequest()->isPost()) {
       if ($this->getRequest()->getPost('cancel')) {
@@ -112,6 +113,7 @@ class Admin_AdministratorController extends App_AdminController
     $form = new Form_AdminProfile();
     $form->removeElement('password');
     $form->removeElement('confirm_password');
+    $form->getElement('cancel')->setAttrib('href', $this->view->route('admin_administrator'));
     $form->addDbValidators($id);
     $form->populate($user);
     if ($this->getRequest()->isPost()) {
@@ -147,6 +149,7 @@ class Admin_AdministratorController extends App_AdminController
     }
     $allow_delete = ($id != $this->identity->id);
     $form = new Form_Delete();
+    $form->getElement('cancel')->setAttrib('href', $this->view->route('admin_administrator'));
     if (!$allow_delete) {
       $form->removeElement('delete');
       $form->getElement('cancel')->setDecorators($form->button);

@@ -130,11 +130,12 @@ class Form_Content extends App_Form
     $element->setAttrib('class', 'btn btn-primary');
     $this->addElement($element);
 
-    $element = new Zend_Form_Element_Submit('cancel');
+    $element = new Form_Element_LinkButton('cancel');
     $element->setLabel('Cancel');
     $element->setDecorators($this->buttonClose);
     $element->setAttrib('class', 'btn cancel');
     //$element->setAttrib('data-loading-text', 'Saving');
+    $element->setIgnore(true);
     $this->addElement($element);
 
     $this->addElement('hash', 'csrf', array('ignore' => true, 'decorators' => $this->hidden));

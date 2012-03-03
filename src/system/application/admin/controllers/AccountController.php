@@ -35,6 +35,7 @@ class Admin_AccountController extends App_AdminController
     $form->removeElement('password');
     $form->removeElement('confirm_password');
     $form->removeElement('active');
+    $form->getElement('cancel')->setAttrib('href', $this->view->route('admin_account'));
     $mgr = new Model_User();
     $profile = $mgr->getProfile($this->identity->id);
     $form->populate($profile);
@@ -61,6 +62,7 @@ class Admin_AccountController extends App_AdminController
   public function passwordAction() {
     $form = new Form_ChangePassword();
     $form->removeElement('pin');
+    $form->getElement('cancel')->setAttrib('href', $this->view->route('admin_account'));
     if ($this->getRequest()->isPost()) {
       if ($this->getRequest()->getPost('cancel')) {
         return $this->redirect('index');

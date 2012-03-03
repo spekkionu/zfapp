@@ -17,6 +17,7 @@ class Admin_AccessController extends App_AdminController
 
   public function indexAction() {
     $form = new Form_Login();
+    $form->getElement('forgot_password')->setAttrib('href', $this->view->route('admin_forgot_password'));
     if ($this->getRequest()->isPost()) {
       if ($this->getRequest()->getPost('forgot_password')) {
         return $this->routeRedirect('admin_forgot_password');
@@ -44,6 +45,8 @@ class Admin_AccessController extends App_AdminController
           $this->addMessage("Error logging in.");
           return $this->routeRedirect('admin_login');
         }
+      }else{
+        Zend_Debug::dump($form->getErrors());
       }
     }
     $this->view->form = $form;
@@ -56,6 +59,7 @@ class Admin_AccessController extends App_AdminController
 
   public function resetPasswordAction() {
     $form = new Form_ForgotPassword();
+    $form->getElement('cancel')->setAttrib('href', $this->view->route('admin_login'));
     if ($this->getRequest()->isPost()) {
       if ($this->getRequest()->getPost('cancel')) {
         return $this->routeRedirect('admin_login');
@@ -92,6 +96,7 @@ class Admin_AccessController extends App_AdminController
     $token = $this->getRequest()->getParam('token');
     $form = new Form_ChangePassword();
     $form->removeElement('old_password');
+    $form->getElement('cancel')->setAttrib('href', $this->view->route('admin_login'));
     if ($this->getRequest()->isPost()) {
       if ($form->isValid($this->getRequest()->getPost())) {
         try {
