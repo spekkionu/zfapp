@@ -71,7 +71,7 @@ class Form_Search_Administrator extends App_Form
     $element = new Zend_Form_Element_Submit('search');
     $element->setLabel('Search');
     $element->setDecorators($this->buttonOpen);
-    $element->setIgnore(TRUE);
+    $element->setIgnore(true);
     $element->setAttrib('class', 'btn btn-primary');
     $this->addElement($element);
 
@@ -83,6 +83,5 @@ class Form_Search_Administrator extends App_Form
 
     $this->addElement('hash', 'csrf', array('ignore' => true, 'decorators' => $this->hidden));
   }
-
 
 }

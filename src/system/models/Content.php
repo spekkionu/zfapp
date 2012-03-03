@@ -180,13 +180,13 @@ class Model_Content extends App_Model
       $routes = array();
       while ($page = $stmt->fetch(Zend_Db::FETCH_ASSOC)) {
         $routes['cms_page_' . $page['id']] = new Zend_Controller_Router_Route_Static(
-            $page['url'],
-            array(
-              'module' => 'default',
-              'controller' => 'index',
-              'action' => 'page',
-              'id' => $page['id']
-            )
+          $page['url'],
+          array(
+            'module' => 'default',
+            'controller' => 'index',
+            'action' => 'page',
+            'id' => $page['id']
+          )
         );
       }
       $cache->save($routes, 'routes');

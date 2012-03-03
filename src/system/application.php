@@ -11,8 +11,8 @@ define('SYSTEM', dirname(__FILE__));
 // Set Include Path
 set_include_path(
   // Application Library Files
-  SYSTEM . DIRECTORY_SEPARATOR . 'library' . PATH_SEPARATOR . 
-  realpath(SYSTEM . DIRECTORY_SEPARATOR . 'library/vendor/zend-framework/library') . PATH_SEPARATOR . 
+  SYSTEM . DIRECTORY_SEPARATOR . 'library' . PATH_SEPARATOR .
+  realpath(SYSTEM . DIRECTORY_SEPARATOR . 'library/vendor/zend-framework/library') . PATH_SEPARATOR .
   realpath(SYSTEM . DIRECTORY_SEPARATOR . 'library/vendor/zend-framework/extras/library')
 );
 
@@ -126,6 +126,7 @@ Zend_Registry::set('db', $db);
 //Zend_Currency::setCache($cache);
 //$currency = new Zend_Currency();
 //Zend_Registry::set('Zend_Currency', $currency);
+
 // Setup Session Handler
 if ($config['session']['handler']) {
   $config['session']['options']['hash_function'] = 'md5';
@@ -136,6 +137,11 @@ if ($config['session']['handler']) {
   $handler = $config['session']['handler'];
   $handler = new $handler($config['session']['handler_options']);
   Zend_Session::setSaveHandler($handler);
+}
+
+// Start Session if one exists
+if(Zend_Session::sessionExists()){
+  Zend_Session::start();
 }
 
 // Initialize Auth Class

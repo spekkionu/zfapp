@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Login form.
  *
@@ -16,7 +17,7 @@ class Form_Login extends App_Form
     $this->setDecorators(array(
       'FormElements',
       array('Description', array('tag' => 'p', 'class' => 'form-help')),
-      array('Fieldset', array('legend'=>'Login')),
+      array('Fieldset', array('legend' => 'Login')),
       array('Form', array('id' => 'form-login', 'class' => 'validate form-horizontal', 'accept-charset' => 'utf-8'))
     ));
   }
@@ -29,9 +30,9 @@ class Form_Login extends App_Form
     $element->setDescription("Enter your username.");
     $element->setRequired(true);
     $element->addValidator('NotEmpty', true, array('messages' => array(
-      Zend_Validate_NotEmpty::INVALID => "Invalid type given. String, integer or float expected",
-      Zend_Validate_NotEmpty::IS_EMPTY => "Username is required."
-    )));
+        Zend_Validate_NotEmpty::INVALID => "Invalid type given. String, integer or float expected",
+        Zend_Validate_NotEmpty::IS_EMPTY => "Username is required."
+      )));
     $element->setFilters(array('StringTrim', 'StripTags'));
     $element->setDecorators($this->field);
     $element->setAttribs(array(
@@ -54,9 +55,9 @@ class Form_Login extends App_Form
     $element->setDescription("Enter your password.");
     $element->setRequired(true);
     $element->addValidator('NotEmpty', true, array('messages' => array(
-      Zend_Validate_NotEmpty::INVALID => "Invalid type given. String, integer or float expected",
-      Zend_Validate_NotEmpty::IS_EMPTY => "Password is required."
-    )));
+        Zend_Validate_NotEmpty::INVALID => "Invalid type given. String, integer or float expected",
+        Zend_Validate_NotEmpty::IS_EMPTY => "Password is required."
+      )));
     $element->setFilters(array('StringTrim'));
     $element->setDecorators($this->field);
     $element->setAttribs(array(
@@ -76,17 +77,18 @@ class Form_Login extends App_Form
     $element = new Zend_Form_Element_Submit('login');
     $element->setLabel('Login');
     $element->setDecorators($this->buttonOpen);
-    $element->setIgnore(TRUE);
+    $element->setIgnore(true);
     $element->setAttrib('class', 'btn btn-primary');
     $this->addElement($element);
 
-    $element = new Zend_Form_Element_Submit('forgot_password');
+    $element = new Form_Element_LinkButton('forgot_password');
     $element->setLabel('Forgot Password?');
     $element->setDecorators($this->buttonClose);
     $element->setAttrib('class', 'btn cancel');
+    $element->setIgnore(true);
     $this->addElement($element);
 
-    $this->addElement('hash', 'csrf', array('ignore' => true, 'decorators' => $this->hidden));
+    //$this->addElement('hash', 'csrf', array('ignore' => true, 'decorators' => $this->hidden));
   }
 
 }

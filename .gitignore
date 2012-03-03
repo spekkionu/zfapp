@@ -1,4 +1,4 @@
-# Cache and userfiles
+﻿# Cache and userfiles
 /src/system/logs
 /src/system/cache
 /src/system/configs/config.php
@@ -24,6 +24,8 @@ nbproject
 _notes
 .idea
 .cache
+*.sublime-project
+*.sublime-workspace
 
 # Source Control
 .svn

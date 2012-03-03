@@ -28,29 +28,29 @@ class Form_Content extends App_Form
     $element->setDescription("Enter the URL the page can be accessed at.");
     $element->setRequired(true);
     $element->addValidator('NotEmpty', true, array('messages' => array(
-      Zend_Validate_NotEmpty::INVALID => "Invalid type given. String, integer or float expected",
-      Zend_Validate_NotEmpty::IS_EMPTY => "URL is required."
-    )));
-    $element->addValidator('RegEx', true, array('pattern'=>'/^[a-z0-9\\/-]*$/', 'messages' => array(
-      Zend_Validate_RegEx::NOT_MATCH => "URL can only contain letters, numbers, slash and dash."
-    )));
-    $element->addValidator('StringLength', true, array('max'=>255,'messages' => array(
-      Zend_Validate_StringLength::INVALID => "Invalid type given. String, integer or float expected",
-      Zend_Validate_StringLength::TOO_SHORT => "Must be at least %min% characters.",
-      Zend_Validate_StringLength::TOO_LONG => "Must be no more than %max% characters."
-    )));
+        Zend_Validate_NotEmpty::INVALID => "Invalid type given. String, integer or float expected",
+        Zend_Validate_NotEmpty::IS_EMPTY => "URL is required."
+      )));
+    $element->addValidator('RegEx', true, array('pattern' => '/^[a-z0-9\\/-]*$/', 'messages' => array(
+        Zend_Validate_RegEx::NOT_MATCH => "URL can only contain letters, numbers, slash and dash."
+      )));
+    $element->addValidator('StringLength', true, array('max' => 255, 'messages' => array(
+        Zend_Validate_StringLength::INVALID => "Invalid type given. String, integer or float expected",
+        Zend_Validate_StringLength::TOO_SHORT => "Must be at least %min% characters.",
+        Zend_Validate_StringLength::TOO_LONG => "Must be no more than %max% characters."
+      )));
     $element->setFilters(array('StringTrim', 'StripTags', 'StringToLower'));
-    $element->addFilter(new Zend_Filter_Callback(array('callback'=>array('Model_Content','filterUrl'))));
+    $element->addFilter(new Zend_Filter_Callback(array('callback' => array('Model_Content', 'filterUrl'))));
     $element->setDecorators($this->field);
     $element->setDecorators(array(
       'ViewHelper',
-      array(array('addon'=>'Addon'), array('tag' => 'span', 'class'=>'add-on','content'=>$this->getView()->site_info['url'].'/')),
-      array(array('prepend'=>'HtmlTag'), array('tag' => 'div', 'class'=>'input-prepend')),
-      array('Description', array('tag' => 'div', 'class'=>'help-block', 'placement'=>'append', 'escape'=>false)),
+      array(array('addon' => 'Addon'), array('tag' => 'span', 'class' => 'add-on', 'content' => $this->getView()->site_info['url'] . '/')),
+      array(array('prepend' => 'HtmlTag'), array('tag' => 'div', 'class' => 'input-prepend')),
+      array('Description', array('tag' => 'div', 'class' => 'help-block', 'placement' => 'append', 'escape' => false)),
       array('Errors'),
-      array(array('element'=>'HtmlTag'), array('tag' => 'div', 'class'=>'controls')),
-      array('Label', array('placement'=>'prepend', 'class' => 'control-label')),
-      array(array('row'=>'HtmlTag'), array('tag' => 'div', 'class'=>'control-group'))
+      array(array('element' => 'HtmlTag'), array('tag' => 'div', 'class' => 'controls')),
+      array('Label', array('placement' => 'prepend', 'class' => 'control-label')),
+      array(array('row' => 'HtmlTag'), array('tag' => 'div', 'class' => 'control-group'))
     ));
 
     $element->setAttribs(array(
@@ -115,7 +115,7 @@ class Form_Content extends App_Form
     $element->setLabel('Content:');
     $element->setDescription("Enter the content of the page.");
     $element->setFilters(array('StringTrim'));
-    $element->addFilter(new Zend_Filter_Callback(array('callback'=>array('Model_Content','filterContent'))));
+    $element->addFilter(new Zend_Filter_Callback(array('callback' => array('Model_Content', 'filterContent'))));
     $element->setAttribs(array(
       'rows' => 20,
       'class' => 'span10'
@@ -126,7 +126,7 @@ class Form_Content extends App_Form
     $element = new Zend_Form_Element_Submit('save');
     $element->setLabel('Save');
     $element->setDecorators($this->buttonOpen);
-    $element->setIgnore(TRUE);
+    $element->setIgnore(true);
     $element->setAttrib('class', 'btn btn-primary');
     $this->addElement($element);
 
@@ -146,7 +146,7 @@ class Form_Content extends App_Form
    * @return Form_AdminProfile
    */
   public function addDbValidators($id = null) {
-    if($this->getElement('url')){
+    if ($this->getElement('url')) {
       $validator = new Zend_Validate_Db_NoRecordExists(array(
           'table' => 'content',
           'field' => 'url'

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Generic delete form
  *
@@ -27,14 +28,15 @@ class Form_Delete extends App_Form
     $element = new Zend_Form_Element_Submit('delete');
     $element->setLabel('Confirm Delete');
     $element->setDecorators($this->buttonOpen);
-    $element->setIgnore(TRUE);
+    $element->setIgnore(true);
     $element->setAttrib('class', 'btn btn-primary');
     $this->addElement($element);
 
-    $element = new Zend_Form_Element_Submit('cancel');
+    $element = new Form_Element_LinkButton('cancel');
     $element->setLabel('Cancel');
     $element->setDecorators($this->buttonClose);
     $element->setAttrib('class', 'btn cancel');
+    $element->setIgnore(true);
     $this->addElement($element);
 
     $this->addElement('hash', 'csrf', array('ignore' => true, 'decorators' => $this->hidden));

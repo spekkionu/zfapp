@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Change password form
  *
@@ -62,9 +63,9 @@ class Form_ChangePassword extends App_Form
     $element->setRequired(true);
     $element->setFilters(array('StringTrim'));
     $element->addValidator('NotEmpty', true, array('messages' => array(
-      Zend_Validate_NotEmpty::INVALID => "Invalid type given. String, integer or float expected",
-      Zend_Validate_NotEmpty::IS_EMPTY => "Current password is required."
-    )));
+        Zend_Validate_NotEmpty::INVALID => "Invalid type given. String, integer or float expected",
+        Zend_Validate_NotEmpty::IS_EMPTY => "Current password is required."
+      )));
     $element->setAttribs(array(
       'size' => 20,
       'maxlength' => 20,
@@ -85,17 +86,17 @@ class Form_ChangePassword extends App_Form
     $element->setDescription("Enter your desired new password.");
     $element->setRequired(true);
     $element->addValidator('NotEmpty', true, array('messages' => array(
-      Zend_Validate_NotEmpty::INVALID => "Invalid type given. String, integer or float expected",
-      Zend_Validate_NotEmpty::IS_EMPTY => "New password is required."
-    )));
-     $element->addValidator('Regex', true, array('pattern'=>'/^\S*$/i','messages'=>array(
-      Zend_Validate_Regex::NOT_MATCH => "Cannot contain spaces."
-    )));
-    $element->addValidator('StringLength', true, array('min'=>4,'max'=>20,'messages' => array(
-      Zend_Validate_StringLength::INVALID => "Invalid type given. String, integer or float expected",
-      Zend_Validate_StringLength::TOO_SHORT => "Must be at least %min% characters.",
-      Zend_Validate_StringLength::TOO_LONG => "Must be no more than %max% characters."
-    )));
+        Zend_Validate_NotEmpty::INVALID => "Invalid type given. String, integer or float expected",
+        Zend_Validate_NotEmpty::IS_EMPTY => "New password is required."
+      )));
+    $element->addValidator('Regex', true, array('pattern' => '/^\S*$/i', 'messages' => array(
+        Zend_Validate_Regex::NOT_MATCH => "Cannot contain spaces."
+      )));
+    $element->addValidator('StringLength', true, array('min' => 4, 'max' => 20, 'messages' => array(
+        Zend_Validate_StringLength::INVALID => "Invalid type given. String, integer or float expected",
+        Zend_Validate_StringLength::TOO_SHORT => "Must be at least %min% characters.",
+        Zend_Validate_StringLength::TOO_LONG => "Must be no more than %max% characters."
+      )));
     $element->setAttribs(array(
       'size' => 20,
       'maxlength' => 20,
@@ -147,14 +148,15 @@ class Form_ChangePassword extends App_Form
     $element = new Zend_Form_Element_Submit('submit');
     $element->setLabel('Change Password');
     $element->setDecorators($this->buttonOpen);
-    $element->setIgnore(TRUE);
+    $element->setIgnore(true);
     $element->setAttrib('class', 'btn btn-primary');
     $this->addElement($element);
 
-    $element = new Zend_Form_Element_Submit('cancel');
+    $element = new Form_Element_LinkButton('cancel');
     $element->setLabel('Cancel');
     $element->setDecorators($this->buttonClose);
     $element->setAttrib('class', 'btn cancel');
+    $element->setIgnore(true);
     $this->addElement($element);
 
     $this->addElement('hash', 'csrf', array('ignore' => true, 'decorators' => $this->hidden));
