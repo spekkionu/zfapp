@@ -132,6 +132,10 @@ if ($config['session']['handler']) {
   $config['session']['options']['hash_function'] = 'md5';
   $config['session']['options']['name'] = md5($config['site']['domain']);
   $config['session']['options']['use_only_cookies'] = true;
+  if(!is_dir(SYSTEM . "/cache/session")){
+    mkdir(SYSTEM . "/cache/session", true);
+    chmod(SYSTEM . "/cache/session", 0777);
+  }
   $config['session']['options']['save_path'] = realpath(SYSTEM . "/cache/session");
   Zend_Session::setOptions($config['session']['options']);
   $handler = $config['session']['handler'];

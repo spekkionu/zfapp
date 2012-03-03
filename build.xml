@@ -22,8 +22,25 @@
   
   <target name="clear-cache" description="Clears cache folders">
     <delete dir="src/system/cache" includeemptydirs="false" failonerror="true" />
-    <mkdir dir="src/system/cache"/>
-    <chmod file="src/system/cache" mode="0777" />
+    <mkdir dir="src/system/cache" mode="0777"/>
+  </target>
+  
+  <target name="init" description="Create needed directories and set permissions">
+    <echo message="Create private directories" />
+    <mkdir dir="src/system/cache" mode="0777"/>
+    <mkdir dir="src/system/logs" mode="0777" />
+    <mkdir dir="src/system/configs/data" />
+    <mkdir dir="src/system/configs/data/fixtures" />
+    <mkdir dir="src/system/configs/data/migrations" />
+    <mkdir dir="src/system/configs/data/schema" />
+    <mkdir dir="src/system/configs/data/sql" />
+    <mkdir dir="src/system/scripts" />
+    <echo message="Create public directories" />
+    <mkdir dir="src/public_html/cached" mode="0777" />
+    <mkdir dir="src/public_html/userfiles" mode="0777" />
+    
+    <echo message="Copy sample.config.php to config.php" />
+    <copy file="${source}/system/configs/sample.config.php" tofile="${source}/system/configs/config.php" overwrite="false"/>
   </target>
 
   <target name="phpunit" description="Run unit tests using PHPUnit and generates junit.xml and clover.xml">
