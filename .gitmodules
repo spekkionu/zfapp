@@ -19,3 +19,12 @@
 [submodule "scripts/tasks/closure"]
 	path = scripts/tasks/closure
 	url = git://github.com/mathewbyrne/closure-task.git
+[submodule "src/system/library/vendor/Assetic"]
+	path = src/system/library/vendor/Assetic
+	url = git://github.com/kriswallsmith/assetic.git
+[submodule "src/system/library/vendor/Symfony/Component/Process"]
+	path = src/system/library/vendor/Symfony/Component/Process
+	url = git://github.com/symfony/Process.git
+[submodule "src/system/library/vendor/lessphp"]
+	path = src/system/library/vendor/lessphp
+	url = git://github.com/leafo/lessphp.git

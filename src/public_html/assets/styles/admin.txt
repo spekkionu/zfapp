@@ -1,1 +1,4 @@
+assets/scripts/jquery/jquery-ui/css/cupertino/jquery-ui-1.8.17.custom.css
+assets/scripts/bootstrap/docs/assets/css/bootstrap.css
+assets/scripts/jquery/jquery-validate.password/jquery.validate.password.css
 assets/styles/admin.css
