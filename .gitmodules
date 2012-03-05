@@ -16,3 +16,6 @@
 [submodule "src/system/library/vendor/WideImage"]
 	path = src/system/library/vendor/WideImage
 	url = git://github.com/spekkionu/wideimage.git
+[submodule "scripts/tasks/closure"]
+	path = scripts/tasks/closure
+	url = git://github.com/mathewbyrne/closure-task.git
