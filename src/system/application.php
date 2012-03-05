@@ -43,7 +43,7 @@ ZendW_Loader_AutoloaderFactory::factory(array(
 ));
 
 // Load Config
-$config = require( SYSTEM . '/configs/config.php');
+$config = require(SYSTEM . '/configs/config.php');
 $config['system'] = SYSTEM;
 
 if (!defined('WEBROOT')) {
@@ -67,9 +67,9 @@ $config['cache']['cache_dir'] = realpath(SYSTEM . '/cache');
 
 // Add Form Autoloader Resource
 $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
-    'basePath' => SYSTEM,
-    'namespace' => '',
-  ));
+  'basePath' => SYSTEM,
+  'namespace' => '',
+));
 $resourceLoader->addResourceType('form', 'forms/', 'Form');
 $resourceLoader->addResourceType('model', 'models/', 'Model');
 
@@ -95,8 +95,8 @@ if ($config['mail']['type'] == 'smtp') {
 } elseif ($config['mail']['type'] == 'file') {
   // This transport is used to log sent mail to a file rather than sending it.
   Zend_Mail::setDefaultTransport(new Zend_Mail_Transport_File(array(
-      'path' => SYSTEM . '/logs/mail'
-    )));
+    'path' => SYSTEM . '/logs/mail'
+  )));
 } else {
   // Use Sendmail
   if (isset($config['mail']['options']['forcereturn']) && $config['mail']['options']['forcereturn']) {
@@ -132,7 +132,7 @@ if ($config['session']['handler']) {
   $config['session']['options']['hash_function'] = 'md5';
   $config['session']['options']['name'] = md5($config['site']['domain']);
   $config['session']['options']['use_only_cookies'] = true;
-  if(!is_dir(SYSTEM . "/cache/session")){
+  if (!is_dir(SYSTEM . "/cache/session")) {
     mkdir(SYSTEM . "/cache/session", true);
     chmod(SYSTEM . "/cache/session", 0777);
   }
@@ -144,7 +144,7 @@ if ($config['session']['handler']) {
 }
 
 // Start Session if one exists
-if(Zend_Session::sessionExists()){
+if (Zend_Session::sessionExists()) {
   Zend_Session::start();
 }
 
@@ -171,7 +171,7 @@ function stripslashes_deep(&$value) {
 }
 
 if (function_exists('get_magic_quotes_gpc')) {
-  if (get_magic_quotes_gpc() or ( ini_get('magic_quotes_sybase') and ( strtolower(ini_get('magic_quotes_sybase')) != 'off' ) )) {
+  if (get_magic_quotes_gpc() or (ini_get('magic_quotes_sybase') and (strtolower(ini_get('magic_quotes_sybase')) != 'off'))) {
     stripslashes_deep($_GET);
     stripslashes_deep($_POST);
   }

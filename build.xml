@@ -5,6 +5,9 @@
   <property name="source" value="src"/>
 
   <!-- Add Custom Tasks to the include path -->
+  <includepath classpath="scripts/tasks/closure/tasks" />
+  <taskdef name="yuicompressor" classname="YuiCompressorTask" />
+  <taskdef name="closure" classname="ClosureTask" />
 
   <target name="clean" depends="clear-cache" description="Clean up and create artifact directories">
     <delete dir="build/api"/>
@@ -19,12 +22,12 @@
     <mkdir dir="build/logs"/>
     <mkdir dir="build/pdepend"/>
   </target>
-  
+
   <target name="clear-cache" description="Clears cache folders">
     <delete dir="src/system/cache" includeemptydirs="false" failonerror="true" />
     <mkdir dir="src/system/cache" mode="0777"/>
   </target>
-  
+
   <target name="init" description="Create needed directories and set permissions">
     <echo message="Create private directories" />
     <mkdir dir="src/system/cache" mode="0777"/>
@@ -38,7 +41,7 @@
     <echo message="Create public directories" />
     <mkdir dir="src/public_html/cached" mode="0777" />
     <mkdir dir="src/public_html/userfiles" mode="0777" />
-    
+
     <echo message="Copy sample.config.php to config.php" />
     <copy file="${source}/system/configs/sample.config.php" tofile="${source}/system/configs/config.php" overwrite="false"/>
   </target>
@@ -156,19 +159,18 @@
     <delete file="${source}/public_html/assets/styles/admin.min.css"/>
     <delete dir="build/tmp"/>
     <mkdir dir="build/tmp"/>
-    <append destfile="build/tmp/admin.min.css">
+    <append destfile="build/tmp/admin.all.css">
       <filelist dir="${source}/public_html/assets" listfile="${source}/public_html/assets/styles/admin.txt"/>
     </append>
     <echo message="Compress combined css file"/>
     <yuicompressor target="${source}/public_html/assets/styles" type="css" compressorjar="${project.basedir}/scripts/tasks/yuicompressor/yuicompressor.jar"  verbose="true">
-      <filelist dir="build/tmp" files="admin.min.css"></filelist>
+      <filelist dir="build/tmp" files="admin.all.min.css"></filelist>
     </yuicompressor>
     <delete dir="build/tmp"/>
   </target>
 
   <target name="jsmin" description="Combines and compresses javascript files">
-    <echo message="Combine CSS Files" />
-
+    <echo message="Combine JS Files" />
     <delete file="${source}/public_html/assets/scripts/admin.min.js"/>
     <delete dir="build/tmp"/>
     <mkdir dir="build/tmp"/>
@@ -176,10 +178,14 @@
       <filelist dir="${source}/public_html/assets" listfile="${source}/public_html/assets/scripts/admin.txt"/>
     </append>
     <echo message="Compress combined js file"/>
-    <yuicompressor target="${source}/public_html/assets/scripts" type="js" compressorjar="${project.basedir}/scripts/tasks/yuicompressor/yuicompressor.jar"  verbose="true">
+    <yuicompressor target="${source}/public_html/assets/scripts" type="js" compressorjar="${project.basedir}/scripts/tasks/compressor/yuicompressor.jar"  verbose="true">
       <filelist dir="build/tmp" files="admin.min.js"></filelist>
     </yuicompressor>
     <delete dir="build/tmp"/>
+
+    <closure target="${source}/public_html/assets/scripts/admin.all.min.js" merge="true" closurejar="${project.basedir}/scripts/tasks/compressor/compiler.jar">
+      <filelist dir="${source}/public_html/assets" listfile="${source}/public_html/assets/scripts/admin.txt"/>
+    </closure>
   </target>
 
 
