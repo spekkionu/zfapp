@@ -53,6 +53,7 @@
         <include name="models/**.php" />
         <include name="application/**.php" />
         <include name="library/**.php" />
+        <exclude name="application.php" />
         <exclude name="library/vendor/*" />
       </fileset>
     </coverage-setup>
@@ -80,6 +81,7 @@
         <include name="models/**.php" />
         <include name="application/**.php" />
         <include name="library/**.php" />
+        <exclude name="application.php" />
         <exclude name="library/vendor/*" />
       </fileset>
       <logger type="jdepend-xml" outfile="build/logs/jdepend.xml"/>
@@ -95,6 +97,7 @@
         <include name="models/**.php" />
         <include name="application/**.php" />
         <include name="library/**.php" />
+        <exclude name="application.php" />
         <exclude name="library/vendor/*" />
       </fileset>
       <formatter type="xml" outfile="build/logs/pmd.xml"/>
@@ -108,6 +111,7 @@
         <include name="models/**.php" />
         <include name="application/**.php" />
         <include name="library/**.php" />
+        <exclude name="application.php" />
         <exclude name="library/vendor/*" />
       </fileset>
       <formatter type="pmd" outfile="build/logs/pmd-cpd.xml"/>
@@ -125,6 +129,7 @@
         <include name="models/**.php" />
         <include name="application/**.php" />
         <include name="library/**.php" />
+        <exclude name="application.php" />
         <exclude name="library/vendor/*" />
       </fileset>
       <formatter type="default" usefile="false"/>
@@ -139,6 +144,7 @@
         <include name="models/**.php" />
         <include name="application/**.php" />
         <include name="library/**.php" />
+        <exclude name="application.php" />
         <exclude name="library/vendor/*" />
       </fileset>
       <projdocfileset dir="${project.basedir}">
