@@ -6,13 +6,15 @@ iconv_set_encoding("output_encoding", "UTF-8");
 mb_internal_encoding( 'UTF-8' );
 
 define('SYSTEM', dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'system');
+define('TEST_DIR', dirname(__FILE__));
+define('TEST_DATA', TEST_DIR.DIRECTORY_SEPARATOR.'data');
 
 // Set Include Path
 set_include_path(
   // Application Library Files
-  SYSTEM . DIRECTORY_SEPARATOR . 'library' . PATH_SEPARATOR . 
-  realpath(SYSTEM . DIRECTORY_SEPARATOR . 'library/vendor/zend-framework/library') . PATH_SEPARATOR . 
-  realpath(SYSTEM . DIRECTORY_SEPARATOR . 'library/vendor/zend-framework/extras/library') . PATH_SEPARATOR . 
+  SYSTEM . DIRECTORY_SEPARATOR . 'library' . PATH_SEPARATOR .
+  realpath(SYSTEM . DIRECTORY_SEPARATOR . 'library/vendor/zend-framework/library') . PATH_SEPARATOR .
+  realpath(SYSTEM . DIRECTORY_SEPARATOR . 'library/vendor/zend-framework/extras/library') . PATH_SEPARATOR .
   get_include_path()
 );
 

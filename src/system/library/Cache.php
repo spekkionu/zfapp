@@ -41,15 +41,41 @@ class Cache
   }
 
   /**
+   * Returns current cache config
+   * @return array
+   */
+  public static function getConfig() {
+    return self::$config;
+  }
+
+  /**
+   * Removes config
+   */
+  public static function clearConfig() {
+    self::$config = null;
+  }
+
+  /**
    * Sets the cache directory
    * @param string $path
    * @return void
    */
   public static function setCacheDir($path) {
     if (!is_dir($path)) {
-      throw new Exception('Cache directory does not exist.');
+      // If the cache dir doesn't exist, true to create it
+      @mkdir($path, 0777, true);
+    }
+    if (!is_dir($path)) {
+      throw new Exception('Cache directory does not exist and could not be created.');
     }
     self::$cachedir = realpath($path);
+  }
+
+  /**
+   * Returns current cache dir
+   */
+  public static function getCacheDir() {
+    return self::$cachedir;
   }
 
   /**
