@@ -37,7 +37,10 @@ ZendW_Loader_AutoloaderFactory::factory(array(
       'Validate' => SYSTEM . '/library/Validate',
       'App' => SYSTEM . '/library/App'
     ),
-    'namespaces' => array(),
+    'namespaces' => array(
+      'Assetic' => SYSTEM . '/library/vendor/Assetic/src/Assetic',
+      'Symfony' => SYSTEM . '/library/vendor/Symfony'
+    ),
     'fallback_autoloader' => true,
   ),
 ));

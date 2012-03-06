@@ -27,7 +27,7 @@ class Crypt
    * @param string $key The Encryption key to use.
    * @param string $algorithm The encryption algorithm.  Defaults to MCRYPT_BLOWFISH.  A good algorithm is MCRYPT_RIJNDAEL_256
    */
-  public function __construct($key, $algorithm = MCRYPT_BLOWFISH) {
+  public function __construct($key, $algorithm = MCRYPT_RIJNDAEL_256) {
     // Make sure mcrypt library is available.
     if (!extension_loaded('mcrypt')) {
       throw new Extension('MCRYPT extension is not loaded.');
@@ -79,6 +79,14 @@ class Crypt
     }
     $this->_algorithm = $algorithm;
     return $this;
+  }
+
+  /**
+   * Algorithm getter
+   * @return string
+   */
+  public function getAlgorithm() {
+    return $this->_algorithm;
   }
 
   /**
