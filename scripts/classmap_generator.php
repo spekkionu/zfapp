@@ -37,7 +37,7 @@ $libPath = SYSTEM . DIRECTORY_SEPARATOR.'library';
 set_include_path(
   // Application Library Files
   $libPath . PATH_SEPARATOR . 
-  $libPath . DIRECTORY_SEPARATOR . 'vendor'.DIRECTORY_SEPARATOR.'zend-framework'.DIRECTORY_SEPARATOR.'library'
+  $libPath . DIRECTORY_SEPARATOR . 'vendor'.DIRECTORY_SEPARATOR.'Zend'
 );
 require(SYSTEM . '/library/vendor/ZendW/Loader/StandardAutoloader.php');
 
@@ -66,10 +66,7 @@ if ($opts->getOption('h')) {
     exit();
 }
 
-$path = $libPath;
-if (array_key_exists('PWD', $_SERVER)) {
-    $path = $_SERVER['PWD'];
-}
+$path = SYSTEM;
 if (isset($opts->l)) {
     $path = $opts->l;
     if (!is_dir($path)) {
@@ -103,7 +100,7 @@ if (isset($opts->o)) {
     }
 }
 
-$strip     = SYSTEM . DIRECTORY_SEPARATOR.'library';
+$strip     = SYSTEM;
 
 if (!$usingStdout) {
     echo "Creating class file map for library in '$path'..." . PHP_EOL;
@@ -133,7 +130,7 @@ iterator_apply($l, 'createMap', array($l, $map, $strip));
 // Stupid syntax highlighters make separating < from PHP declaration necessary
 $dirStore = 'dirname_' . uniqid();
 $content = '<' . "?php\n"
-         . '$' . $dirStore . " = dirname(__FILE__);\n"
+         . '$' . $dirStore . " = dirname(dirname(__FILE__));\n"
          . 'return ' . var_export((array) $map, true) . ';';
 
 // Prefix with dirname(__FILE__); modify the generated content
