@@ -62,6 +62,7 @@ Cache::setCacheDir(SYSTEM . DIRECTORY_SEPARATOR . 'cache');
 // Set Locale
 Zend_Locale::setDefault($config['locale']['locale']);
 $locale = new Zend_Locale($config['locale']['locale']);
+Zend_Locale::setCache(Cache::getCache('locale'));
 Zend_Registry::set('Zend_Locale', $locale);
 
 // Setup Cache Settings
@@ -128,6 +129,19 @@ Zend_Registry::set('db', $db);
 //Zend_Currency::setCache($cache);
 //$currency = new Zend_Currency();
 //Zend_Registry::set('Zend_Currency', $currency);
+
+/*
+$translate = new Zend_Translate(
+  array(
+    'adapter' => 'array',
+    'content' => SYSTEM.'/configs/language/en_US.php',
+    'locale'  => 'en_US',
+    'disableNotices' => true,
+    'cache' => Cache::getCache('translate')
+  )
+);
+Zend_Registry::set('Zend_Translate', $translate);
+*/
 
 // Setup Session Handler
 if ($config['session']['handler']) {

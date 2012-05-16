@@ -114,14 +114,36 @@ $config['cache'] = array(
     // Any options for the cache backend go here.  Most will not need any
     'options' => array()
   ),
-  // Caching for Full Page Content, This used Smarty Cache rather than Zend Cache
-  'page' => array(
-    // If true smarty caching will be used
+  // Caching for Zend_Locale
+  'locale' => array(
+    // If true caching will be used
     'enabled' => false,
-    // The amount of time page is cached, set to 0 to cache forever
-    'timeout' => 300,
-    // If true file will be template will be checked for modifications, this is slightly slower
-    'check_modified' => false
+    // The caching method
+    'type' => 'File',
+    // Set to true if using something other than a default Zend_Cache Backend
+    'custom' => false,
+    // The maximum lifetime of a cached entry, set to null for no expiration
+    "lifetime" => null,
+    // Any options for the cache backend go here.  Most will not need any
+    'options' => array()
+  ),
+  // Caching for Zend_Translate
+  'translate' => array(
+    // If true caching will be used
+    'enabled' => false,
+    // The caching method
+    'type' => 'File',
+    // Set to true if using something other than a default Zend_Cache Backend
+    'custom' => false,
+    // The maximum lifetime of a cached entry, set to null for no expiration
+    "lifetime" => null,
+    // Any options for the cache backend go here.  Most will not need any
+    'options' => array()
+  ),
+  // Caching for plugin loader
+  'plugin' => array(
+    // If true caching will be used
+    'enabled' => false
   )
 );
 

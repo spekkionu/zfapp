@@ -2,6 +2,17 @@
 
 require(dirname(__FILE__) . '/application.php');
 
+if ($config['cache']['plugin']['enabled']) {
+  if (file_exists(SYSTEM . '/cache/plugin/pluginLoaderCache.php')) {
+    // Include the plugin loader cache
+    include_once SYSTEM . '/cache/plugin/pluginLoaderCache.php';
+  }elseif(!is_dir(SYSTEM . '/cache/plugin/')){
+    // Create the plugin cache directory
+    mkdir(SYSTEM . '/cache/plugin/', 0777, true);
+  }
+  Zend_Loader_PluginLoader::setIncludeFileCache(SYSTEM . '/cache/plugin/pluginLoaderCache.php');
+}
+
 // Set Controller Paths
 $controller = Zend_Controller_Front::getInstance();
 $controller->setControllerDirectory(array(
