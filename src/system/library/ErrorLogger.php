@@ -42,6 +42,13 @@ class ErrorLogger
   }
 
   /**
+   * Clears Logger
+   */
+  public static function clearInstance(){
+    self::$log = null;
+  }
+
+  /**
    * Logs a message
    * @param string $message
    * @param int $priority

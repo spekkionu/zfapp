@@ -7,9 +7,6 @@
 [submodule "src/public_html/assets/scripts/tiny_mce"]
 	path = src/public_html/assets/scripts/tiny_mce
 	url = git://github.com/spekkionu/tinymce.git
-[submodule "src/system/library/vendor/zend-framework"]
-	path = src/system/library/vendor/zend-framework
-	url = git://gitorious.org/zf/zf-1.git
 [submodule "src/system/library/vendor/HTMLPurifier"]
 	path = src/system/library/vendor/HTMLPurifier
 	url = git://github.com/spekkionu/htmlpurifier.git
