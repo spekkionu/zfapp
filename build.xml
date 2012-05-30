@@ -3,7 +3,7 @@
 
 <project name="zfapp" default="build" basedir=".">
   <property name="source" value="src"/>
-
+  
   <!-- Add Custom Tasks to the include path -->
   <includepath classpath="scripts/tasks/closure/tasks" />
   <taskdef name="yuicompressor" classname="YuiCompressorTask" />
@@ -123,7 +123,8 @@
   </target>
 
   <target name="phpcs" description="Generate checkstyle.xml using PHP_CodeSniffer">
-    <phpcodesniffer standard="Spekkionu" showWarnings="false">
+    <resolvepath propertyName="standard" file="${project.basedir}/scripts/tasks/phpcs/Spekkionu"/>
+    <phpcodesniffer standard="${standard}" showWarnings="false">
       <fileset dir="${source}/system">
         <include name="forms/**.php" />
         <include name="models/**.php" />
