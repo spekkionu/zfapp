@@ -20,7 +20,16 @@
 
   <filter>
     <whitelist addUncoveredFilesFromWhitelist="true">
-      <directory suffix=".php">tests/unit</directory>
+      <directory suffix=".php">src/system</directory>
+      <exclude>
+        <directory suffix=".php">src/system/cache</directory>
+        <directory suffix=".php">src/system/configs</directory>
+        <directory suffix=".php">src/system/logs</directory>
+        <directory suffix=".php">src/system/scripts</directory>
+        <directory suffix=".php">src/system/library/vendor</directory>
+        <file>src/system/application.php</file>
+        <file>src/system/mvc.php</file>
+    </exclude>
     </whitelist>
   </filter>
 </phpunit>

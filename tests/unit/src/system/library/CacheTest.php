@@ -69,7 +69,7 @@ class CacheTest extends PHPUnit_Framework_TestCase
   }
 
   /**
-   * @covers Cache::getManager
+   * test Cache::getManager
    */
   public function testGetManager() {
     $manager = Cache::getManager();
@@ -77,7 +77,7 @@ class CacheTest extends PHPUnit_Framework_TestCase
   }
 
   /**
-   * @covers Cache::setConfig
+   * test Cache::setConfig
    */
   public function testSetConfig() {
     $config = array('cache'=>'this is a cache config array');
@@ -87,7 +87,7 @@ class CacheTest extends PHPUnit_Framework_TestCase
   }
 
   /**
-   * @covers Cache::setCacheDir
+   * test Cache::setCacheDir
    */
   public function testSetCacheDir() {
     $path = TEST_DATA.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.'test';
@@ -97,7 +97,7 @@ class CacheTest extends PHPUnit_Framework_TestCase
   }
 
   /**
-   * @covers Cache::getCache
+   * test Cache::getCache
    */
   public function testGetCache() {
     $key = 'test';
@@ -106,7 +106,7 @@ class CacheTest extends PHPUnit_Framework_TestCase
   }
 
   /**
-   * @covers Cache::getHtmlPurifierCache
+   * test Cache::getHtmlPurifierCache
    */
   public function testGetHtmlPurifierCache() {
     $cachedir = Cache::getCacheDir();

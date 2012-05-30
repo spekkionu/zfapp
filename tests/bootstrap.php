@@ -13,7 +13,8 @@ define('TEST_DATA', TEST_DIR.DIRECTORY_SEPARATOR.'data');
 set_include_path(
   // Application Library Files
   SYSTEM . DIRECTORY_SEPARATOR . 'library' . PATH_SEPARATOR .
-  realpath(SYSTEM . DIRECTORY_SEPARATOR . 'library/vendor')
+  realpath(SYSTEM . DIRECTORY_SEPARATOR . 'library/vendor') . PATH_SEPARATOR . 
+  get_include_path()
 );
 
 // Set up autoload.

@@ -8,7 +8,7 @@ class CryptTest extends PHPUnit_Framework_TestCase
 {
 
   /**
-   * @covers Crypt::getAlgorithm
+   * test Crypt::getAlgorithm
    */
   public function testKey() {
     $key = "dtgjhGGFDStregfdgfJRTHrdbf";
@@ -20,7 +20,7 @@ class CryptTest extends PHPUnit_Framework_TestCase
   }
 
   /**
-   * @covers Crypt::encrypt
+   * test Crypt::encrypt
    */
   public function testEncrypt() {
     $text = "Raw Text";
@@ -31,7 +31,7 @@ class CryptTest extends PHPUnit_Framework_TestCase
   }
 
   /**
-   * @covers Crypt::decrypt
+   * test Crypt::decrypt
    */
   public function testDecrypt() {
     $text = "Raw Text";

@@ -8,7 +8,7 @@ class DebugTest extends PHPUnit_Framework_TestCase
 {
 
   /**
-   * @covers Debug::dump
+   * test Debug::dump
    * @todo Implement testDump().
    */
   public function testDump() {

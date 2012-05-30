@@ -34,7 +34,7 @@ class ErrorLoggerTest extends PHPUnit_Framework_TestCase
   }
 
   /**
-   * @covers ErrorLogger::setInstance
+   * test ErrorLogger::setInstance
    * @todo Implement testSetInstance().
    */
   public function testSetInstance() {
@@ -45,7 +45,7 @@ class ErrorLoggerTest extends PHPUnit_Framework_TestCase
   }
 
   /**
-   * @covers ErrorLogger::getInstance
+   * test ErrorLogger::getInstance
    * @todo Implement testGetInstance().
    */
   public function testGetInstance() {
@@ -56,7 +56,7 @@ class ErrorLoggerTest extends PHPUnit_Framework_TestCase
   }
 
   /**
-   * @covers ErrorLogger::log
+   * test ErrorLogger::log
    * @todo Implement testLog().
    */
   public function testLog() {
