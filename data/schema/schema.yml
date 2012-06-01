@@ -1,0 +1,129 @@
+User:
+  tableName: users
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
+    type: INNODB
+  actAs:
+    Timestampable:
+      created:
+        name: date_created
+        type: timestamp
+      updated:
+        disabled: true
+  indexes:
+    login:
+      fields: [username,password,active]
+      type: unique
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      unsigned: true
+      autoincrement: true
+    username:
+      type: string(25)
+      notblank: true
+      notnull: true
+      unique: true
+    password:
+      type: string(128)
+      fixed: true
+      notblank: true
+      notnull: true
+    firstname:
+      type: string(32)
+      notblank: true
+      notnull: true
+    lastname:
+      type: string(64)
+      notblank: true
+      notnull: true
+    email:
+      type: string(127)
+      email: true
+      notnull: true
+      notblank: true
+      unique: true
+    active:
+      type: boolean
+      default: false
+      notnull: true
+      unsigned: true
+    date_created:
+      type: timestamp
+      notnull: true
+    last_login:
+      type: timestamp
+    accesslevel:
+      type: string(50)
+      notblank: true
+      notnull: true
+      default: user
+    token:
+      type: string(128)
+      fixed: true
+    password_key:
+      type: string(128)
+      fixed: true
+    token_date:
+      type: date
+
+
+Content:
+  tableName: content
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
+    type: INNODB
+  actAs:
+    Timestampable:
+      created:
+        name: date_created
+        type: timestamp
+      updated:
+        name: last_updated
+        type: timestamp
+  indexes:
+    routes:
+      fields: [active,full_page]
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      unsigned: true
+      autoincrement: true
+    url:
+      type: string(255)
+      notblank: true
+      notnull: true
+      unique: true
+    title:
+      type: string(255)
+    content:
+      type: clob(2147483647)
+    active:
+      type: boolean
+      default: false
+      notnull: true
+      unsigned: true
+    date_created:
+      type: timestamp
+      notnull: true
+    last_updated:
+      type: timestamp
+    can_delete:
+      type: boolean
+      default: true
+      notnull: true
+      unsigned: true
+    edit_url:
+      type: boolean
+      default: true
+      notnull: true
+      unsigned: true
+    full_page:
+      type: boolean
+      default: true
+      notnull: true
+      unsigned: true

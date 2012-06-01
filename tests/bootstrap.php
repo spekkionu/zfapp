@@ -36,7 +36,8 @@ ZendW_Loader_AutoloaderFactory::factory(array(
       'Options' => SYSTEM . '/library/Options',
       'Session' => SYSTEM . '/library/Session',
       'Validate' => SYSTEM . '/library/Validate',
-      'App' => SYSTEM . '/library/App'
+      'App' => SYSTEM . '/library/App',
+      'Doctrine' => SYSTEM . '/library/vendor/doctrine-orm/lib/Doctrine',
     ),
     'namespaces' => array(
       'Assetic' => SYSTEM . '/library/vendor/Assetic/src/Assetic',

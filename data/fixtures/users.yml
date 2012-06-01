@@ -1,0 +1,9 @@
+User:
+  admin_1:
+    username: admin
+    password: 4c8b80639e84199f6fc0585a76a48d6dd3a44b7ebd8714a94fb433ae7ce2c66bc88f6bb0ad4e0562519af04ca19d4735ec75159717a9be667be9ccedb059b9
+    firstname: Firstname
+    lastname: Lastname
+    email: email@example.com
+    active: true
+    accesslevel: superadmin
