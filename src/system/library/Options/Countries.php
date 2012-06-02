@@ -73,7 +73,7 @@ class Options_Countries
    * @return boolean
    */
   public static function isCached() {
-    return is_null(self::$countries);
+    return !is_null(self::$countries);
   }
 
   /**

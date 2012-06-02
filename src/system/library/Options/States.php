@@ -75,7 +75,7 @@ class Options_States
    * @return boolean
    */
   public static function isCached() {
-    return is_null(self::$states);
+    return !is_null(self::$states);
   }
 
   /**

@@ -30,42 +30,38 @@ class ErrorLoggerTest extends PHPUnit_Framework_TestCase
    * This method is called after a test is executed.
    */
   protected function tearDown() {
-
+    ErrorLogger::clearInstance();
   }
 
   /**
    * test ErrorLogger::setInstance
-   * @todo Implement testSetInstance().
    */
   public function testSetInstance() {
-    // Remove the following lines when you implement this test.
-    $this->markTestIncomplete(
-      'This test has not been implemented yet.'
-    );
+    ErrorLogger::setInstance($this->logger);
+    $logger = ErrorLogger::getInstance();
+    $this->assertEquals($logger, $this->logger);
   }
 
   /**
    * test ErrorLogger::getInstance
-   * @todo Implement testGetInstance().
    */
   public function testGetInstance() {
-    // Remove the following lines when you implement this test.
-    $this->markTestIncomplete(
-      'This test has not been implemented yet.'
-    );
+    ErrorLogger::setInstance($this->logger);
+    $logger = ErrorLogger::getInstance();
+    $this->assertEquals($logger, $this->logger);
   }
 
   /**
    * test ErrorLogger::log
-   * @todo Implement testLog().
    */
   public function testLog() {
-    // Remove the following lines when you implement this test.
-    $this->markTestIncomplete(
-      'This test has not been implemented yet.'
-    );
+    ErrorLogger::setInstance($this->logger);
+    $message = "Log Message";
+    ErrorLogger::log($message);
+    $log = $this->writer->events[0];
+    $this->assertEquals($log['message'], $message);
   }
 
 }
 
-?>
+
