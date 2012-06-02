@@ -9,6 +9,9 @@
  * @property string $url
  * @property string $title
  * @property clob $content
+ * @property string $meta_title
+ * @property string $meta_keywords
+ * @property string $meta_description
  * @property boolean $active
  * @property timestamp $date_created
  * @property timestamp $last_updated
@@ -16,7 +19,7 @@
  * @property boolean $edit_url
  * @property boolean $full_page
  * 
- * @package    Simplecart
+ * @package    App
  * @subpackage Model
  * @author     spekkionu <spekkionu@gmail.com>
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
@@ -31,6 +34,7 @@ abstract class Base_Content extends Doctrine_Record
              'primary' => true,
              'unsigned' => true,
              'autoincrement' => true,
+             'comment' => 'Primary key',
              'length' => '4',
              ));
         $this->hasColumn('url', 'string', 255, array(
@@ -38,46 +42,68 @@ abstract class Base_Content extends Doctrine_Record
              'notblank' => true,
              'notnull' => true,
              'unique' => true,
+             'comment' => 'Url the page can be found at',
              'length' => '255',
              ));
         $this->hasColumn('title', 'string', 255, array(
              'type' => 'string',
+             'comment' => 'Used as the meta title for the page',
              'length' => '255',
              ));
         $this->hasColumn('content', 'clob', 2147483647, array(
              'type' => 'clob',
+             'comment' => 'The page content',
              'length' => '2147483647',
+             ));
+        $this->hasColumn('meta_title', 'string', 255, array(
+             'type' => 'string',
+             'comment' => 'Used in the <title> tag',
+             'length' => '255',
+             ));
+        $this->hasColumn('meta_keywords', 'string', null, array(
+             'type' => 'string',
+             'comment' => 'Kewords for SEO <meta> keywords tag',
+             ));
+        $this->hasColumn('meta_description', 'string', null, array(
+             'type' => 'string',
+             'comment' => 'Description for SEO <meta> description tag',
              ));
         $this->hasColumn('active', 'boolean', null, array(
              'type' => 'boolean',
              'default' => false,
              'notnull' => true,
              'unsigned' => true,
+             'comment' => 'Only active pages can be accessed',
              ));
         $this->hasColumn('date_created', 'timestamp', null, array(
              'type' => 'timestamp',
              'notnull' => true,
+             'comment' => 'The date the content was created.',
              ));
         $this->hasColumn('last_updated', 'timestamp', null, array(
              'type' => 'timestamp',
+             'comment' => 'The date the content was last updated.',
              ));
         $this->hasColumn('can_delete', 'boolean', null, array(
              'type' => 'boolean',
              'default' => true,
              'notnull' => true,
              'unsigned' => true,
+             'comment' => 'If 0 this page cannot be deleted.',
              ));
         $this->hasColumn('edit_url', 'boolean', null, array(
              'type' => 'boolean',
              'default' => true,
              'notnull' => true,
              'unsigned' => true,
+             'comment' => 'If 0 the url cannot be changed.',
              ));
         $this->hasColumn('full_page', 'boolean', null, array(
              'type' => 'boolean',
              'default' => true,
              'notnull' => true,
              'unsigned' => true,
+             'comment' => 'If 0 do not create a route for this page.',
              ));
 
 

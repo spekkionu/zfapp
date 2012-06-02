@@ -14,6 +14,7 @@ class Addcontent extends Doctrine_Migration_Base
               'unsigned' => true,
               'autoincrement' => true,
               'length' => 4,
+              'comment' => 'Primary key',
              ),
              'url' =>
              array(
@@ -22,16 +23,19 @@ class Addcontent extends Doctrine_Migration_Base
               'notnull' => true,
               'unique' => true,
               'length' => 255,
+              'comment' => 'Url the page can be found at',
              ),
              'title' =>
              array(
               'type' => 'string',
               'length' => 255,
+              'comment' => 'Used as the meta title for the page',
              ),
              'content' =>
              array(
               'type' => 'clob',
               'length' => 2147483647,
+              'comment' => 'The page content',
              ),
              'active' =>
              array(
@@ -40,18 +44,21 @@ class Addcontent extends Doctrine_Migration_Base
               'notnull' => true,
               'unsigned' => true,
               'length' => 25,
+              'comment' => 'Only active pages can be accessed',
              ),
              'date_created' =>
              array(
               'notnull' => true,
               'type' => 'timestamp',
               'length' => 25,
+              'comment' => 'The date the content was created.',
              ),
              'last_updated' =>
              array(
               'notnull' => true,
               'type' => 'timestamp',
               'length' => 25,
+              'comment' => 'The date the content was last updated.',
              ),
              'can_delete' =>
              array(
@@ -60,6 +67,7 @@ class Addcontent extends Doctrine_Migration_Base
               'notnull' => true,
               'unsigned' => true,
               'length' => 25,
+              'comment' => 'If 0 this page cannot be deleted.',
              ),
              'edit_url' =>
              array(
@@ -68,6 +76,7 @@ class Addcontent extends Doctrine_Migration_Base
               'notnull' => true,
               'unsigned' => true,
               'length' => 25,
+              'comment' => 'If 0 the url cannot be changed.',
              ),
              'full_page' =>
              array(
@@ -76,6 +85,7 @@ class Addcontent extends Doctrine_Migration_Base
               'notnull' => true,
               'unsigned' => true,
               'length' => 25,
+              'comment' => 'If 0 do not create a route for this page.',
              ),
              ), array(
              'type' => 'INNODB',

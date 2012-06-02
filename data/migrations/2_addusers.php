@@ -14,6 +14,7 @@ class Addusers extends Doctrine_Migration_Base
               'unsigned' => true,
               'autoincrement' => true,
               'length' => 4,
+              'comment' => 'primary key',
              ),
              'username' =>
              array(
@@ -22,6 +23,7 @@ class Addusers extends Doctrine_Migration_Base
               'notnull' => true,
               'unique' => true,
               'length' => 25,
+              'comment' => 'The username the user logs in with',
              ),
              'password' =>
              array(
@@ -30,6 +32,7 @@ class Addusers extends Doctrine_Migration_Base
               'notblank' => true,
               'notnull' => true,
               'length' => 128,
+              'comment' => 'The password the user logs in with',
              ),
              'firstname' =>
              array(
@@ -37,6 +40,7 @@ class Addusers extends Doctrine_Migration_Base
               'notblank' => true,
               'notnull' => true,
               'length' => 32,
+              'comment' => 'The first name of the user',
              ),
              'lastname' =>
              array(
@@ -44,6 +48,7 @@ class Addusers extends Doctrine_Migration_Base
               'notblank' => true,
               'notnull' => true,
               'length' => 64,
+              'comment' => 'The last name of the user',
              ),
              'email' =>
              array(
@@ -52,6 +57,7 @@ class Addusers extends Doctrine_Migration_Base
               'notblank' => true,
               'unique' => true,
               'length' => 127,
+              'comment' => 'The email address of the user',
              ),
              'active' =>
              array(
@@ -60,17 +66,20 @@ class Addusers extends Doctrine_Migration_Base
               'notnull' => true,
               'unsigned' => true,
               'length' => 25,
+              'comment' => 'Only active users may log in.',
              ),
              'date_created' =>
              array(
               'notnull' => true,
               'type' => 'timestamp',
               'length' => 25,
+              'comment' => 'The date the user account was created.',
              ),
              'last_login' =>
              array(
               'type' => 'timestamp',
               'length' => 25,
+              'comment' => 'The date the user last logged in.',
              ),
              'accesslevel' =>
              array(
@@ -79,23 +88,27 @@ class Addusers extends Doctrine_Migration_Base
               'notnull' => true,
               'default' => 'user',
               'length' => 50,
+              'comment' => 'The access level of the user',
              ),
              'token' =>
              array(
               'type' => 'string',
               'fixed' => 1,
               'length' => 128,
+              'comment' => 'Token used for password reset',
              ),
              'password_key' =>
              array(
               'type' => 'string',
               'fixed' => 1,
               'length' => 128,
+              'comment' => 'Hash used for password reset',
              ),
              'token_date' =>
              array(
               'type' => 'date',
               'length' => 25,
+              'comment' => 'Date the password reset token expires.',
              ),
              ), array(
              'type' => 'INNODB',

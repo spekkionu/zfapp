@@ -1,74 +1,3 @@
-User:
-  tableName: users
-  options:
-    collate: utf8_unicode_ci
-    charset: utf8
-    type: INNODB
-  actAs:
-    Timestampable:
-      created:
-        name: date_created
-        type: timestamp
-      updated:
-        disabled: true
-  indexes:
-    login:
-      fields: [username,password,active]
-      type: unique
-  columns:
-    id:
-      type: integer(4)
-      primary: true
-      unsigned: true
-      autoincrement: true
-    username:
-      type: string(25)
-      notblank: true
-      notnull: true
-      unique: true
-    password:
-      type: string(128)
-      fixed: true
-      notblank: true
-      notnull: true
-    firstname:
-      type: string(32)
-      notblank: true
-      notnull: true
-    lastname:
-      type: string(64)
-      notblank: true
-      notnull: true
-    email:
-      type: string(127)
-      notnull: true
-      notblank: true
-      unique: true
-    active:
-      type: boolean
-      default: false
-      notnull: true
-      unsigned: true
-    date_created:
-      type: timestamp
-      notnull: true
-    last_login:
-      type: timestamp
-    accesslevel:
-      type: string(50)
-      notblank: true
-      notnull: true
-      default: user
-    token:
-      type: string(128)
-      fixed: true
-    password_key:
-      type: string(128)
-      fixed: true
-    token_date:
-      type: date
-
-
 Content:
   tableName: content
   options:
@@ -92,37 +21,149 @@ Content:
       primary: true
       unsigned: true
       autoincrement: true
+      comment: Primary key
     url:
       type: string(255)
       notblank: true
       notnull: true
       unique: true
+      comment: Url the page can be found at
     title:
       type: string(255)
+      comment: Used as the meta title for the page
     content:
       type: clob(2147483647)
+      comment: The page content
+    meta_title:
+      type: string(255)
+      comment: Used in the <title> tag
+    meta_keywords:
+      type: string
+      comment: Kewords for SEO <meta> keywords tag
+    meta_description:
+      type: string
+      comment: Description for SEO <meta> description tag
     active:
       type: boolean
       default: false
       notnull: true
       unsigned: true
+      comment: Only active pages can be accessed
     date_created:
       type: timestamp
       notnull: true
+      comment: The date the content was created.
     last_updated:
       type: timestamp
+      comment: The date the content was last updated.
     can_delete:
       type: boolean
       default: true
       notnull: true
       unsigned: true
+      comment: If 0 this page cannot be deleted.
     edit_url:
       type: boolean
       default: true
       notnull: true
       unsigned: true
+      comment: If 0 the url cannot be changed.
     full_page:
       type: boolean
       default: true
       notnull: true
       unsigned: true
+      comment: If 0 do not create a route for this page.
+
+User:
+  tableName: users
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
+    type: INNODB
+  actAs:
+    Timestampable:
+      created:
+        name: date_created
+        type: timestamp
+      updated:
+        disabled: true
+  indexes:
+    login:
+      fields: [username,password,active]
+      type: unique
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      unsigned: true
+      autoincrement: true
+      comment: primary key
+    username:
+      type: string(25)
+      notblank: true
+      notnull: true
+      unique: true
+      comment: The username the user logs in with
+    password:
+      type: string(128)
+      fixed: true
+      notblank: true
+      notnull: true
+      comment: The password the user logs in with
+    firstname:
+      type: string(32)
+      notblank: true
+      notnull: true
+      comment: The first name of the user
+    lastname:
+      type: string(64)
+      notblank: true
+      notnull: true
+      comment: The last name of the user
+    email:
+      type: string(127)
+      notnull: true
+      notblank: true
+      unique: true
+      comment: The email address of the user
+    active:
+      type: boolean
+      default: false
+      notnull: true
+      unsigned: true
+      comment: Only active users may log in.
+    date_created:
+      type: timestamp
+      notnull: true
+      comment: The date the user account was created.
+    last_login:
+      type: timestamp
+      comment: The date the user last logged in.
+    accesslevel:
+      type: string(50)
+      notblank: true
+      notnull: true
+      default: user
+      comment: The access level of the user
+    token:
+      type: string(128)
+      fixed: true
+      comment: Token used for password reset
+    password_key:
+      type: string(128)
+      fixed: true
+      comment: Hash used for password reset
+    token_date:
+      type: date
+      comment: Date the password reset token expires.
+
+MigrationVersion:
+  tableName: migration_version
+  columns:
+    version:
+      type: integer(4)
+      unsigned: false
+      primary: true
+      notnull: true
+      default: 0
