@@ -48,7 +48,6 @@ class Addusers extends Doctrine_Migration_Base
              'email' =>
              array(
               'type' => 'string',
-              'email' => true,
               'notnull' => true,
               'notblank' => true,
               'unique' => true,

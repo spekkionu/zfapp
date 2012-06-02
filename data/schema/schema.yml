@@ -41,7 +41,6 @@ User:
       notnull: true
     email:
       type: string(127)
-      email: true
       notnull: true
       notblank: true
       unique: true

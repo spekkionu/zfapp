@@ -64,7 +64,6 @@ abstract class Base_User extends Doctrine_Record
              ));
         $this->hasColumn('email', 'string', 127, array(
              'type' => 'string',
-             'email' => true,
              'notnull' => true,
              'notblank' => true,
              'unique' => true,
