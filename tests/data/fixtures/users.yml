@@ -1,0 +1,19 @@
+User:
+  user_1:
+    id: 1
+    username: username
+    password: 4c8b80639e84199f6fc0585a76a48d6dd3a44b7ebd8714a94fb433ae7ce2c66bc88f6bb0ad4e0562519af04ca19d4735ec75159717a9be667be9ccedb059b961
+    firstname: Firstname
+    lastname: Lastname
+    email: email@address.com
+    active: true
+    accesslevel: user
+  admin_1:
+    id: 2
+    username: admin
+    password: 4c8b80639e84199f6fc0585a76a48d6dd3a44b7ebd8714a94fb433ae7ce2c66bc88f6bb0ad4e0562519af04ca19d4735ec75159717a9be667be9ccedb059b961
+    firstname: Firstname
+    lastname: Lastname
+    email: admin@address.com
+    active: true
+    accesslevel: admin

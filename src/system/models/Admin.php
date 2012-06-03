@@ -1,4 +1,3 @@
-
 <?php
 
 /**
@@ -50,6 +49,7 @@ class Model_Admin extends Model_User
       'id', 'username', 'firstname', 'lastname', 'email', 'active',
       'date_created', 'last_login'
     ));
+    $select->where("`accesslevel` IN (?)", array('admin','superadmin'));
     if ($search['username']) {
       $select->where("`username` LIKE ?", "%" . $search['username'] . "%");
     }
@@ -90,7 +90,7 @@ class Model_Admin extends Model_User
    */
   public function addAdministrator(array $values) {
     $data = $this->_filterDataArray($values, array('id', 'date_created', 'last_login', 'accesslevel', 'token', 'password_key', 'token_date'));
-    $data['date_created'] = new Zend_Db_Expr("NOW()");
+    $data['date_created'] = date("Y-m-d H:i:s");
     $data['accesslevel'] = self::ACCESS_ADMIN;
     $data['password'] = self::encryptPassword($values['password']);
     $data['active'] = ($data['active']) ? 1 : 0;

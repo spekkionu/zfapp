@@ -62,7 +62,7 @@ class Options_StatesTest extends PHPUnit_Framework_TestCase
    * tests Options_States::getArray
    */
   public function testGetArray() {
-   $states = Options_States::getArray();
+    $states = Options_States::getArray();
     $this->assertInternalType('array', $states);
     $this->assertArrayHasKey('CA', $states);
   }
@@ -86,5 +86,4 @@ class Options_StatesTest extends PHPUnit_Framework_TestCase
   }
 
 }
-
 

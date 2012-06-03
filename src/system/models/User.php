@@ -1,4 +1,3 @@
-
 <?php
 
 /**
@@ -74,7 +73,7 @@ class Model_User extends App_Model
    *
    * @param string $username
    * @param string $password
-   * @return array
+   * @return object
    */
   public function login($username, $password) {
     // Encrypt the password
@@ -106,7 +105,7 @@ class Model_User extends App_Model
         ));
       // Update Last Login Date and clear password reset tokens
       $this->update(array(
-        'last_login' => new Zend_Db_Expr("NOW()"),
+        'last_login' => date('Y-m-d H:i:s'),
         'token' => null,
         'password_key' => null,
         'token_date' => null
@@ -119,6 +118,13 @@ class Model_User extends App_Model
     }
   }
 
+  /**
+   * Changes user's password
+   * @param int $id
+   * @param Form_ChangePassword $form
+   * @return int Number of affected rows
+   * @throws Validate_Exception
+   */
   public function changePassword($id, Form_ChangePassword $form) {
     $data = $form->getValues();
     $encrypted_password = self::encryptPassword($data['old_password']);
@@ -133,7 +139,7 @@ class Model_User extends App_Model
       throw new Validate_Exception();
     }
     // Password matches, do change
-    $this->update(array(
+    return $this->update(array(
       'password' => self::encryptPassword($data['password']),
       'token' => null,
       'password_key' => null,
@@ -167,7 +173,7 @@ class Model_User extends App_Model
     $this->update(array(
       'token' => self::encryptToken($user['token']),
       'password_key' => self::encryptPin($user['pin']),
-      'token_date' => new Zend_Db_Expr("NOW()")
+      'token_date' => date('Y-m-d H:i:s')
       ), 'id = ' . $this->quote($user['id']));
     return $user;
   }

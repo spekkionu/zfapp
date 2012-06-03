@@ -8,44 +8,42 @@ class CacheTest extends PHPUnit_Framework_TestCase
 {
 
   protected $config = array(
-      // Cache id prefix, can usually be left alone, needed if multiple applications share the same cache
-      'prefix' => 'zfapp',
-      // Caching for general data
-      'general' => array(
-        // If true caching will be used
-        'enabled' => true,
-        // The caching method
-        'type' => 'File',
-        // Set to true if using something other than a default Zend_Cache Backend
-        'custom' => false,
-        // The maximum lifetime of a cached entry, set to null for no expiration
-        "lifetime" => null,
-        // Any options for the cache backend go here.  Most will not need any
-        'options' => array()
-      ),
-      // Caching for database schema and metadata
-      'dbmetadata' => array(
-        // If true caching will be used
-        'enabled' => false,
-        // The caching method
-        'type' => 'File',
-        // Set to true if using something other than a default Zend_Cache Backend
-        'custom' => false,
-        // The maximum lifetime of a cached entry, set to null for no expiration
-        "lifetime" => null,
-        // Any options for the cache backend go here.  Most will not need any
-        'options' => array()
-      ),
-      // Caching for Full Page Content, This used Smarty Cache rather than Zend Cache
-      'page' => array(
-        // If true smarty caching will be used
-        'enabled' => false,
-        // The amount of time page is cached, set to 0 to cache forever
-        'timeout' => 300,
-        // If true file will be template will be checked for modifications, this is slightly slower
-        'check_modified' => false
-      )
-    );
+    // Cache id prefix, can usually be left alone, needed if multiple applications share the same cache
+    'prefix' => 'zfapptest',
+    // Caching for general data
+    'general' => array(
+      // If true caching will be used
+      'enabled' => false,
+      // The caching method
+      'type' => 'File',
+      // Set to true if using something other than a default Zend_Cache Backend
+      'custom' => false,
+      // The maximum lifetime of a cached entry, set to null for no expiration
+      "lifetime" => null,
+      // Any options for the cache backend go here.  Most will not need any
+      'options' => array()
+    ),
+    // Caching for database schema and metadata
+    'dbmetadata' => array(
+      // If true caching will be used
+      'enabled' => false,
+      // The caching method
+      'type' => 'File',
+      // Set to true if using something other than a default Zend_Cache Backend
+      'custom' => false,
+      // The maximum lifetime of a cached entry, set to null for no expiration
+      "lifetime" => null,
+      // Any options for the cache backend go here.  Most will not need any
+      'options' => array()
+    ),
+    // Caching for HTMLPurifier
+    'htmlpurifier' => array(
+      // If true caching will be used
+      'enabled' => true
+    ),
+  );
+
+  protected $default;
 
   /**
    * Sets up the fixture, for example, opens a network connection.
@@ -55,6 +53,7 @@ class CacheTest extends PHPUnit_Framework_TestCase
     if (!is_dir(TEST_DATA . '/cache/cache')) {
       mkdir(TEST_DATA . '/cache/cache', 0777, true);
     }
+    $this->default = Cache::getConfig();
     Cache::setCacheDir(TEST_DATA . '/cache/cache');
     Cache::setConfig($this->config);
   }
@@ -64,8 +63,18 @@ class CacheTest extends PHPUnit_Framework_TestCase
    * This method is called after a test is executed.
    */
   protected function tearDown() {
-    Cache::clearConfig();
-    @unlink(TEST_DATA . '/cache/cache');
+    Cache::setConfig($this->default);
+    if(is_dir(TEST_DATA . '/cache/cache')){
+      // Recursively delete cache directory
+      $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(TEST_DATA . '/cache/cache'),RecursiveIteratorIterator::CHILD_FIRST);
+      foreach ($iterator as $path) {
+        if ($path->isDir()) {
+            @rmdir($path->__toString());
+        } else {
+            @unlink($path->__toString());
+        }
+      }
+    }
   }
 
   /**
@@ -80,7 +89,7 @@ class CacheTest extends PHPUnit_Framework_TestCase
    * test Cache::setConfig
    */
   public function testSetConfig() {
-    $config = array('cache'=>'this is a cache config array');
+    $config = array('cache' => 'this is a cache config array');
     Cache::setConfig($config);
     $value = Cache::getConfig();
     $this->assertEquals($value, $config);
@@ -90,7 +99,7 @@ class CacheTest extends PHPUnit_Framework_TestCase
    * test Cache::setCacheDir
    */
   public function testSetCacheDir() {
-    $path = TEST_DATA.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.'test';
+    $path = TEST_DATA . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'test';
     Cache::setCacheDir($path);
     $value = Cache::getCacheDir();
     $this->assertEquals($value, $path);
@@ -111,11 +120,10 @@ class CacheTest extends PHPUnit_Framework_TestCase
   public function testGetHtmlPurifierCache() {
     $cachedir = Cache::getCacheDir();
     $key = 'test';
-    $expected = $cachedir.DIRECTORY_SEPARATOR.'htmlpurifier'.DIRECTORY_SEPARATOR.$key;
+    $expected = $cachedir . DIRECTORY_SEPARATOR . 'htmlpurifier' . DIRECTORY_SEPARATOR . $key;
     $value = Cache::getHtmlPurifierCache($key);
     $this->assertEquals($value, $expected);
   }
 
 }
-
 

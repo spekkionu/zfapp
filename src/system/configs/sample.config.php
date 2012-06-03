@@ -140,6 +140,11 @@ $config['cache'] = array(
     // Any options for the cache backend go here.  Most will not need any
     'options' => array()
   ),
+  // Caching for HTMLPurifier
+  'htmlpurifier' => array(
+    // If true caching will be used
+    'enabled' => false
+  ),
   // Caching for plugin loader
   'plugin' => array(
     // If true caching will be used
@@ -195,6 +200,13 @@ $config['mail'] = array(
   ),
   'test' => array(
     // If true all mail will be sent to test address rather than normal target
+    'enabled' => false,
+    // Array of test addresses
+    'address' => array('test@example.com')
+  ),
+   // Send copies of all emails to these addresses
+  'bcc' => array(
+    // If true send copy of all mails
     'enabled' => false,
     // Array of test addresses
     'address' => array('test@example.com')

@@ -38,7 +38,7 @@ class Form_ChangePassword extends App_Form
         Zend_Validate_Regex::NOT_MATCH => "Must be a 4 digit number."
       )));
     $element->setAttribs(array(
-      'size' => 4,
+      'class' => 'span2',
       'maxlength' => 4,
       'autofocus' => 'autofocus',
       'data' => Zend_Json::encode(array('validate' => array(
@@ -67,7 +67,6 @@ class Form_ChangePassword extends App_Form
         Zend_Validate_NotEmpty::IS_EMPTY => "Current password is required."
       )));
     $element->setAttribs(array(
-      'size' => 20,
       'maxlength' => 20,
       'data' => Zend_Json::encode(array('validate' => array(
           'required' => true,
@@ -98,7 +97,6 @@ class Form_ChangePassword extends App_Form
         Zend_Validate_StringLength::TOO_LONG => "Must be no more than %max% characters."
       )));
     $element->setAttribs(array(
-      'size' => 20,
       'maxlength' => 20,
       'data' => Zend_Json::encode(array('validate' => array(
           'required' => true,
@@ -129,7 +127,6 @@ class Form_ChangePassword extends App_Form
         Zend_Validate_Identical::MISSING_TOKEN => 'Passwords do not match'
       )));
     $element->setAttribs(array(
-      'size' => 20,
       'maxlength' => 20,
       'data' => Zend_Json::encode(array('validate' => array(
           'required' => true,

@@ -1,4 +1,3 @@
-
 <?php
 
 /**
@@ -127,7 +126,8 @@ class Model_Content extends App_Model
    */
   public function addPage(array $data) {
     $data = $this->_filterDataArray($data, array('id', 'date_created', 'last_updated', 'can_delete'));
-    $data['date_created'] = new Zend_Db_Expr("NOW()");
+    $data['date_created'] = date('Y-m-d H:i:s');
+    $data['last_updated'] = date('Y-m-d H:i:s');
     $data['can_delete'] = 1;
     $this->insert($data);
     $id = $this->getAdapter()->lastInsertId($this->_name, $this->_primary);
@@ -144,7 +144,7 @@ class Model_Content extends App_Model
    */
   public function updatePage($id, array $data) {
     $data = $this->_filterDataArray($data, array('id', 'date_created', 'last_updated', 'can_delete'));
-    $data['last_updated'] = new Zend_Db_Expr("NOW()");
+    $data['last_updated'] = date('Y-m-d H:i:s');
     $updated = $this->update($data, 'id = ' . $this->getAdapter()->quote($id, Zend_Db::PARAM_INT));
     // Clear Cache
     $cache = Cache::getCache('content');
@@ -226,9 +226,7 @@ class Model_Content extends App_Model
     if (empty($content)) {
       return $content;
     }
-    require_once(SYSTEM."/library/vendor/HTMLPurifier/HTMLPurifier.safe-includes.php");
     $config = HTMLPurifier_Config::createDefault();
-
     $config->set('HTML.DefinitionID', 'page_filter');
     $config->set('HTML.DefinitionRev', 1);
     $config->set('Attr.AllowedFrameTargets', array('_blank', '_self', '_target', '_top'));
@@ -239,13 +237,19 @@ class Model_Content extends App_Model
     $config->set('HTML.MaxImgLength', '800');
     $config->set('CSS.MaxImgLength', '800');
     $config->set('HTML.TidyLevel', 'light');
-
     $config->set('Output.Newline', "\n");
     $config->set('Output.TidyFormat', true);
     $config->set('URI.AllowedSchemes', array(
       'http' => true, 'https' => true, 'mailto' => true
     ));
-    $config->set('Cache.SerializerPath', Cache::getHtmlPurifierCache('page_filter'));
+    $cache = Cache::getHtmlPurifierCache('page_filter');
+    if($cache){
+      $config->set('Cache.SerializerPath', $cache);
+      $config->set('Cache.SerializerPermissions', 777);
+    }else{
+      $config->set('Cache.DefinitionImpl', null);
+      $config->set('Cache.SerializerPath', null);
+    }
     $purifier = new HTMLPurifier($config);
     return $purifier->purify($content);
   }

@@ -84,6 +84,7 @@ class Model_EmailTemplates
     }
     $view = new Zend_View();
     $view->setScriptPath(self::$template_dir);
+    $view->addHelperPath(SYSTEM . '/application/default/views/helpers', 'Zend_View_Helper');
     $layout = new Zend_Layout();
     $layout->setLayoutPath(self::$template_dir . '/layout');
     $layout->setView($view);

@@ -15,9 +15,8 @@ class DebugTest extends PHPUnit_Framework_TestCase
     Debug::setSapi('cli');
     $data = 'string';
     $result = Debug::Dump($data, null, false);
-    $result = str_replace(array(PHP_EOL, "\n"), '_', $result);
-    $expected = "__string(6) \"string\"__";
-    $this->assertEquals($expected, $result);
+    $search = stristr($result, $data);
+    $this->assertNotEquals(false, $search);
   }
 
 }

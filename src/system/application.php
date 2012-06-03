@@ -124,6 +124,9 @@ if ($config['cache']['dbmetadata']['enabled']) {
 // Save in registry
 Zend_Registry::set('db', $db);
 
+// Set htmlpurifier path
+define('HTMLPURIFIER_PREFIX', SYSTEM.'/library/vendor/HTMLPurifier');
+
 // Setup Zend_Currency
 //$cache = Cache::getCache('currency');
 //Zend_Currency::setCache($cache);

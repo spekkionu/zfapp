@@ -50,9 +50,7 @@ class Form_AdminProfile extends App_Form
     $element->setFilters(array('StringTrim', 'StripTags'));
     $element->setDecorators($this->field);
     $element->setAttribs(array(
-      'size' => 20,
       'maxlength' => 20,
-      'autofocus' => 'autofocus',
       'data' => Zend_Json::encode(array('validate' => array(
           'required' => true,
           'alphanumeric' => true,
@@ -81,7 +79,6 @@ class Form_AdminProfile extends App_Form
         Zend_Validate_StringLength::TOO_LONG => "Must be no more than %max% characters."
       )));
     $element->setAttribs(array(
-      'size' => 20,
       'maxlength' => 20,
       'data' => Zend_Json::encode(array('validate' => array(
           'required' => true,
@@ -112,7 +109,6 @@ class Form_AdminProfile extends App_Form
         Zend_Validate_Identical::MISSING_TOKEN => 'Passwords do not match'
       )));
     $element->setAttribs(array(
-      'size' => 20,
       'maxlength' => 20,
       'data' => Zend_Json::encode(array('validate' => array(
           'required' => true,
@@ -142,7 +138,6 @@ class Form_AdminProfile extends App_Form
         Zend_Validate_StringLength::TOO_LONG => "Must be no more than %max% characters."
       )));
     $element->setAttribs(array(
-      'size' => 32,
       'maxlength' => 32,
       'data' => Zend_Json::encode(array('validate' => array(
           'required' => true,
@@ -169,7 +164,6 @@ class Form_AdminProfile extends App_Form
         Zend_Validate_StringLength::TOO_LONG => "Must be no more than %max% characters."
       )));
     $element->setAttribs(array(
-      'size' => 40,
       'maxlength' => 64,
       'data' => Zend_Json::encode(array('validate' => array(
           'required' => true,
@@ -206,7 +200,6 @@ class Form_AdminProfile extends App_Form
         Zend_Validate_EmailAddress::LENGTH_EXCEEDED => 'Not a valid email address.'
       )));
     $element->setAttribs(array(
-      'size' => 50,
       'maxlength' => 127,
       'data' => Zend_Json::encode(array('validate' => array(
           'required' => true,
@@ -245,7 +238,6 @@ class Form_AdminProfile extends App_Form
     $element->setLabel('Cancel');
     $element->setDecorators($this->buttonClose);
     $element->setAttrib('class', 'btn cancel');
-    //$element->setAttrib('data-loading-text', 'Saving');
     $element->setIgnore(true);
     $this->addElement($element);
 

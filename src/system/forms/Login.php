@@ -36,7 +36,6 @@ class Form_Login extends App_Form
     $element->setFilters(array('StringTrim', 'StripTags'));
     $element->setDecorators($this->field);
     $element->setAttribs(array(
-      'size' => 20,
       'maxlength' => 20,
       'autofocus' => 'autofocus',
       'data' => Zend_Json::encode(array('validate' => array(
@@ -61,7 +60,6 @@ class Form_Login extends App_Form
     $element->setFilters(array('StringTrim'));
     $element->setDecorators($this->field);
     $element->setAttribs(array(
-      'size' => 20,
       'maxlength' => 20,
       'data' => Zend_Json::encode(array('validate' => array(
           'required' => true,
@@ -88,7 +86,7 @@ class Form_Login extends App_Form
     $element->setIgnore(true);
     $this->addElement($element);
 
-    //$this->addElement('hash', 'csrf', array('ignore' => true, 'decorators' => $this->hidden));
+    $this->addElement('hash', 'csrf', array('ignore' => true, 'decorators' => $this->hidden));
   }
 
 }

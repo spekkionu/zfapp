@@ -27,6 +27,14 @@ class Cache
   }
 
   /**
+   * Clear entries in the cache manager
+   * @return void
+   */
+  public static function clearCacheManager(){
+    self::$manager = null;
+  }
+
+  /**
    * Sets Cache Config Options
    * @param Zend_Config|array $config
    */
@@ -38,6 +46,7 @@ class Cache
     } else {
       throw new Exception("Cache config must be and instance of Zend_Config or an array");
     }
+    self::$manager = null;
   }
 
   /**
@@ -69,6 +78,7 @@ class Cache
       throw new Exception('Cache directory does not exist and could not be created.');
     }
     self::$cachedir = realpath($path);
+    self::$manager = null;
   }
 
   /**
@@ -148,6 +158,9 @@ class Cache
    * @return string
    */
   public static function getHtmlPurifierCache($key = 'default') {
+    if(isset(self::$config['htmlpurifier']) && !self::$config['htmlpurifier']['enabled']){
+      return null;
+    }
     $key = preg_replace("/[^a-z0-9_]/i", '', strtolower($key));
     if (!$key) {
       $key = 'default';
@@ -161,7 +174,7 @@ class Cache
         throw new Exception('HTML Purifier cache directory does not exist and could not be created.');
       }
     }
-    return self::$cachedir . DIRECTORY_SEPARATOR . 'htmlpurifier' . DIRECTORY_SEPARATOR . $key;
+    return realpath(self::$cachedir . DIRECTORY_SEPARATOR . 'htmlpurifier' . DIRECTORY_SEPARATOR . $key);
   }
 
 }

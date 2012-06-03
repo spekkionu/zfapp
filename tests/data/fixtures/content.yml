@@ -1,0 +1,21 @@
+Content:
+  home:
+    id: 1
+    url: about
+    title: About Us
+    content: Content for about us page
+    active: true
+    can_delete: true
+    edit_url: true
+    full_page: true
+  contact:
+    id: 2
+    url: contact
+    title: Contact Us
+    content: Content for contact us page
+    active: true
+    can_delete: true
+    edit_url: true
+    full_page: true
+
+

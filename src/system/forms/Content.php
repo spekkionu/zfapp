@@ -41,10 +41,13 @@ class Form_Content extends App_Form
       )));
     $element->setFilters(array('StringTrim', 'StripTags', 'StringToLower'));
     $element->addFilter(new Zend_Filter_Callback(array('callback' => array('Model_Content', 'filterUrl'))));
-    $element->setDecorators($this->field);
+    $base_url = ($this->getView() && isset($this->getView()->site_info['url'])) ? $this->getView()->site_info['url'] : '/';
+    if (mb_substr($base_url, -1) != '/') {
+      $base_url .= '/';
+    }
     $element->setDecorators(array(
       'ViewHelper',
-      array(array('addon' => 'Addon'), array('tag' => 'span', 'class' => 'add-on', 'content' => $this->getView()->site_info['url'] . '/')),
+      array(array('addon' => 'Addon'), array('tag' => 'span', 'class' => 'add-on', 'content' => $base_url)),
       array(array('prepend' => 'HtmlTag'), array('tag' => 'div', 'class' => 'input-prepend')),
       array('Description', array('tag' => 'div', 'class' => 'help-block', 'placement' => 'append', 'escape' => false)),
       array('Errors'),
@@ -54,9 +57,7 @@ class Form_Content extends App_Form
     ));
 
     $element->setAttribs(array(
-      'size' => 32,
       'maxlength' => 255,
-      'autofocus' => 'autofocus',
       'data' => Zend_Json::encode(array('validate' => array(
           'required' => true,
           'slug' => true,
@@ -68,8 +69,6 @@ class Form_Content extends App_Form
     ));
     $this->addElement($element);
 
-
-
     $element = new Zend_Form_Element_Text('title');
     $element->setLabel('Page Title:');
     $element->setDescription("Enter the title of the page.");
@@ -79,18 +78,17 @@ class Form_Content extends App_Form
         Zend_Validate_NotEmpty::INVALID => "Invalid type given. String, integer or float expected",
         Zend_Validate_NotEmpty::IS_EMPTY => "Title is required."
       )));
-    $element->addValidator('StringLength', true, array('max' => 100, 'messages' => array(
+    $element->addValidator('StringLength', true, array('max' => 255, 'messages' => array(
         Zend_Validate_StringLength::INVALID => "Invalid type given. String, integer or float expected",
         Zend_Validate_StringLength::TOO_LONG => "Must be no more than %max% characters."
       )));
     $element->setAttribs(array(
-      'size' => 32,
-      'maxlength' => 100,
+      'maxlength' => 255,
       'data' => Zend_Json::encode(array('validate' => array(
           'required' => true,
           'messages' => array(
             'required' => 'Title is required.',
-            'maxlength' => 'Must be no more than 100 characters.'
+            'maxlength' => 'Must be no more than 255 characters.'
           )
         )))
     ));
@@ -134,7 +132,6 @@ class Form_Content extends App_Form
     $element->setLabel('Cancel');
     $element->setDecorators($this->buttonClose);
     $element->setAttrib('class', 'btn cancel');
-    //$element->setAttrib('data-loading-text', 'Saving');
     $element->setIgnore(true);
     $this->addElement($element);
 
