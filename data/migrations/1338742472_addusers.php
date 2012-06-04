@@ -7,116 +7,115 @@ class Addusers extends Doctrine_Migration_Base
     public function up()
     {
         $this->createTable('users', array(
-             'id' =>
+             'id' => 
              array(
               'type' => 'integer',
               'primary' => true,
               'unsigned' => true,
               'autoincrement' => true,
-              'length' => 4,
               'comment' => 'primary key',
+              'length' => 4,
              ),
-             'username' =>
+             'username' => 
              array(
               'type' => 'string',
               'notblank' => true,
               'notnull' => true,
               'unique' => true,
-              'length' => 25,
               'comment' => 'The username the user logs in with',
+              'length' => 25,
              ),
-             'password' =>
+             'password' => 
              array(
               'type' => 'string',
               'fixed' => 1,
               'notblank' => true,
               'notnull' => true,
-              'length' => 128,
               'comment' => 'The password the user logs in with',
+              'length' => 128,
              ),
-             'firstname' =>
+             'firstname' => 
              array(
               'type' => 'string',
               'notblank' => true,
               'notnull' => true,
-              'length' => 32,
               'comment' => 'The first name of the user',
+              'length' => 32,
              ),
-             'lastname' =>
+             'lastname' => 
              array(
               'type' => 'string',
               'notblank' => true,
               'notnull' => true,
-              'length' => 64,
               'comment' => 'The last name of the user',
+              'length' => 64,
              ),
-             'email' =>
+             'email' => 
              array(
               'type' => 'string',
               'notnull' => true,
               'notblank' => true,
               'unique' => true,
-              'length' => 127,
               'comment' => 'The email address of the user',
+              'length' => 127,
              ),
-             'active' =>
+             'active' => 
              array(
               'type' => 'boolean',
               'default' => 0,
               'notnull' => true,
               'unsigned' => true,
-              'length' => 25,
               'comment' => 'Only active users may log in.',
+              'length' => 25,
              ),
-             'date_created' =>
+             'date_created' => 
              array(
               'notnull' => true,
               'type' => 'timestamp',
               'length' => 25,
-              'comment' => 'The date the user account was created.',
              ),
-             'last_login' =>
+             'last_login' => 
              array(
               'type' => 'timestamp',
-              'length' => 25,
               'comment' => 'The date the user last logged in.',
+              'length' => 25,
              ),
-             'accesslevel' =>
+             'accesslevel' => 
              array(
               'type' => 'string',
               'notblank' => true,
               'notnull' => true,
               'default' => 'user',
-              'length' => 50,
               'comment' => 'The access level of the user',
+              'length' => 50,
              ),
-             'token' =>
+             'token' => 
              array(
               'type' => 'string',
               'fixed' => 1,
-              'length' => 128,
               'comment' => 'Token used for password reset',
+              'length' => 128,
              ),
-             'password_key' =>
+             'password_key' => 
              array(
               'type' => 'string',
               'fixed' => 1,
-              'length' => 128,
               'comment' => 'Hash used for password reset',
+              'length' => 128,
              ),
-             'token_date' =>
+             'token_date' => 
              array(
               'type' => 'date',
-              'length' => 25,
               'comment' => 'Date the password reset token expires.',
+              'length' => 25,
              ),
              ), array(
              'type' => 'INNODB',
-             'indexes' =>
+             'indexes' => 
              array(
-              'login' =>
+              'login' => 
               array(
-              'fields' =>
+              'fields' => 
               array(
                0 => 'username',
                1 => 'password',
@@ -125,7 +124,7 @@ class Addusers extends Doctrine_Migration_Base
               'type' => 'unique',
               ),
              ),
-             'primary' =>
+             'primary' => 
              array(
               0 => 'id',
              ),
