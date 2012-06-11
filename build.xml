@@ -138,8 +138,8 @@
     </phpcodesniffer>
   </target>
 
-  <target name="phpdoc" description="Generate API documentation using PHPDocumentor">
-    <phpdoc destdir="build/api" parseprivate="false" output="HTML:Smarty:PHP">
+  <target name="phpdoc" description="Generate API documentation using PHPDocumentor2">
+    <phpdoc2 destdir="build/api" template="responsive">
       <fileset dir="${source}/system">
         <include name="forms/**.php" />
         <include name="models/**.php" />
@@ -148,11 +148,7 @@
         <exclude name="application.php" />
         <exclude name="library/vendor/*" />
       </fileset>
-      <projdocfileset dir="${project.basedir}">
-        <include name="README" />
-        <include name="INSTALL" />
-      </projdocfileset>
-    </phpdoc>
+    </phpdoc2>
   </target>
 
   <target name="phpcb" description="Aggregate tool output with PHP_CodeBrowser">
