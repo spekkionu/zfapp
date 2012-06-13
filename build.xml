@@ -151,9 +151,9 @@
     </phpdoc2>
   </target>
 	
-	<target name="apigen" description="Generate API documentation using APIGen">
-	  <resolvepath propertyName="src" file="${source}"/>
-		<exec command='apigen --source "${source}/system" --destination "build/api" --title "API Documentation"   --exclude "${src}/system/application.php" --exclude "${src}/system/mvc.php" --exclude "${src}/system/logs" --exclude "${src}/system/cache" --exclude "${src}/system/configs" --exclude "${src}/system/library/.classmap.php" --exclude "*/tests/*" --skip-doc-path "${src}/system/library/vendor/*"' passthru="true" />
+	<target name="apigen" description="Generate API documentation using apigen">
+    <resolvepath propertyName="src" file="${source}"/>
+    <apigen source="${source}/system" destination="build/api" exclude="${src}/system/cache,${src}/system/logs,${src}/system/configs,${src}/system/library/.classmap.php,${src}/system/application.php,${src}/system/mvc.php,*/tests/*" skipdocpath="${src}/system/library/vendor/*" title="API Documentation" deprecated="true" todo="false" sourcecode="true" />
   </target>
 
   <target name="phpcb" description="Aggregate tool output with PHP_CodeBrowser">
