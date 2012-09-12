@@ -50,10 +50,12 @@ class Model_User extends App_Model
    * @param integer $id
    * @return array
    */
-  public function getProfile($id) {
+  public function getProfile($id)
+  {
     $select = $this->select();
     $select->from($this, array('id', 'username', 'email', 'firstname', 'lastname', 'active', 'accesslevel', 'date_created', 'last_login'));
     $select->where('id = ?', $id, Zend_Db::PARAM_INT);
+
     return $this->getAdapter()->fetchRow($select);
   }
 
@@ -63,8 +65,10 @@ class Model_User extends App_Model
    * @param array $data
    * @return int Number of affected rows
    */
-  public function updateProfile($userid, array $data) {
+  public function updateProfile($userid, array $data)
+  {
     $data = $this->_filterDataArray($data, array('id', 'password', 'accesslevel', 'signup_date', 'last_login', 'token', 'password_key', 'token_date'));
+
     return $this->update($data, 'id = ' . $this->getAdapter()->quote($userid, Zend_Db::PARAM_INT));
   }
 
@@ -75,7 +79,8 @@ class Model_User extends App_Model
    * @param string $password
    * @return object
    */
-  public function login($username, $password) {
+  public function login($username, $password)
+  {
     // Encrypt the password
     $password = self::encryptPassword($password);
 
@@ -112,6 +117,7 @@ class Model_User extends App_Model
         ), 'id = ' . $this->quote($data->id, Zend_Db::PARAM_INT));
       // Save the login data to the session.
       $auth->getStorage()->write($data);
+
       return $auth->getIdentity();
     } else {
       throw new Validate_Exception('User account not found with this username and password.');
@@ -125,7 +131,8 @@ class Model_User extends App_Model
    * @return int Number of affected rows
    * @throws Validate_Exception
    */
-  public function changePassword($id, Form_ChangePassword $form) {
+  public function changePassword($id, Form_ChangePassword $form)
+  {
     $data = $form->getValues();
     $encrypted_password = self::encryptPassword($data['old_password']);
     // Make sure old password is correct
@@ -154,7 +161,8 @@ class Model_User extends App_Model
    * @param string $access_level Optionally limit to only this access level
    * @return array
    */
-  public function resetPassword($email, $access_level = null) {
+  public function resetPassword($email, $access_level = null)
+  {
     $select = $this->select();
     $select->from($this, array('id', 'username', 'firstname', 'lastname', 'email'));
     $select->where('email LIKE ?', $email);
@@ -175,6 +183,7 @@ class Model_User extends App_Model
       'password_key' => self::encryptPin($user['pin']),
       'token_date' => date('Y-m-d H:i:s')
       ), 'id = ' . $this->quote($user['id']));
+
     return $user;
   }
 
@@ -186,7 +195,8 @@ class Model_User extends App_Model
    * @param Form_ChangePassword $form
    * @return array
    */
-  public function confirmPasswordReset($token, Form_ChangePassword $form) {
+  public function confirmPasswordReset($token, Form_ChangePassword $form)
+  {
     $values = $form->getValues();
     // Make sure token and pin are correct
     $token = self::encryptToken($token);
@@ -210,6 +220,7 @@ class Model_User extends App_Model
     $this->update(array(
       'password' => self::encryptPassword($values['password'])
       ), 'id = ' . $this->quote($user['id']));
+
     return $this->login($user['username'], $values['password']);
   }
 
@@ -218,8 +229,10 @@ class Model_User extends App_Model
    * @param  string $password
    * @return string
    */
-  public static function encryptPassword($password) {
+  public static function encryptPassword($password)
+  {
     $crypt_key = 'vghhgjVCHRTjhgfhjmHFDNHGJTDhtykMGFBRThgfdnb';
+
     return self::encrypt($password, $crypt_key);
   }
 
@@ -228,8 +241,10 @@ class Model_User extends App_Model
    * @param  string $token
    * @return string
    */
-  public static function encryptToken($token) {
+  public static function encryptToken($token)
+  {
     $crypt_key = 'gfjhGFHBgfjhymgfdBHRTIJMfdhgJKNBVMtdyhgkmFDgrte';
+
     return self::encrypt($token, $crypt_key);
   }
 
@@ -238,8 +253,10 @@ class Model_User extends App_Model
    * @param  string $pin
    * @return string
    */
-  public static function encryptPin($pin) {
+  public static function encryptPin($pin)
+  {
     $crypt_key = 'hkthyJFDGrtjhgmRTHYRTYkhyjgfdhRTEYgjthgyIKrthd';
+
     return self::encrypt($pin, $crypt_key);
   }
 
@@ -249,7 +266,8 @@ class Model_User extends App_Model
    * @param  string $crypt_key
    * @return string
    */
-  protected static function encrypt($value, $crypt_key) {
+  protected static function encrypt($value, $crypt_key)
+  {
     return hash('sha512', $value . $crypt_key);
   }
 

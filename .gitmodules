@@ -25,12 +25,6 @@
 [submodule "src/system/library/vendor/lessphp"]
 	path = src/system/library/vendor/lessphp
 	url = git://github.com/leafo/lessphp.git
-[submodule "src/system/library/vendor/Zend"]
-	path = src/system/library/vendor/Zend
-	url = git://github.com/spekkionu/zendframework.git
-[submodule "src/system/library/vendor/ZendX"]
-	path = src/system/library/vendor/ZendX
-	url = git://github.com/spekkionu/zendframework-extras.git
 [submodule "scripts/tasks/phpcs/Spekkionu"]
 	path = scripts/tasks/phpcs/Spekkionu
 	url = git://github.com/spekkionu/spekkionu-coding-standard.git

@@ -42,7 +42,8 @@ class Model_EmailTemplates
    * Sets template directory
    * @param string $dir
    */
-  public static function setTemplateDir($dir) {
+  public static function setTemplateDir($dir)
+  {
     if (!is_dir($dir)) {
       throw new Exception("Template directory not found.");
     }
@@ -53,7 +54,8 @@ class Model_EmailTemplates
    * Sets email config
    * @param array $config
    */
-  public static function setConfig(array $config) {
+  public static function setConfig(array $config)
+  {
     self::$config = $config;
   }
 
@@ -63,7 +65,8 @@ class Model_EmailTemplates
    * @param array $user
    * @return Zend_Mail
    */
-  public function passwordReset(array $user) {
+  public function passwordReset(array $user)
+  {
     $this->setupView();
     $this->view->user = $user;
     $mailbody = $this->layout->render('password-reset');
@@ -72,13 +75,15 @@ class Model_EmailTemplates
     $mail->setBodyHtml($mailbody, 'UTF-8', Zend_Mime::ENCODING_BASE64);
     // Unlike most emails, this one should still be sent to user rather than test address
     $mail->addTo($user['email'], trim($user['firstname'] . ' ' . $user['lastname']));
+
     return $mail;
   }
 
   /**
    * Setup
    */
-  private function setupView() {
+  private function setupView()
+  {
     if (!self::$template_dir) {
       throw new Exception("Must first set template directory.");
     }
@@ -96,7 +101,8 @@ class Model_EmailTemplates
    * Setup common mail setting that are used for most emails
    * @return Zend_Mail
    */
-  public function getDefaultMailInstance() {
+  public function getDefaultMailInstance()
+  {
     $mail = new Zend_Mail('UTF-8');
     $mail->setFrom(self::$config['from']['email'], self::$config['from']['name']);
     $mail->setHeaderEncoding(Zend_Mime::ENCODING_BASE64);
@@ -105,6 +111,7 @@ class Model_EmailTemplates
         $mail->addBcc($email);
       }
     }
+
     return $mail;
   }
 
