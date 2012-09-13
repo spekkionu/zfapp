@@ -83,11 +83,11 @@ class Admin_ContentController extends App_AdminController
           $mgr = new Model_Content();
           $id = $mgr->addPage($values);
           $this->addMessage("Sucessfully added page.", 'success');
-          return $this->redirect('index');
+          return $this->redirectSimple('index');
         } catch (Exception $e) {
           $this->logError("Failed to add page - {$e->getMessage()}");
           $this->addMessage("Failed to add page", 'error');
-          return $this->redirect();
+          return $this->redirectSimple();
         }
       }
     }
@@ -125,7 +125,7 @@ class Admin_ContentController extends App_AdminController
         } catch (Exception $e) {
           $this->logError("Failed to update page - {$e->getMessage()}");
           $this->addMessage("Failed to update page", 'error');
-          return $this->redirect();
+          return $this->redirectSimple();
         }
       }
     }
@@ -160,7 +160,7 @@ class Admin_ContentController extends App_AdminController
         } catch (Exception $e) {
           $this->logError("Failed to delete page - {$e->getMessage()}");
           $this->addMessage("Failed to delete page", 'error');
-          return $this->redirect();
+          return $this->redirectSimple();
         }
       }
     }

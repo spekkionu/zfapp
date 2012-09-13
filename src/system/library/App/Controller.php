@@ -129,7 +129,7 @@ abstract class App_Controller extends Zend_Controller_Action
    * @param  array  $params
    * @return void
    */
-  protected function redirect($action = null, $controller = null, $module = null, array $params = array()) {
+  public function redirectSimple($action = null, $controller = null, $module = null, array $params = array()) {
     if (is_null($action)) {
       $action = $this->getRequest()->getActionName();
     }
@@ -145,7 +145,7 @@ abstract class App_Controller extends Zend_Controller_Action
    * @param  boolean $reset
    * @return void
    */
-  protected function routeRedirect($name = null, array $urlOptions = array(), $reset = false) {
+  public function routeRedirect($name = null, array $urlOptions = array(), $reset = false) {
     $redirector = Zend_Controller_Action_HelperBroker::getStaticHelper('redirector');
     $redirector->gotoRouteAndExit($urlOptions, $name, $reset);
   }

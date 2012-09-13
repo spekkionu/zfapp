@@ -12,20 +12,17 @@ define('SYSTEM', dirname(__FILE__));
 set_include_path(
   // Application Library Files
   SYSTEM . DIRECTORY_SEPARATOR . 'library' . PATH_SEPARATOR .
-  realpath(SYSTEM . DIRECTORY_SEPARATOR . 'library/vendor')
+  realpath(SYSTEM . DIRECTORY_SEPARATOR . 'library/vendor/zendframework1/library')
 );
 
 // Set up autoload.
-require_once(SYSTEM . '/library/vendor/ZendW/Loader/AutoloaderFactory.php');
-ZendW_Loader_AutoloaderFactory::factory(array(
-  'ZendW_Loader_ClassMapAutoloader' => array(
-    SYSTEM . '/library/.classmap.php',
-  ),
-  'ZendW_Loader_StandardAutoloader' => array(
+require_once(SYSTEM . '/library/vendor/zendframework1/library/Zend/Loader/AutoloaderFactory.php');
+require_once(SYSTEM . '/library/vendor/zendframework1/library/Zend/Loader/ClassMapAutoloader.php');
+Zend_Loader_AutoloaderFactory::factory(array(
+  'Zend_Loader_StandardAutoloader' => array(
     'prefixes' => array(
-      'Zend' => SYSTEM . '/library/vendor/Zend',
-      'ZendX' => SYSTEM . '/library/vendor/ZendX',
-      'ZendW' => SYSTEM . '/library/vendor/ZendW',
+      'Zend' => SYSTEM . '/library/vendor/zendframework1/library/Zend',
+      'ZendX' => SYSTEM . '/library/vendor/zendframework1/library/ZendX',
       'HTMLPurifier' => SYSTEM . '/library/vendor/HTMLPurifier/HTMLPurifier',
       'WideImage' => SYSTEM . '/library/vendor/WideImage',
       'ZFDebug' => SYSTEM . '/library/vendor/ZFDebug',

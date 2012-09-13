@@ -25,7 +25,7 @@ class Admin_AccountController extends App_AdminController
     $mgr = new Model_User();
     $profile = $mgr->getProfile($this->identity->id);
     if (!$profile) {
-      return $this->redirect('not-found', 'error');
+      return $this->redirectSimple('not-found', 'error');
     }
     $this->view->profile = $profile;
   }
@@ -42,17 +42,17 @@ class Admin_AccountController extends App_AdminController
     $form->addDbValidators($this->identity->id);
     if ($this->getRequest()->isPost()) {
       if ($this->getRequest()->getPost('cancel')) {
-        return $this->redirect('index');
+        return $this->redirectSimple('index');
       }
       if ($form->isValid($this->getRequest()->getPost())) {
         try {
           $values = $form->getValues();
           $mgr->updateProfile($this->identity->id, $values);
           $this->addMessage("Successfully updated profile.", 'success');
-          return $this->redirect('index');
+          return $this->redirectSimple('index');
         } catch (Exception $e) {
           $this->addMessage("Failed to update profile.", 'error');
-          return $this->redirect('edit');
+          return $this->redirectSimple('edit');
         }
       }
     }
@@ -65,7 +65,7 @@ class Admin_AccountController extends App_AdminController
     $form->getElement('cancel')->setAttrib('href', $this->view->route('admin_account'));
     if ($this->getRequest()->isPost()) {
       if ($this->getRequest()->getPost('cancel')) {
-        return $this->redirect('index');
+        return $this->redirectSimple('index');
       }
       if ($form->isValid($this->getRequest()->getPost())) {
         try {
@@ -73,13 +73,13 @@ class Admin_AccountController extends App_AdminController
             $mgr = new Model_Admin();
             $mgr->changePassword($this->identity->id, $form);
             $this->addMessage("Successfully changed account password.", 'success');
-            return $this->redirect('index');
+            return $this->redirectSimple('index');
           } catch (Validate_Exception $e) {
             // Failed validation, do nothing, redisplay form
           }
         } catch (Exception $e) {
           $this->addMessage("Failed to change password.", 'error');
-          return $this->redirect('password');
+          return $this->redirectSimple('password');
         }
       }
     }

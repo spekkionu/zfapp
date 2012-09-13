@@ -86,11 +86,11 @@ class Admin_AdministratorController extends App_AdminController
           $mgr = new Model_Admin();
           $id = $mgr->addAdministrator($values);
           $this->addMessage("Sucessfully added administrator.", 'success');
-          return $this->redirect('index');
+          return $this->redirectSimple('index');
         } catch (Exception $e) {
           $this->logError("Failed to add administrator - {$e->getMessage()}");
           $this->addMessage("Failed to add administrator", 'error');
-          return $this->redirect();
+          return $this->redirectSimple();
         }
       }
     }
@@ -126,11 +126,11 @@ class Admin_AdministratorController extends App_AdminController
           $mgr = new Model_Admin();
           $id = $mgr->updateAdministrator($id, $values);
           $this->addMessage("Sucessfully updated administrator.", 'success');
-          return $this->redirect('index');
+          return $this->redirectSimple('index');
         } catch (Exception $e) {
           $this->logError("Failed to update administrator - {$e->getMessage()}");
           $this->addMessage("Failed to update administrator", 'error');
-          return $this->redirect();
+          return $this->redirectSimple();
         }
       }
     }
@@ -163,11 +163,11 @@ class Admin_AdministratorController extends App_AdminController
           $mgr = new Model_Admin();
           $id = $mgr->deleteAdministrator($id);
           $this->addMessage("Sucessfully deleted administrator.", 'success');
-          return $this->redirect('index');
+          return $this->redirectSimple('index');
         } catch (Exception $e) {
           $this->logError("Failed to delete administrator - {$e->getMessage()}");
           $this->addMessage("Failed to delete administrator", 'error');
-          return $this->redirect();
+          return $this->redirectSimple();
         }
       }
     }

@@ -32,7 +32,7 @@ class Admin_AccessController extends App_AdminController
             $session = new Zend_Session_Namespace();
             if (isset($session->login_destination) && $session->login_destination) {
               // Redirect to destination
-              return $this->_redirect($session->login_destination);
+              return $this->redirect($session->login_destination);
             } else {
               // Send to index
               return $this->routeRedirect('admin_home');
