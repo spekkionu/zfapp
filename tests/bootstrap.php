@@ -7,62 +7,19 @@ mb_internal_encoding( 'UTF-8' );
 
 define('SYSTEM', realpath(dirname(dirname(__FILE__)).'/src/system'));
 define('TEST_DIR', dirname(__FILE__));
-define('TEST_DATA', TEST_DIR.DIRECTORY_SEPARATOR.'data');
+define('TEST_DATA', TEST_DIR.DIRECTORY_SEPARATOR.'_data');
 define('PROJECT_PATH', dirname(dirname(SYSTEM)));
 define('SANDBOX_PATH', PROJECT_PATH.'/scripts/doctrine');
-define('DOCTRINE_PATH', SYSTEM . '/library/vendor/doctrine-orm/lib');
+define('DOCTRINE_PATH', SYSTEM . '/library/vendor/doctrine/doctrine1/lib');
 define('DATA_FIXTURES_PATH', PROJECT_PATH . '/data/fixtures');
 define('MODELS_PATH', PROJECT_PATH . '/data/models');
 define('MIGRATIONS_PATH', PROJECT_PATH . '/data/migrations');
 define('SQL_PATH', PROJECT_PATH . '/data/sql');
 define('YAML_SCHEMA_PATH', PROJECT_PATH . '/data/schema');
-define('HTMLPURIFIER_PREFIX', SYSTEM.'/library/vendor/HTMLPurifier');
-
-// Set Include Path
-set_include_path(
-  // Application Library Files
-  SYSTEM . DIRECTORY_SEPARATOR . 'library' . PATH_SEPARATOR .
-  realpath(SYSTEM . DIRECTORY_SEPARATOR . 'library/vendor') . PATH_SEPARATOR .
-  get_include_path()
-);
+define('HTMLPURIFIER_PREFIX', SYSTEM.'/library/vendor/spekkionu/htmlpurifier');
 
 // Set up autoload.
-require_once(SYSTEM . '/library/vendor/ZendW/Loader/AutoloaderFactory.php');
-ZendW_Loader_AutoloaderFactory::factory(array(
-  'ZendW_Loader_ClassMapAutoloader' => array(
-    SYSTEM . '/library/.classmap.php',
-  ),
-  'ZendW_Loader_StandardAutoloader' => array(
-    'prefixes' => array(
-      'Zend' => SYSTEM . '/library/vendor/Zend',
-      'ZendX' => SYSTEM . '/library/vendor/ZendX',
-      'ZendW' => SYSTEM . '/library/vendor/ZendW',
-      'HTMLPurifier' => SYSTEM . '/library/vendor/HTMLPurifier/HTMLPurifier',
-      'WideImage' => SYSTEM . '/library/vendor/WideImage',
-      'ZFDebug' => SYSTEM . '/library/vendor/ZFDebug',
-      'Cache' => SYSTEM . '/library/Cache',
-      'Form' => SYSTEM . '/library/Form',
-      'Options' => SYSTEM . '/library/Options',
-      'Session' => SYSTEM . '/library/Session',
-      'Validate' => SYSTEM . '/library/Validate',
-      'App' => SYSTEM . '/library/App',
-      'Doctrine' => SYSTEM . '/library/vendor/doctrine-orm/lib/Doctrine',
-    ),
-    'namespaces' => array(
-      'Assetic' => SYSTEM . '/library/vendor/Assetic/src/Assetic',
-      'Symfony' => SYSTEM . '/library/vendor/Symfony'
-    ),
-    'fallback_autoloader' => true,
-  ),
-));
-
-// Add Form Autoloader Resource
-$resourceLoader = new Zend_Loader_Autoloader_Resource(array(
-    'basePath' => SYSTEM,
-    'namespace' => '',
-  ));
-$resourceLoader->addResourceType('form', 'forms/', 'Form');
-$resourceLoader->addResourceType('model', 'models/', 'Model');
+require_once(SYSTEM . '/library/vendor/autoload.php');
 
 $cache_config = array(
   // Cache id prefix, can usually be left alone, needed if multiple applications share the same cache
@@ -117,6 +74,7 @@ Cache::setConfig($cache_config);
 
 Zend_Session::start();
 
+require_once(DOCTRINE_PATH . DIRECTORY_SEPARATOR . 'Doctrine.php');
 spl_autoload_register(array('Doctrine_Core', 'autoload'));
 spl_autoload_register(array('Doctrine_Core', 'modelsAutoload'));
 spl_autoload_register(array('Doctrine_Core', 'extensionsAutoload'));
@@ -126,7 +84,7 @@ Doctrine_Core::setModelsDirectory(MODELS_PATH);
 
 $manager = Doctrine_Manager::getInstance();
 $manager->setAttribute(Doctrine_Core::ATTR_QUOTE_IDENTIFIER, true);
-$manager->setAttribute(Doctrine_Core::ATTR_VALIDATE, Doctrine_Core::VALIDATE_ALL);
+$manager->setAttribute(Doctrine_Core::ATTR_VALIDATE, Doctrine_Core::VALIDATE_NONE);
 $manager->setAttribute(Doctrine_Core::ATTR_USE_NATIVE_ENUM, true );
 $manager->setAttribute(Doctrine_Core::ATTR_MODEL_LOADING, Doctrine_Core::MODEL_LOADING_PEAR);
 $manager->setAttribute(Doctrine_Core::ATTR_TABLE_CLASS_FORMAT, 'Table_%s');

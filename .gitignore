@@ -1,15 +1,25 @@
 ﻿# Cache and userfiles
+/src/system/library/vendor
+/src/public_html/assets/vendor
 /src/system/logs
 /src/system/cache
-/src/system/configs/config.php
+/src/system/configs/config.local.php
 /src/public_html/cached
 /src/public_html/wincache.php
 /src/public_html/phpinfo.php
+/src/public_html/dummy.php
+/src/public_html/apc.php
+/src/public_html/xhprof
+/tests/data/cache
+/tests/_log
 /build
+/bin
+/composer.phar
 
 # OS Files
 Thumbs.db
 .DS_Store
+*~
 
 # IDE Files
 .buildpath

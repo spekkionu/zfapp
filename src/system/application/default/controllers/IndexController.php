@@ -11,29 +11,34 @@
 class IndexController extends App_FrontController
 {
 
-  public function init() {
-    parent::init();
-  }
-
-  public function indexAction() {
-
-  }
-
-  public function pageAction() {
-    $id = $this->getRequest()->getParam('id');
-    if (!$id) {
-      return $this->_forward('not-found', 'error', 'default');
+    public function init()
+    {
+        parent::init();
+        $this->_helper->cache(array('index','page'));
     }
-    $mgr = new Model_Content();
-    $page = $mgr->getPageContent($id);
-    if (!$page) {
-      return $this->_forward('not-found', 'error', 'default');
+
+    public function indexAction()
+    {
+
     }
-    $this->view->page = $page;
-  }
 
-  public function contactAction() {
+    public function pageAction()
+    {
+        $id = $this->getRequest()->getParam('id');
+        if (!$id) {
+            return $this->_forward('not-found', 'error', 'default');
+        }
+        $mgr = new Model_Content();
+        $page = $mgr->getPageContent($id);
+        if (!$page) {
+            return $this->_forward('not-found', 'error', 'default');
+        }
+        $this->view->page = $page;
+    }
 
-  }
+    public function contactAction()
+    {
+
+    }
 
 }

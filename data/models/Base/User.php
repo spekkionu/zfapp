@@ -16,7 +16,6 @@
  * @property timestamp $last_login
  * @property string $accesslevel
  * @property string $token
- * @property string $password_key
  * @property date $token_date
  * 
  * @package    App
@@ -45,13 +44,11 @@ abstract class Base_User extends Doctrine_Record
              'comment' => 'The username the user logs in with',
              'length' => '25',
              ));
-        $this->hasColumn('password', 'string', 128, array(
+        $this->hasColumn('password', 'string', 60, array(
              'type' => 'string',
              'fixed' => 1,
-             'notblank' => true,
-             'notnull' => true,
              'comment' => 'The password the user logs in with',
-             'length' => '128',
+             'length' => '60',
              ));
         $this->hasColumn('firstname', 'string', 32, array(
              'type' => 'string',
@@ -99,17 +96,11 @@ abstract class Base_User extends Doctrine_Record
              'comment' => 'The access level of the user',
              'length' => '50',
              ));
-        $this->hasColumn('token', 'string', 128, array(
+        $this->hasColumn('token', 'string', 32, array(
              'type' => 'string',
              'fixed' => 1,
              'comment' => 'Token used for password reset',
-             'length' => '128',
-             ));
-        $this->hasColumn('password_key', 'string', 128, array(
-             'type' => 'string',
-             'fixed' => 1,
-             'comment' => 'Hash used for password reset',
-             'length' => '128',
+             'length' => '32',
              ));
         $this->hasColumn('token_date', 'date', null, array(
              'type' => 'date',
@@ -134,17 +125,6 @@ abstract class Base_User extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        $timestampable0 = new Doctrine_Template_Timestampable(array(
-             'created' => 
-             array(
-              'name' => 'date_created',
-              'type' => 'timestamp',
-             ),
-             'updated' => 
-             array(
-              'disabled' => true,
-             ),
-             ));
-        $this->actAs($timestampable0);
+        
     }
 }

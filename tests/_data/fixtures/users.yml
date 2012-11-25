@@ -1,0 +1,19 @@
+User:
+  user_1:
+    id: 1
+    username: username
+    password: "$2a$12$CHEXSs3uTBgzTQRnmQKbguhtT5nw/5/YY3l0R0DF7XvWDtgoE.jhq"
+    firstname: Firstname
+    lastname: Lastname
+    email: email@address.com
+    active: true
+    accesslevel: user
+  admin_1:
+    id: 2
+    username: admin
+    password: "$2a$12$CHEXSs3uTBgzTQRnmQKbguhtT5nw/5/YY3l0R0DF7XvWDtgoE.jhq"
+    firstname: Firstname
+    lastname: Lastname
+    email: admin@address.com
+    active: true
+    accesslevel: admin

@@ -1,33 +1,6 @@
-[submodule "src/public_html/assets/scripts/bootbox"]
-	path = src/public_html/assets/scripts/bootbox
-	url = git://github.com/makeusabrew/bootbox.git
-[submodule "src/public_html/assets/scripts/bootstrap"]
-	path = src/public_html/assets/scripts/bootstrap
-	url = git://github.com/twitter/bootstrap.git
-[submodule "src/public_html/assets/scripts/tiny_mce"]
-	path = src/public_html/assets/scripts/tiny_mce
-	url = git://github.com/spekkionu/tinymce.git
-[submodule "src/system/library/vendor/HTMLPurifier"]
-	path = src/system/library/vendor/HTMLPurifier
-	url = git://github.com/spekkionu/htmlpurifier.git
-[submodule "src/system/library/vendor/WideImage"]
-	path = src/system/library/vendor/WideImage
-	url = git://github.com/spekkionu/wideimage.git
 [submodule "scripts/tasks/closure"]
 	path = scripts/tasks/closure
 	url = git://github.com/mathewbyrne/closure-task.git
-[submodule "src/system/library/vendor/Assetic"]
-	path = src/system/library/vendor/Assetic
-	url = git://github.com/kriswallsmith/assetic.git
-[submodule "src/system/library/vendor/Symfony/Component/Process"]
-	path = src/system/library/vendor/Symfony/Component/Process
-	url = git://github.com/symfony/Process.git
-[submodule "src/system/library/vendor/lessphp"]
-	path = src/system/library/vendor/lessphp
-	url = git://github.com/leafo/lessphp.git
 [submodule "scripts/tasks/phpcs/Spekkionu"]
 	path = scripts/tasks/phpcs/Spekkionu
 	url = git://github.com/spekkionu/spekkionu-coding-standard.git
-[submodule "src/system/library/vendor/doctrine-orm"]
-	path = src/system/library/vendor/doctrine-orm
-	url = git://github.com/doctrine/doctrine1.git

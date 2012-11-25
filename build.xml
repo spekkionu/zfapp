@@ -3,7 +3,7 @@
 
 <project name="zfapp" default="build" basedir=".">
   <property name="source" value="src"/>
-  
+
   <!-- Add Custom Tasks to the include path -->
   <includepath classpath="scripts/tasks/closure/tasks" />
   <taskdef name="yuicompressor" classname="YuiCompressorTask" />
@@ -24,7 +24,7 @@
   </target>
 
   <target name="clear-cache" description="Clears cache folders">
-    <delete dir="src/system/cache" includeemptydirs="false" failonerror="true" />
+    <delete dir="src/system/cache" includeemptydirs="false" failonerror="false" />
     <mkdir dir="src/system/cache" mode="0777"/>
   </target>
 
@@ -32,6 +32,7 @@
     <echo message="Create private directories" />
     <mkdir dir="src/system/cache" mode="0777"/>
     <mkdir dir="src/system/logs" mode="0777" />
+    <mkdir dir="src/system/userfiles" mode="0777" />
     <mkdir dir="src/system/configs/data" />
     <mkdir dir="src/system/configs/data/fixtures" />
     <mkdir dir="src/system/configs/data/migrations" />
@@ -41,9 +42,6 @@
     <echo message="Create public directories" />
     <mkdir dir="src/public_html/cached" mode="0777" />
     <mkdir dir="src/public_html/userfiles" mode="0777" />
-
-    <echo message="Copy sample.config.php to config.php" />
-    <copy file="${source}/system/configs/sample.config.php" tofile="${source}/system/configs/config.php" overwrite="false"/>
   </target>
 
   <target name="phpunit" description="Run unit tests using PHPUnit and generates junit.xml and clover.xml">
@@ -53,13 +51,11 @@
         <include name="models/**.php" />
         <include name="application/**.php" />
         <include name="library/**.php" />
-        <exclude name="application.php" />
         <exclude name="library/vendor/*" />
       </fileset>
     </coverage-setup>
-    <delete dir="tests/data/cache" includeemptydirs="false" failonerror="true" />
-    <mkdir dir="tests/data/cache"/>
-    <chmod file="tests/data/cache" mode="0777" />
+    <delete dir="tests/_data/cache" includeemptydirs="false" failonerror="false" />
+    <mkdir dir="tests/_data/cache" mode="0777"/>
     <phpunit haltonerror="false" bootstrap="tests/bootstrap.php" codecoverage="true" >
       <formatter type="clover" todir="build/logs" outfile="clover.xml"></formatter>
       <formatter type="xml" todir="build/logs" outfile="junit.xml"></formatter>
@@ -81,7 +77,6 @@
         <include name="models/**.php" />
         <include name="application/**.php" />
         <include name="library/**.php" />
-        <exclude name="application.php" />
         <exclude name="library/vendor/*" />
       </fileset>
       <logger type="jdepend-xml" outfile="build/logs/jdepend.xml"/>
@@ -97,13 +92,13 @@
         <include name="models/**.php" />
         <include name="application/**.php" />
         <include name="library/**.php" />
-        <exclude name="application.php" />
         <exclude name="library/vendor/*" />
       </fileset>
       <formatter type="xml" outfile="build/logs/pmd.xml"/>
     </phpmd>
   </target>
 
+  <!--
   <target name="phpcpd" description="Generate pmd-cpd.xml using PHPCPD">
     <phpcpd>
       <fileset dir="${source}/system">
@@ -111,12 +106,12 @@
         <include name="models/**.php" />
         <include name="application/**.php" />
         <include name="library/**.php" />
-        <exclude name="application.php" />
         <exclude name="library/vendor/*" />
       </fileset>
       <formatter type="pmd" outfile="build/logs/pmd-cpd.xml"/>
     </phpcpd>
   </target>
+  -->
 
   <target name="phploc" description="Generate phploc.csv">
     <exec command="phploc --log-csv build/logs/phploc.csv ${source}/system" passthru="true" />
@@ -130,7 +125,6 @@
         <include name="models/**.php" />
         <include name="application/**.php" />
         <include name="library/**.php" />
-        <exclude name="application.php" />
         <exclude name="library/vendor/*" />
       </fileset>
       <formatter type="default" usefile="false"/>
@@ -139,28 +133,27 @@
   </target>
 
   <target name="phpdoc" description="Generate API documentation using PHPDocumentor2">
-    <phpdoc2 destdir="build/api" template="responsive">
+    <phpdoc2 destdir="build/phpdoc" template="responsive">
       <fileset dir="${source}/system">
         <include name="forms/**.php" />
         <include name="models/**.php" />
         <include name="application/**.php" />
         <include name="library/**.php" />
-        <exclude name="application.php" />
         <exclude name="library/vendor/*" />
       </fileset>
     </phpdoc2>
   </target>
-	
+
 	<target name="apigen" description="Generate API documentation using apigen">
     <resolvepath propertyName="src" file="${source}"/>
-    <apigen source="${source}/system" destination="build/api" exclude="${src}/system/cache,${src}/system/logs,${src}/system/configs,${src}/system/library/.classmap.php,${src}/system/application.php,${src}/system/mvc.php,*/tests/*" skipdocpath="${src}/system/library/vendor/*" title="API Documentation" deprecated="true" todo="false" sourcecode="true" />
+    <apigen source="${source}/system" destination="build/api" exclude="${src}/system/cache,${src}/system/logs,${src}/system/configs,${src}/system/userfiles,${src}/system/mvc.php,*/tests/*" skipdocpath="${src}/system/library/vendor/*" title="API Documentation" deprecated="true" todo="false" sourcecode="true" />
   </target>
 
   <target name="phpcb" description="Aggregate tool output with PHP_CodeBrowser">
     <exec command="phpcb --log build/logs --source ${source}/system --output build/code-browser" passthru="true" />
   </target>
 
-  <target name="build" depends="clean,phpunit,pdepend,phpmd,phpcpd,phpcs,phploc,apigen,phpcb"/>
+  <target name="build" depends="clean,phpunit,pdepend,phpmd,phpcs,phploc,apigen,phpcb"/>
 
   <target name="cssmin" description="Combines and compresses admin css files">
     <mkdir dir="build/tmp"/>

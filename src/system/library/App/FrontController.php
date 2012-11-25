@@ -11,11 +11,12 @@
 abstract class App_FrontController extends App_Controller
 {
 
-  /**
-   * Controller init
-   */
-  public function init() {
-    parent::init();
-  }
+    /**
+     * Controller init
+     */
+    public function init()
+    {
+        parent::init();
+    }
 
 }

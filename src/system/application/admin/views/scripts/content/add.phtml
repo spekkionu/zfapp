@@ -1,7 +1,7 @@
 <?php $this->headTitle('Add Page');?>
 <?php $this->pageHeader = 'Add Page';?>
 
-<?php $this->headScript()->appendFile($this->baseUrl('/assets/scripts/tiny_mce/tiny_mce.js'), 'text/javascript');?>
+<?php $this->headScript()->appendFile($this->baseUrl('/assets/vendor/tinymce-release/tiny_mce.js'), 'text/javascript');?>
 <?php $this->placeholder('footerScript')->captureStart();?>
 <script type="text/javascript">
 tinyMCE.init({

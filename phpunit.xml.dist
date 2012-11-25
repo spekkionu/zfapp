@@ -9,7 +9,7 @@
       <directory suffix="Test.php">tests/unit</directory>
     </testsuite>
   </testsuites>
-
+<!--
   <logging>
     <log type="coverage-html" target="build/coverage" title="zfapp"
          charset="UTF-8" yui="true" highlight="true"
@@ -32,4 +32,5 @@
     </exclude>
     </whitelist>
   </filter>
+  -->
 </phpunit>

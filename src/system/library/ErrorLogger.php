@@ -11,61 +11,67 @@
 class ErrorLogger
 {
 
-  /**
-   * Zend_Log Instance
-   * @var Zend_Log
-   */
-  private static $log = null;
+    /**
+     * Zend_Log Instance
+     * @var Zend_Log
+     */
+    private static $log = null;
 
-  /**
-   * Class is a static class
-   */
-  private function __construct() {
+    /**
+     * Class is a static class
+     */
+    private function __construct()
+    {
 
-  }
-
-  /**
-   * Sets Zend_Log instance
-   * @param Zend_Log $log
-   * @return void
-   */
-  public static function setInstance(Zend_Log $log) {
-    self::$log = $log;
-  }
-
-  /**
-   * Returns logger
-   * @return Zend_Log
-   */
-  public static function getInstance() {
-    return self::$log;
-  }
-
-  /**
-   * Clears Logger
-   */
-  public static function clearInstance(){
-    self::$log = null;
-  }
-
-  /**
-   * Logs a message
-   * @param string $message
-   * @param int $priority
-   */
-  public static function log($message, $priority = Zend_Log::ERR) {
-    self::checkInstance();
-    return self::$log->log($message, $priority);
-  }
-
-  /**
-   * Checks if there is an existing instance
-   * @throws Exception
-   */
-  private static function checkInstance() {
-    if (is_null(self::$log)) {
-      throw new Exception('No log instance set.');
     }
-  }
+
+    /**
+     * Sets Zend_Log instance
+     * @param Zend_Log $log
+     * @return void
+     */
+    public static function setInstance(Zend_Log $log)
+    {
+        self::$log = $log;
+    }
+
+    /**
+     * Returns logger
+     * @return Zend_Log
+     */
+    public static function getInstance()
+    {
+        return self::$log;
+    }
+
+    /**
+     * Clears Logger
+     */
+    public static function clearInstance()
+    {
+        self::$log = null;
+    }
+
+    /**
+     * Logs a message
+     * @param string $message
+     * @param int $priority
+     */
+    public static function log($message, $priority = Zend_Log::ERR)
+    {
+        self::checkInstance();
+        return self::$log->log($message, $priority);
+    }
+
+    /**
+     * Checks if there is an existing instance
+     * @throws Exception
+     */
+    private static function checkInstance()
+    {
+        if (is_null(self::$log)) {
+            throw new Exception('No log instance set.');
+        }
+    }
 
 }

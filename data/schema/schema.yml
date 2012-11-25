@@ -81,13 +81,6 @@ User:
     collate: utf8_unicode_ci
     charset: utf8
     type: INNODB
-  actAs:
-    Timestampable:
-      created:
-        name: date_created
-        type: timestamp
-      updated:
-        disabled: true
   indexes:
     login:
       fields: [username,password,active]
@@ -106,10 +99,8 @@ User:
       unique: true
       comment: The username the user logs in with
     password:
-      type: string(128)
+      type: string(60)
       fixed: true
-      notblank: true
-      notnull: true
       comment: The password the user logs in with
     firstname:
       type: string(32)
@@ -147,13 +138,9 @@ User:
       default: user
       comment: The access level of the user
     token:
-      type: string(128)
+      type: string(32)
       fixed: true
       comment: Token used for password reset
-    password_key:
-      type: string(128)
-      fixed: true
-      comment: Hash used for password reset
     token_date:
       type: date
       comment: Date the password reset token expires.

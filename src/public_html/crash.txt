@@ -1,0 +1,368 @@
+date/time         : 2012-11-19, 21:55:46, 769ms
+computer name     : JONATHAN-PC
+user name         : IUSR
+registered owner  : Jonathan
+operating system  : Windows NT New x64 Service Pack 1 build 7601
+system language   : English
+system up time    : 13 hours 38 minutes
+program up time   : 10 minutes
+processors        : 4x Intel(R) Core(TM)2 Quad CPU Q6600 @ 2.40GHz
+physical memory   : 4454/8191 MB (free/total)
+free disk space   : (C:) 814.06 GB
+display mode      : 1024x768, 32 bit
+process id        : $1dbc
+allocated memory  : 13.26 MB
+command line      : C:\sendmail\sendmail.exe -t -i
+executable        : sendmail.exe
+exec. date/time   : 2008-04-24 13:48
+compiled with     : BCB 2006
+madExcept version : 3.0d
+callstack crc     : $9011801b, $1cd89da8, $1cd89da8
+exception number  : 1
+exception class   : EInOutError
+exception message : I/O error 105.
+
+main thread ($1adc):
+004aaf38 +14d0 sendmail.exe sendmail          812 +363 initialization
+77cc012e +000a ntdll.dll                               KiUserExceptionDispatcher
+004046dd +001d sendmail.exe System             53   +0 @AfterConstruction
+0043c664 +01d8 sendmail.exe IdIOHandlerStack  495  +49 TIdIOHandlerStack.ReadFromSource
+00434c94 +0190 sendmail.exe IdIOHandler      1158  +39 TIdIOHandler.ReadLn
+00434aec +0020 sendmail.exe IdIOHandler      1106   +1 TIdIOHandler.ReadLn
+00434e87 +003b sendmail.exe IdIOHandler      1208   +6 TIdIOHandler.ReadLnWait
+0043d065 +0055 sendmail.exe IdTCPConnection   683   +5 TIdTCPConnection.GetInternalResponse
+0043cc3d +0015 sendmail.exe IdTCPConnection   550   +1 TIdTCPConnection.GetResponse
+0043d120 +0020 sendmail.exe IdTCPConnection   702   +1 TIdTCPConnection.GetResponse
+0045431b +0027 sendmail.exe IdSMTP            419   +2 TIdSMTP.Connect
+004aa8e1 +0e79 sendmail.exe sendmail          720 +271 initialization
+75593398 +0010 KERNEL32.dll                            BaseThreadInitThunk
+
+thread $1f70:
+77cd013d +00 ntdll.dll
+75593398 +10 KERNEL32.dll  BaseThreadInitThunk
+
+modules:
+00400000 sendmail.exe                    C:\sendmail
+02160000 ssleay32.dll   0.9.8.24         C:\php5
+10000000 libeay32.dll   0.9.8.24         C:\php5
+722a0000 wshtcpip.dll   6.1.7600.16385   C:\Windows\System32
+722b0000 rasadhlp.dll   6.1.7600.16385   C:\Windows\system32
+722c0000 fwpuclnt.dll   6.1.7601.17514   C:\Windows\System32
+72300000 mdnsNSP.dll    3.0.0.10         C:\Program Files (x86)\Bonjour
+72330000 winrnr.dll     6.1.7600.16385   C:\Windows\System32
+72340000 DNSAPI.dll     6.1.7601.17570   C:\Windows\system32
+72530000 mswsock.dll    6.1.7601.17514   C:\Windows\System32
+72570000 WLIDNSP.DLL    6.500.3165.0     C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live
+725a0000 pnrpnsp.dll    6.1.7600.16385   C:\Windows\system32
+725c0000 napinsp.dll    6.1.7600.16385   C:\Windows\system32
+727e0000 NLAapi.dll     6.1.7601.17761   C:\Windows\system32
+72c80000 WINNSI.DLL     6.1.7600.16385   C:\Windows\system32
+72c90000 Iphlpapi.DLL   6.1.7601.17514   C:\Windows\system32
+73a80000 version.dll    6.1.7600.16385   C:\Windows\system32
+73ba0000 MSVCR90.dll    9.0.30729.6161   C:\Windows\WinSxS\x86_microsoft.vc90.crt_1fc8b3b9a1e18e3b_9.0.30729.6161_none_50934f2ebcb7eb57
+74c70000 comctl32.dll   5.82.7601.17514  C:\Windows\WinSxS\x86_microsoft.windows.common-controls_6595b64144ccf1df_5.82.7601.17514_none_ec83dffa859149af
+752d0000 snxhk.dll      7.0.1474.765     C:\Program Files\AVAST Software\Avast
+75310000 wsock32.dll    6.1.7600.16385   C:\Windows\system32
+75380000 CRYPTBASE.dll  6.1.7600.16385   C:\Windows\syswow64
+75390000 SspiCli.dll    6.1.7601.17940   C:\Windows\syswow64
+75420000 RPCRT4.dll     6.1.7601.17514   C:\Windows\syswow64
+75510000 SHLWAPI.dll    6.1.7601.17514   C:\Windows\syswow64
+75570000 NSI.dll        6.1.7600.16385   C:\Windows\syswow64
+75580000 KERNEL32.dll   6.1.7601.17651   C:\Windows\syswow64
+75690000 WS2_32.dll     6.1.7601.17514   C:\Windows\syswow64
+756d0000 LPK.dll        6.1.7600.16385   C:\Windows\syswow64
+759b0000 IMM32.DLL      6.1.7601.17514   C:\Windows\system32
+75a10000 msvcrt.dll     7.0.7601.17744   C:\Windows\syswow64
+75ac0000 USP10.dll      1.626.7601.17514 C:\Windows\syswow64
+75b90000 oleaut32.dll   6.1.7601.17676   C:\Windows\syswow64
+75c20000 KERNELBASE.dll 6.1.7601.17651   C:\Windows\syswow64
+75cf0000 ole32.dll      6.1.7601.17514   C:\Windows\syswow64
+75e60000 MSCTF.dll      6.1.7600.16385   C:\Windows\syswow64
+75f30000 sechost.dll    6.1.7600.16385   C:\Windows\SysWOW64
+76110000 comdlg32.dll   6.1.7601.17514   C:\Windows\syswow64
+76340000 USER32.dll     6.1.7601.17514   C:\Windows\syswow64
+76440000 GDI32.dll      6.1.7601.17514   C:\Windows\syswow64
+764d0000 ADVAPI32.dll   6.1.7601.17514   C:\Windows\syswow64
+76570000 shell32.dll    6.1.7601.17859   C:\Windows\syswow64
+77c80000 PSAPI.DLL      6.1.7600.16385   C:\Windows\syswow64
+77cb0000 ntdll.dll      6.1.7601.17725   C:\Windows\SysWOW64
+
+processes:
+0000 Idle                       0
+0004 System                     0
+01b8 smss.exe                   0
+020c csrss.exe                  0
+0260 wininit.exe                0
+0270 csrss.exe                  1
+02a8 winlogon.exe               1
+02d4 services.exe               0
+02e8 lsass.exe                  0
+02f0 lsm.exe                    0
+0358 svchost.exe                0
+03bc svchost.exe                0
+01e0 atiesrxx.exe               0
+0224 svchost.exe                0
+02cc svchost.exe                0
+0408 svchost.exe                0
+0484 CTAudSvc.exe               0
+04a0 svchost.exe                0
+04c0 svchost.exe                0
+0518 atieclxx.exe               1
+0544 svchost.exe                0
+05b8 AvastSvc.exe               0
+064c spoolsv.exe                0
+0708 svchost.exe                0
+07ec taskhost.exe               1
+0750 dwm.exe                    1
+0420 explorer.exe               1
+0840 svchost.exe                0
+0a38 sidebar.exe                1
+0aec StikyNot.exe               1
+0b04 ubd.exe                    1
+0b0c chrome.exe                 1
+0b3c GoogleCalendarSync.exe     1
+0b7c GoogleCrashHandler.exe     1
+0b8c GoogleCrashHandler64.exe   1
+05c0 mDNSResponder.exe          0
+08c4 CISVC.EXE                  0
+0820 inetinfo.exe               0
+0854 distnoted.exe              1
+09e8 conhost.exe                1
+0a04 AvastUI.exe                1
+073c iTunesHelper.exe           1
+09c0 chrome.exe                 1
+0b2c MOM.exe                    1
+09b0 chrome.exe                 1
+058c chrome.exe                 1
+0adc chrome.exe                 1
+0a70 chrome.exe                 1
+0b44 chrome.exe                 1
+0a78 chrome.exe                 1
+0a0c chrome.exe                 1
+0a1c chrome.exe                 1
+0a10 chrome.exe                 1
+0914 chrome.exe                 1
+0a94 chrome.exe                 1
+0828 chrome.exe                 1
+0a84 chrome.exe                 1
+0c4c jusched.exe                1
+0d40 vmware-tray.exe            1
+0eb8 mysqld.exe                 0
+0ef8 svchost.exe                0
+0f3c StarWindServiceAE.exe      0
+0f50 svchost.exe                0
+0fa0 TeamViewer_Service.exe     0
+0fd8 vmnat.exe                  0
+0d58 CCC.exe                    1
+0a68 svchost.exe                0
+0848 WLIDSVC.EXE                0
+104c vmware-authd.exe           0
+1248 WLIDSVCM.EXE               0
+1268 vmnetdhcp.exe              0
+132c vmware-usbarbitrator64.exe 0
+13c8 SearchIndexer.exe          0
+1088 iPodService.exe            0
+0d4c svchost.exe                0
+0fe4 svchost.exe                0
+06ec svchost.exe                0
+1658 wuauclt.exe                1
+1604 taskeng.exe                0
+0a6c cmd.exe                    0
+1534 conhost.exe                0
+14e8 TSVNCache.exe              1
+11e8 firefox.exe                1
+17dc chrome.exe                 1
+1664 Console.exe                1
+1610 powershell.exe             1
+0c1c conhost.exe                1
+17b4 ssh-agent.exe              1
+1ae0 chrome.exe                 1
+1460 chrome.exe                 1
+1e2c chrome.exe                 1
+16d8 audiodg.exe                0
+1cd4 w3wp.exe                   0
+1cc0 sublime_text.exe           1
+1e58 TGitCache.exe              1
+1020 w3wp.exe                   0
+1a80 cmd.exe                    0 normal C:\Windows\SysWOW64
+0d68 conhost.exe                0 normal
+1dbc sendmail.exe               0 normal C:\sendmail
+1c9c php-cgi.exe                0
+
+hardware:
++ Computer
+  - ACPI x64-based PC
++ Disk drives
+  - ST31000528AS ATA Device
+  - ST3500630AS ATA Device
+  - WDC WD10EAVS-00D7B1 ATA Device
++ Display adapters
+  - ATI Radeon HD 5700 Series (driver 9.2.0.0)
++ DVD/CD-ROM drives
+  - ATAPI iHOS104 ATA Device
+  - TSSTcorp CD/DVDW SH-S183L ATA Device
+  - XCXUDUL VSPENS9A SCSI CdRom Device
++ Human Interface Devices
+  - HID-compliant consumer control device
+  - HID-compliant device
+  - HID-compliant device
+  - HID-compliant device
+  - HID-compliant device
+  - HID-compliant game controller
+  - HID-compliant game controller
+  - USB Input Device
+  - USB Input Device
+  - USB Input Device
+  - USB Input Device
+  - USB Input Device
++ IDE ATA/ATAPI controllers
+  - ATA Channel 0
+  - ATA Channel 0
+  - ATA Channel 0
+  - ATA Channel 1
+  - ATA Channel 1
+  - ATA Channel 1
+  - Standard Dual Channel PCI IDE Controller
+  - Standard Dual Channel PCI IDE Controller
+  - Standard Dual Channel PCI IDE Controller
++ Keyboards
+  - HID Keyboard Device
+  - Standard PS/2 Keyboard
++ Mice and other pointing devices
+  - HID-compliant mouse
++ Monitors
+  - Generic PnP Monitor
+  - S211HL (Analog) (driver 1.0.0.0)
++ Network adapters
+  - D-Link DWA-556 Xtreme N PCIe Desktop Adapter (driver 8.0.0.238)
+  - Microsoft Virtual WiFi Miniport Adapter
+  - VMware Virtual Ethernet Adapter for VMnet1 (driver 4.1.4.0)
+  - VMware Virtual Ethernet Adapter for VMnet8 (driver 4.1.4.0)
++ Ports (COM & LPT)
+  - Communications Port (COM1)
++ Processors
+  - Intel(R) Core(TM)2 Quad CPU    Q6600  @ 2.40GHz
+  - Intel(R) Core(TM)2 Quad CPU    Q6600  @ 2.40GHz
+  - Intel(R) Core(TM)2 Quad CPU    Q6600  @ 2.40GHz
+  - Intel(R) Core(TM)2 Quad CPU    Q6600  @ 2.40GHz
++ Sound, video and game controllers
+  - AMD High Definition Audio Device (driver 7.12.0.7708)
+  - Creative SB Audigy 4 (WDM) (driver 6.0.1.1377)
++ Storage controllers
+  - A7S08Y6W IDE Controller
++ Storage volume shadow copies
+  - Generic volume shadow copy
+  - Generic volume shadow copy
+  - Generic volume shadow copy
+  - Generic volume shadow copy
+  - Generic volume shadow copy
+  - Generic volume shadow copy
++ System devices
+  - ACPI Fixed Feature Button
+  - ACPI Power Button
+  - ATK0110 ACPI UTILITY (driver 1043.2.15.37)
+  - Composite Bus Enumerator
+  - Direct Application Launch Button
+  - Direct memory access controller
+  - Extended IO Bus
+  - File as Volume Driver
+  - High Definition Audio Controller
+  - High precision event timer
+  - Intel(R) 82801 PCI Bridge - 244E
+  - Intel(R) G33/G31/P35/P31 Express Chipset PCI Express Root Port - 29C1
+  - Intel(R) G33/G31/P35/P31 Express Chipset Processor to I/O Controller - 29C0
+  - Intel(R) ICH9 Family PCI Express Root Port 1 - 2940
+  - Intel(R) ICH9 Family PCI Express Root Port 3 - 2944
+  - Intel(R) ICH9 Family PCI Express Root Port 5 - 2948
+  - Intel(R) ICH9 Family SMBus Controller - 2930
+  - Intel(R) ICH9R LPC Interface Controller - 2916
+  - Microsoft ACPI-Compliant System
+  - Microsoft System Management BIOS Driver
+  - Microsoft Virtual Drive Enumerator Driver
+  - Motherboard resources
+  - Motherboard resources
+  - Motherboard resources
+  - Motherboard resources
+  - Numeric data processor
+  - PCI bus
+  - Plug and Play Software Device Enumerator
+  - Programmable interrupt controller
+  - Remote Desktop Device Redirector Bus
+  - System board
+  - System board
+  - System CMOS/real time clock
+  - System speaker
+  - System timer
+  - Terminal Server Keyboard Driver
+  - Terminal Server Mouse Driver
+  - UMBus Enumerator
+  - UMBus Root Bus Enumerator
+  - VMware VMCI Host Device (driver 9.3.51.0)
+  - Volume Manager
++ Universal Serial Bus controllers
+  - Intel(R) ICH9 Family USB Universal Host Controller - 2934
+  - Intel(R) ICH9 Family USB Universal Host Controller - 2935
+  - Intel(R) ICH9 Family USB Universal Host Controller - 2936
+  - Intel(R) ICH9 Family USB Universal Host Controller - 2937
+  - Intel(R) ICH9 Family USB Universal Host Controller - 2938
+  - Intel(R) ICH9 Family USB Universal Host Controller - 2939
+  - Intel(R) ICH9 Family USB2 Enhanced Host Controller - 293A
+  - Intel(R) ICH9 Family USB2 Enhanced Host Controller - 293C
+  - USB Composite Device
+  - USB Composite Device
+  - USB Root Hub
+  - USB Root Hub
+  - USB Root Hub
+  - USB Root Hub
+  - USB Root Hub
+  - USB Root Hub
+  - USB Root Hub
+  - USB Root Hub
+
+cpu registers:
+eax = 00b7f620
+ebx = 004aaf38
+ecx = 00000069
+edx = 004aaf38
+esi = 004aaf38
+edi = 0018fe44
+eip = 004aaf38
+esp = 0018f7a0
+ebp = 0018ff88
+
+stack dump:
+0018f7a0  38 af 4a 00 de fa ed 0e - 01 00 00 00 07 00 00 00  8.J.............
+0018f7b0  b4 f7 18 00 38 af 4a 00 - 20 f6 b7 00 38 af 4a 00  ....8.J.....8.J.
+0018f7c0  38 af 4a 00 44 fe 18 00 - 88 ff 18 00 d0 f7 18 00  8.J.D...........
+0018f7d0  00 00 00 00 f0 2f 40 00 - 00 00 00 00 f9 ae 4a 00  ...../@.......J.
+0018f7e0  38 af 4a 00 00 00 00 00 - 59 57 43 00 60 53 b7 00  8.J.....YWC.`S..
+0018f7f0  f0 f8 18 00 1c f8 18 00 - 28 f8 18 00 00 00 00 00  ........(.......
+0018f800  00 00 00 00 00 00 00 00 - 59 b4 d0 77 f0 f8 18 00  ........Y..w....
+0018f810  44 fe 18 00 40 f9 18 00 - c4 f8 18 00 2c fe 18 00  D...@.......,...
+0018f820  6d b4 d0 77 44 fe 18 00 - d8 f8 18 00 2b b4 d0 77  m..wD.......+..w
+0018f830  f0 f8 18 00 44 fe 18 00 - 40 f9 18 00 c4 f8 18 00  ....D...@.......
+0018f840  f0 ae 4a 00 00 00 00 00 - f0 f8 18 00 44 fe 18 00  ..J.........D...
+0018f850  ce b3 d0 77 f0 f8 18 00 - 44 fe 18 00 40 f9 18 00  ...w....D...@...
+0018f860  c4 f8 18 00 f0 ae 4a 00 - 20 fe 18 00 f0 f8 18 00  ......J.........
+0018f870  00 00 00 00 d4 f8 18 00 - d8 f8 18 00 c4 d0 5b 75  ..............[u
+0018f880  74 65 f5 c3 00 00 40 00 - 00 00 40 00 00 00 00 00  te....@...@.....
+0018f890  00 00 40 00 80 f8 18 00 - f3 f8 18 00 bc f8 18 00  ..@.............
+0018f8a0  00 00 00 00 d4 f8 18 00 - 86 96 46 00 d4 f8 18 00  ..........F.....
+0018f8b0  10 fa 18 00 99 96 46 00 - d4 f8 18 00 e6 52 40 00  ......F......R@.
+0018f8c0  b8 fa 18 00 00 00 00 00 - 72 00 00 00 00 00 19 00  ........r.......
+0018f8d0  00 60 18 00 00 00 30 00 - 78 fc 18 00 33 01 cc 77  .`....0.x...3..w
+
+disassembling:
+[...]
+004aaf1e       mov     edx, [ebp-$120]
+004aaf24       mov     eax, [$4b154c]
+004aaf29       call    -$a5476 ($405ab8)      ; System.@Write0LString
+004aaf2e       call    -$a71c7 ($403d6c)      ; System.@WriteLn
+004aaf33       call    -$a7f0c ($40302c)      ; System.@_IOTest
+004aaf38 812 > mov     eax, [$4b8cf8]
+004aaf3d       mov     eax, [eax+4]
+004aaf40       call    -$3699 ($4a78ac)       ; sendmail.errorLog
+004aaf45 814   call    -$a62a6 ($404ca4)      ; System.@RaiseAgain
+004aaf4a       call    -$a6257 ($404cf8)      ; System.@DoneExcept
+004aaf4f 821   xor     eax, eax
+[...]

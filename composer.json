@@ -1,0 +1,66 @@
+{
+    "name": "spekkionu/zfapp",
+    "description": "Zend Framework 1.x skeleton application",
+    "license": "MIT",
+    "config": {
+        "bin-dir": "bin",
+        "vendor-dir": "src/system/library/vendor"
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "digital-canvas/zend-framework": "dev-master as 1.12.0",
+        "spekkionu/htmlpurifier": "dev-master as 4.4.0",
+        "spekkionu/wideimage": "dev-master as 11.02.19",
+        "jbroadway/urlify": "dev-master",
+        "spekkionu/zfdebug": "dev-master as 1.6",
+        "ziadoz/bcrypt": "dev-master",
+        "symfony/process": "v2.1.3",
+        "symfony/console": "v2.1.3",
+        "symfony/yaml": "v2.1.3",
+        "symfony/filesystem": "v2.1.3",
+        "symfony/finder": "v2.1.3"
+    },
+    "require-dev": {
+        "kriswallsmith/assetic": "v1.0.4",
+        "doctrine/doctrine1": "v1.2.5",
+        "leafo/lessphp": "v0.3.8",
+        "symfony/event-dispatcher" : "v2.1.3",
+        "symfony/css-selector": "v2.1.3",
+        "symfony/dom-crawler": "v2.1.3",
+        "symfony/browser-kit": "v2.1.3",
+        "fabpot/goutte": "dev-master",
+        "codeception/codeception":  "dev-master as 1.1.5"
+    },
+    "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/spekkionu/Codeception"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "App_": "src/system/library",
+            "Options_": "src/system/library/",
+            "Test_": "src/system/library/",
+            "Validate_": "src/system/library/",
+            "CLI": "src/system/application/",
+            "": "src/system/library"
+        },
+        "classmap": [
+          "src/system/application/",
+          "src/system/models/",
+          "src/system/forms/",
+          "src/system/library/Cache.php",
+          "src/system/library/Crypt.php",
+          "src/system/library/ErrorLogger.php"
+        ]
+    },
+    "include-path": ["src/system/library/"],
+    "authors": [
+        {
+            "name": "spekkionu",
+            "email": "spekkionu@spekkionu.com"
+        }
+    ]
+}

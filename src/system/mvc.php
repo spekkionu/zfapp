@@ -1,83 +1,89 @@
 <?php
 
-require(dirname(__FILE__) . '/application.php');
-
-if ($config['cache']['plugin']['enabled']) {
-  if (file_exists(SYSTEM . '/cache/plugin/pluginLoaderCache.php')) {
-    // Include the plugin loader cache
-    include_once SYSTEM . '/cache/plugin/pluginLoaderCache.php';
-  }elseif(!is_dir(SYSTEM . '/cache/plugin/')){
-    // Create the plugin cache directory
-    mkdir(SYSTEM . '/cache/plugin/', 0777, true);
-  }
-  Zend_Loader_PluginLoader::setIncludeFileCache(SYSTEM . '/cache/plugin/pluginLoaderCache.php');
+if (!defined('SYSTEM')) {
+    define('SYSTEM', __DIR__);
 }
 
-// Set Controller Paths
-$controller = Zend_Controller_Front::getInstance();
-$controller->setControllerDirectory(array(
-  'default' => SYSTEM . '/application/default/controllers',
-  'admin' => SYSTEM . '/application/admin/controllers'
-));
-
-// Setup Router with custom routes
-$router = $controller->getRouter();
-// Load CMS Routes
-$mgrContent = new Model_Content();
-$router->addRoutes($mgrContent->getRoutes());
-unset($mgrContent);
-// Add application routes
-$router->addRoutes(require(SYSTEM . '/configs/routes.php'));
-
-// Set Error Reporting
-$controller->throwExceptions($config['debug']['display_errors']);
-// Set Base Url
-if ($config['ssl']['enable'] && $_SERVER['REMOTE_PORT'] == $config['ssl']['port']) {
-  // This is a ssl request
-  $controller->setBaseUrl($config['ssl']['base_url']);
-} else {
-  // This is not an ssl request
-  $controller->setBaseUrl($config['site']['base_url']);
-}
-$controller->setParam('disableOutputBuffering', true);
-
-// register the default action helpers
-Zend_Controller_Action_HelperBroker::addPath(SYSTEM . '/application/default/helpers', 'Zend_Controller_Action_Helper');
-
-// Init Layout
-$layout = Zend_Layout::startMvc();
-$layout->setLayoutPath(SYSTEM . '/application/default/views/layout');
-$view = $layout->getView();
-$view->addHelperPath(SYSTEM . '/application/default/views/helpers', 'Zend_View_Helper');
-ZendX_JQuery::enableView($view);
-$view->jQuery()->enable();
-
-// Setup Navidation Defaults
-Zend_View_Helper_Navigation_HelperAbstract::setDefaultAcl($acl);
-if (Zend_Auth::getInstance()->hasIdentity()) {
-  Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole(Zend_Auth::getInstance()->getIdentity()->accesslevel);
-} else {
-  Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('guest');
+if (!defined('APPLICATION_PATH')) {
+    define('APPLICATION_PATH', SYSTEM.DIRECTORY_SEPARATOR.'application');
 }
 
-if ($config['debug']['debug_bar']) {
-  $debug = new ZFDebug_Controller_Plugin_Debug(array(
-      'jquery_path' => $view->baseUrl('assets/scripts/jquery/jquery-1.7.1.min.js'),
-      'plugins' => array(
-        'Variables',
-        'Html',
-        'Log',
-        'File' => array('base_path' => SYSTEM),
-        'Database',
-        'Memory',
-        'Time',
-        'ZFDebug_Controller_Plugin_Debug_Plugin_Auth' => array('user' => 'username', 'role' => 'accesslevel'),
-        'Exception'
-      )
-    ));
-  $controller->registerPlugin($debug);
+// Define application environment
+if (!defined('APPLICATION_ENV')) {
+    define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 }
 
+if(!defined('HTMLPURIFIER_PREFIX')){
+    define('HTMLPURIFIER_PREFIX', SYSTEM.'/library/vendor/spekkionu/htmlpurifier');
+}
 
-// distpatch controller
-$controller->dispatch();
+require_once(SYSTEM . '/library/vendor/autoload.php');
+
+$config = require_once(SYSTEM . '/configs/config.php');
+
+$config['debug']['xhprof']['active'] = false;
+if(APPLICATION_ENV != 'testing' && extension_loaded('xhprof') && $config['debug']['xhprof']['enabled'] && isset($_GET[$config['debug']['xhprof']['trigger']])) {
+    // Set as active
+    $config['debug']['xhprof']['active'] = true;
+    xhprof_enable(intval($config['debug']['xhprof']['options']));
+}
+
+Zend_Registry::set('config', $config);
+ 
+// Create application, bootstrap, and run
+$application = new Zend_Application(
+    APPLICATION_ENV,
+    SYSTEM . '/configs/application.ini'
+);
+
+$application->bootstrap()->run();
+
+if (APPLICATION_ENV != 'testing') {
+    $controller = Zend_Controller_Front::getInstance();
+    $request = $controller->getRequest();
+    $response = $controller->getResponse();
+
+    if ($config['debug']['xhprof']['active']) {
+      // stop profiler
+      $xhprof_data = xhprof_disable();
+
+      $XHPROF_ROOT = $config['debug']['xhprof']['root'];
+      include_once $XHPROF_ROOT . "/xhprof_lib/utils/xhprof_lib.php";
+      include_once $XHPROF_ROOT . "/xhprof_lib/utils/xhprof_runs.php";
+
+      // save raw data for this profiler run using default
+      // implementation of iXHProfRuns.
+      $xhprof_runs = new XHProfRuns_Default();
+
+      // save the run under a namespace "xhprof_foo"
+      $run_id = $xhprof_runs->save_run($xhprof_data, $config['debug']['xhprof']['key']);
+      $url = $config['debug']['xhprof']['base_url']."?run={$run_id}&source={$config['debug']['xhprof']['key']}";
+    }
+
+    if ($config['debug']['firebug']) {
+      $channel = Zend_Wildfire_Channel_HttpHeaders::getInstance();
+      $channel->setRequest($request);
+      $channel->setResponse($response);
+      ob_start();
+      if ($config['debug']['xhprof']['active']) {
+        if($config['debug']['xhprof']['allowed'] && isset($_SERVER['REMOTE_ADDRESS']) && in_array($_SERVER['REMOTE_ADDRESS'], $config['debug']['xhprof']['allowed'])){
+          // If allowed log to firebug
+          $firebug->log($run_id, Zend_Log::DEBUG);
+          $firebug->log($url, Zend_Log::DEBUG);
+        }else{
+          // otherwise log to file
+          $logger = new Zend_Log(new Zend_Log_Writer_Stream(SYSTEM.'/logs/xhprof.log'));
+          $logger->log($run_id, Zend_Log::DEBUG);
+          $logger->log($url, Zend_Log::DEBUG);
+        }
+      }
+      $channel->flush();
+    }elseif($config['debug']['xhprof']['active']){
+      // otherwise log to file
+      $logger = new Zend_Log(new Zend_Log_Writer_Stream(SYSTEM.'/logs/xhprof.log'));
+      $logger->log($run_id, Zend_Log::DEBUG);
+      $logger->log($url, Zend_Log::DEBUG);
+    }
+
+    $response->sendResponse();
+}

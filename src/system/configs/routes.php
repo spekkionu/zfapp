@@ -76,6 +76,14 @@ $routes['admin_forgot_password'] = new Zend_Controller_Router_Route_Static(
     'action' => 'reset-password'
   )
 );
+$routes['admin_password_sent'] = new Zend_Controller_Router_Route_Static(
+  'admin/reset-password/sent',
+  array(
+    'module' => 'admin',
+    'controller' => 'access',
+    'action' => 'password-sent'
+  )
+);
 $routes['admin_save_password'] = new Zend_Controller_Router_Route(
   'admin/reset-password/:token',
   array(

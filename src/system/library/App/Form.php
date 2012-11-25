@@ -8,11 +8,41 @@
  * @author     spekkionu
  * @license    New BSD http://www.opensource.org/licenses/bsd-license.php
  */
-class App_Form extends ZendX_JQuery_Form
+class App_Form extends Zend_Form
 {
 
-  public $field = array(
+    public function loadDefaultDecorators() {
+        $this->setDecorators(array(
+          'FormElements',
+          array('Description', array('tag' => 'p', 'class' => 'form-help')),
+          array('Fieldset', array()),
+          array('Form', array('class' => 'form-horizontal', 'accept-charset' => 'utf-8'))
+        ));
+      }
+
+    public $field = array(
     'ViewHelper',
+    array('Description', array('tag' => 'div', 'class' => 'help-block', 'placement' => 'append', 'escape' => false)),
+    array('Errors', array()),
+    array(array('element' => 'HtmlTag'), array('tag' => 'div', 'class' => 'controls')),
+    array('Label', array('placement' => 'prepend', 'class' => 'control-label')),
+    array(array('row' => 'HtmlTag'), array('tag' => 'div', 'class' => 'control-group'))
+  );
+  public $front = array(
+      'ViewHelper',
+      //array('Description', array('tag' => 'div', 'class' => 'help-block', 'placement' => 'append', 'escape' => false)),
+      array('Errors', array()),
+      //array(array('element' => 'HtmlTag'), array('tag' => 'div', 'class' => 'controls')),
+      array('Label', array('placement' => 'prepend', 'class' => 'control-label')),
+      array(array('row' => 'HtmlTag'), array('tag' => 'div', 'class' => 'control-group'))
+  );
+  public $simple = array(
+    'ViewHelper',
+    array('Errors', array()),
+    array('Label', array('placement' => 'prepend', 'class' => '')),
+  );
+  public $file = array(
+    'File',
     array('Description', array('tag' => 'div', 'class' => 'help-block', 'placement' => 'append', 'escape' => false)),
     array('Errors', array()),
     array(array('element' => 'HtmlTag'), array('tag' => 'div', 'class' => 'controls')),
@@ -32,7 +62,7 @@ class App_Form extends ZendX_JQuery_Form
     array('Description', array('tag' => 'div', 'class' => 'help-block', 'placement' => 'append', 'escape' => false)),
     'Errors',
     array(array('element' => 'HtmlTag'), array('tag' => 'div', 'class' => 'controls')),
-    array('Label', array('placement' => 'prepend')),
+    array('Label', array('placement' => 'prepend', 'class' => 'control-label')),
     array(array('row' => 'HtmlTag'), array('tag' => 'div', 'class' => 'control-group span5')),
     array(array('wrapper' => 'HtmlTag'), array('tag' => 'div', 'class' => 'row', 'openOnly' => true))
   );
@@ -41,7 +71,7 @@ class App_Form extends ZendX_JQuery_Form
     array('Description', array('tag' => 'div', 'class' => 'help-block', 'placement' => 'append', 'escape' => false)),
     'Errors',
     array(array('element' => 'HtmlTag'), array('tag' => 'div', 'class' => 'controls')),
-    array('Label', array('placement' => 'prepend')),
+    array('Label', array('placement' => 'prepend', 'class' => 'control-label')),
     array(array('row' => 'HtmlTag'), array('tag' => 'div', 'class' => 'control-group span5')),
     array(array('wrapper' => 'HtmlTag'), array('tag' => 'div', 'class' => 'row', 'closeOnly' => true))
   );
@@ -54,7 +84,7 @@ class App_Form extends ZendX_JQuery_Form
     array('Description', array('tag' => 'div', 'class' => 'help-block', 'placement' => 'append', 'escape' => false)),
     'Errors',
     array(array('element' => 'HtmlTag'), array('tag' => 'div', 'class' => 'controls form-element-password')),
-    array('Label', array('placement' => 'prepend')),
+    array('Label', array('placement' => 'prepend', 'class' => 'control-label')),
     array(array('row' => 'HtmlTag'), array('tag' => 'div', 'class' => 'control-group'))
   );
   public $inline = array(
@@ -83,70 +113,76 @@ class App_Form extends ZendX_JQuery_Form
     'ViewHelper',
     array(array('row' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-actions', 'closeOnly' => true))
   );
+  public $displayGroup = array(
+    'FormElements',
+    array('Fieldset', array()),
+  );
 
-  public function init() {
-    if ($this->getView()) {
-      $this->setAction($this->getView()->url());
+    public function init()
+    {
+        if ($this->getView()) {
+            $this->setAction($this->getView()->url());
+        }
+        $this->setMethod('post');
+        $this->addElementPrefixPath('App_Form_Decorator', 'App/Form/Decorator/', 'decorator');
     }
-    $this->setMethod('post');
-    ZendX_JQuery::enableForm($this);
-    $this->addElementPrefixPath('Form_Decorator', 'Form/Decorator/', 'decorator');
-  }
 
-  /**
-   * Returns array of form validation error messages for use in json response
-   * If an element has multiple errors they are returned as a string separated by newlines
-   * @return array
-   */
-  public function getJsonErrors($allow_array = true, $separator = "\n") {
-    $array = array();
-    foreach ($this->getMessages() as $element => $messages) {
-      $array[$element] = ($allow_array) ? $messages : implode($separator, $messages);
+    /**
+     * Returns array of form validation error messages for use in json response
+     * If an element has multiple errors they are returned as a string separated by newlines
+     * @return array
+     */
+    public function getJsonErrors($allow_array = true, $separator = "\n")
+    {
+        $array = array();
+        foreach ($this->getMessages() as $element => $messages) {
+            $array[$element] = ($allow_array) ? $messages : implode($separator, $messages);
+        }
+        unset($element, $messages);
+        return $array;
     }
-    unset($element, $messages);
-    return $array;
-  }
 
-  /**
-   * Add error class to invalid elements
-   * @param array $data
-   * @return boolean
-   */
-  public function isValid($data) {
-    $valid = parent::isValid($data);
-    if (!$valid) {
-      foreach ($this->getMessages() as $element => $messages) {
-        $class = $this->getElement($element)->getAttrib('class');
-        if (!$class) {
-          $class = 'error';
-        } else {
-          // Check if already has error class
-          $classes = explode(' ', $class);
-          if (!in_array('error', $classes)) {
-            // Does not already have error class
-            $class .= ' error';
-          }
+    /**
+     * Add error class to invalid elements
+     * @param array $data
+     * @return boolean
+     */
+    public function isValid($data)
+    {
+        $valid = parent::isValid($data);
+        if (!$valid) {
+            foreach ($this->getMessages() as $element => $messages) {
+                $class = $this->getElement($element)->getAttrib('class');
+                if (!$class) {
+                    $class = 'error';
+                } else {
+                    // Check if already has error class
+                    $classes = explode(' ', $class);
+                    if (!in_array('error', $classes)) {
+                        // Does not already have error class
+                        $class .= ' error';
+                    }
+                }
+                $this->getElement($element)->setAttrib('class', $class);
+                $decorator = $this->getElement($element)->getDecorator('row');
+                if (!$decorator) {
+                    continue;
+                }
+                $class = $decorator->getOption('class');
+                if (!$class) {
+                    $class = 'error';
+                } else {
+                    // Check if already has error class
+                    $classes = explode(' ', $class);
+                    if (!in_array('error', $classes)) {
+                        // Does not already have error class
+                        $class .= ' error';
+                    }
+                }
+                $this->getElement($element)->getDecorator('row')->setOption('class', $class);
+            }
         }
-        $this->getElement($element)->setAttrib('class', $class);
-        $decorator = $this->getElement($element)->getDecorator('row');
-        if (!$decorator) {
-          continue;
-        }
-        $class = $decorator->getOption('class');
-        if (!$class) {
-          $class = 'error';
-        } else {
-          // Check if already has error class
-          $classes = explode(' ', $class);
-          if (!in_array('error', $classes)) {
-            // Does not already have error class
-            $class .= ' error';
-          }
-        }
-        $this->getElement($element)->getDecorator('row')->setOption('class', $class);
-      }
+        return $valid;
     }
-    return $valid;
-  }
 
 }

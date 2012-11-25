@@ -1,0 +1,505 @@
+{
+    "hash": "c2b2dfc3a812fad1d88bdcce5ae67132",
+    "packages": [
+        {
+            "name": "digital-canvas/zend-framework",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/digital-canvas/zend-framework",
+                "reference": "1.12.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/digital-canvas/zend-framework/archive/1.12.0.zip",
+                "reference": "1.12.0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.4"
+            },
+            "time": "2012-08-31 19:22:38",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Zend_": "library/",
+                    "ZendX_": "library/"
+                }
+            },
+            "include-path": [
+                "library/"
+            ],
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Zend Framework with only the libraries and require_once() calls commented out for better performance with an autoloader.",
+            "homepage": "https://github.com/digital-canvas/zend-framework",
+            "keywords": [
+                "zend",
+                "Zend Framework",
+                "ZF1",
+                "zf"
+            ]
+        },
+        {
+            "name": "jbroadway/urlify",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jbroadway/urlify",
+                "reference": "e263633fa41986c4fe82f3089451ff43611608fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/jbroadway/urlify/archive/e263633fa41986c4fe82f3089451ff43611608fc.zip",
+                "reference": "e263633fa41986c4fe82f3089451ff43611608fc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "time": "2012-09-19 14:01:18",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "URLify": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Johnny Broadway",
+                    "email": "johnny@johnnybroadway.com",
+                    "homepage": "http://www.johnnybroadway.com/"
+                }
+            ],
+            "description": "PHP port of URLify.js from the Django project. Transliterates non-ascii characters for use in URLs.",
+            "homepage": "https://github.com/jbroadway/urlify",
+            "keywords": [
+                "url",
+                "link",
+                "slug",
+                "encode",
+                "urlify",
+                "transliterate",
+                "translit",
+                "transliteration",
+                "iconv"
+            ]
+        },
+        {
+            "name": "spekkionu/htmlpurifier",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spekkionu/htmlpurifier",
+                "reference": "95e16443811da5dd1b5e4ef800c1d636fadfbeee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/spekkionu/htmlpurifier/archive/95e16443811da5dd1b5e4ef800c1d636fadfbeee.zip",
+                "reference": "95e16443811da5dd1b5e4ef800c1d636fadfbeee",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.4"
+            },
+            "time": "2012-07-30 16:34:03",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "HTMLPurifier": "",
+                    "HTMLPurifier_": "HTMLPurifier/"
+                }
+            },
+            "license": [
+                "LGPL-2.0"
+            ],
+            "description": "HTML Purifier is a standards-compliant HTML filter library written in PHP.",
+            "homepage": "http://htmlpurifier.org/"
+        },
+        {
+            "name": "spekkionu/wideimage",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spekkionu/wideimage",
+                "reference": "8c66e974f3bded4bcebf7f688df584eb4c102672"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/spekkionu/wideimage/archive/8c66e974f3bded4bcebf7f688df584eb4c102672.zip",
+                "reference": "8c66e974f3bded4bcebf7f688df584eb4c102672",
+                "shasum": ""
+            },
+            "time": "2012-10-21 00:03:36",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "WideImage": "",
+                    "WideImage_": "WideImage/"
+                }
+            },
+            "license": [
+                "GPL-2.0",
+                "LGPL-2.1"
+            ],
+            "description": "An open-source PHP library for image manipulation",
+            "homepage": "http://wideimage.sourceforge.net"
+        },
+        {
+            "name": "spekkionu/zfdebug",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spekkionu/ZFDebug",
+                "reference": "359a4423f7850c41c9af4b3998b335d815f1e220"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/spekkionu/ZFDebug/archive/359a4423f7850c41c9af4b3998b335d815f1e220.zip",
+                "reference": "359a4423f7850c41c9af4b3998b335d815f1e220",
+                "shasum": ""
+            },
+            "time": "2012-09-17 05:19:50",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "classmap": [
+                    "library/"
+                ]
+            },
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "description": "Debug bar for Zend Framework 1"
+        },
+        {
+            "name": "symfony/console",
+            "version": "v2.1.3",
+            "target-dir": "Symfony/Component/Console",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Console",
+                "reference": "v2.1.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/symfony/Console/zipball/v2.1.3",
+                "reference": "v2.1.3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "time": "2012-10-22 07:37:12",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Console": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Console Component",
+            "homepage": "http://symfony.com"
+        },
+        {
+            "name": "symfony/filesystem",
+            "version": "v2.1.3",
+            "target-dir": "Symfony/Component/Filesystem",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Filesystem",
+                "reference": "v2.1.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/symfony/Filesystem/zipball/v2.1.3",
+                "reference": "v2.1.3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "time": "2012-10-20 00:10:30",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Filesystem": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Filesystem Component",
+            "homepage": "http://symfony.com"
+        },
+        {
+            "name": "symfony/finder",
+            "version": "v2.1.3",
+            "target-dir": "Symfony/Component/Finder",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Finder",
+                "reference": "v2.1.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/symfony/Finder/zipball/v2.1.3",
+                "reference": "v2.1.3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "time": "2012-10-20 00:10:30",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Finder": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Finder Component",
+            "homepage": "http://symfony.com"
+        },
+        {
+            "name": "symfony/process",
+            "version": "v2.1.3",
+            "target-dir": "Symfony/Component/Process",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Process",
+                "reference": "v2.1.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/symfony/Process/zipball/v2.1.3",
+                "reference": "v2.1.3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "time": "2012-10-20 00:10:30",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Process": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Process Component",
+            "homepage": "http://symfony.com"
+        },
+        {
+            "name": "symfony/yaml",
+            "version": "v2.1.3",
+            "target-dir": "Symfony/Component/Yaml",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Yaml",
+                "reference": "v2.1.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/symfony/Yaml/zipball/v2.1.3",
+                "reference": "v2.1.3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "time": "2012-10-29 04:15:41",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Yaml": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Yaml Component",
+            "homepage": "http://symfony.com"
+        },
+        {
+            "name": "ziadoz/bcrypt",
+            "version": "dev-default",
+            "source": {
+                "type": "hg",
+                "url": "https://bitbucket.org/ziadoz/bcrypt",
+                "reference": "tip"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://bitbucket.org/ziadoz/bcrypt/get/tip.zip",
+                "reference": "tip",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "time": "2012-10-25 03:14:36",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Ziadoz": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ziadoz"
+                }
+            ],
+            "description": "A simple BCrypt password hashing library.",
+            "homepage": "https://bitbucket.org/ziadoz/bcrypt",
+            "keywords": [
+                "password",
+                "hash",
+                "blowfish",
+                "bcrypt"
+            ]
+        }
+    ],
+    "packages-dev": null,
+    "aliases": [
+        {
+            "alias": "1.12.0",
+            "alias_normalized": "1.12.0.0",
+            "version": "9999999-dev",
+            "package": "digital-canvas/zend-framework"
+        },
+        {
+            "alias": "4.4.0",
+            "alias_normalized": "4.4.0.0",
+            "version": "9999999-dev",
+            "package": "spekkionu/htmlpurifier"
+        },
+        {
+            "alias": "11.02.19",
+            "alias_normalized": "11.02.19.0",
+            "version": "9999999-dev",
+            "package": "spekkionu/wideimage"
+        },
+        {
+            "alias": "1.6",
+            "alias_normalized": "1.6.0.0",
+            "version": "9999999-dev",
+            "package": "spekkionu/zfdebug"
+        },
+        {
+            "alias": "1.1.5",
+            "alias_normalized": "1.1.5.0",
+            "version": "9999999-dev",
+            "package": "codeception/codeception"
+        }
+    ],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "digital-canvas/zend-framework": 20,
+        "spekkionu/htmlpurifier": 20,
+        "spekkionu/wideimage": 20,
+        "jbroadway/urlify": 20,
+        "spekkionu/zfdebug": 20,
+        "ziadoz/bcrypt": 20,
+        "fabpot/goutte": 20,
+        "codeception/codeception": 20
+    }
+}

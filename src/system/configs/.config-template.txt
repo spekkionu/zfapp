@@ -1,0 +1,101 @@
+<?php
+
+//########################
+// General Site Settings #
+//########################
+
+$config['site'] = array(
+  // The name of the site. Used for emails and site titles
+  'name' => '{{site_name}}',
+
+  // The domain of the store.  Does not include the http:://
+  'domain' => '{{site_domain}}',
+
+  // The directory the application is installed in. Use / if the application is installed in the document root
+  // If mod rewrite is not available use /index.php/
+  'base_url' => '/',
+
+  'webroot' => '{{site_webroot}}'
+);
+
+$config['ssl'] = array(
+  // If ssl is enabled for this site
+  'enable' => false,
+
+  // The port to use for secure pages.
+  // Use port 443 for ssl and port 80 to fake ssl switching
+  'port' => 443,
+);
+
+//##############################
+// Error reporting and logging #
+//##############################
+
+$config['debug'] = array(
+  // Error reporting php setting
+  // Leave at -1 to log all errors.
+	// Better to turn off display_errors than change this which also changes logging.
+  'error_reporting' => E_ALL,
+  // If true errors and exceptions will be shown.
+  // Set to false for production
+  'display_errors' => false,
+  // If true errors and exceptions will be logged.
+  'error_logging' => true,
+  // If true send FirePHP headers to firebug
+  'firebug' => false,
+  // Show Debug Toolbar
+  'debug_bar' => false,
+  // Profile with xhprof
+  'xhprof' => array(
+    // If true it will be enabled
+    'enabled' => false,
+    // Identifier for the run
+    'key' => 'xhprof_zfapp',
+    // Directory with xhprof php libraries
+    'root' => '/usr/share/php',
+    // Url for profile viewing
+    'base_url' => '{{site_domain}}/xhprof',
+    // Options passed to xhprof_enable XHPROF_FLAGS_MEMORY | XHPROF_FLAGS_CPU | XHPROF_FLAGS_NO_BUILTINS
+    'options' => 0,
+    // IP addresses allowed to view the url
+    'allowed' => array('127.0.0.1'),
+    // the trigger GET param
+    'trigger' => 'xhprof'
+  )
+);
+
+
+//##########################
+// Encryption and hashing  #
+//##########################
+
+$config['security'] = array(
+  'crypt' => array(
+    // Salt used for encrypting settings, user passwords, and other data
+    // Should be changed for each install but changing will invalidate existing data.
+    'key' => '{{crypt_key}}',
+    // Encryption Algorithm to use.
+    // Can be any mcrypt encryption algorithm returned by mcrypt_list_algorithms()
+    'algorithm' => 'rijndael-256',
+    // mcrypt mode
+    'mode' => 'ecb'
+  )
+);
+
+
+//###############################
+// Database Connection Settings #
+//###############################
+
+$config['database'] = array(
+  'adapter' => 'Pdo_Mysql',
+  'params' => array(
+    'host' => '{{database_hostname}}',
+    'username' => '{{database_username}}',
+    'password' => '{{database_password}}',
+    'dbname' => '{{database_database}}',
+    'charset' => 'utf8',
+    // Adapter specific parameters
+    'options' => array()
+  )
+);
