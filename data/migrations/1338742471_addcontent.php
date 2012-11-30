@@ -7,7 +7,7 @@ class Addcontent extends Doctrine_Migration_Base
     public function up()
     {
         $this->createTable('content', array(
-             'id' => 
+             'id' =>
              array(
               'type' => 'integer',
               'primary' => true,
@@ -16,7 +16,7 @@ class Addcontent extends Doctrine_Migration_Base
               'comment' => 'Primary key',
               'length' => 4,
              ),
-             'url' => 
+             'url' =>
              array(
               'type' => 'string',
               'notblank' => true,
@@ -25,98 +25,98 @@ class Addcontent extends Doctrine_Migration_Base
               'comment' => 'Url the page can be found at',
               'length' => 255,
              ),
-             'title' => 
+             'title' =>
              array(
               'type' => 'string',
               'comment' => 'Used as the meta title for the page',
               'length' => 255,
              ),
-             'content' => 
+             'content' =>
              array(
               'type' => 'clob',
               'comment' => 'The page content',
               'length' => 2147483647,
              ),
-             'meta_title' => 
+             'meta_title' =>
              array(
               'type' => 'string',
               'comment' => 'Used in the <title> tag',
               'length' => 255,
              ),
-             'meta_keywords' => 
+             'meta_keywords' =>
              array(
               'type' => 'string',
               'comment' => 'Kewords for SEO <meta> keywords tag',
               'length' => NULL,
              ),
-             'meta_description' => 
+             'meta_description' =>
              array(
               'type' => 'string',
               'comment' => 'Description for SEO <meta> description tag',
               'length' => NULL,
              ),
-             'active' => 
+             'active' =>
              array(
-              'type' => 'boolean',
+              'type' => 'integer',
               'default' => 0,
               'notnull' => true,
               'unsigned' => true,
               'comment' => 'Only active pages can be accessed',
-              'length' => 25,
+              'length' => 1,
              ),
-             'date_created' => 
+             'date_created' =>
              array(
               'notnull' => true,
               'type' => 'timestamp',
               'length' => 25,
              ),
-             'last_updated' => 
+             'last_updated' =>
              array(
               'notnull' => true,
               'type' => 'timestamp',
               'length' => 25,
              ),
-             'can_delete' => 
+             'can_delete' =>
              array(
-              'type' => 'boolean',
+              'type' => 'integer',
               'default' => 1,
               'notnull' => true,
               'unsigned' => true,
               'comment' => 'If 0 this page cannot be deleted.',
-              'length' => 25,
+              'length' => 1,
              ),
-             'edit_url' => 
+             'edit_url' =>
              array(
-              'type' => 'boolean',
+              'type' => 'integer',
               'default' => 1,
               'notnull' => true,
               'unsigned' => true,
               'comment' => 'If 0 the url cannot be changed.',
-              'length' => 25,
+              'length' => 1,
              ),
-             'full_page' => 
+             'full_page' =>
              array(
-              'type' => 'boolean',
+              'type' => 'integer',
               'default' => 1,
               'notnull' => true,
               'unsigned' => true,
               'comment' => 'If 0 do not create a route for this page.',
-              'length' => 25,
+              'length' => 1,
              ),
              ), array(
              'type' => 'INNODB',
-             'indexes' => 
+             'indexes' =>
              array(
-              'routes' => 
+              'routes' =>
               array(
-              'fields' => 
+              'fields' =>
               array(
                0 => 'active',
                1 => 'full_page',
               ),
               ),
              ),
-             'primary' => 
+             'primary' =>
              array(
               0 => 'id',
              ),

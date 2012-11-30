@@ -59,12 +59,12 @@ class Addusers extends Doctrine_Migration_Base
              ),
              'active' =>
              array(
-              'type' => 'boolean',
+              'type' => 'integer',
               'default' => 0,
               'notnull' => true,
               'unsigned' => true,
               'comment' => 'Only active users may log in.',
-              'length' => 25,
+              'length' => 1,
              ),
              'date_created' =>
              array(
@@ -124,8 +124,24 @@ class Addusers extends Doctrine_Migration_Base
              ));
     }
 
+    public function postUp()
+    {
+        $mgr = new Model_User();
+        $mgr->insert(array(
+            'username' => 'admin',
+            'password' => Model_User::encrypt('password'),
+            'firstname' => '',
+            'lastname' => 'Administrator',
+            'email' => 'email@example.com',
+            'active' => 1,
+            'date_created' => date('Y-m-d H:i:s'),
+            'accesslevel' => Model_Admin::ACCESS_SUPERADMIN
+        ));
+    }
+
     public function down()
     {
         $this->dropTable('users');
     }
+
 }

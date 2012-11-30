@@ -11,7 +11,7 @@
  * @property string $firstname
  * @property string $lastname
  * @property string $email
- * @property boolean $active
+ * @property integer $active
  * @property timestamp $date_created
  * @property timestamp $last_login
  * @property string $accesslevel
@@ -72,12 +72,13 @@ abstract class Base_User extends Doctrine_Record
              'comment' => 'The email address of the user',
              'length' => '127',
              ));
-        $this->hasColumn('active', 'boolean', null, array(
-             'type' => 'boolean',
-             'default' => false,
+        $this->hasColumn('active', 'integer', 1, array(
+             'type' => 'integer',
+             'default' => 0,
              'notnull' => true,
              'unsigned' => true,
              'comment' => 'Only active users may log in.',
+             'length' => '1',
              ));
         $this->hasColumn('date_created', 'timestamp', null, array(
              'type' => 'timestamp',

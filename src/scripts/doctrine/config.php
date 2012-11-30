@@ -39,9 +39,6 @@ define('DISABLE_CACHES', true);
 define('DISABLE_LOGS', true);
 define('DISABLE_SESSIONS', true);
 
-// Init Autoloader
-require_once(dirname(dirname(__DIR__)) . '/system/application.php');
-
 define('SANDBOX_PATH', dirname(__FILE__));
 define('PROJECT_PATH', dirname(dirname(dirname(SANDBOX_PATH))));
 if(!defined('SYSTEM')){
@@ -53,6 +50,26 @@ define('MODELS_PATH', PROJECT_PATH . '/data/models');
 define('MIGRATIONS_PATH', PROJECT_PATH . '/data/migrations');
 define('SQL_PATH', PROJECT_PATH . '/data/sql');
 define('YAML_SCHEMA_PATH', PROJECT_PATH . '/data/schema');
+
+if(!defined('APPLICATION_ENV')){
+    define('APPLICATION_ENV', 'production');
+}
+if(!defined('APPLICATION_PATH')){
+    define('APPLICATION_PATH', SYSTEM.DIRECTORY_SEPARATOR.'application');
+}
+
+// Set up autoload.
+require_once(SYSTEM . '/library/vendor/autoload.php');
+
+// Init Autoloader
+$application = new Zend_Application(
+    APPLICATION_ENV,
+    SYSTEM . '/configs/application.ini'
+);
+
+$application->bootstrap(array('encoding', 'config', 'cache', 'locale', 'crypt', 'db', 'mail', 'session'));
+
+$config = Zend_Registry::get('config');
 
 // Init Doctrine Autoloader
 require_once(DOCTRINE_PATH . DIRECTORY_SEPARATOR . 'Doctrine.php');

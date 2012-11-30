@@ -4,14 +4,6 @@ Content:
     collate: utf8_unicode_ci
     charset: utf8
     type: INNODB
-  actAs:
-    Timestampable:
-      created:
-        name: date_created
-        type: timestamp
-      updated:
-        name: last_updated
-        type: timestamp
   indexes:
     routes:
       fields: [active,full_page]
@@ -44,8 +36,8 @@ Content:
       type: string
       comment: Description for SEO <meta> description tag
     active:
-      type: boolean
-      default: false
+      type: integer(1)
+      default: 0
       notnull: true
       unsigned: true
       comment: Only active pages can be accessed
@@ -57,20 +49,20 @@ Content:
       type: timestamp
       comment: The date the content was last updated.
     can_delete:
-      type: boolean
-      default: true
+      type: integer(1)
+      default: 1
       notnull: true
       unsigned: true
       comment: If 0 this page cannot be deleted.
     edit_url:
-      type: boolean
-      default: true
+      type: integer(1)
+      default: 1
       notnull: true
       unsigned: true
       comment: If 0 the url cannot be changed.
     full_page:
-      type: boolean
-      default: true
+      type: integer(1)
+      default: 1
       notnull: true
       unsigned: true
       comment: If 0 do not create a route for this page.
@@ -119,8 +111,8 @@ User:
       unique: true
       comment: The email address of the user
     active:
-      type: boolean
-      default: false
+      type: integer(1)
+      default: 0
       notnull: true
       unsigned: true
       comment: Only active users may log in.

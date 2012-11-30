@@ -12,12 +12,12 @@
  * @property string $meta_title
  * @property string $meta_keywords
  * @property string $meta_description
- * @property boolean $active
+ * @property integer $active
  * @property timestamp $date_created
  * @property timestamp $last_updated
- * @property boolean $can_delete
- * @property boolean $edit_url
- * @property boolean $full_page
+ * @property integer $can_delete
+ * @property integer $edit_url
+ * @property integer $full_page
  * 
  * @package    App
  * @subpackage Model
@@ -68,12 +68,13 @@ abstract class Base_Content extends Doctrine_Record
              'type' => 'string',
              'comment' => 'Description for SEO <meta> description tag',
              ));
-        $this->hasColumn('active', 'boolean', null, array(
-             'type' => 'boolean',
-             'default' => false,
+        $this->hasColumn('active', 'integer', 1, array(
+             'type' => 'integer',
+             'default' => 0,
              'notnull' => true,
              'unsigned' => true,
              'comment' => 'Only active pages can be accessed',
+             'length' => '1',
              ));
         $this->hasColumn('date_created', 'timestamp', null, array(
              'type' => 'timestamp',
@@ -84,26 +85,29 @@ abstract class Base_Content extends Doctrine_Record
              'type' => 'timestamp',
              'comment' => 'The date the content was last updated.',
              ));
-        $this->hasColumn('can_delete', 'boolean', null, array(
-             'type' => 'boolean',
-             'default' => true,
+        $this->hasColumn('can_delete', 'integer', 1, array(
+             'type' => 'integer',
+             'default' => 1,
              'notnull' => true,
              'unsigned' => true,
              'comment' => 'If 0 this page cannot be deleted.',
+             'length' => '1',
              ));
-        $this->hasColumn('edit_url', 'boolean', null, array(
-             'type' => 'boolean',
-             'default' => true,
+        $this->hasColumn('edit_url', 'integer', 1, array(
+             'type' => 'integer',
+             'default' => 1,
              'notnull' => true,
              'unsigned' => true,
              'comment' => 'If 0 the url cannot be changed.',
+             'length' => '1',
              ));
-        $this->hasColumn('full_page', 'boolean', null, array(
-             'type' => 'boolean',
-             'default' => true,
+        $this->hasColumn('full_page', 'integer', 1, array(
+             'type' => 'integer',
+             'default' => 1,
              'notnull' => true,
              'unsigned' => true,
              'comment' => 'If 0 do not create a route for this page.',
+             'length' => '1',
              ));
 
 
@@ -122,18 +126,6 @@ abstract class Base_Content extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        $timestampable0 = new Doctrine_Template_Timestampable(array(
-             'created' => 
-             array(
-              'name' => 'date_created',
-              'type' => 'timestamp',
-             ),
-             'updated' => 
-             array(
-              'name' => 'last_updated',
-              'type' => 'timestamp',
-             ),
-             ));
-        $this->actAs($timestampable0);
+        
     }
 }
