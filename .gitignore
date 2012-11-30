@@ -11,6 +11,7 @@
 /src/public_html/apc.php
 /src/public_html/xhprof
 /tests/data/cache
+/tests/_data/cache
 /tests/_log
 /build
 /bin

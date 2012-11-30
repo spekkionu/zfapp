@@ -179,25 +179,7 @@ class TestGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Checks if a row with given column values exists.
-     * Provide table name and column values.
      *
-     * Example:
-     *
-     * ``` php
-     * <?php
-     * $I->seeInDatabase('users', array('name' => 'Davert', 'email' => 'davert@mail.com'));
-     *
-     * ```
-     * Will generate:
-     *
-     * ``` sql
-     * SELECT COUNT(*) FROM `users` WHERE `name` = 'Davert' AND `email` = 'davert@mail.com'
-     * ```
-     * Fails if no such user found.
-     *
-     * @param $table
-     * @param array $criteria
      * @see Db::seeInDatabase()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -214,27 +196,7 @@ class TestGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Effect is opposite to ->seeInDatabase
      *
-     * Checks if there is no record with such column values in database.
-     * Provide table name and column values.
-     *
-     * Example:
-     *
-     * ``` php
-     * <?php
-     * $I->seeInDatabase('users', array('name' => 'Davert', 'email' => 'davert@mail.com'));
-     *
-     * ```
-     * Will generate:
-     *
-     * ``` sql
-     * SELECT COUNT(*) FROM `users` WHERE `name` = 'Davert' AND `email` = 'davert@mail.com'
-     * ```
-     * Fails if such user was found.
-     *
-     * @param $table
-     * @param array $criteria
      * @see Db::dontSeeInDatabase()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -251,22 +213,7 @@ class TestGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Fetches a single column value from a database.
-     * Provide table name, desired column and criteria.
      *
-     * Example:
-     *
-     * ``` php
-     * <?php
-     * $mail = $I->grabFromDatabase('users', array('name' => 'Davert'));
-     *
-     * ```
-     *
-     * @version 1.1
-     * @param $table
-     * @param $column
-     * @param array $criteria
-     * @return mixed
      * @see Db::grabFromDatabase()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -283,21 +230,7 @@ class TestGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Opens the page.
-     * Requires relative uri as parameter
      *
-     * Example:
-     *
-     * ``` php
-     * <?php
-     * // opens front page
-     * $I->amOnPage('/');
-     * // opens /register page
-     * $I->amOnPage('/register');
-     * ?>
-     * ```
-     *
-     * @param $page
      * @see ZF1::amOnPage()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -314,29 +247,7 @@ class TestGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Perform a click on link or button.
-     * Link or button are found by their names or CSS selector.
-     * Submits a form if button is a submit type.
      *
-     * If link is an image it's found by alt attribute value of image.
-     * If button is image button is found by it's value
-     * If link or button can't be found by name they are searched by CSS selector.
-     *
-     * Examples:
-     *
-     * ``` php
-     * <?php
-     * // simple link
-     * $I->click('Logout');
-     * // button of form
-     * $I->click('Submit');
-     * // CSS button
-     * $I->click('#form input[type=submit]');
-     * // XPath
-     * $I->click('//form/*[@type=submit]')
-     * ?>
-     * ```
-     * @param $link
      * @see ZF1::click()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -353,21 +264,7 @@ class TestGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Check if current page contains the text specified.
-     * Specify the css selector to match only specific region.
      *
-     * Examples:
-     *
-     * ``` php
-     * <?php
-     * $I->see('Logout'); // I can suppose user is logged in
-     * $I->see('Sign Up','h1'); // I can suppose it's a signup page
-     * $I->see('Sign Up','//body/h1'); // with XPath
-     *
-     * ```
-     *
-     * @param $text
-     * @param null $selector
      * @see ZF1::see()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -384,20 +281,7 @@ class TestGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Check if current page doesn't contain the text specified.
-     * Specify the css selector to match only specific region.
      *
-     * Examples:
-     *
-     * ```php
-     * <?php
-     * $I->dontSee('Login'); // I can suppose user is already logged in
-     * $I->dontSee('Sign Up','h1'); // I can suppose it's not a signup page
-     * $I->dontSee('Sign Up','//body/h1'); // with XPath
-     * ```
-     *
-     * @param $text
-     * @param null $selector
      * @see ZF1::dontSee()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -414,20 +298,7 @@ class TestGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Checks if there is a link with text specified.
-     * Specify url to match link with exact this url.
      *
-     * Examples:
-     *
-     * ``` php
-     * <?php
-     * $I->seeLink('Logout'); // matches <a href="#">Logout</a>
-     * $I->seeLink('Logout','/logout'); // matches <a href="/logout">Logout</a>
-     *
-     * ```
-     *
-     * @param $text
-     * @param null $url
      * @see ZF1::seeLink()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -444,19 +315,7 @@ class TestGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Checks if page doesn't contain the link with text specified.
-     * Specify url to narrow the results.
      *
-     * Examples:
-     *
-     * ``` php
-     * <?php
-     * $I->dontSeeLink('Logout'); // I suppose user is not logged in
-     *
-     * ```
-     *
-     * @param $text
-     * @param null $url
      * @see ZF1::dontSeeLink()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -473,9 +332,7 @@ class TestGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Checks that current uri contains value
      *
-     * @param $uri
      * @see ZF1::seeInCurrentUrl()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -492,20 +349,7 @@ class TestGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Assert if the specified checkbox is checked.
-     * Use css selector or xpath to match.
      *
-     * Example:
-     *
-     * ``` php
-     * <?php
-     * $I->seeCheckboxIsChecked('#agree'); // I suppose user agreed to terms
-     * $I->seeCheckboxIsChecked('#signup_form input[type=checkbox]'); // I suppose user agreed to terms, If there is only one checkbox in form.
-     * $I->seeCheckboxIsChecked('//form/input[@type=checkbox and @name=agree]');
-     *
-     * ```
-     *
-     * @param $checkbox
      * @see ZF1::seeCheckboxIsChecked()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -522,19 +366,7 @@ class TestGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Assert if the specified checkbox is unchecked.
-     * Use css selector or xpath to match.
      *
-     * Example:
-     *
-     * ``` php
-     * <?php
-     * $I->dontSeeCheckboxIsChecked('#agree'); // I suppose user didn't agree to terms
-     * $I->seeCheckboxIsChecked('#signup_form input[type=checkbox]'); // I suppose user didn't check the first checkbox in form.
-     *
-     * ```
-     *
-     * @param $checkbox
      * @see ZF1::dontSeeCheckboxIsChecked()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -551,21 +383,7 @@ class TestGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Checks that an input field or textarea contains value.
      *
-     * Example:
-     *
-     * ``` php
-     * <?php
-     * $I->seeInField('form textarea[name=body]','Type your comment here');
-     * $I->seeInField('form input[type=hidden]','hidden_value');
-     * $I->seeInField('#searchform input','Search');
-     * $I->seeInField('//form/*[@name=search]','Search');
-     * ?>
-     * ```
-     *
-     * @param $field
-     * @param $value
      * @see ZF1::seeInField()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -582,21 +400,7 @@ class TestGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Checks that an input field or textarea doesn't contain value.
      *
-     * Example:
-     *
-     * ``` php
-     * <?php
-     * $I->dontSeeInField('form textarea[name=body]','Type your comment here');
-     * $I->dontSeeInField('form input[type=hidden]','hidden_value');
-     * $I->dontSeeInField('#searchform input','Search');
-     * $I->dontSeeInField('//form/*[@name=search]','Search');
-     * ?>
-     * ```
-     *
-     * @param $field
-     * @param $value
      * @see ZF1::dontSeeInField()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -613,44 +417,7 @@ class TestGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Submits a form located on page.
-     * Specify the form by it's css or xpath selector.
-     * Fill the form fields values as array.
      *
-     * Skipped fields will be filled by their values from page.
-     * You don't need to click the 'Submit' button afterwards.
-     * This command itself triggers the request to form's action.
-     *
-     * Examples:
-     *
-     * ``` php
-     * <?php
-     * $I->submitForm('#login', array('login' => 'davert', 'password' => '123456'));
-     *
-     * ```
-     *
-     * For sample Sign Up form:
-     *
-     * ``` html
-     * <form action="/sign_up">
-     *     Login: <input type="text" name="user[login]" /><br/>
-     *     Password: <input type="password" name="user[password]" /><br/>
-     *     Do you agree to out terms? <input type="checkbox" name="user[agree]" /><br/>
-     *     Select pricing plan <select name="plan"><option value="1">Free</option><option value="2" selected="selected">Paid</option></select>
-     *     <input type="submit" value="Submit" />
-     * </form>
-     * ```
-     * I can write this:
-     *
-     * ``` php
-     * <?php
-     * $I->submitForm('#userForm', array('user' => array('login' => 'Davert', 'password' => '123456', 'agree' => true)));
-     *
-     * ```
-     * Note, that pricing plan will be set to Paid, as it's selected on page.
-     *
-     * @param $selector
-     * @param $params
      * @see ZF1::submitForm()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -667,10 +434,7 @@ class TestGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Fills a text field or textarea with value.
      *
-     * @param $field
-     * @param $value
      * @see ZF1::fillField()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -687,20 +451,7 @@ class TestGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Selects an option in select tag or in radio button group.
      *
-     * Example:
-     *
-     * ``` php
-     * <?php
-     * $I->selectOption('form select[name=account]', 'Premium');
-     * $I->selectOption('form input[name=payment]', 'Monthly');
-     * $I->selectOption('//form/select[@name=account]', 'Monthly');
-     * ?>
-     * ```
-     *
-     * @param $select
-     * @param $option
      * @see ZF1::selectOption()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -717,10 +468,7 @@ class TestGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Ticks a checkbox.
-     * For radio buttons use `selectOption` method.
      *
-     * @param $option
      * @see ZF1::checkOption()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -737,10 +485,7 @@ class TestGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Unticks a checkbox.
-     * For radio buttons use `selectOption` method.
      *
-     * @param $option
      * @see ZF1::uncheckOption()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -757,19 +502,7 @@ class TestGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Attaches file from Codeception data directory to upload field.
      *
-     * Example:
-     *
-     * ``` php
-     * <?php
-     * // file is stored in 'tests/data/tests.xls'
-     * $I->attachFile('prices.xls');
-     * ?>
-     * ```
-     *
-     * @param $field
-     * @param $filename
      * @see ZF1::attachFile()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -786,13 +519,7 @@ class TestGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * If your page triggers an ajax request, you can perform it manually.
-     * This action sends a GET ajax request with specified params.
      *
-     * See ->sendAjaxPostRequest for examples.
-     *
-     * @param $uri
-     * @param $params
      * @see ZF1::sendAjaxGetRequest()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -809,24 +536,7 @@ class TestGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * If your page triggers an ajax request, you can perform it manually.
-     * This action sends a POST ajax request with specified params.
-     * Additional params can be passed as array.
      *
-     * Example:
-     *
-     * Imagine that by clicking checkbox you trigger ajax request which updates user settings.
-     * We emulate that click by running this ajax request manually.
-     *
-     * ``` php
-     * <?php
-     * $I->sendAjaxPostRequest('/updateSettings', array('notifications' => true); // POST
-     * $I->sendAjaxGetRequest('/updateSettings', array('notifications' => true); // GET
-     *
-     * ```
-     *
-     * @param $uri
-     * @param $params
      * @see ZF1::sendAjaxPostRequest()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -860,21 +570,7 @@ class TestGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Finds and returns text contents of element.
-     * Element is searched by CSS selector, XPath or matcher by regex.
      *
-     * Example:
-     *
-     * ``` php
-     * <?php
-     * $heading = $I->grabTextFrom('h1');
-     * $heading = $I->grabTextFrom('descendant-or-self::h1');
-     * $value = $I->grabTextFrom('~<input value=(.*?)]~sgi');
-     * ?>
-     * ```
-     *
-     * @param $cssOrXPathOrRegex
-     * @return mixed
      * @see ZF1::grabTextFrom()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -891,21 +587,7 @@ class TestGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Finds and returns field and returns it's value.
-     * Searches by field name, then by CSS, then by XPath
      *
-     * Example:
-     *
-     * ``` php
-     * <?php
-     * $name = $I->grabValueFrom('Name');
-     * $name = $I->grabValueFrom('input[name=username]');
-     * $name = $I->grabValueFrom('descendant-or-self::form/descendant::input[@name = 'username']');
-     * ?>
-     * ```
-     *
-     * @param $field
-     * @return mixed
      * @see ZF1::grabValueFrom()
      *
      * ! This method is generated. DO NOT EDIT. !

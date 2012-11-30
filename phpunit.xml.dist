@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit backupGlobals="false"
-         bootstrap="tests/phpunit/bootstrap.php"
+         bootstrap="tests/unit/_bootstrap.php"
          backupStaticAttributes="false"
          strict="true"
          verbose="true">
   <testsuites>
     <testsuite name="zfapp-unittests">
-      <directory suffix="Test.php">tests/phpunit</directory>
+      <directory suffix="Test.php">tests/unit</directory>
     </testsuite>
   </testsuites>
 <!--
@@ -27,8 +27,6 @@
         <directory suffix=".php">src/system/logs</directory>
         <directory suffix=".php">src/system/scripts</directory>
         <directory suffix=".php">src/system/library/vendor</directory>
-        <file>src/system/application.php</file>
-        <file>src/system/mvc.php</file>
     </exclude>
     </whitelist>
   </filter>

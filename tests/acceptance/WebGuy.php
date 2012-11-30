@@ -25,44 +25,7 @@ class WebGuy extends \Codeception\AbstractGuy
 {
     
     /**
-     * Submits a form located on page.
-     * Specify the form by it's css or xpath selector.
-     * Fill the form fields values as array.
      *
-     * Skipped fields will be filled by their values from page.
-     * You don't need to click the 'Submit' button afterwards.
-     * This command itself triggers the request to form's action.
-     *
-     * Examples:
-     *
-     * ``` php
-     * <?php
-     * $I->submitForm('#login', array('login' => 'davert', 'password' => '123456'));
-     *
-     * ```
-     *
-     * For sample Sign Up form:
-     *
-     * ``` html
-     * <form action="/sign_up">
-     *     Login: <input type="text" name="user[login]" /><br/>
-     *     Password: <input type="password" name="user[password]" /><br/>
-     *     Do you agree to out terms? <input type="checkbox" name="user[agree]" /><br/>
-     *     Select pricing plan <select name="plan"><option value="1">Free</option><option value="2" selected="selected">Paid</option></select>
-     *     <input type="submit" value="Submit" />
-     * </form>
-     * ```
-     * I can write this:
-     *
-     * ``` php
-     * <?php
-     * $I->submitForm('#userForm', array('user' => array('login' => 'Davert', 'password' => '123456', 'agree' => true)));
-     *
-     * ```
-     * Note, that pricing plan will be set to Paid, as it's selected on page.
-     *
-     * @param $selector
-     * @param $params
      * @see PhpBrowser::submitForm()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -79,24 +42,7 @@ class WebGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * If your page triggers an ajax request, you can perform it manually.
-     * This action sends a POST ajax request with specified params.
-     * Additional params can be passed as array.
      *
-     * Example:
-     *
-     * Imagine that by clicking checkbox you trigger ajax request which updates user settings.
-     * We emulate that click by running this ajax request manually.
-     *
-     * ``` php
-     * <?php
-     * $I->sendAjaxPostRequest('/updateSettings', array('notifications' => true); // POST
-     * $I->sendAjaxGetRequest('/updateSettings', array('notifications' => true); // GET
-     *
-     * ```
-     *
-     * @param $uri
-     * @param $params
      * @see PhpBrowser::sendAjaxPostRequest()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -113,13 +59,7 @@ class WebGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * If your page triggers an ajax request, you can perform it manually.
-     * This action sends a GET ajax request with specified params.
      *
-     * See ->sendAjaxPostRequest for examples.
-     *
-     * @param $uri
-     * @param $params
      * @see PhpBrowser::sendAjaxGetRequest()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -136,9 +76,7 @@ class WebGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Opens the page.
      *
-     * @param $page
      * @see PhpBrowser::amOnPage()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -155,20 +93,7 @@ class WebGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Check if current page doesn't contain the text specified.
-     * Specify the css selector to match only specific region.
      *
-     * Examples:
-     *
-     * ```php
-     * <?php
-     * $I->dontSee('Login'); // I can suppose user is already logged in
-     * $I->dontSee('Sign Up','h1'); // I can suppose it's not a signup page
-     * $I->dontSee('Sign Up','//body/h1'); // with XPath
-     * ```
-     *
-     * @param $text
-     * @param null $selector
      * @see PhpBrowser::dontSee()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -185,21 +110,7 @@ class WebGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Check if current page contains the text specified.
-     * Specify the css selector to match only specific region.
      *
-     * Examples:
-     *
-     * ``` php
-     * <?php
-     * $I->see('Logout'); // I can suppose user is logged in
-     * $I->see('Sign Up','h1'); // I can suppose it's a signup page
-     * $I->see('Sign Up','//body/h1'); // with XPath
-     *
-     * ```
-     *
-     * @param $text
-     * @param null $selector
      * @see PhpBrowser::see()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -216,12 +127,7 @@ class WebGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Checks if the document has link that contains specified
-     * text (or text and url)
      *
-     * @param  string $text
-     * @param  string $url (Default: null)
-     * @return mixed
      * @see PhpBrowser::seeLink()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -238,12 +144,7 @@ class WebGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Checks if the document hasn't link that contains specified
-     * text (or text and url)
      *
-     * @param  string $text
-     * @param  string $url (Default: null)
-     * @return mixed
      * @see PhpBrowser::dontSeeLink()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -260,10 +161,7 @@ class WebGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Clicks on either link or button (for PHPBrowser) or on any selector for JS browsers.
-     * Link text or css selector can be passed.
      *
-     * @param $link
      * @see PhpBrowser::click()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -280,7 +178,7 @@ class WebGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Reloads current page
+     *
      * @see PhpBrowser::reloadPage()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -297,7 +195,7 @@ class WebGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Moves back in history
+     *
      * @see PhpBrowser::moveBack()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -314,7 +212,7 @@ class WebGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Moves forward in history
+     *
      * @see PhpBrowser::moveForward()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -331,11 +229,7 @@ class WebGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Fill the field with given value.
-     * Field is searched by its id|name|label|value or CSS selector.
      *
-     * @param $field
-     * @param $value
      * @see PhpBrowser::fillField()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -352,12 +246,7 @@ class WebGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Selects opition from selectbox.
-     * Use field name|label|value|id or CSS selector to match selectbox.
-     * Either values or text of options can be used to fetch option.
      *
-     * @param $select
-     * @param $option
      * @see PhpBrowser::selectOption()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -374,10 +263,7 @@ class WebGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Check matched checkbox or radiobutton.
-     * Field is searched by its id|name|label|value or CSS selector.
      *
-     * @param $option
      * @see PhpBrowser::checkOption()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -394,10 +280,7 @@ class WebGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Uncheck matched checkbox or radiobutton.
-     * Field is searched by its id|name|label|value or CSS selector.
      *
-     * @param $option
      * @see PhpBrowser::uncheckOption()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -414,9 +297,7 @@ class WebGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Checks if current url contains the $uri.
      *
-     * @param $uri
      * @see PhpBrowser::seeInCurrentUrl()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -433,11 +314,7 @@ class WebGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Attaches file stored in Codeception data directory to field specified.
-     * Field is searched by its id|name|label|value or CSS selector.
      *
-     * @param $field
-     * @param $filename
      * @see PhpBrowser::attachFile()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -454,10 +331,7 @@ class WebGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Asserts the checkbox is checked.
-     * Field is searched by its id|name|label|value or CSS selector.
      *
-     * @param $checkbox
      * @see PhpBrowser::seeCheckboxIsChecked()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -474,10 +348,7 @@ class WebGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Asserts that checbox is not checked
-     * Field is searched by its id|name|label|value or CSS selector.
      *
-     * @param $checkbox
      * @see PhpBrowser::dontSeeCheckboxIsChecked()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -494,10 +365,7 @@ class WebGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Checks the value of field is equal to value passed.
      *
-     * @param $field
-     * @param $value
      * @see PhpBrowser::seeInField()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -514,11 +382,7 @@ class WebGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Checks the value in field is not equal to value passed.
-     * Field is searched by its id|name|label|value or CSS selector.
      *
-     * @param $field
-     * @param $value
      * @see PhpBrowser::dontSeeInField()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -535,21 +399,7 @@ class WebGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Finds and returns text contents of element.
-     * Element is searched by CSS selector, XPath or matcher by regex.
      *
-     * Example:
-     *
-     * ``` php
-     * <?php
-     * $heading = $I->grabTextFrom('h1');
-     * $heading = $I->grabTextFrom('descendant-or-self::h1');
-     * $value = $I->grabTextFrom('~<input value=(.*?)]~sgi');
-     * ?>
-     * ```
-     *
-     * @param $cssOrXPathOrRegex
-     * @return mixed
      * @see PhpBrowser::grabTextFrom()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -566,21 +416,7 @@ class WebGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Finds and returns field and returns it's value.
-     * Searches by field name, then by CSS, then by XPath
      *
-     * Example:
-     *
-     * ``` php
-     * <?php
-     * $name = $I->grabValueFrom('Name');
-     * $name = $I->grabValueFrom('input[name=username]');
-     * $name = $I->grabValueFrom('descendant-or-self::form/descendant::input[@name = 'username']');
-     * ?>
-     * ```
-     *
-     * @param $field
-     * @return mixed
      * @see PhpBrowser::grabValueFrom()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -631,25 +467,7 @@ class WebGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Checks if a row with given column values exists.
-     * Provide table name and column values.
      *
-     * Example:
-     *
-     * ``` php
-     * <?php
-     * $I->seeInDatabase('users', array('name' => 'Davert', 'email' => 'davert@mail.com'));
-     *
-     * ```
-     * Will generate:
-     *
-     * ``` sql
-     * SELECT COUNT(*) FROM `users` WHERE `name` = 'Davert' AND `email` = 'davert@mail.com'
-     * ```
-     * Fails if no such user found.
-     *
-     * @param $table
-     * @param array $criteria
      * @see Db::seeInDatabase()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -666,27 +484,7 @@ class WebGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Effect is opposite to ->seeInDatabase
      *
-     * Checks if there is no record with such column values in database.
-     * Provide table name and column values.
-     *
-     * Example:
-     *
-     * ``` php
-     * <?php
-     * $I->seeInDatabase('users', array('name' => 'Davert', 'email' => 'davert@mail.com'));
-     *
-     * ```
-     * Will generate:
-     *
-     * ``` sql
-     * SELECT COUNT(*) FROM `users` WHERE `name` = 'Davert' AND `email` = 'davert@mail.com'
-     * ```
-     * Fails if such user was found.
-     *
-     * @param $table
-     * @param array $criteria
      * @see Db::dontSeeInDatabase()
      *
      * ! This method is generated. DO NOT EDIT. !
@@ -703,22 +501,7 @@ class WebGuy extends \Codeception\AbstractGuy
 
  
     /**
-     * Fetches a single column value from a database.
-     * Provide table name, desired column and criteria.
      *
-     * Example:
-     *
-     * ``` php
-     * <?php
-     * $mail = $I->grabFromDatabase('users', array('name' => 'Davert'));
-     *
-     * ```
-     *
-     * @version 1.1
-     * @param $table
-     * @param $column
-     * @param array $criteria
-     * @return mixed
      * @see Db::grabFromDatabase()
      *
      * ! This method is generated. DO NOT EDIT. !
