@@ -9,7 +9,11 @@
       <directory suffix="Test.php">tests/unit</directory>
     </testsuite>
   </testsuites>
-<!--
+
+  <php>
+    <env name="APPLICATION_ENV" value="testing"/>
+  </php>
+
   <logging>
     <log type="coverage-html" target="build/coverage" title="zfapp"
          charset="UTF-8" yui="true" highlight="true"
@@ -27,8 +31,9 @@
         <directory suffix=".php">src/system/logs</directory>
         <directory suffix=".php">src/system/scripts</directory>
         <directory suffix=".php">src/system/library/vendor</directory>
+        <directory suffix=".php">src/system/userfiles</directory>
     </exclude>
     </whitelist>
   </filter>
-  -->
+
 </phpunit>

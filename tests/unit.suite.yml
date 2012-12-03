@@ -5,12 +5,5 @@
 
 class_name: CodeGuy
 modules:
-    enabled: [Unit, CodeHelper, Db]
+    enabled: [Unit, CodeHelper]
     config:
-      Db:
-        dsn: sqlite:src/system/userfiles/database/database.sqlite
-        user:
-        password:
-        populate: true
-        cleanup: true
-        dump: tests/_data/sqlite_dump.sql

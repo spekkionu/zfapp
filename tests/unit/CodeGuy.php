@@ -5,7 +5,6 @@
 use Codeception\Maybe;
 use Codeception\Module\Unit;
 use Codeception\Module\CodeHelper;
-use Codeception\Module\Db;
 
 /**
  * Inherited methods
@@ -441,57 +440,6 @@ class CodeGuy extends \Codeception\AbstractGuy
      */
     public function seeMethodNotReturns($object, $method, $value, $params = null) {
         $this->scenario->assertion('seeMethodNotReturns', func_get_args());
-        if ($this->scenario->running()) {
-            $result = $this->scenario->runStep();
-            return new Maybe($result);
-        }
-        return new Maybe();
-    }
-
- 
-    /**
-     *
-     * @see Db::seeInDatabase()
-     *
-     * ! This method is generated. DO NOT EDIT. !
-     * ! Documentation taken from corresponding module !
-     */
-    public function seeInDatabase($table, $criteria = null) {
-        $this->scenario->assertion('seeInDatabase', func_get_args());
-        if ($this->scenario->running()) {
-            $result = $this->scenario->runStep();
-            return new Maybe($result);
-        }
-        return new Maybe();
-    }
-
- 
-    /**
-     *
-     * @see Db::dontSeeInDatabase()
-     *
-     * ! This method is generated. DO NOT EDIT. !
-     * ! Documentation taken from corresponding module !
-     */
-    public function dontSeeInDatabase($table, $criteria = null) {
-        $this->scenario->action('dontSeeInDatabase', func_get_args());
-        if ($this->scenario->running()) {
-            $result = $this->scenario->runStep();
-            return new Maybe($result);
-        }
-        return new Maybe();
-    }
-
- 
-    /**
-     *
-     * @see Db::grabFromDatabase()
-     *
-     * ! This method is generated. DO NOT EDIT. !
-     * ! Documentation taken from corresponding module !
-     */
-    public function grabFromDatabase($table, $column, $criteria = null) {
-        $this->scenario->action('grabFromDatabase', func_get_args());
         if ($this->scenario->running()) {
             $result = $this->scenario->runStep();
             return new Maybe($result);
