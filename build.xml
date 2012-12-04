@@ -51,10 +51,10 @@
   <target name="pdepend" description="Generate jdepend.xml and software metrics charts using PHP_Depend">
     <phpdepend>
       <fileset dir="${source}/system">
-        <include name="forms/**.php" />
-        <include name="models/**.php" />
-        <include name="application/**.php" />
-        <include name="library/**.php" />
+        <include name="forms/**/*.php" />
+        <include name="models/**/*.php" />
+        <include name="application/**/*.php" />
+        <include name="library/**/*.php" />
         <exclude name="library/vendor/*" />
       </fileset>
       <logger type="jdepend-xml" outfile="build/logs/jdepend.xml"/>
@@ -66,10 +66,10 @@
   <target name="phpmd" description="Generate pmd.xml using PHPMD">
     <phpmd rulesets="codesize,design,naming,unusedcode">
       <fileset dir="${source}/system">
-        <include name="forms/**.php" />
-        <include name="models/**.php" />
-        <include name="application/**.php" />
-        <include name="library/**.php" />
+        <include name="forms/**/*.php" />
+        <include name="models/**/*.php" />
+        <include name="application/**/*.php" />
+        <include name="library/**/*.php" />
         <exclude name="library/vendor/*" />
       </fileset>
       <formatter type="xml" outfile="build/logs/pmd.xml"/>
@@ -80,10 +80,10 @@
   <target name="phpcpd" description="Generate pmd-cpd.xml using PHPCPD">
     <phpcpd>
       <fileset dir="${source}/system">
-        <include name="forms/**.php" />
-        <include name="models/**.php" />
-        <include name="application/**.php" />
-        <include name="library/**.php" />
+        <include name="forms/**/*.php" />
+        <include name="models/**/*.php" />
+        <include name="application/**/*.php" />
+        <include name="library/**/*.php" />
         <exclude name="library/vendor/*" />
       </fileset>
       <formatter type="pmd" outfile="build/logs/pmd-cpd.xml"/>
@@ -95,14 +95,26 @@
     <exec command="phploc --log-csv build/logs/phploc.csv ${source}/system" passthru="true" />
   </target>
 
+  <target name="lint" description="Perform syntax check of sourcecode files">
+    <phplint tofile="build/logs/lint.log">
+      <fileset dir="${source}/system">
+        <include name="forms/**/*.php" />
+        <include name="models/**/*.php" />
+        <include name="application/**/*.php" />
+        <include name="library/**/*.php" />
+        <exclude name="library/vendor/*" />
+      </fileset>
+    </phplint>
+  </target>
+
   <target name="phpcs" description="Generate checkstyle.xml using PHP_CodeSniffer">
     <resolvepath propertyName="standard" file="${project.basedir}/scripts/tasks/phpcs/Spekkionu"/>
     <phpcodesniffer standard="${standard}" showWarnings="false">
       <fileset dir="${source}/system">
-        <include name="forms/**.php" />
-        <include name="models/**.php" />
-        <include name="application/**.php" />
-        <include name="library/**.php" />
+        <include name="forms/**/*.php" />
+        <include name="models/**/*.php" />
+        <include name="application/**/*.php" />
+        <include name="library/**/*.php" />
         <exclude name="library/vendor/*" />
       </fileset>
       <formatter type="default" usefile="false"/>
@@ -119,7 +131,7 @@
     <exec command="phpcb --log build/logs --source ${source}/system --output build/code-browser" passthru="true" />
   </target>
 
-  <target name="build" depends="clean,phpunit,pdepend,phpmd,phpcs,phploc,apigen,phpcb"/>
+  <target name="build" depends="clean,lint,phpunit,pdepend,phpmd,phpcpd,phpcs,phploc,apigen,phpcb"/>
 
   <target name="cssmin" description="Combines and compresses admin css files">
     <mkdir dir="build/tmp"/>
