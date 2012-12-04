@@ -41,9 +41,7 @@ class App_Paginator
     private static function _setup($paginator)
     {
         $paginator->setDefaultScrollingStyle('Sliding');
-        Zend_View_Helper_PaginationControl::setDefaultViewPartial(
-          array('partials/pagination.phtml', 'default')
-        );
+        Zend_View_Helper_PaginationControl::setDefaultViewPartial(array('partials/pagination.phtml', 'default'));
         return $paginator;
     }
 

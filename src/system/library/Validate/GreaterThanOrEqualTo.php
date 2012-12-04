@@ -20,6 +20,8 @@
  */
 
 /**
+ * Validates that a value is greater than or equal to another value
+ *
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)

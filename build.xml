@@ -23,9 +23,8 @@
     <mkdir dir="build/pdepend"/>
   </target>
 
-  <target name="clear-cache" description="Clears cache folders">
-    <delete dir="src/system/cache" includeemptydirs="false" failonerror="false" />
-    <mkdir dir="src/system/cache" mode="0777"/>
+  <target name="clear-cache" description="Clears application cache">
+    <exec command="php ${src}/scripts/console.php cache:clear" passthru="true" />
   </target>
 
   <target name="init" description="Create needed directories and set permissions">
@@ -51,11 +50,12 @@
   <target name="pdepend" description="Generate jdepend.xml and software metrics charts using PHP_Depend">
     <phpdepend>
       <fileset dir="${source}/system">
-        <include name="forms/**/*.php" />
-        <include name="models/**/*.php" />
-        <include name="application/**/*.php" />
-        <include name="library/**/*.php" />
-        <exclude name="library/vendor/*" />
+        <include name="**/*.php" />
+        <exclude name="cache/**" />
+        <exclude name="logs/**" />
+        <exclude name="configs/**" />
+        <exclude name="userfiles/**" />
+        <exclude name="library/vendor/**" />
       </fileset>
       <logger type="jdepend-xml" outfile="build/logs/jdepend.xml"/>
       <logger type="jdepend-chart" outfile="build/pdepend/dependencies.svg"/>
@@ -66,11 +66,12 @@
   <target name="phpmd" description="Generate pmd.xml using PHPMD">
     <phpmd rulesets="codesize,design,naming,unusedcode">
       <fileset dir="${source}/system">
-        <include name="forms/**/*.php" />
-        <include name="models/**/*.php" />
-        <include name="application/**/*.php" />
-        <include name="library/**/*.php" />
-        <exclude name="library/vendor/*" />
+        <include name="**/*.php" />
+        <exclude name="cache/**" />
+        <exclude name="logs/**" />
+        <exclude name="configs/**" />
+        <exclude name="userfiles/**" />
+        <exclude name="library/vendor/**" />
       </fileset>
       <formatter type="xml" outfile="build/logs/pmd.xml"/>
     </phpmd>
@@ -80,11 +81,12 @@
   <target name="phpcpd" description="Generate pmd-cpd.xml using PHPCPD">
     <phpcpd>
       <fileset dir="${source}/system">
-        <include name="forms/**/*.php" />
-        <include name="models/**/*.php" />
-        <include name="application/**/*.php" />
-        <include name="library/**/*.php" />
-        <exclude name="library/vendor/*" />
+        <include name="**/*.php" />
+        <exclude name="cache/**" />
+        <exclude name="logs/**" />
+        <exclude name="configs/**" />
+        <exclude name="userfiles/**" />
+        <exclude name="library/vendor/**" />
       </fileset>
       <formatter type="pmd" outfile="build/logs/pmd-cpd.xml"/>
     </phpcpd>
@@ -92,17 +94,27 @@
 
 
   <target name="phploc" description="Generate phploc.csv">
-    <exec command="phploc --log-csv build/logs/phploc.csv ${source}/system" passthru="true" />
+    <phploc reportType="csv" reportName="phploc" reportDirectory="build/logs">
+      <fileset dir="${source}/system">
+        <include name="**/*.php" />
+        <exclude name="cache/**" />
+        <exclude name="logs/**" />
+        <exclude name="configs/**" />
+        <exclude name="userfiles/**" />
+        <exclude name="library/vendor/**" />
+      </fileset>
+    </phploc>
   </target>
 
   <target name="lint" description="Perform syntax check of sourcecode files">
     <phplint tofile="build/logs/lint.log">
       <fileset dir="${source}/system">
-        <include name="forms/**/*.php" />
-        <include name="models/**/*.php" />
-        <include name="application/**/*.php" />
-        <include name="library/**/*.php" />
-        <exclude name="library/vendor/*" />
+        <include name="**/*.php" />
+        <exclude name="cache/**" />
+        <exclude name="logs/**" />
+        <exclude name="configs/**" />
+        <exclude name="userfiles/**" />
+        <exclude name="library/vendor/**" />
       </fileset>
     </phplint>
   </target>
@@ -111,20 +123,22 @@
     <resolvepath propertyName="standard" file="${project.basedir}/scripts/tasks/phpcs/Spekkionu"/>
     <phpcodesniffer standard="${standard}" showWarnings="false">
       <fileset dir="${source}/system">
-        <include name="forms/**/*.php" />
-        <include name="models/**/*.php" />
-        <include name="application/**/*.php" />
-        <include name="library/**/*.php" />
-        <exclude name="library/vendor/*" />
+        <include name="**/*.php" />
+        <exclude name="cache/**" />
+        <exclude name="logs/**" />
+        <exclude name="configs/**" />
+        <exclude name="userfiles/**" />
+        <exclude name="library/vendor/**" />
       </fileset>
       <formatter type="default" usefile="false"/>
       <formatter type="checkstyle" outfile="build/logs/checkstyle.xml"/>
+      <formatter type="csv" outfile="build/logs/phpcs.csv"/>
     </phpcodesniffer>
   </target>
 
   <target name="apigen" description="Generate API documentation using apigen">
     <resolvepath propertyName="src" file="${source}"/>
-    <apigen source="${source}/system" destination="build/api" exclude="${src}/system/cache,${src}/system/logs,${src}/system/configs,${src}/system/userfiles,${src}/system/mvc.php,*/tests/*,*/Tests/*,*/docs/*,*/demos/*" skipdocpath="${src}/system/library/vendor/*" title="API Documentation" deprecated="true" todo="false" sourcecode="true" />
+    <apigen source="${source}/system" destination="build/api" exclude="${src}/system/cache/*,${src}/system/logs/*,${src}/system/configs/*,${src}/system/userfiles/*,${src}/system/mvc.php,*/tests/*,*/Tests/*,*/docs/*,*/demos/*" skipdocpath="${src}/system/library/vendor/*" title="API Documentation" deprecated="true" todo="false" sourcecode="true" />
   </target>
 
   <target name="phpcb" description="Aggregate tool output with PHP_CodeBrowser">

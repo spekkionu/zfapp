@@ -13,23 +13,27 @@ use Assetic\Filter;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOException;
 
+/**
+ * Compiles Bootstap Assets
+ *
+ * @package CLI
+ * @subpackage Asset
+ */
 class BootstrapCommand extends Command
 {
 
     protected function configure()
     {
-        $this
-          ->setName('asset:bootstrap')
-          ->setDescription('Compiles bootstrap assets.')
-        ;
+        $this->setName('asset:bootstrap');
+        $this->setDescription('Compiles bootstrap assets.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln("<header>Compile Bootstrap Assets</header>");
         $fs = new Filesystem();
-        if(!$fs->exists(WEBROOT.'/assets/styles/bootstrap')){
-            $fs->mkdir(WEBROOT.'/assets/styles/bootstrap');
+        if (!$fs->exists(WEBROOT . '/assets/styles/bootstrap')) {
+            $fs->mkdir(WEBROOT . '/assets/styles/bootstrap');
         }
         try {
             $output->writeln("Building main bootstrap css file.");
@@ -39,8 +43,8 @@ class BootstrapCommand extends Command
                 new Filter\CssImportFilter(),
                 new Filter\Yui\CssCompressorFilter(realpath(PROJECT . '/scripts/tools/yuicompressor/yuicompressor.jar'), 'java'),
               ));
-            if(!$fs->exists(WEBROOT.'/assets/styles/bootstrap/css')){
-                $fs->mkdir(WEBROOT.'/assets/styles/bootstrap/css');
+            if (!$fs->exists(WEBROOT . '/assets/styles/bootstrap/css')) {
+                $fs->mkdir(WEBROOT . '/assets/styles/bootstrap/css');
             }
 
             file_put_contents(WEBROOT . "/assets/styles/bootstrap/css/bootstrap.min.css", $css->dump());
@@ -82,8 +86,8 @@ class BootstrapCommand extends Command
             );
             $output->writeln("Save full javascript file.");
             $js = new AssetCollection($input, array());
-            if(!$fs->exists(WEBROOT.'/assets/styles/bootstrap/js')){
-                $fs->mkdir(WEBROOT.'/assets/styles/bootstrap/js');
+            if (!$fs->exists(WEBROOT . '/assets/styles/bootstrap/js')) {
+                $fs->mkdir(WEBROOT . '/assets/styles/bootstrap/js');
             }
             file_put_contents(WEBROOT . "/assets/styles/bootstrap/js/bootstrap.js", $js->dump());
             $output->writeln("<info>Saved to assets/styles/bootstrap/js/bootstrap.js</info>");
@@ -91,7 +95,7 @@ class BootstrapCommand extends Command
             $output->writeln("Save minified javascript file to assets/styles/bootstrap/js/bootstrap.js.");
             $js = new AssetCollection($input, array(
                 new Filter\GoogleClosure\CompilerJarFilter(realpath(PROJECT . '/scripts/tools/closure-compiler/compiler.jar'), 'java'),
-            ));
+              ));
             file_put_contents(WEBROOT . "/assets/styles/bootstrap/js/bootstrap.min.js", $js->dump());
 
             $output->writeln("<info>Saved to assets/styles/bootstrap/js/bootstrap.min.js</info>");
@@ -100,11 +104,10 @@ class BootstrapCommand extends Command
         }
 
         $output->writeln("Copy image files.");
-        if(!$fs->exists(WEBROOT.'/assets/styles/bootstrap/img')){
-            $fs->mkdir(WEBROOT.'/assets/styles/bootstrap/img');
+        if (!$fs->exists(WEBROOT . '/assets/styles/bootstrap/img')) {
+            $fs->mkdir(WEBROOT . '/assets/styles/bootstrap/img');
         }
-        $fs->mirror(WEBROOT . '/assets/vendor/bootstrap/img', WEBROOT.'/assets/styles/bootstrap/img');
-
+        $fs->mirror(WEBROOT . '/assets/vendor/bootstrap/img', WEBROOT . '/assets/styles/bootstrap/img');
     }
 
 }

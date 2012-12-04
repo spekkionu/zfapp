@@ -63,9 +63,9 @@ class Session_SaveHandler_Mock implements Zend_Session_SaveHandler_Interface
     public function read($id)
     {
         if (array_key_exists($id, self::$_data[self::$_name])) {
-          return self::$_data[self::$_name][$id];
+            return self::$_data[self::$_name][$id];
         } else {
-          return false;
+            return false;
         }
     }
 

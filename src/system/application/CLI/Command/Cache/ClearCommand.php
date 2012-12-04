@@ -11,15 +11,19 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Clears application cache
+ *
+ * @package CLI
+ * @subpackage Cache
+ */
 class ClearCommand extends Command
 {
 
     protected function configure()
     {
-        $this
-          ->setName('cache:clear')
-          ->setDescription('Clears application cache')
-        ;
+        $this->setName('cache:clear');
+        $this->setDescription('Clears application cache');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -27,8 +31,8 @@ class ClearCommand extends Command
         $output->writeln("<header>Clearing cache</header>");
 
         $fs = new Filesystem();
-        if($fs->exists(SYSTEM . DIRECTORY_SEPARATOR . 'cache')){
-           // Init Cache
+        if ($fs->exists(SYSTEM . DIRECTORY_SEPARATOR . 'cache')) {
+            // Init Cache
             $config = require(SYSTEM . '/configs/config.php');
             \Cache::setConfig($config['cache']);
             \Cache::setCacheDir(SYSTEM . DIRECTORY_SEPARATOR . 'cache');
@@ -36,12 +40,9 @@ class ClearCommand extends Command
             // Clear the cache
             \Cache::clearAllCaches();
             $output->writeln("<info>cache cleared</info>");
-        }else{
+        } else {
             $output->writeln("<error>cache dir does not exist</error>");
         }
-
-
     }
-
 
 }

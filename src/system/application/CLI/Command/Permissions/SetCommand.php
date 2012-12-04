@@ -11,33 +11,29 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Fixes application permissions
+ *
+ * @package CLI
+ * @subpackage Permissions
+ */
 class SetCommand extends Command
 {
 
     protected function configure()
     {
-        $this
-          ->setName('permissions:set')
-          ->setDescription('Fixes file / directory permissions')
-        ;
+        $this->setName('permissions:set');
+        $this->setDescription('Fixes file / directory permissions');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         // Collect info
         $dialog = $this->getHelperSet()->get('dialog');
-        $ownread = $dialog->ask(
-          $output, '<question>What should the owner for readable files be?</question> [username] ', 'username'
-        );
-        $grpread = $dialog->ask(
-          $output, '<question>What should the group for readable directories be?</question> [usergroup] ', 'usergroup'
-        );
-        $ownwrite = $dialog->ask(
-          $output, '<question>What should the owner for writable files be?</question> [www-data] ', 'www-data'
-        );
-        $grpwrite = $dialog->ask(
-          $output, '<question>What should the group for writable directories be?</question> [www-data] ', 'www-data'
-        );
+        $ownread = $dialog->ask($output, '<question>What should the owner for readable files be?</question> [username] ', 'username');
+        $grpread = $dialog->ask($output, '<question>What should the group for readable directories be?</question> [usergroup] ', 'usergroup');
+        $ownwrite = $dialog->ask($output, '<question>What should the owner for writable files be?</question> [www-data] ', 'www-data');
+        $grpwrite = $dialog->ask($output, '<question>What should the group for writable directories be?</question> [www-data] ', 'www-data');
 
         // Set permissions
         $fs = new Filesystem();
@@ -49,16 +45,16 @@ class SetCommand extends Command
         $fs->chgrp(SYSTEM, $grpread, true);
 
         // Make sure writable directories exist
-        if(!$fs->exists(SYSTEM . DIRECTORY_SEPARATOR . 'cache')){
+        if (!$fs->exists(SYSTEM . DIRECTORY_SEPARATOR . 'cache')) {
             $fs->mkdir(SYSTEM . DIRECTORY_SEPARATOR . 'cache', 0777);
         }
-        if(!$fs->exists(SYSTEM . DIRECTORY_SEPARATOR . 'logs')){
+        if (!$fs->exists(SYSTEM . DIRECTORY_SEPARATOR . 'logs')) {
             $fs->mkdir(SYSTEM . DIRECTORY_SEPARATOR . 'logs', 0777);
         }
-        if(!$fs->exists(SYSTEM . DIRECTORY_SEPARATOR . 'userfiles')){
+        if (!$fs->exists(SYSTEM . DIRECTORY_SEPARATOR . 'userfiles')) {
             $fs->mkdir(SYSTEM . DIRECTORY_SEPARATOR . 'userfiles', 0777);
         }
-        if(!$fs->exists(WEBROOT . DIRECTORY_SEPARATOR . 'userfiles')){
+        if (!$fs->exists(WEBROOT . DIRECTORY_SEPARATOR . 'userfiles')) {
             $fs->mkdir(WEBROOT . DIRECTORY_SEPARATOR . 'userfiles', 0777);
         }
 
@@ -80,8 +76,6 @@ class SetCommand extends Command
         $fs->chmod(SYSTEM . DIRECTORY_SEPARATOR . 'userfiles', 0644, true);
         $fs->chmod(SYSTEM . DIRECTORY_SEPARATOR . 'cache', 0600, true);
         $fs->chmod(SYSTEM . DIRECTORY_SEPARATOR . 'logs', 0644, true);
-
     }
-
 
 }

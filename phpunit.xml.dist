@@ -32,7 +32,7 @@
         <directory suffix=".php">src/system/scripts</directory>
         <directory suffix=".php">src/system/library/vendor</directory>
         <directory suffix=".php">src/system/userfiles</directory>
-    </exclude>
+      </exclude>
     </whitelist>
   </filter>
 

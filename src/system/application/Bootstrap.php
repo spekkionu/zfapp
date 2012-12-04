@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Application Bootstrap
+ *
+ * @package App
+ */
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 
@@ -41,7 +45,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $config = $this->getResource('config');
         error_reporting($config['debug']['error_reporting']);
         ini_set('display_errors', $config['debug']['display_errors'] ? 1 : 0);
-         if (!is_dir(SYSTEM . DIRECTORY_SEPARATOR . 'logs')) {
+        if (!is_dir(SYSTEM . DIRECTORY_SEPARATOR . 'logs')) {
             // Log directory does not exist, create it
             @mkdir(SYSTEM . DIRECTORY_SEPARATOR . 'logs', 0777, true);
         }
@@ -68,9 +72,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             $logger = new Zend_Log(new Zend_Log_Writer_Stream(SYSTEM . '/logs/error.log'));
             ErrorLogger::setInstance($logger);
             if ($config['debug']['firebug']) {
-                $firebug = new Zend_Log( new Zend_Log_Writer_Firebug());
+                $firebug = new Zend_Log(new Zend_Log_Writer_Firebug());
             } else {
-                $firebug = new Zend_Log( new Zend_Log_Writer_Null());
+                $firebug = new Zend_Log(new Zend_Log_Writer_Null());
             }
             Zend_Registry::set('firebug', $firebug);
             $logger = new Zend_Log(new Zend_Log_Writer_Stream(SYSTEM . '/logs/application.log'));
@@ -78,8 +82,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         Zend_Registry::set('Zend_Log', $logger);
         return $logger;
     }
-
-    
 
     public function _initCache()
     {
@@ -96,7 +98,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             if (file_exists(SYSTEM . '/cache/plugin/pluginLoaderCache.php')) {
                 // Include the plugin loader cache
                 include_once SYSTEM . '/cache/plugin/pluginLoaderCache.php';
-            } elseif(!is_dir(SYSTEM . '/cache/plugin/')) {
+            } elseif (!is_dir(SYSTEM . '/cache/plugin/')) {
                 // Create the plugin cache directory
                 @mkdir(SYSTEM . '/cache/plugin/', 0777, true);
             }
@@ -134,8 +136,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $config = $this->getResource('config');
         if (APPLICATION_ENV == 'testing') {
             $db = Zend_Db::factory('Pdo_SQLite', array(
-                'dbname'   => SYSTEM.'/userfiles/database/database.sqlite'
-            ));
+                'dbname' => SYSTEM . '/userfiles/database/database.sqlite'
+              ));
         } else {
             // Connect to database
             $db = Zend_Db::factory($config['database']['adapter'], $config['database']['params']);
@@ -150,8 +152,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return $db;
     }
 
-
-
     public function _initMail()
     {
         $this->bootstrap('config');
@@ -163,7 +163,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             }
             Zend_Mail::setDefaultTransport(new Zend_Mail_Transport_File(array(
                 'path' => SYSTEM . '/logs/mail'
-            )));
+              )));
         } else {
             // Setup Default Mail Transport
             if ($config['mail']['type'] == 'smtp') {
@@ -183,7 +183,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 }
                 Zend_Mail::setDefaultTransport(new Zend_Mail_Transport_File(array(
                     'path' => SYSTEM . '/logs/mail'
-                )));
+                  )));
             } else {
                 // Use Sendmail
                 if (isset($config['mail']['options']['forcereturn']) && $config['mail']['options']['forcereturn']) {
@@ -200,21 +200,21 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $this->bootstrap('cache');
         /*
-        $translate = new Zend_Translate(
+          $translate = new Zend_Translate(
           array(
-            'adapter' => 'array',
-            'content' => SYSTEM.'/configs/language/en_US.php',
-            'locale'  => 'en_US',
-            'disableNotices' => true,
-            'cache' => Cache::getCache('translate'),
-            'log' => new Zend_Log(new Zend_Log_Writer_Stream(SYSTEM . '/logs/translate.log'))
+          'adapter' => 'array',
+          'content' => SYSTEM.'/configs/language/en_US.php',
+          'locale'  => 'en_US',
+          'disableNotices' => true,
+          'cache' => Cache::getCache('translate'),
+          'log' => new Zend_Log(new Zend_Log_Writer_Stream(SYSTEM . '/logs/translate.log'))
           )
-        );
-        Zend_Validate_Abstract::setDefaultTranslator($translate);
-        Zend_Form::setDefaultTranslator($translate);
-        Zend_Registry::set('Zend_Translate', $translate);
-        return $translate;
-        */
+          );
+          Zend_Validate_Abstract::setDefaultTranslator($translate);
+          Zend_Form::setDefaultTranslator($translate);
+          Zend_Registry::set('Zend_Translate', $translate);
+          return $translate;
+         */
     }
 
     public function _initSession()
@@ -237,9 +237,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             $config['session']['options']['name'] = md5($config['site']['domain']);
             $config['session']['options']['use_only_cookies'] = true;
             if (!is_dir(SYSTEM . "/cache/session")) {
-              @mkdir(SYSTEM . "/cache/session", 0777, true);
+                @mkdir(SYSTEM . "/cache/session", 0777, true);
             }
-            $config['session']['options']['save_path'] = SYSTEM.DIRECTORY_SEPARATOR."cache".DIRECTORY_SEPARATOR."session";
+            $config['session']['options']['save_path'] = SYSTEM . DIRECTORY_SEPARATOR . "cache" . DIRECTORY_SEPARATOR . "session";
             Zend_Session::setOptions($config['session']['options']);
             if ($config['session']['handler']) {
                 $handler = $config['session']['handler'];
@@ -247,7 +247,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 Zend_Session::setSaveHandler($handler);
             }
         }
-        
     }
 
     public function _initAcl()
@@ -274,7 +273,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return $auth;
     }
 
-    public function _initNavigation() 
+    public function _initNavigation()
     {
         $this->bootstrap('config');
         $this->bootstrap('acl');
@@ -282,11 +281,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $acl = $this->getResource('acl');
         Zend_View_Helper_Navigation_HelperAbstract::setDefaultAcl($acl);
         if (Zend_Auth::getInstance()->hasIdentity()) {
-          Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole(Zend_Auth::getInstance()->getIdentity()->accesslevel);
+            Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole(Zend_Auth::getInstance()->getIdentity()->accesslevel);
         } else {
-          Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('guest');
+            Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('guest');
         }
-
     }
 
     public function _initFrontController()
@@ -305,7 +303,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $controller->throwExceptions($config['debug']['display_errors']);
         // Set Base Url
         $controller->setBaseUrl($config['site']['base_url']);
-        if(APPLICATION_ENV != 'testing') {
+        if (APPLICATION_ENV != 'testing') {
             $controller->returnResponse(true);
             $controller->setParam('disableOutputBuffering', false);
         }
@@ -316,17 +314,17 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             $debug = new ZFDebug_Controller_Plugin_Debug(array(
                 'jquery_path' => $view->baseUrl('assets/vendor/jquery/jquery.js'),
                 'plugins' => array(
-                    'Variables',
-                    'Html',
-                    'Log',
-                    'File' => array('base_path' => SYSTEM),
-                    'Database',
-                    'Memory',
-                    'Time',
-                    'ZFDebug_Controller_Plugin_Debug_Plugin_Auth' => array('user' => 'username', 'role' => 'accesslevel'),
-                    'Exception'
+                  'Variables',
+                  'Html',
+                  'Log',
+                  'File' => array('base_path' => SYSTEM),
+                  'Database',
+                  'Memory',
+                  'Time',
+                  'ZFDebug_Controller_Plugin_Debug_Plugin_Auth' => array('user' => 'username', 'role' => 'accesslevel'),
+                  'Exception'
                 )
-            ));
+              ));
             $controller->registerPlugin($debug);
         }
         return $controller;
@@ -347,7 +345,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         // Add application routes
         $router->addRoutes(require(SYSTEM . '/configs/routes.php'));
         return $router;
-
     }
 
 }

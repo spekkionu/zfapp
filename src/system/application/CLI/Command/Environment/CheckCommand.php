@@ -12,15 +12,19 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Checks server environment
+ *
+ * @package CLI
+ * @subpackage Environment
+ */
 class CheckCommand extends Command
 {
 
     protected function configure()
     {
-        $this
-          ->setName('environment:check')
-          ->setDescription('Check environment')
-        ;
+        $this->setName('environment:check');
+        $this->setDescription('Check environment');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -69,12 +73,10 @@ class CheckCommand extends Command
         // Check Permissions
         $command = $this->getApplication()->find('permissions:check');
         $arguments = array(
-            'command' => 'permissions:check',
+          'command' => 'permissions:check',
         );
         $cinput = new ArrayInput($arguments);
         $returnCode = $command->run($cinput, $output);
-
-
     }
 
     /**

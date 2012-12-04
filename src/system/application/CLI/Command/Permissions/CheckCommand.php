@@ -11,15 +11,19 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Checks application permissions
+ *
+ * @package CLI
+ * @subpackage Permissions
+ */
 class CheckCommand extends Command
 {
 
     protected function configure()
     {
-        $this
-          ->setName('permissions:check')
-          ->setDescription('Check file / directory permissions')
-        ;
+        $this->setName('permissions:check');
+        $this->setDescription('Check file / directory permissions');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -28,18 +32,10 @@ class CheckCommand extends Command
 
         // Check File owner / group
         $dialog = $this->getHelperSet()->get('dialog');
-        $ownread = $dialog->ask(
-          $output, '<question>What should the owner for readable files be?</question> [username] ', 'username'
-        );
-        $grpread = $dialog->ask(
-          $output, '<question>What should the group for readable directories be?</question> [usergroup] ', 'usergroup'
-        );
-        $ownwrite = $dialog->ask(
-          $output, '<question>What should the owner for writable files be?</question> [www-data] ', 'www-data'
-        );
-        $grpwrite = $dialog->ask(
-          $output, '<question>What should the group for writable directories be?</question> [www-data] ', 'www-data'
-        );
+        $ownread = $dialog->ask($output, '<question>What should the owner for readable files be?</question> [username] ', 'username');
+        $grpread = $dialog->ask($output, '<question>What should the group for readable directories be?</question> [usergroup] ', 'usergroup');
+        $ownwrite = $dialog->ask($output, '<question>What should the owner for writable files be?</question> [www-data] ', 'www-data');
+        $grpwrite = $dialog->ask($output, '<question>What should the group for writable directories be?</question> [www-data] ', 'www-data');
 
         // Check webroot
         $output->writeln("<header>Checking webroot</header>");
@@ -49,7 +45,7 @@ class CheckCommand extends Command
         $owner = posix_getpwuid($file->getOwner());
         if ($ownread != $owner['name']) {
             $output->writeln(": <error>Webroot is owned by {$owner['name']}</error>");
-        }else{
+        } else {
             $output->writeln(": <info>OK</info>");
         }
         // group
@@ -57,7 +53,7 @@ class CheckCommand extends Command
         $group = posix_getgrgid($file->getGroup());
         if ($grpread != $group['name']) {
             $output->writeln(": <error>Webroot is in group {$group['name']}</error>");
-        }else{
+        } else {
             $output->writeln(": <info>OK</info>");
         }
         // permissions
@@ -65,7 +61,7 @@ class CheckCommand extends Command
         $perms = substr(sprintf('%o', $file->getPerms()), -4);
         if ($perms != "0775") {
             $output->writeln(": <error>Webroot should have permissions 0775</error>");
-        }else{
+        } else {
             $output->writeln(": <info>OK</info>");
         }
 
@@ -77,7 +73,7 @@ class CheckCommand extends Command
         $owner = posix_getpwuid($file->getOwner());
         if ($ownread != $owner['name']) {
             $output->writeln(": <error>System folder is owned by {$owner['name']}</error>");
-        }else{
+        } else {
             $output->writeln(": <info>OK</info>");
         }
         // group
@@ -85,7 +81,7 @@ class CheckCommand extends Command
         $group = posix_getgrgid($file->getGroup());
         if ($grpread != $group['name']) {
             $output->writeln(": <error>System folder is in group {$group['name']}</error>");
-        }else{
+        } else {
             $output->writeln(": <info>OK</info>");
         }
         // permissions
@@ -93,7 +89,7 @@ class CheckCommand extends Command
         $perms = substr(sprintf('%o', $file->getPerms()), -4);
         if ($perms != "0775") {
             $output->writeln(": <error>System folder should have permissions 0775</error>");
-        }else{
+        } else {
             $output->writeln(": <info>OK</info>");
         }
 
@@ -105,7 +101,7 @@ class CheckCommand extends Command
         $owner = posix_getpwuid($file->getOwner());
         if ($ownwrite != $owner['name']) {
             $output->writeln(": <error>Userfiles folder is owned by {$owner['name']}</error>");
-        }else{
+        } else {
             $output->writeln(": <info>OK</info>");
         }
         //group
@@ -113,7 +109,7 @@ class CheckCommand extends Command
         $group = posix_getgrgid($file->getGroup());
         if ($grpwrite != $group['name']) {
             $output->writeln(": <error>Userfiles folder is in group {$group['name']}</error>");
-        }else{
+        } else {
             $output->writeln(": <info>OK</info>");
         }
         // permissions
@@ -121,7 +117,7 @@ class CheckCommand extends Command
         $perms = substr(sprintf('%o', $file->getPerms()), -4);
         if ($perms != "0777") {
             $output->writeln(": <error>Userfiles folder should have permissions 0777</error>");
-        }else{
+        } else {
             $output->writeln(": <info>OK</info>");
         }
 
@@ -133,7 +129,7 @@ class CheckCommand extends Command
         $owner = posix_getpwuid($file->getOwner());
         if ($ownwrite != $owner['name']) {
             $output->writeln(": <error>Userfiles folder is owned by {$owner['name']}</error>");
-        }else{
+        } else {
             $output->writeln(": <info>OK</info>");
         }
         //group
@@ -141,7 +137,7 @@ class CheckCommand extends Command
         $group = posix_getgrgid($file->getGroup());
         if ($grpwrite != $group['name']) {
             $output->writeln(": <error>Userfiles folder is in group {$group['name']}</error>");
-        }else{
+        } else {
             $output->writeln(": <info>OK</info>");
         }
         // permissions
@@ -149,7 +145,7 @@ class CheckCommand extends Command
         $perms = substr(sprintf('%o', $file->getPerms()), -4);
         if ($perms != "0777") {
             $output->writeln(": <error>Userfiles folder should have permissions 0777</error>");
-        }else{
+        } else {
             $output->writeln(": <info>OK</info>");
         }
 
@@ -161,7 +157,7 @@ class CheckCommand extends Command
         $owner = posix_getpwuid($file->getOwner());
         if ($ownwrite != $owner['name']) {
             $output->writeln(": <error>Log folder is owned by {$owner['name']}</error>");
-        }else{
+        } else {
             $output->writeln(": <info>OK</info>");
         }
         //group
@@ -169,7 +165,7 @@ class CheckCommand extends Command
         $group = posix_getgrgid($file->getGroup());
         if ($grpwrite != $group['name']) {
             $output->writeln(": <error>Log folder is in group {$group['name']}</error>");
-        }else{
+        } else {
             $output->writeln(": <info>OK</info>");
         }
         // permissions
@@ -177,7 +173,7 @@ class CheckCommand extends Command
         $perms = substr(sprintf('%o', $file->getPerms()), -4);
         if ($perms != "0777") {
             $output->writeln(": <error>Log folder should have permissions 0777</error>");
-        }else{
+        } else {
             $output->writeln(": <info>OK</info>");
         }
 
@@ -189,7 +185,7 @@ class CheckCommand extends Command
         $owner = posix_getpwuid($file->getOwner());
         if ($ownwrite != $owner['name']) {
             $output->writeln(": <error>Cache folder is owned by {$owner['name']}</error>");
-        }else{
+        } else {
             $output->writeln(": <info>OK</info>");
         }
         //group
@@ -197,7 +193,7 @@ class CheckCommand extends Command
         $group = posix_getgrgid($file->getGroup());
         if ($grpwrite != $group['name']) {
             $output->writeln(": <error>Cache folder is in group {$group['name']}</error>");
-        }else{
+        } else {
             $output->writeln(": <info>OK</info>");
         }
         // permissions
@@ -205,10 +201,9 @@ class CheckCommand extends Command
         $perms = substr(sprintf('%o', $file->getPerms()), -4);
         if ($perms != "0777") {
             $output->writeln(": <error>Cache folder should have permissions 0777</error>");
-        }else{
+        } else {
             $output->writeln(": <info>OK</info>");
         }
     }
-
 
 }

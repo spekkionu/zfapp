@@ -25,8 +25,8 @@ abstract class Test_DbTestCase extends PHPUnit_Framework_TestCase
         parent::tearDown();
         Doctrine_Manager::getInstance()->closeConnection(Doctrine_Manager::connection());
         $db = Zend_Db_Table::getDefaultAdapter();
-        if($db){
-          $db->closeConnection();
+        if ($db) {
+            $db->closeConnection();
         }
         @unlink(TEST_DATA . '/cache/testdb.sqlite');
     }
