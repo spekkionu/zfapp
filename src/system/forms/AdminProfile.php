@@ -86,7 +86,7 @@ class Form_AdminProfile extends App_Form
               'required' => true,
               'nowhitespace' => true,
               'maxlength' => 20,
-          //    'minlength' => 4,
+              //    'minlength' => 4,
               'password' => true,
               'messages' => array(
                 'required' => 'New password is required.',
@@ -283,5 +283,4 @@ class Form_AdminProfile extends App_Form
 
         return $this;
     }
-
 }

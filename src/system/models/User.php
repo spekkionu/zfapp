@@ -225,5 +225,4 @@ class Model_User extends App_Model
     {
         return Ziadoz\BCrypt\BCrypt::compare($password, $hash);
     }
-
 }

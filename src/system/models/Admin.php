@@ -125,5 +125,4 @@ class Model_Admin extends Model_User
     {
         return $this->delete($this->getAdapter()->quoteInto("`id` = ?", $id, Zend_Db::PARAM_INT));
     }
-
 }

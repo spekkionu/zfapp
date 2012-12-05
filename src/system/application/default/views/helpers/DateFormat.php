@@ -35,5 +35,4 @@ class Zend_View_Helper_DateFormat extends Zend_View_Helper_Abstract
             return $date->format($format);
         }
     }
-
 }

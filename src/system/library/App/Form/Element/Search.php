@@ -11,10 +11,9 @@
 class Form_Element_Search extends Zend_Form_Element_Text
 {
 
-  /**
-   * Use ValidationTextBox dijit view helper
-   * @var string
-   */
-  public $helper = 'SearchTextBox';
-
+    /**
+     * Use ValidationTextBox dijit view helper
+     * @var string
+     */
+    public $helper = 'SearchTextBox';
 }

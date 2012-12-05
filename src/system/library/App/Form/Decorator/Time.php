@@ -61,5 +61,4 @@ class App_Decorator_Time extends Zend_Form_Decorator_Abstract
         }
         return $this->buildInput();
     }
-
 }

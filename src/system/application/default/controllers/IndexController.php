@@ -14,7 +14,7 @@ class IndexController extends App_FrontController
     public function init()
     {
         parent::init();
-        $this->_helper->cache(array('index','page'));
+        $this->_helper->cache(array('index', 'page'));
     }
 
     public function indexAction()
@@ -40,5 +40,4 @@ class IndexController extends App_FrontController
     {
 
     }
-
 }

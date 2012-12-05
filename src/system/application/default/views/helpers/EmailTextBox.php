@@ -20,5 +20,4 @@ class Zend_View_Helper_EmailTextBox extends Zend_View_Helper_FormText
     {
         return parent::formText($id, $value, $attribs);
     }
-
 }

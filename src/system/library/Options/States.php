@@ -141,5 +141,4 @@ class Options_States
             return false;
         }
     }
-
 }

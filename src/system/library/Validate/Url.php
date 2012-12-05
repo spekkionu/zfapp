@@ -33,5 +33,4 @@ class Validate_Url extends Zend_Validate_Abstract
         }
         return true;
     }
-
 }

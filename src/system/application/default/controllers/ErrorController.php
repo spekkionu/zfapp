@@ -36,5 +36,4 @@ class ErrorController extends App_FrontController
     {
 
     }
-
 }

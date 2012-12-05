@@ -26,5 +26,4 @@ class App_Form_Element_Time extends Zend_Form_Element
         $this->_value = $date;
         return $this;
     }
-
 }

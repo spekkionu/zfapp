@@ -122,5 +122,4 @@ class Model_EmailTemplates
 
         return $mail;
     }
-
 }

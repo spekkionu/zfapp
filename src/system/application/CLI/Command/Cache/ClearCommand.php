@@ -44,5 +44,4 @@ class ClearCommand extends Command
             $output->writeln("<error>cache dir does not exist</error>");
         }
     }
-
 }

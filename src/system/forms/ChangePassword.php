@@ -128,5 +128,4 @@ class Form_ChangePassword extends App_Form
 
         $this->addElement('hash', 'csrf', array('ignore' => true, 'decorators' => $this->hidden));
     }
-
 }

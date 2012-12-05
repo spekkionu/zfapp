@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Application Bootstrap
  *
@@ -346,5 +347,4 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router->addRoutes(require(SYSTEM . '/configs/routes.php'));
         return $router;
     }
-
 }

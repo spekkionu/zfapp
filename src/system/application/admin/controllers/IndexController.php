@@ -26,5 +26,4 @@ class Admin_IndexController extends App_AdminController
     {
 
     }
-
 }

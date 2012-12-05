@@ -24,5 +24,4 @@ class Zend_View_Helper_Route extends Zend_View_Helper_Abstract
     {
         return $this->view->url($urlOptions, $route, $reset, $encode);
     }
-
 }

@@ -30,5 +30,4 @@ abstract class Test_DbTestCase extends PHPUnit_Framework_TestCase
         }
         @unlink(TEST_DATA . '/cache/testdb.sqlite');
     }
-
 }

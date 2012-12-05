@@ -271,5 +271,4 @@ class Model_Content extends App_Model
 
         return $purifier->purify($content);
     }
-
 }

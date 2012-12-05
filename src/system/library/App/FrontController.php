@@ -18,5 +18,4 @@ abstract class App_FrontController extends App_Controller
     {
         parent::init();
     }
-
 }

@@ -129,5 +129,4 @@ class Options_Countries
             return false;
         }
     }
-
 }

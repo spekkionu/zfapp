@@ -129,7 +129,7 @@ class Admin_ContentController extends App_AdminController
                 } catch (Exception $e) {
                     $this->logError("Failed to update page - {$e->getMessage()}");
                     $this->addMessage("Failed to update page", 'error');
-                    return $this->routeRedirect('admin_content_edit', array('id'=>$id));
+                    return $this->routeRedirect('admin_content_edit', array('id' => $id));
                 }
             }
         }
@@ -172,5 +172,4 @@ class Admin_ContentController extends App_AdminController
         $this->view->page = $result;
         $this->view->form = $form;
     }
-
 }

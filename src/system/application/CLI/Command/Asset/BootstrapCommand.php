@@ -109,5 +109,4 @@ class BootstrapCommand extends Command
         }
         $fs->mirror(WEBROOT . '/assets/vendor/bootstrap/img', WEBROOT . '/assets/styles/bootstrap/img');
     }
-
 }

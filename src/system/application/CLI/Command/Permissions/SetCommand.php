@@ -77,5 +77,4 @@ class SetCommand extends Command
         $fs->chmod(SYSTEM . DIRECTORY_SEPARATOR . 'cache', 0600, true);
         $fs->chmod(SYSTEM . DIRECTORY_SEPARATOR . 'logs', 0644, true);
     }
-
 }

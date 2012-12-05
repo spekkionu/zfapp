@@ -73,5 +73,4 @@ class ErrorLogger
             throw new Exception('No log instance set.');
         }
     }
-
 }
