@@ -1,20 +1,24 @@
 <?php
-
 /**
  * Base CLI Application
  *
  */
 if (!defined('SYSTEM')) {
-    define('SYSTEM', dirname(__DIR__).DIRECTORY_SEPARATOR.'system');
+    define('SYSTEM', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'system');
 }
 
 if (!defined('WEBROOT')) {
     // Set the webroot to the current dir
-    define('WEBROOT', dirname(SYSTEM).DIRECTORY_SEPARATOR.'public_html');
+    define('WEBROOT', dirname(SYSTEM) . DIRECTORY_SEPARATOR . 'public_html');
 }
 
 if (!defined('PROJECT')) {
     define('PROJECT', dirname(SYSTEM));
+}
+
+if (!defined('SCRIPTPATH')) {
+    // The SAPPHIRE directory should match this file
+    define('SCRIPTPATH', __DIR__);
 }
 
 // Change the directory to the app root
@@ -41,6 +45,7 @@ $application->add(new CLI\Command\Permissions\CheckCommand);
 $application->add(new CLI\Command\Permissions\SetCommand);
 $application->add(new CLI\Command\Asset\MinifyCommand);
 $application->add(new CLI\Command\Asset\BootstrapCommand);
+$application->add(new CLI\Command\Migrate\RunCommand);
 
 // Configure styles
 $output = new Symfony\Component\Console\Output\ConsoleOutput();

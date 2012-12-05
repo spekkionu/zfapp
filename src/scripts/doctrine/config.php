@@ -33,15 +33,15 @@
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @author      Jonathan H. Wage <jwage@mac.com>
  */
-
-
-define('DISABLE_CACHES', true);
+if (!defined('DISABLE_CACHES')) {
+    define("DISABLE_CACHES", true);
+}
 define('DISABLE_LOGS', true);
 define('DISABLE_SESSIONS', true);
 
 define('SANDBOX_PATH', dirname(__FILE__));
 define('PROJECT_PATH', dirname(dirname(dirname(SANDBOX_PATH))));
-if(!defined('SYSTEM')){
+if (!defined('SYSTEM')) {
     define('SYSTEM', PROJECT_PATH . '/src/system');
 }
 define('DOCTRINE_PATH', SYSTEM . '/library/vendor/doctrine/doctrine1/lib');
@@ -51,11 +51,11 @@ define('MIGRATIONS_PATH', PROJECT_PATH . '/data/migrations');
 define('SQL_PATH', PROJECT_PATH . '/data/sql');
 define('YAML_SCHEMA_PATH', PROJECT_PATH . '/data/schema');
 
-if(!defined('APPLICATION_ENV')){
+if (!defined('APPLICATION_ENV')) {
     define('APPLICATION_ENV', 'production');
 }
-if(!defined('APPLICATION_PATH')){
-    define('APPLICATION_PATH', SYSTEM.DIRECTORY_SEPARATOR.'application');
+if (!defined('APPLICATION_PATH')) {
+    define('APPLICATION_PATH', SYSTEM . DIRECTORY_SEPARATOR . 'application');
 }
 
 // Set up autoload.
@@ -77,33 +77,33 @@ spl_autoload_register(array('Doctrine', 'autoload'));
 spl_autoload_register(array('Doctrine', 'modelsAutoload'));
 spl_autoload_register(array('Doctrine', 'extensionsAutoload'));
 
-Doctrine_Core::setExtensionsPath(SYSTEM.'/library/vendor/DoctrineExtensions');
+Doctrine_Core::setExtensionsPath(SYSTEM . '/library/vendor/DoctrineExtensions');
 
 $manager = Doctrine_Manager::getInstance();
 $manager->setAttribute(Doctrine_Core::ATTR_QUOTE_IDENTIFIER, true);
 $manager->setAttribute(Doctrine_Core::ATTR_VALIDATE, Doctrine_Core::VALIDATE_NONE);
-$manager->setAttribute( Doctrine_Core::ATTR_USE_NATIVE_ENUM, true );
+$manager->setAttribute(Doctrine_Core::ATTR_USE_NATIVE_ENUM, true);
 $manager->setAttribute(Doctrine_Core::ATTR_MODEL_LOADING, Doctrine_Core::MODEL_LOADING_PEAR);
 $manager->setAttribute(Doctrine_Core::ATTR_TABLE_CLASS_FORMAT, 'Table_%s');
-$manager->setAttribute( Doctrine_Core::ATTR_AUTOLOAD_TABLE_CLASSES,true);
+$manager->setAttribute(Doctrine_Core::ATTR_AUTOLOAD_TABLE_CLASSES, true);
 $manager->setAttribute(Doctrine_Core::ATTR_AUTO_ACCESSOR_OVERRIDE, true);
-$manager->setCharset( 'utf8' );
-$manager->setCollate( 'utf8_unicode_ci' );
-switch($config['database']['adapter']){
-  case "Pdo_Mysql":
-  case "Mysqli":
-    $config['database']['dsn'] = "mysql" .
-                        '://' . $config['database']['params']['username'] .
-                        ':' . $config['database']['params']['password'].
-                        '@' . $config['database']['params']['host'] .
-                        '/' . $config['database']['params']['dbname'];
-    break;
-  case "Pdo_Sqlite":
-    $config['database']['dsn'] = "sqlite:///".SYSTEM."/cache/".$config['database']['dbname'].".sqlite?mode=666";
-    break;
-  default:
-    exit("Unsuported database adapter {$config['database']['adapter']}");
-    break;
+$manager->setCharset('utf8');
+$manager->setCollate('utf8_unicode_ci');
+switch ($config['database']['adapter']) {
+    case "Pdo_Mysql":
+    case "Mysqli":
+        $config['database']['dsn'] = "mysql" .
+          '://' . $config['database']['params']['username'] .
+          ':' . $config['database']['params']['password'] .
+          '@' . $config['database']['params']['host'] .
+          '/' . $config['database']['params']['dbname'];
+        break;
+    case "Pdo_Sqlite":
+        $config['database']['dsn'] = "sqlite:///" . SYSTEM . "/cache/" . $config['database']['dbname'] . ".sqlite?mode=666";
+        break;
+    default:
+        exit("Unsuported database adapter {$config['database']['adapter']}");
+        break;
 }
 // Connect to database
 $conn = Doctrine_Manager::connection($config['database']['dsn']);

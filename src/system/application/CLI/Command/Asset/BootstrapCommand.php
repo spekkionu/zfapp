@@ -92,7 +92,7 @@ class BootstrapCommand extends Command
             file_put_contents(WEBROOT . "/assets/styles/bootstrap/js/bootstrap.js", $js->dump());
             $output->writeln("<info>Saved to assets/styles/bootstrap/js/bootstrap.js</info>");
 
-            $output->writeln("Save minified javascript file to assets/styles/bootstrap/js/bootstrap.js.");
+            $output->writeln("Save minified javascript file.");
             $js = new AssetCollection($input, array(
                 new Filter\GoogleClosure\CompilerJarFilter(realpath(PROJECT . '/scripts/tools/closure-compiler/compiler.jar'), 'java'),
               ));
