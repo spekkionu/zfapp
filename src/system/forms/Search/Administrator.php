@@ -85,5 +85,4 @@ class Form_Search_Administrator extends App_Form
 
         $this->addElement('hash', 'csrf', array('ignore' => true, 'decorators' => $this->hidden));
     }
-
 }

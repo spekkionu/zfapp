@@ -230,13 +230,13 @@ class Cache
               'backend' => array(
                 'name' => 'Two Levels',
                 'options' => array(
-                'slow_backend' => 'File',
-                'slow_backend_options' => array(
-                  'cache_dir' => $cachedir
-                ),
-                'fast_backend' => $config['type'],
-                'fast_backend_custom_naming' => (isset($config['custom']) && $config['custom']),
-                'fast_backend_options' => $config['options']
+                  'slow_backend' => 'File',
+                  'slow_backend_options' => array(
+                    'cache_dir' => $cachedir
+                  ),
+                  'fast_backend' => $config['type'],
+                  'fast_backend_custom_naming' => (isset($config['custom']) && $config['custom']),
+                  'fast_backend_options' => $config['options']
                 )
               )
             );
@@ -318,7 +318,7 @@ class Cache
         $caches[] = "translate";
         $caches = array_unique($caches);
         // Clear the caches
-        $exclude = array('cache_dir', 'prefix', 'page','pagetag');
+        $exclude = array('cache_dir', 'prefix', 'page', 'pagetag');
         foreach ($caches as $key) {
             if (!in_array($key, $exclude)) {
                 self::clearCache($key);
@@ -371,5 +371,4 @@ class Cache
     {
         self::$manager = null;
     }
-
 }

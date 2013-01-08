@@ -86,5 +86,4 @@ abstract class App_Model extends Zend_Db_Table_Abstract
     {
         return $this->getAdapter()->quote($value, $type);
     }
-
 }

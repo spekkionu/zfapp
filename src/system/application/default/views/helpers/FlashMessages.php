@@ -34,5 +34,4 @@ class Zend_View_Helper_FlashMessages extends Zend_View_Helper_Abstract
         $string .= '</div>';
         return $string;
     }
-
 }

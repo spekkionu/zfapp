@@ -125,5 +125,4 @@ class Admin_AccessController extends App_AdminController
         }
         $this->view->form = $form;
     }
-
 }

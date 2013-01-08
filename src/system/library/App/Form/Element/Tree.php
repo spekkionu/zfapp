@@ -18,5 +18,4 @@ class App_Form_Element_Tree extends Zend_Form_Element_Select
      * @var string
      */
     public $helper = 'formHidden';
-
 }

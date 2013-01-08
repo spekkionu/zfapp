@@ -205,5 +205,4 @@ class CheckCommand extends Command
             $output->writeln(": <info>OK</info>");
         }
     }
-
 }

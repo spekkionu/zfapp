@@ -89,5 +89,4 @@ class Admin_AccountController extends App_AdminController
         }
         $this->view->form = $form;
     }
-
 }

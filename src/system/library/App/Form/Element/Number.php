@@ -11,10 +11,9 @@
 class Form_Element_Number extends Zend_Form_Element_Text
 {
 
-  /**
-   * Use ValidationTextBox dijit view helper
-   * @var string
-   */
-  public $helper = 'NumberTextBox';
-
+    /**
+     * Use ValidationTextBox dijit view helper
+     * @var string
+     */
+    public $helper = 'NumberTextBox';
 }

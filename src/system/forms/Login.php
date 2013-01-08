@@ -68,7 +68,7 @@ class Form_Login extends App_Form
               //'nowhitespace' => true,
               'messages' => array(
                 'required' => 'Password is required.',
-               // 'nowhitespace' => 'Cannot contain spaces.'
+              // 'nowhitespace' => 'Cannot contain spaces.'
               )
             )))
         ));
@@ -90,5 +90,4 @@ class Form_Login extends App_Form
 
         $this->addElement('hash', 'csrf', array('ignore' => true, 'decorators' => $this->hidden));
     }
-
 }

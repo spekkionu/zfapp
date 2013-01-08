@@ -29,5 +29,4 @@ class Zend_View_Helper_Anchor extends Zend_View_Helper_HtmlElement
         }
         return '<a' . $this->_htmlAttribs($attribs) . '>' . $label . '</a>';
     }
-
 }

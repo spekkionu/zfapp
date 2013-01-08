@@ -103,5 +103,4 @@ class Session_SaveHandler_Mock implements Zend_Session_SaveHandler_Interface
     {
         return true;
     }
-
 }

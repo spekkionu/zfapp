@@ -12,5 +12,4 @@ class App_Form_Element_LinkButton extends Zend_Form_Element_Submit
 {
 
     public $helper = 'linkButton';
-
 }

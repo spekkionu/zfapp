@@ -44,5 +44,4 @@ class Zend_View_Helper_LinkButton extends Zend_View_Helper_FormElement
           . ' ' . $this->_htmlAttribs($attribs) . '>' . $this->view->escape($value) . '</a>';
         return $xhtml;
     }
-
 }

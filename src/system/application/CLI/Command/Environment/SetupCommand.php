@@ -111,5 +111,4 @@ class SetupCommand extends Command
             }
         }
     }
-
 }

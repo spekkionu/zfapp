@@ -70,5 +70,4 @@ class App_Form_Decorator_Errors extends Zend_Form_Decorator_Abstract
                 break;
         }
     }
-
 }

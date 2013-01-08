@@ -67,7 +67,7 @@ abstract class App_Controller extends Zend_Controller_Action
           'domain' => $this->config['site']['domain']
         );
         $this->view->site_info['url'] = (isset($_SERVER['REMOTE_PORT']) && $_SERVER['REMOTE_PORT'] == 443) ? 'https://' : 'http://' . $this->view->site_info['domain'] . $this->view->baseUrl();
-         // Setup Full Page Cache
+        // Setup Full Page Cache
         $cache = $this->getHelper('cache');
         $cache->setManager(Cache::getManager());
     }
@@ -200,5 +200,4 @@ abstract class App_Controller extends Zend_Controller_Action
         $this->flashMessenger->resetNamespace();
         return $messages;
     }
-
 }

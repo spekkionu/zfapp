@@ -180,5 +180,4 @@ class Admin_AdministratorController extends App_AdminController
         $this->view->form = $form;
         $this->view->allow_delete = $allow_delete;
     }
-
 }

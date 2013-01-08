@@ -27,5 +27,4 @@ class MinifyCommand extends Command
     {
         $output->writeln("<header>Minify Assets</header>");
     }
-
 }

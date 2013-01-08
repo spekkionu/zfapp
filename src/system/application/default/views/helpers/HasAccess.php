@@ -27,5 +27,4 @@ class Zend_View_Helper_HasAccess extends Zend_View_Helper_Abstract
         $identity = $auth->getIdentity();
         return $acl->isAllowed($identity->accesslevel, $resource, $privilege);
     }
-
 }

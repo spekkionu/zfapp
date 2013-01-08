@@ -44,5 +44,4 @@ class App_Paginator
         Zend_View_Helper_PaginationControl::setDefaultViewPartial(array('partials/pagination.phtml', 'default'));
         return $paginator;
     }
-
 }

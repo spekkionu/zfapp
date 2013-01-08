@@ -212,5 +212,4 @@ class Crypt
         $data = @unserialize($data);
         return ($data !== false) ? $data : null;
     }
-
 }

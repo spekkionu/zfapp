@@ -34,5 +34,4 @@ class App_Form_Decorator_Addon extends Zend_Form_Decorator_HtmlTag
           . $this->_getCloseTag($tag)
           . $content;
     }
-
 }

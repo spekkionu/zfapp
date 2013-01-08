@@ -34,14 +34,14 @@ class Validate_GreaterThanOrEqualTo extends Zend_Validate_GreaterThan
      * @var array
      */
     protected $_messageTemplates = array(
-        self::NOT_GREATER => "'%value%' is not greater than or equal to '%min%'",
+      self::NOT_GREATER => "'%value%' is not greater than or equal to '%min%'",
     );
 
     /**
      * @var array
      */
     protected $_messageVariables = array(
-        'min' => '_min'
+      'min' => '_min'
     );
 
     /**
@@ -62,5 +62,4 @@ class Validate_GreaterThanOrEqualTo extends Zend_Validate_GreaterThan
         }
         return true;
     }
-
 }

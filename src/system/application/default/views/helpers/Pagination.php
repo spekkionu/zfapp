@@ -22,5 +22,4 @@ class Zend_View_Helper_Pagination extends Zend_View_Helper_Abstract
     {
         return $this->view->paginationControl($pager, null, null, array('params' => $params));
     }
-
 }

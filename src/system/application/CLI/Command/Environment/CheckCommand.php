@@ -96,5 +96,4 @@ class CheckCommand extends Command
             return true;
         }
     }
-
 }

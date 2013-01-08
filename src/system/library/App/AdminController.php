@@ -33,5 +33,4 @@ abstract class App_AdminController extends App_Controller
         // Save Navigation
         Zend_Registry::set('Zend_Navigation', $container);
     }
-
 }
