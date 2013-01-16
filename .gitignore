@@ -1,15 +1,17 @@
 ﻿# Cache and userfiles
-/src/system/library/vendor
-/src/public_html/assets/vendor
-/src/system/logs
-/src/system/cache
-/src/system/configs/config.local.php
-/src/public_html/cached
-/src/public_html/wincache.php
-/src/public_html/phpinfo.php
-/src/public_html/dummy.php
-/src/public_html/apc.php
-/src/public_html/xhprof
+/system/library/vendor
+/public/assets/vendor
+/system/logs
+/system/cache
+/system/userfiles
+/system/configs/config.local.php
+/public/cached
+/public/userfiles
+/public/wincache.php
+/public/phpinfo.php
+/public/dummy.php
+/public/apc.php
+/public/xhprof
 /tests/data/cache
 /tests/_data/cache
 /tests/_log
@@ -37,6 +39,7 @@ _notes
 .cache
 *.sublime-project
 *.sublime-workspace
+crash.txt
 
 # Source Control
 .svn

@@ -1,6 +1,3 @@
-[submodule "scripts/tasks/closure"]
-	path = scripts/tasks/closure
-	url = git://github.com/mathewbyrne/closure-task.git
 [submodule "scripts/tasks/phpcs/Spekkionu"]
 	path = scripts/tasks/phpcs/Spekkionu
 	url = git://github.com/spekkionu/spekkionu-coding-standard.git

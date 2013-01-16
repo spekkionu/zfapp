@@ -24,14 +24,14 @@
 
   <filter>
     <whitelist addUncoveredFilesFromWhitelist="true">
-      <directory suffix=".php">src/system</directory>
+      <directory suffix=".php">system</directory>
       <exclude>
-        <directory suffix=".php">src/system/cache</directory>
-        <directory suffix=".php">src/system/configs</directory>
-        <directory suffix=".php">src/system/logs</directory>
-        <directory suffix=".php">src/system/scripts</directory>
-        <directory suffix=".php">src/system/library/vendor</directory>
-        <directory suffix=".php">src/system/userfiles</directory>
+        <directory suffix=".php">system/cache</directory>
+        <directory suffix=".php">system/configs</directory>
+        <directory suffix=".php">system/logs</directory>
+        <directory suffix=".php">system/scripts</directory>
+        <directory suffix=".php">system/library/vendor</directory>
+        <directory suffix=".php">system/userfiles</directory>
       </exclude>
     </whitelist>
   </filter>

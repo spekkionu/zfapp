@@ -36,23 +36,23 @@
     ],
     "autoload": {
         "psr-0": {
-            "App_": "src/system/library",
-            "Options_": "src/system/library/",
-            "Test_": "src/system/library/",
-            "Validate_": "src/system/library/",
-            "CLI": "src/system/application/",
-            "": "src/system/library"
+            "App_": "system/library",
+            "Options_": "system/library/",
+            "Test_": "system/library/",
+            "Validate_": "system/library/",
+            "CLI": "system/application/",
+            "": "system/library"
         },
         "classmap": [
-          "src/system/application/",
-          "src/system/models/",
-          "src/system/forms/",
-          "src/system/library/Cache.php",
-          "src/system/library/Crypt.php",
-          "src/system/library/ErrorLogger.php"
+          "system/application/",
+          "system/models/",
+          "system/forms/",
+          "system/library/Cache.php",
+          "system/library/Crypt.php",
+          "system/library/ErrorLogger.php"
         ]
     },
-    "include-path": ["src/system/library/"],
+    "include-path": ["system/library/"],
     "authors": [
         {
             "name": "spekkionu",

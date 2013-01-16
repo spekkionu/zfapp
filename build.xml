@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="zfapp" default="build" basedir=".">
-  <property name="source" value="src"/>
 
   <!-- Add Custom Tasks to the include path -->
-  <includepath classpath="scripts/tasks/closure/tasks" />
-  <taskdef name="yuicompressor" classname="YuiCompressorTask" />
-  <taskdef name="closure" classname="ClosureTask" />
-
   <target name="clean" depends="clear-cache" description="Clean up and create artifact directories">
     <delete dir="build/api"/>
     <delete dir="build/code-browser"/>
@@ -27,18 +22,18 @@
 
   <target name="init" description="Create needed directories and set permissions">
     <echo message="Create private directories" />
-    <mkdir dir="src/system/cache" mode="0777"/>
-    <mkdir dir="src/system/logs" mode="0777" />
-    <mkdir dir="src/system/userfiles" mode="0777" />
-    <mkdir dir="src/system/configs/data" />
-    <mkdir dir="src/system/configs/data/fixtures" />
-    <mkdir dir="src/system/configs/data/migrations" />
-    <mkdir dir="src/system/configs/data/schema" />
-    <mkdir dir="src/system/configs/data/sql" />
-    <mkdir dir="src/system/scripts" />
+    <mkdir dir="system/cache" mode="0777"/>
+    <mkdir dir="system/logs" mode="0777" />
+    <mkdir dir="system/userfiles" mode="0777" />
+    <mkdir dir="system/configs/data" />
+    <mkdir dir="system/configs/data/fixtures" />
+    <mkdir dir="system/configs/data/migrations" />
+    <mkdir dir="system/configs/data/schema" />
+    <mkdir dir="system/configs/data/sql" />
+    <mkdir dir="system/scripts" />
     <echo message="Create public directories" />
-    <mkdir dir="src/public_html/cached" mode="0777" />
-    <mkdir dir="src/public_html/userfiles" mode="0777" />
+    <mkdir dir="public/cached" mode="0777" />
+    <mkdir dir="public/userfiles" mode="0777" />
   </target>
 
   <target name="phpunit" description="Run unit tests using PHPUnit and generates junit.xml and clover.xml">
@@ -47,7 +42,7 @@
 
   <target name="pdepend" description="Generate jdepend.xml and software metrics charts using PHP_Depend">
     <phpdepend>
-      <fileset dir="${source}/system">
+      <fileset dir="system">
         <include name="**/*.php" />
         <exclude name="cache/**" />
         <exclude name="logs/**" />
@@ -63,7 +58,7 @@
 
   <target name="phpmd" description="Generate pmd.xml using PHPMD">
     <phpmd rulesets="codesize,design,naming,unusedcode">
-      <fileset dir="${source}/system">
+      <fileset dir="system">
         <include name="**/*.php" />
         <exclude name="cache/**" />
         <exclude name="logs/**" />
@@ -78,7 +73,7 @@
 
   <target name="phpcpd" description="Generate pmd-cpd.xml using PHPCPD">
     <phpcpd>
-      <fileset dir="${source}/system">
+      <fileset dir="system">
         <include name="**/*.php" />
         <exclude name="cache/**" />
         <exclude name="logs/**" />
@@ -93,7 +88,7 @@
 
   <target name="phploc" description="Generate phploc.csv">
     <phploc reportType="csv" reportName="phploc" reportDirectory="build/logs">
-      <fileset dir="${source}/system">
+      <fileset dir="system">
         <include name="**/*.php" />
         <exclude name="cache/**" />
         <exclude name="logs/**" />
@@ -106,7 +101,7 @@
 
   <target name="lint" description="Perform syntax check of sourcecode files">
     <phplint tofile="build/logs/lint.log">
-      <fileset dir="${source}/system">
+      <fileset dir="system">
         <include name="**/*.php" />
         <exclude name="cache/**" />
         <exclude name="logs/**" />
@@ -120,7 +115,7 @@
   <target name="phpcs" description="Generate checkstyle.xml using PHP_CodeSniffer">
     <resolvepath propertyName="standard" file="${project.basedir}/scripts/tasks/phpcs/Spekkionu"/>
     <phpcodesniffer standard="${standard}" showWarnings="false">
-      <fileset dir="${source}/system">
+      <fileset dir="system">
         <include name="**/*.php" />
         <exclude name="cache/**" />
         <exclude name="logs/**" />
@@ -135,34 +130,15 @@
   </target>
 
   <target name="apigen" description="Generate API documentation using apigen">
-    <resolvepath propertyName="src" file="${source}"/>
-    <apigen source="${source}/system" destination="build/api" exclude="${src}/system/cache/*,${src}/system/logs/*,${src}/system/configs/*,${src}/system/userfiles/*,${src}/system/mvc.php,*/tests/*,*/Tests/*,*/docs/*,*/demos/*" skipdocpath="${src}/system/library/vendor/*" title="API Documentation" deprecated="true" todo="false" sourcecode="true" />
+    <resolvepath propertyName="system" file="system"/>
+    <apigen source="system" destination="build/api" exclude="${system}/cache/*,${system}/logs/*,${system}/configs/*,${system}/userfiles/*,${system}/mvc.php,*/tests/*,*/Tests/*,*/docs/*,*/demos/*" skipdocpath="${system}/library/vendor/*" title="API Documentation" deprecated="true" todo="false" sourcecode="true" />
   </target>
 
   <target name="phpcb" description="Aggregate tool output with PHP_CodeBrowser">
-    <exec command="phpcb --log build/logs --source ${source}/system --output build/code-browser" passthru="true" />
+    <exec command="phpcb --log build/logs --source system --output build/code-browser" passthru="true" />
   </target>
 
   <target name="build" depends="clean,lint,phpunit,pdepend,phpmd,phpcpd,phpcs,phploc,apigen,phpcb"/>
-
-  <target name="cssmin" description="Combines and compresses admin css files">
-    <mkdir dir="build/tmp"/>
-    <delete file="${source}/public_html/assets/styles/admin.min.css"/>
-    <copy file="${source}/public_html/assets/styles/admin.css" tofile="build/tmp/admin.min.css" overwrite="true" />
-    <echo message="Compress combined css file"/>
-    <yuicompressor target="${source}/public_html/assets/styles" type="css" file="build/tmp/admin.min.css" compressorjar="${project.basedir}/scripts/tasks/compressor/yuicompressor.jar"  verbose="true" />
-    <delete dir="build/tmp"/>
-  </target>
-
-  <target name="jsmin" description="Combines and compresses javascript files">
-    <echo message="Combine and compress admin js files" />
-    <delete file="${source}/public_html/assets/scripts/admin.min.js"/>
-
-    <closure target="${source}/public_html/assets/scripts/admin.min.js" merge="true" closurejar="${project.basedir}/scripts/tasks/compressor/compiler.jar">
-      <filelist dir="${source}/public_html/assets" listfile="${source}/public_html/assets/scripts/admin.txt"/>
-    </closure>
-  </target>
-
 
 
 </project>
