@@ -4,7 +4,7 @@
     "license": "MIT",
     "config": {
         "bin-dir": "bin",
-        "vendor-dir": "src/system/library/vendor"
+        "vendor-dir": "system/library/vendor"
     },
     "require": {
         "php": ">=5.3.3",
@@ -13,7 +13,7 @@
         "spekkionu/wideimage": "dev-master",
         "jbroadway/urlify": "dev-master",
         "spekkionu/zfdebug": "dev-master",
-        "ziadoz/bcrypt": "dev-master",
+        "ircmaxell/password-compat": "1.0.0",
         "symfony/process": "v2.1.3",
         "symfony/console": "v2.1.3",
         "symfony/yaml": "v2.1.3",
