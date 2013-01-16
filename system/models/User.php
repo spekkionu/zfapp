@@ -207,12 +207,11 @@ class Model_User extends App_Model
     /**
      * Encrypts value
      * @param  string $value
-     * @param  string $crypt_key
      * @return string
      */
     public static function encrypt($value)
     {
-        return Ziadoz\BCrypt\BCrypt::hash($value);
+        return password_hash($value, PASSWORD_BCRYPT, array('cost' => 12));
     }
 
     /**
@@ -223,6 +222,6 @@ class Model_User extends App_Model
      */
     public static function checkPassword($password, $hash)
     {
-        return Ziadoz\BCrypt\BCrypt::compare($password, $hash);
+        return password_verify($password, $hash);
     }
 }
