@@ -1,7 +1,7 @@
 <?php
 // Here you can initialize variables that will for your tests
 if(!defined('SYSTEM')){
-    define('SYSTEM', realpath(dirname(dirname(__DIR__)).'/src/system'));
+    define('SYSTEM', realpath(dirname(dirname(__DIR__)).'/system'));
 }
 if(!defined('APPLICATION_PATH')){
     define('APPLICATION_PATH', SYSTEM.DIRECTORY_SEPARATOR.'application');
