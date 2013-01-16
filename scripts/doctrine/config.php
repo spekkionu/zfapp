@@ -40,9 +40,9 @@ define('DISABLE_LOGS', true);
 define('DISABLE_SESSIONS', true);
 
 define('SANDBOX_PATH', dirname(__FILE__));
-define('PROJECT_PATH', dirname(dirname(dirname(SANDBOX_PATH))));
+define('PROJECT_PATH', dirname(dirname(SANDBOX_PATH)));
 if (!defined('SYSTEM')) {
-    define('SYSTEM', PROJECT_PATH . '/src/system');
+    define('SYSTEM', PROJECT_PATH . '/system');
 }
 define('DOCTRINE_PATH', SYSTEM . '/library/vendor/doctrine/doctrine1/lib');
 define('DATA_FIXTURES_PATH', PROJECT_PATH . '/data/fixtures');

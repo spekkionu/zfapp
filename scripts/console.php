@@ -9,7 +9,7 @@ if (!defined('SYSTEM')) {
 
 if (!defined('WEBROOT')) {
     // Set the webroot to the current dir
-    define('WEBROOT', dirname(SYSTEM) . DIRECTORY_SEPARATOR . 'public_html');
+    define('WEBROOT', dirname(SYSTEM) . DIRECTORY_SEPARATOR . 'public');
 }
 
 if (!defined('PROJECT')) {
